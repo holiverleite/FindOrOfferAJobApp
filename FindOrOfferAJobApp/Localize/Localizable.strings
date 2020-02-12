@@ -1,0 +1,7 @@
+"registration_first_name" = "Nome";
+"registration_last_name" = "Sobrenome";
+"registration_email" = "Email";
+"registration_password" = "Senha";
+"registration_retype_password" = "Redigite a senha";
+"registration_create_account" = "Criar conta";
+

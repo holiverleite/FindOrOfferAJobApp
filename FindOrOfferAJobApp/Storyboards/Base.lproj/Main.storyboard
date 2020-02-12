@@ -8,48 +8,48 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Login-->
+        <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FindOrOfferAJobApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="FindOrOfferAJobApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mo2-UK-Gon">
-                                <rect key="frame" x="60" y="286" width="294" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cgi-w3-GHC">
-                                <rect key="frame" x="60" y="340" width="294" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TUE-8j-f9y">
-                                <rect key="frame" x="60" y="394" width="294" height="46"/>
+                                <rect key="frame" x="67" y="326" width="280" height="46"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="280" id="D0J-55-QZn"/>
                                     <constraint firstAttribute="height" constant="46" id="Qt5-tR-Odb"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Log In"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vnm-9u-V3V">
+                                <rect key="frame" x="67" y="382" width="280" height="46"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="TYk-xt-FjG"/>
+                                </constraints>
+                                <state key="normal" title="Sign Up"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="TUE-8j-f9y" firstAttribute="leading" secondItem="cgi-w3-GHC" secondAttribute="leading" id="GOC-6E-yp0"/>
-                            <constraint firstItem="TUE-8j-f9y" firstAttribute="trailing" secondItem="cgi-w3-GHC" secondAttribute="trailing" id="NIp-Mj-RLE"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Mo2-UK-Gon" secondAttribute="trailing" constant="60" id="R68-tw-Aq0"/>
-                            <constraint firstItem="cgi-w3-GHC" firstAttribute="leading" secondItem="Mo2-UK-Gon" secondAttribute="leading" id="Zd3-vw-McQ"/>
-                            <constraint firstItem="cgi-w3-GHC" firstAttribute="top" secondItem="Mo2-UK-Gon" secondAttribute="bottom" constant="20" id="fLh-vB-qiU"/>
-                            <constraint firstItem="Mo2-UK-Gon" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="198" id="h7l-55-n1z"/>
-                            <constraint firstItem="TUE-8j-f9y" firstAttribute="top" secondItem="cgi-w3-GHC" secondAttribute="bottom" constant="20" id="uha-GZ-NS2"/>
-                            <constraint firstItem="Mo2-UK-Gon" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="60" id="vQJ-jN-C1k"/>
-                            <constraint firstItem="cgi-w3-GHC" firstAttribute="trailing" secondItem="Mo2-UK-Gon" secondAttribute="trailing" id="y2S-b7-OaO"/>
+                            <constraint firstItem="TUE-8j-f9y" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="238" id="Vg5-dE-VZ3"/>
+                            <constraint firstItem="vnm-9u-V3V" firstAttribute="trailing" secondItem="TUE-8j-f9y" secondAttribute="trailing" id="bqo-V6-yb3"/>
+                            <constraint firstItem="vnm-9u-V3V" firstAttribute="leading" secondItem="TUE-8j-f9y" secondAttribute="leading" id="fnV-cO-uIw"/>
+                            <constraint firstItem="vnm-9u-V3V" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="gRF-bh-mqt"/>
+                            <constraint firstItem="vnm-9u-V3V" firstAttribute="top" secondItem="TUE-8j-f9y" secondAttribute="bottom" constant="10" id="ldY-qH-9ra"/>
+                            <constraint firstItem="TUE-8j-f9y" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="qVT-ww-HpR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Login" id="cbN-dt-eXz"/>
+                    <navigationItem key="navigationItem" id="cbN-dt-eXz"/>
+                    <connections>
+                        <outlet property="loginButton" destination="TUE-8j-f9y" id="xdq-Vl-84n"/>
+                        <outlet property="signupButton" destination="vnm-9u-V3V" id="Wuq-ga-FAq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
