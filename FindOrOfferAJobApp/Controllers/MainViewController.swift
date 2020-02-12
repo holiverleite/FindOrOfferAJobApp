@@ -14,6 +14,7 @@ class MainViewController: UIViewController {
     enum StoryboardNavigate: String {
         case Login
         case Registration
+        case Home
     }
 
     // MARK: - IBOutlets
@@ -33,6 +34,18 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let currentUser = PreferencesManager.sharedInstance().retrieveCredencials()
+        if currentUser != nil {
+            let homeStoryboard = UIStoryboard(name: StoryboardNavigate.Home.rawValue, bundle: nil)
+            if let homeViewController = homeStoryboard.instantiateInitialViewController() {
+                self.navigationController?.pushViewController(homeViewController, animated: true)
+            }
+        }
     }
     
     // MARK: - Selectors

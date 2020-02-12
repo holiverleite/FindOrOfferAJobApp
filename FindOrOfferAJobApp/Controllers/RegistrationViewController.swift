@@ -55,10 +55,22 @@ class RegistrationViewController: UIViewController {
     
     @objc func didTapCreateAccountButon() {
         let createAccountManager = FirebaseAuthManager()
-        if let email = self.emailTextField.text, let password = self.passwordTextField.text {
+        if let firstName = self.firstNameTextField.text,
+            let lastName = self.lastNameTextField.text,
+            let email = self.emailTextField.text,
+            let password = self.passwordTextField.text {
+            
             createAccountManager.createUser(email: email, password: password) { [weak self](success) in
+                
+                guard let `self` = self else {
+                    return
+                }
+                
                 var message = ""
                 if success {
+                    // FIXME: - Implement UserProfileViewModel
+                    let userProfile = UserProfile(firstName: firstName, lastName: lastName, email: email, password: password)
+                    PreferencesManager.sharedInstance().saveUserCredentials(user: userProfile)
                     message = "User Succefully created!"
                 } else {
                     message = "There was a error!"
@@ -67,10 +79,11 @@ class RegistrationViewController: UIViewController {
                 let alertViewController = UIAlertController(title: "Response", message: message, preferredStyle: .alert)
                 alertViewController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
                     if success {
-                        self?.navigationController?.popViewController(animated: true)
+                        self.navigationController?.popViewController(animated: true)
                     }
                 }))
-                self?.navigationController?.present(alertViewController, animated: true, completion: nil)
+                
+                self.navigationController?.present(alertViewController, animated: true, completion: nil)
             }
         }
     }
