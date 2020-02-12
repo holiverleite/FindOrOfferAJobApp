@@ -8,22 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		628CB81023DCDA4500B62278 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628CB80F23DCDA4500B62278 /* AppDelegate.swift */; };
-		628CB81223DCDA4500B62278 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628CB81123DCDA4500B62278 /* SceneDelegate.swift */; };
-		628CB81423DCDA4500B62278 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628CB81323DCDA4500B62278 /* ViewController.swift */; };
 		628CB81723DCDA4500B62278 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 628CB81523DCDA4500B62278 /* Main.storyboard */; };
 		628CB81923DCDA4800B62278 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 628CB81823DCDA4800B62278 /* Assets.xcassets */; };
 		628CB81C23DCDA4800B62278 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 628CB81A23DCDA4800B62278 /* LaunchScreen.storyboard */; };
+		945578F723F41CFA005B1B92 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 945578F623F41CFA005B1B92 /* GoogleService-Info.plist */; };
+		A562AD7090F1F7CFE7F82818 /* Pods_FindOrOfferAJobApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C0346F02195F24BC5A7402 /* Pods_FindOrOfferAJobApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		27C0346F02195F24BC5A7402 /* Pods_FindOrOfferAJobApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FindOrOfferAJobApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		628CB80C23DCDA4500B62278 /* FindOrOfferAJobApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindOrOfferAJobApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		628CB80F23DCDA4500B62278 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		628CB81123DCDA4500B62278 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		628CB81323DCDA4500B62278 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		628CB81623DCDA4500B62278 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		628CB81823DCDA4800B62278 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		628CB81B23DCDA4800B62278 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		628CB81D23DCDA4800B62278 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		945578F623F41CFA005B1B92 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AD321A33F4A824AB7296BE12 /* Pods-FindOrOfferAJobApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FindOrOfferAJobApp.debug.xcconfig"; path = "Target Support Files/Pods-FindOrOfferAJobApp/Pods-FindOrOfferAJobApp.debug.xcconfig"; sourceTree = "<group>"; };
+		B062A53B2B1564BB03E4D086 /* Pods-FindOrOfferAJobApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FindOrOfferAJobApp.release.xcconfig"; path = "Target Support Files/Pods-FindOrOfferAJobApp/Pods-FindOrOfferAJobApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +33,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A562AD7090F1F7CFE7F82818 /* Pods_FindOrOfferAJobApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3EDF47747F4944223F485435 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				27C0346F02195F24BC5A7402 /* Pods_FindOrOfferAJobApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		628CB80323DCDA4500B62278 = {
 			isa = PBXGroup;
 			children = (
 				628CB80E23DCDA4500B62278 /* FindOrOfferAJobApp */,
 				628CB80D23DCDA4500B62278 /* Products */,
+				7E8AF0FA921AD1CEEDC8750E /* Pods */,
+				3EDF47747F4944223F485435 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +69,24 @@
 		628CB80E23DCDA4500B62278 /* FindOrOfferAJobApp */ = {
 			isa = PBXGroup;
 			children = (
+				945578F623F41CFA005B1B92 /* GoogleService-Info.plist */,
 				628CB80F23DCDA4500B62278 /* AppDelegate.swift */,
-				628CB81123DCDA4500B62278 /* SceneDelegate.swift */,
-				628CB81323DCDA4500B62278 /* ViewController.swift */,
 				628CB81523DCDA4500B62278 /* Main.storyboard */,
 				628CB81823DCDA4800B62278 /* Assets.xcassets */,
 				628CB81A23DCDA4800B62278 /* LaunchScreen.storyboard */,
 				628CB81D23DCDA4800B62278 /* Info.plist */,
 			);
 			path = FindOrOfferAJobApp;
+			sourceTree = "<group>";
+		};
+		7E8AF0FA921AD1CEEDC8750E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AD321A33F4A824AB7296BE12 /* Pods-FindOrOfferAJobApp.debug.xcconfig */,
+				B062A53B2B1564BB03E4D086 /* Pods-FindOrOfferAJobApp.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +96,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 628CB82023DCDA4800B62278 /* Build configuration list for PBXNativeTarget "FindOrOfferAJobApp" */;
 			buildPhases = (
+				04B831B7C9FCA8B6F96548E9 /* [CP] Check Pods Manifest.lock */,
 				628CB80823DCDA4500B62278 /* Sources */,
 				628CB80923DCDA4500B62278 /* Frameworks */,
 				628CB80A23DCDA4500B62278 /* Resources */,
+				567B5FA6E47B2E085069C9DE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -126,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				628CB81C23DCDA4800B62278 /* LaunchScreen.storyboard in Resources */,
+				945578F723F41CFA005B1B92 /* GoogleService-Info.plist in Resources */,
 				628CB81923DCDA4800B62278 /* Assets.xcassets in Resources */,
 				628CB81723DCDA4500B62278 /* Main.storyboard in Resources */,
 			);
@@ -133,14 +158,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		04B831B7C9FCA8B6F96548E9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FindOrOfferAJobApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		567B5FA6E47B2E085069C9DE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FindOrOfferAJobApp/Pods-FindOrOfferAJobApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FindOrOfferAJobApp/Pods-FindOrOfferAJobApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FindOrOfferAJobApp/Pods-FindOrOfferAJobApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		628CB80823DCDA4500B62278 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				628CB81423DCDA4500B62278 /* ViewController.swift in Sources */,
 				628CB81023DCDA4500B62278 /* AppDelegate.swift in Sources */,
-				628CB81223DCDA4500B62278 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,11 +347,13 @@
 		};
 		628CB82123DCDA4800B62278 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD321A33F4A824AB7296BE12 /* Pods-FindOrOfferAJobApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2G29PVWCKX;
 				INFOPLIST_FILE = FindOrOfferAJobApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -300,11 +367,13 @@
 		};
 		628CB82223DCDA4800B62278 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B062A53B2B1564BB03E4D086 /* Pods-FindOrOfferAJobApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2G29PVWCKX;
 				INFOPLIST_FILE = FindOrOfferAJobApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
