@@ -5,6 +5,13 @@
 "registration_password" = "Senha";
 "registration_retype_password" = "Redigite a senha";
 "registration_create_account" = "Criar conta";
+"registration_success_account_creation" = "Conta criada com sucesso!";
+"login_wrong_user_or_password" = "Usuário ou senha inválidos";
+
+"commom_warning_title_alert" = "Atenção!";
+"commom_success_title_alert" = "Sucesso!";
+"commom_ok_title" = "Ok";
+"common_error_message" = "Algum erro ocorreu!";
 
 // Home
 "home_welcome_message" = "Bem vindo, %@";

@@ -10,21 +10,50 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    // MARK: - IBOutlets
+    @IBOutlet weak var userLoginTextField: UITextField! {
+        didSet {
+            self.userLoginTextField.placeholder = String.localize("registration_email")
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBOutlet weak var passwordTextField: UITextField! {
+        didSet {
+            self.passwordTextField.placeholder = String.localize("registration_password")
+        }
     }
-    */
-
+    
+    @IBOutlet weak var loginButton: UIButton! {
+        didSet {
+            self.loginButton.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
+        }
+    }
+    
+    // MARK: - Methods
+    @objc func didTapLoginButton() {
+        let loginManager = FirebaseAuthManager()
+        guard let email = self.userLoginTextField.text, let password = self.passwordTextField.text else {
+            return
+        }
+        
+        loginManager.signIn(email: email, password: password) { [weak self](success) in
+            guard let `self` = self else {
+                return
+            }
+            
+            if success {
+                let userProfile = UserProfile(firstName: "", lastName: "", email: email, password: password)
+                PreferencesManager.sharedInstance().saveUserCredentials(user: userProfile)
+                self.navigationController?.dismiss(animated: true, completion: nil)
+            } else {
+                let alertViewController = UIAlertController(title: String.localize("commom_warning_title_alert"), message: String.localize("login_wrong_user_or_password"), preferredStyle: .alert)
+                
+                alertViewController.addAction(UIAlertAction(title: String.localize("login_ok_title"), style: .cancel, handler: { (_) in
+                    self.passwordTextField.text = ""
+                }))
+                
+                self.navigationController?.present(alertViewController, animated: true, completion: nil)
+            }
+        }
+    }
 }

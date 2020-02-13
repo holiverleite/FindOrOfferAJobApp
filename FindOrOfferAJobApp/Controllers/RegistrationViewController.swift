@@ -47,12 +47,6 @@ class RegistrationViewController: UIViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-    
     @objc func didTapCreateAccountButon() {
         let createAccountManager = FirebaseAuthManager()
         if let firstName = self.firstNameTextField.text,
@@ -67,19 +61,23 @@ class RegistrationViewController: UIViewController {
                 }
                 
                 var message = ""
+                var title = ""
+                
                 if success {
                     // FIXME: - Implement UserProfileViewModel
                     let userProfile = UserProfile(firstName: firstName, lastName: lastName, email: email, password: password)
                     PreferencesManager.sharedInstance().saveUserCredentials(user: userProfile)
-                    message = "User Succefully created!"
+                    title = String.localize("commom_success_title_alert")
+                    message = String.localize("registration_success_account_creation")
                 } else {
-                    message = "There was a error!"
+                    title = String.localize("commom_warning_title_alert")
+                    message = String.localize("common_error_message")
                 }
                 
-                let alertViewController = UIAlertController(title: "Response", message: message, preferredStyle: .alert)
+                let alertViewController = UIAlertController(title: title, message: message, preferredStyle: .alert)
                 alertViewController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
                     if success {
-                        self.navigationController?.popViewController(animated: true)
+                        self.navigationController?.dismiss(animated: true, completion: nil)
                     }
                 }))
                 

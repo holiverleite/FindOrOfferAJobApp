@@ -2,7 +2,7 @@
 //  UserProfile.swift
 //  FindOrOfferAJobApp
 //
-//  Created by monitora on 12/02/20.
+//  Created by Haroldo on 12/02/20.
 //  Copyright © 2020 HaroldoLeite. All rights reserved.
 //
 
