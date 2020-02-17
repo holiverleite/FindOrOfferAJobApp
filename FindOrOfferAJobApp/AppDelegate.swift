@@ -8,17 +8,51 @@
 
 import UIKit
 import Firebase
+import GoogleSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    var navigationDelegate: NavigationDelegate?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        // Configure Firebase
         FirebaseApp.configure()
-        // Override point for customization after application launch.
+        
+        // Initialize sign-in
+        GIDSignIn.sharedInstance()?.clientID = "226718689311-5hlq80rojgo7q5mbrvm0hhm081cqbekf.apps.googleusercontent.com"
+        GIDSignIn.sharedInstance()?.delegate = self
+        
         return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url)
+    }
+}
+
+extension AppDelegate: GIDSignInDelegate {
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let error = error {
+            if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
+                print("The user has not signed in before or they have since signed out.")
+            } else {
+                print("\(error.localizedDescription)")
+            }
+            return
+        }
+        
+        if self.navigationDelegate != nil {
+            let userProfile = UserProfile(firstName: user.profile.name, lastName: user.profile.familyName, email: user.profile.email)
+            self.navigationDelegate?.signWithGoogleAccount(user: userProfile)
+        }
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        print("")
     }
 }
 

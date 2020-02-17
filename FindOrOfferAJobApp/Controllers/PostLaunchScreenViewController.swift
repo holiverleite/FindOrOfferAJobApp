@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import GoogleSignIn
+import Firebase
 
 class PostLaunchScreenViewController: UIViewController {
     
@@ -15,14 +17,20 @@ class PostLaunchScreenViewController: UIViewController {
         case Main
         case Home
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+        GIDSignIn.sharedInstance()?.restorePreviousSignIn()
+    }
 
     @IBOutlet weak var activityIndicator: UIActivity!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let currentUser = PreferencesManager.sharedInstance().retrieveCredencials()
-        if currentUser != nil {
+        if Auth.auth().currentUser != nil {
             let homeStoryboard = UIStoryboard(name: StoryboardNavigate.Home.rawValue, bundle: nil)
             if let homeViewController = homeStoryboard.instantiateInitialViewController() {
                 self.present(homeViewController, animated: true, completion: nil)

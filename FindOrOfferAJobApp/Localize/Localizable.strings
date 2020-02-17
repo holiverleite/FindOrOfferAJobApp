@@ -14,5 +14,5 @@
 "common_error_message" = "Algum erro ocorreu!";
 
 // Home
-"home_welcome_message" = "Bem vindo, %@";
+"home_welcome_message" = "Nome: %@ \n Email: %@";
 

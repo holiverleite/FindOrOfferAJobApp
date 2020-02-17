@@ -65,8 +65,8 @@ class RegistrationViewController: UIViewController {
                 
                 if success {
                     // FIXME: - Implement UserProfileViewModel
-                    let userProfile = UserProfile(firstName: firstName, lastName: lastName, email: email, password: password)
-                    PreferencesManager.sharedInstance().saveUserCredentials(user: userProfile)
+//                    let userProfile = UserProfile(firstName: firstName, lastName: lastName, email: email)
+//                    PreferencesManager.sharedInstance().saveUserCredentials(user: userProfile)
                     title = String.localize("commom_success_title_alert")
                     message = String.localize("registration_success_account_creation")
                 } else {

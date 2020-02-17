@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleSignIn
 
 class LoginViewController: UIViewController {
 
@@ -29,6 +30,21 @@ class LoginViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var googleLoginButton: GIDSignInButton! {
+        didSet {
+            self.googleLoginButton.style = .wide
+        }
+    }
+    
+    // MARK: - LifeCycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            appDelegate.navigationDelegate = self
+        }
+    }
+    
     // MARK: - Methods
     @objc func didTapLoginButton() {
         let loginManager = FirebaseAuthManager()
@@ -42,8 +58,8 @@ class LoginViewController: UIViewController {
             }
             
             if success {
-                let userProfile = UserProfile(firstName: "", lastName: "", email: email, password: password)
-                PreferencesManager.sharedInstance().saveUserCredentials(user: userProfile)
+//                let userProfile = UserProfile(firstName: "", lastName: "", email: email)
+//                PreferencesManager.sharedInstance().saveUserCredentials(user: userProfile)
                 self.navigationController?.dismiss(animated: true, completion: nil)
             } else {
                 let alertViewController = UIAlertController(title: String.localize("commom_warning_title_alert"), message: String.localize("login_wrong_user_or_password"), preferredStyle: .alert)
@@ -55,5 +71,12 @@ class LoginViewController: UIViewController {
                 self.navigationController?.present(alertViewController, animated: true, completion: nil)
             }
         }
+    }
+}
+
+extension LoginViewController: NavigationDelegate {
+    func signWithGoogleAccount(user: UserProfile) {
+//        PreferencesManager.sharedInstance().saveUserCredentials(user: user)
+        self.navigationController?.dismiss(animated: true, completion: nil)
     }
 }

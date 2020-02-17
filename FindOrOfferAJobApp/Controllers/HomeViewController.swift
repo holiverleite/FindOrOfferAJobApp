@@ -21,13 +21,20 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let userProfile = PreferencesManager.sharedInstance().retrieveCredencials() {
-            self.mainLabel.text = String(format: String.localize("home_welcome_message"), userProfile.firstName)
-        }
+//        if let userProfile = PreferencesManager.sharedInstance().retrieveCredencials() {
+//            self.mainLabel.text = String(format: String.localize("home_welcome_message"), userProfile.firstName, userProfile.email)
+//        }
     }
     
     @objc func didTapLogoutButton() {
-        PreferencesManager.sharedInstance().deleteUserCredential()
-        self.navigationController?.dismiss(animated: false, completion: nil)
+        FirebaseAuthManager().signOut { [weak self](success) in
+            if success {
+                self?.navigationController?.dismiss(animated: false, completion: nil)
+            } else {
+                print("Error Logout")
+            }
+        }
+//        PreferencesManager.sharedInstance().deleteUserCredential()
+//        self.navigationController?.dismiss(animated: false, completion: nil)
     }
 }

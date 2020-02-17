@@ -32,4 +32,12 @@ class FirebaseAuthManager {
         }
     }
     
+    func signOut(completion: @escaping (_ success:Bool) -> Void) {
+        if let _ = try? Auth.auth().signOut() {
+            completion(true)
+        } else {
+            completion(false)
+        }
+    }
+    
 }

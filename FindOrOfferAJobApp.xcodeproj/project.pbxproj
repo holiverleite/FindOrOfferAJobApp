@@ -12,6 +12,7 @@
 		628CB81923DCDA4800B62278 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 628CB81823DCDA4800B62278 /* Assets.xcassets */; };
 		628CB81C23DCDA4800B62278 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 628CB81A23DCDA4800B62278 /* LaunchScreen.storyboard */; };
 		940CDC5F23F5734100683B1A /* PostLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 940CDC5E23F5734100683B1A /* PostLaunchScreen.storyboard */; };
+		9443361A23FB072D004378BD /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9443361923FB072D004378BD /* Protocols.swift */; };
 		945578F723F41CFA005B1B92 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 945578F623F41CFA005B1B92 /* GoogleService-Info.plist */; };
 		945578FA23F4241B005B1B92 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945578F923F4241B005B1B92 /* FirebaseAuthManager.swift */; };
 		9455790323F431EF005B1B92 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9455790223F431EF005B1B92 /* MainViewController.swift */; };
@@ -36,6 +37,7 @@
 		628CB81B23DCDA4800B62278 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		628CB81D23DCDA4800B62278 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		940CDC5E23F5734100683B1A /* PostLaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PostLaunchScreen.storyboard; sourceTree = "<group>"; };
+		9443361923FB072D004378BD /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		945578F623F41CFA005B1B92 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		945578F923F4241B005B1B92 /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
 		9455790223F431EF005B1B92 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 		628CB80E23DCDA4500B62278 /* FindOrOfferAJobApp */ = {
 			isa = PBXGroup;
 			children = (
+				9443361823FB071A004378BD /* Protocols */,
 				9455791123F467B0005B1B92 /* Models */,
 				9455790E23F46320005B1B92 /* Manager */,
 				9455790023F431BF005B1B92 /* Controllers */,
@@ -116,6 +119,14 @@
 				B062A53B2B1564BB03E4D086 /* Pods-FindOrOfferAJobApp.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		9443361823FB071A004378BD /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				9443361923FB072D004378BD /* Protocols.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		945578F823F423FD005B1B92 /* Services */ = {
@@ -192,6 +203,7 @@
 				628CB80923DCDA4500B62278 /* Frameworks */,
 				628CB80A23DCDA4500B62278 /* Resources */,
 				567B5FA6E47B2E085069C9DE /* [CP] Embed Pods Frameworks */,
+				748AD1BAD8CC65F86A2FF032 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -292,6 +304,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FindOrOfferAJobApp/Pods-FindOrOfferAJobApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		748AD1BAD8CC65F86A2FF032 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FindOrOfferAJobApp/Pods-FindOrOfferAJobApp-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FindOrOfferAJobApp/Pods-FindOrOfferAJobApp-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FindOrOfferAJobApp/Pods-FindOrOfferAJobApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -301,6 +330,7 @@
 			files = (
 				9455790D23F43F7A005B1B92 /* StringExtensions.swift in Sources */,
 				9455790523F43510005B1B92 /* LoginViewController.swift in Sources */,
+				9443361A23FB072D004378BD /* Protocols.swift in Sources */,
 				9455790323F431EF005B1B92 /* MainViewController.swift in Sources */,
 				9455791023F4634D005B1B92 /* PreferencesManager.swift in Sources */,
 				9455791323F467BF005B1B92 /* UserProfile.swift in Sources */,

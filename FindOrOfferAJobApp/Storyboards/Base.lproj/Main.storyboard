@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="V9o-Gd-rcx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="V9o-Gd-rcx">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -64,7 +64,6 @@
         <!--Navigation Controller-->
         <scene sceneID="QKH-EX-fLg">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qmD-fl-Okv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="V9o-Gd-rcx" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="BIE-le-syo">
@@ -76,6 +75,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Uu4-Y9-A1t"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qmD-fl-Okv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="131.8840579710145" y="138.61607142857142"/>
         </scene>
@@ -104,23 +104,35 @@
                                 </constraints>
                                 <state key="normal" title="LoGiN"/>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WXi-R5-VMV" customClass="GIDSignInButton">
+                                <rect key="frame" x="50" y="506" width="314" height="45"/>
+                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="gVn-ST-EVr"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="bGU-v0-7K0" firstAttribute="leading" secondItem="86H-zG-cwq" secondAttribute="leading" constant="50" id="9wd-qV-Go6"/>
                             <constraint firstItem="td4-0l-9cc" firstAttribute="leading" secondItem="bGU-v0-7K0" secondAttribute="leading" id="DGZ-4I-Nbd"/>
+                            <constraint firstItem="WXi-R5-VMV" firstAttribute="leading" secondItem="q3e-o9-i3E" secondAttribute="leading" id="FhR-Nm-Yws"/>
                             <constraint firstItem="86H-zG-cwq" firstAttribute="trailing" secondItem="bGU-v0-7K0" secondAttribute="trailing" constant="50" id="HYS-a6-Om4"/>
                             <constraint firstItem="td4-0l-9cc" firstAttribute="trailing" secondItem="bGU-v0-7K0" secondAttribute="trailing" id="HxD-K8-qnT"/>
                             <constraint firstItem="q3e-o9-i3E" firstAttribute="trailing" secondItem="td4-0l-9cc" secondAttribute="trailing" id="Wi1-kf-r5M"/>
                             <constraint firstItem="bGU-v0-7K0" firstAttribute="top" secondItem="86H-zG-cwq" secondAttribute="top" constant="200" id="eJi-Hg-KWx"/>
+                            <constraint firstItem="WXi-R5-VMV" firstAttribute="top" secondItem="q3e-o9-i3E" secondAttribute="bottom" constant="60" id="eRR-pF-lma"/>
                             <constraint firstItem="td4-0l-9cc" firstAttribute="top" secondItem="bGU-v0-7K0" secondAttribute="bottom" constant="15" id="hVj-kZ-I9A"/>
                             <constraint firstItem="q3e-o9-i3E" firstAttribute="top" secondItem="td4-0l-9cc" secondAttribute="bottom" constant="30" id="qrL-BE-bWV"/>
                             <constraint firstItem="q3e-o9-i3E" firstAttribute="leading" secondItem="td4-0l-9cc" secondAttribute="leading" id="yBG-37-Z9I"/>
+                            <constraint firstItem="WXi-R5-VMV" firstAttribute="centerX" secondItem="RBC-IR-1kf" secondAttribute="centerX" id="ySK-9s-zwj"/>
+                            <constraint firstItem="WXi-R5-VMV" firstAttribute="trailing" secondItem="q3e-o9-i3E" secondAttribute="trailing" id="zXD-CA-SXI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="86H-zG-cwq"/>
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="Ryt-2n-LrB"/>
                     <connections>
+                        <outlet property="googleLoginButton" destination="WXi-R5-VMV" id="b0e-W7-GQW"/>
                         <outlet property="loginButton" destination="q3e-o9-i3E" id="t0O-hy-lZa"/>
                         <outlet property="passwordTextField" destination="td4-0l-9cc" id="cIF-dz-GBj"/>
                         <outlet property="userLoginTextField" destination="bGU-v0-7K0" id="kXW-Wb-k7O"/>
@@ -128,7 +140,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cND-aO-xXu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2086" y="-181"/>
+            <point key="canvasLocation" x="2085.507246376812" y="-181.47321428571428"/>
         </scene>
         <!--Registration-->
         <scene sceneID="4RB-Xn-oMG">
