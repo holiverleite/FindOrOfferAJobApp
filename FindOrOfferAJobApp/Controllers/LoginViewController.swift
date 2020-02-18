@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleSignIn
+import FirebaseDatabase
 
 class LoginViewController: UIViewController {
 
@@ -36,6 +37,9 @@ class LoginViewController: UIViewController {
         }
     }
     
+    // MARK: - Variables
+    var rootUserReference = Database.database().reference(withPath: "users")
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +49,12 @@ class LoginViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.navigationBar.isHidden = false
+    }
+    
     // MARK: - Methods
     @objc func didTapLoginButton() {
         let loginManager = FirebaseAuthManager()
@@ -52,15 +62,26 @@ class LoginViewController: UIViewController {
             return
         }
         
-        loginManager.signIn(email: email, password: password) { [weak self](success) in
+        loginManager.signIn(email: email, password: password) { [weak self] (userId) in
             guard let `self` = self else {
                 return
             }
-            
-            if success {
-//                let userProfile = UserProfile(firstName: "", lastName: "", email: email)
-//                PreferencesManager.sharedInstance().saveUserCredentials(user: userProfile)
-                self.navigationController?.dismiss(animated: true, completion: nil)
+            // Login Success with Email and Passwd
+            if let userId = userId {
+                // FIXME: REcover the user from firebase after the login
+                var _ = self.rootUserReference.child(userId).observeSingleEvent(of: .value) { (snapshot) in
+                    let value = snapshot.value as? NSDictionary
+                    if let firstName = value?.object(forKey: "first_name") as? String,
+                        let lastName = value?.object(forKey: "last_name") as? String,
+                        let email = value?.object(forKey: "email") as? String {
+                        
+                        let userProfile = UserProfile(userId: userId, firstName: firstName, lastName: lastName, email: email)
+                        // Save/Update User in Firebase
+                        PreferencesManager.sharedInstance().saveUserProfile(user: userProfile)
+                        self.navigationController?.dismiss(animated: true, completion: nil)
+                    }
+                    
+                }
             } else {
                 let alertViewController = UIAlertController(title: String.localize("commom_warning_title_alert"), message: String.localize("login_wrong_user_or_password"), preferredStyle: .alert)
                 
@@ -75,8 +96,17 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController: NavigationDelegate {
+    // Login Success with Google Account
     func signWithGoogleAccount(user: UserProfile) {
-//        PreferencesManager.sharedInstance().saveUserCredentials(user: user)
+        
+        let userDict : [String:Any] = ["first_name": user.firstName, "last_name": user.lastName, "email": user.email]
+        
+        let ref = self.rootUserReference.child(user.userId)
+        ref.setValue(userDict)
+        
+        // Save/Update User in Firebase
+        PreferencesManager.sharedInstance().saveUserProfile(user: user)
         self.navigationController?.dismiss(animated: true, completion: nil)
+        
     }
 }

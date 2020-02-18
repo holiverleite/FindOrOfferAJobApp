@@ -14,7 +14,6 @@ import GoogleSignIn
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
     var navigationDelegate: NavigationDelegate?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -36,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        
         if let error = error {
             if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
                 print("The user has not signed in before or they have since signed out.")
@@ -45,10 +45,11 @@ extension AppDelegate: GIDSignInDelegate {
             return
         }
         
-        if self.navigationDelegate != nil {
-            let userProfile = UserProfile(firstName: user.profile.name, lastName: user.profile.familyName, email: user.profile.email)
+        if let userId = user.userID, let firstName = user.profile.name, let lastName = user.profile.familyName, let email = user.profile.email {
+            let userProfile = UserProfile(userId: userId, firstName: firstName, lastName: lastName, email: email)
             self.navigationDelegate?.signWithGoogleAccount(user: userProfile)
         }
+        
     }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {

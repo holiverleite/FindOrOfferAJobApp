@@ -26,21 +26,21 @@ class PreferencesManager {
         return UserDefaults.standard
     }
     
-//    public func saveUserCredentials(user: UserProfile) {
-//        let encodedUserProfileData: Data = NSKeyedArchiver.archivedData(withRootObject: user)
-//        self.getUserDefaults().set(encodedUserProfileData, forKey: Manager.UserCredential.rawValue)
-//    }
+    public func saveUserProfile(user: UserProfile) {
+        let encodedUserProfileData: Data = NSKeyedArchiver.archivedData(withRootObject: user)
+        self.getUserDefaults().set(encodedUserProfileData, forKey: Manager.UserCredential.rawValue)
+    }
     
-//    public func retrieveCredencials() -> UserProfile? {
-//        if let decodedUserProfileData = self.getUserDefaults().object(forKey: Manager.UserCredential.rawValue) as? Data {
-//            if let userProfile = NSKeyedUnarchiver.unarchiveObject(with: decodedUserProfileData) as? UserProfile {
-//                return userProfile
-//            }
-//        }
-//        return nil
-//    }
+    public func retrieveUserProfile() -> UserProfile? {
+        if let decodedUserProfileData = self.getUserDefaults().object(forKey: Manager.UserCredential.rawValue) as? Data {
+            if let userProfile = NSKeyedUnarchiver.unarchiveObject(with: decodedUserProfileData) as? UserProfile {
+                return userProfile
+            }
+        }
+        return nil
+    }
     
-    public func deleteUserCredential() {
+    public func deleteUserProfile() {
         self.getUserDefaults().set(nil, forKey: Manager.UserCredential.rawValue)
     }
 }

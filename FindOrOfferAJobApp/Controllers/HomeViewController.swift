@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleSignIn
 
 class HomeViewController: UIViewController {
 
@@ -21,20 +22,30 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        if let userProfile = PreferencesManager.sharedInstance().retrieveCredencials() {
-//            self.mainLabel.text = String(format: String.localize("home_welcome_message"), userProfile.firstName, userProfile.email)
-//        }
+        if let userProfile = PreferencesManager.sharedInstance().retrieveUserProfile() {
+            self.mainLabel.text = String(format: String.localize("home_welcome_message"), userProfile.firstName, userProfile.email)
+        }
     }
     
     @objc func didTapLogoutButton() {
-        FirebaseAuthManager().signOut { [weak self](success) in
-            if success {
-                self?.navigationController?.dismiss(animated: false, completion: nil)
-            } else {
-                print("Error Logout")
+        
+        // SignOut from Google Login
+        if GIDSignIn.sharedInstance()?.currentUser != nil {
+            GIDSignIn.sharedInstance()?.signOut()
+            
+            PreferencesManager.sharedInstance().deleteUserProfile()
+            self.navigationController?.dismiss(animated: false, completion: nil)
+        }
+        // SignOut from User/Password Login
+        else {
+            FirebaseAuthManager().signOut { [weak self] (success) in
+                if success {
+                    PreferencesManager.sharedInstance().deleteUserProfile()
+                    self?.navigationController?.dismiss(animated: false, completion: nil)
+                } else {
+                    print("Error Logout")
+                }
             }
         }
-//        PreferencesManager.sharedInstance().deleteUserCredential()
-//        self.navigationController?.dismiss(animated: false, completion: nil)
     }
 }

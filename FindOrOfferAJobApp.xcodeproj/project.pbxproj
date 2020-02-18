@@ -140,9 +140,9 @@
 		945578FB23F43111005B1B92 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				940CDC5E23F5734100683B1A /* PostLaunchScreen.storyboard */,
 				628CB81523DCDA4500B62278 /* Main.storyboard */,
 				9461BFE423F4710100EA2CA9 /* Home.storyboard */,
-				940CDC5E23F5734100683B1A /* PostLaunchScreen.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";

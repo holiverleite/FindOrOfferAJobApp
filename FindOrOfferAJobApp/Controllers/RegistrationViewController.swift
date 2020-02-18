@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class RegistrationViewController: UIViewController {
     
@@ -47,6 +48,16 @@ class RegistrationViewController: UIViewController {
         }
     }
     
+    // MARK: - Variables
+    let rootUsersReference = Database.database().reference(withPath: "users")
+    
+    // MARK: - LifeCycle
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.navigationBar.isHidden = false
+    }
+    
     @objc func didTapCreateAccountButon() {
         let createAccountManager = FirebaseAuthManager()
         if let firstName = self.firstNameTextField.text,
@@ -54,7 +65,7 @@ class RegistrationViewController: UIViewController {
             let email = self.emailTextField.text,
             let password = self.passwordTextField.text {
             
-            createAccountManager.createUser(email: email, password: password) { [weak self](success) in
+            createAccountManager.createUser(email: email, password: password) { [weak self](userId) in
                 
                 guard let `self` = self else {
                     return
@@ -63,10 +74,18 @@ class RegistrationViewController: UIViewController {
                 var message = ""
                 var title = ""
                 
-                if success {
+                if let userId = userId {
+                    
+                    let userDict : [String:Any] = ["first_name": firstName, "last_name": lastName, "email": email]
+                    
+                    let ref = self.rootUsersReference.child(userId)
+                    ref.setValue(userDict)
+                    
                     // FIXME: - Implement UserProfileViewModel
-//                    let userProfile = UserProfile(firstName: firstName, lastName: lastName, email: email)
-//                    PreferencesManager.sharedInstance().saveUserCredentials(user: userProfile)
+                    // FIXME: - Implement To do this when receive a change in the listener
+                    let userProfile = UserProfile(userId: userId, firstName: firstName, lastName: lastName, email: email)
+                    PreferencesManager.sharedInstance().saveUserProfile(user: userProfile)
+                    
                     title = String.localize("commom_success_title_alert")
                     message = String.localize("registration_success_account_creation")
                 } else {
@@ -76,7 +95,7 @@ class RegistrationViewController: UIViewController {
                 
                 let alertViewController = UIAlertController(title: title, message: message, preferredStyle: .alert)
                 alertViewController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
-                    if success {
+                    if let _ = userId {
                         self.navigationController?.dismiss(animated: true, completion: nil)
                     }
                 }))

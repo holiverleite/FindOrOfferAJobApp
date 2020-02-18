@@ -15,7 +15,13 @@ class MainViewController: UIViewController {
         case Login
         case Registration
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
     // MARK: - IBOutlets
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signupButton: UIButton!

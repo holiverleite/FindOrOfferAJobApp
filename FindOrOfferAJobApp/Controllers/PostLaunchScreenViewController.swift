@@ -21,6 +21,8 @@ class PostLaunchScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.isHidden = true
+        
         GIDSignIn.sharedInstance()?.presentingViewController = self
         GIDSignIn.sharedInstance()?.restorePreviousSignIn()
     }
@@ -30,7 +32,7 @@ class PostLaunchScreenViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if Auth.auth().currentUser != nil {
+        if Auth.auth().currentUser != nil || GIDSignIn.sharedInstance()?.currentUser != nil {
             let homeStoryboard = UIStoryboard(name: StoryboardNavigate.Home.rawValue, bundle: nil)
             if let homeViewController = homeStoryboard.instantiateInitialViewController() {
                 self.present(homeViewController, animated: true, completion: nil)

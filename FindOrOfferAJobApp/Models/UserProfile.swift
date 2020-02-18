@@ -11,34 +11,39 @@ import Foundation
 class UserProfile: NSObject, NSCoding {
     
     enum User: String {
+        case userId
         case firstName
         case lastName
         case email
     }
     
+    let userId: String // Cant be changed
     var firstName: String
     var lastName: String
-    var email: String
+    let email: String // Cant be changed
     
-    init(firstName: String, lastName: String, email: String) {
+    init(userId: String, firstName: String, lastName: String, email: String) {
+        self.userId = userId
         self.firstName = firstName
         self.lastName = lastName
         self.email = email
     }
     
     func encode(with coder: NSCoder) {
+        coder.encode(userId, forKey: User.userId.rawValue)
         coder.encode(firstName, forKey: User.firstName.rawValue)
         coder.encode(lastName, forKey: User.lastName.rawValue)
         coder.encode(email, forKey: User.email.rawValue)
     }
     
     required convenience init(coder aDecoder: NSCoder) {
-        if let firstName = aDecoder.decodeObject(forKey: User.firstName.rawValue) as? String,
+        if let userId = aDecoder.decodeObject(forKey: User.userId.rawValue) as? String,
+            let firstName = aDecoder.decodeObject(forKey: User.firstName.rawValue) as? String,
             let lastName = aDecoder.decodeObject(forKey: User.lastName.rawValue) as? String,
             let email = aDecoder.decodeObject(forKey: User.email.rawValue) as? String {
-            self.init(firstName: firstName, lastName: lastName, email: email)
+            self.init(userId: userId, firstName: firstName, lastName: lastName, email: email)
         } else {
-            self.init(firstName: "", lastName: "", email: "")
+            self.init(userId: "", firstName: "", lastName: "", email: "")
         }
     }
 }

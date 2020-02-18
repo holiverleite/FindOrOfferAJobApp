@@ -10,4 +10,5 @@ target 'FindOrOfferAJobApp' do
   pod 'Firebase/Auth'
   pod 'GoogleSignIn'
   pod 'Firebase/Firestore'
+  pod 'Firebase/Database'
 end

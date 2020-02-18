@@ -10,24 +10,23 @@ import Foundation
 import FirebaseAuth
 
 class FirebaseAuthManager {
-    
-    func createUser(email: String, password: String, completion: @escaping (_ success: Bool) -> Void) {
+
+    func createUser(email: String, password: String, completion: @escaping (_ userId: String?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
             if let user = authResult?.user {
-                print(user)
-                completion(true)
+                completion(user.uid)
             } else {
-                completion(false)
+                completion(nil)
             }
         }
     }
     
-    func signIn(email: String, password: String, completion: @escaping (_ success: Bool) -> Void) {
+    func signIn(email: String, password: String, completion: @escaping (_ userId: String?) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
             if let error = error, let _ = AuthErrorCode(rawValue: error._code) {
-                completion(false)
+                completion(nil)
             } else {
-                completion(true)
+                completion(authResult?.user.uid)
             }
         }
     }
