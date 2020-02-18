@@ -49,7 +49,7 @@ class RegistrationViewController: UIViewController {
     }
     
     // MARK: - Variables
-    let rootUsersReference = Database.database().reference(withPath: "users")
+    let rootUsersReference = Database.database().reference(withPath: FirebaseKnot.Users)
     
     // MARK: - LifeCycle
     override func viewWillAppear(_ animated: Bool) {
@@ -76,7 +76,7 @@ class RegistrationViewController: UIViewController {
                 
                 if let userId = userId {
                     
-                    let userDict : [String:Any] = ["first_name": firstName, "last_name": lastName, "email": email]
+                    let userDict : [String:Any] = [FirebaseUser.FirstName: firstName, FirebaseUser.LastName: lastName, FirebaseUser.Email: email]
                     
                     let ref = self.rootUsersReference.child(userId)
                     ref.setValue(userDict)

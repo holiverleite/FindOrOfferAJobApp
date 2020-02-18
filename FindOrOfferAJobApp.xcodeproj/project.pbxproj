@@ -24,6 +24,7 @@
 		9455791323F467BF005B1B92 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9455791223F467BF005B1B92 /* UserProfile.swift */; };
 		9461BFE523F4710100EA2CA9 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9461BFE423F4710100EA2CA9 /* Home.storyboard */; };
 		9461BFE723F4711600EA2CA9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9461BFE623F4711600EA2CA9 /* HomeViewController.swift */; };
+		9488CBA123FC614100D8B883 /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9488CBA023FC614100D8B883 /* FirebaseConstants.swift */; };
 		94D19A2423F56E0B00A557CC /* PostLaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D19A2323F56E0B00A557CC /* PostLaunchScreenViewController.swift */; };
 		A562AD7090F1F7CFE7F82818 /* Pods_FindOrOfferAJobApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C0346F02195F24BC5A7402 /* Pods_FindOrOfferAJobApp.framework */; };
 /* End PBXBuildFile section */
@@ -49,6 +50,7 @@
 		9455791223F467BF005B1B92 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		9461BFE423F4710100EA2CA9 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		9461BFE623F4711600EA2CA9 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		9488CBA023FC614100D8B883 /* FirebaseConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConstants.swift; sourceTree = "<group>"; };
 		94D19A2323F56E0B00A557CC /* PostLaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLaunchScreenViewController.swift; sourceTree = "<group>"; };
 		AD321A33F4A824AB7296BE12 /* Pods-FindOrOfferAJobApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FindOrOfferAJobApp.debug.xcconfig"; path = "Target Support Files/Pods-FindOrOfferAJobApp/Pods-FindOrOfferAJobApp.debug.xcconfig"; sourceTree = "<group>"; };
 		B062A53B2B1564BB03E4D086 /* Pods-FindOrOfferAJobApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FindOrOfferAJobApp.release.xcconfig"; path = "Target Support Files/Pods-FindOrOfferAJobApp/Pods-FindOrOfferAJobApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				945578F923F4241B005B1B92 /* FirebaseAuthManager.swift */,
+				9488CBA023FC614100D8B883 /* FirebaseConstants.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				9455791323F467BF005B1B92 /* UserProfile.swift in Sources */,
 				94D19A2423F56E0B00A557CC /* PostLaunchScreenViewController.swift in Sources */,
 				9461BFE723F4711600EA2CA9 /* HomeViewController.swift in Sources */,
+				9488CBA123FC614100D8B883 /* FirebaseConstants.swift in Sources */,
 				945578FA23F4241B005B1B92 /* FirebaseAuthManager.swift in Sources */,
 				628CB81023DCDA4500B62278 /* AppDelegate.swift in Sources */,
 				9455790723F4356A005B1B92 /* RegistrationViewController.swift in Sources */,

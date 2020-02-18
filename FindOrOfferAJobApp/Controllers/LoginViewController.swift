@@ -38,7 +38,7 @@ class LoginViewController: UIViewController {
     }
     
     // MARK: - Variables
-    var rootUserReference = Database.database().reference(withPath: "users")
+    var rootUserReference = Database.database().reference(withPath: FirebaseKnot.Users)
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -71,9 +71,9 @@ class LoginViewController: UIViewController {
                 // FIXME: REcover the user from firebase after the login
                 var _ = self.rootUserReference.child(userId).observeSingleEvent(of: .value) { (snapshot) in
                     let value = snapshot.value as? NSDictionary
-                    if let firstName = value?.object(forKey: "first_name") as? String,
-                        let lastName = value?.object(forKey: "last_name") as? String,
-                        let email = value?.object(forKey: "email") as? String {
+                    if let firstName = value?.object(forKey: FirebaseUser.FirstName) as? String,
+                        let lastName = value?.object(forKey: FirebaseUser.LastName) as? String,
+                        let email = value?.object(forKey: FirebaseUser.Email) as? String {
                         
                         let userProfile = UserProfile(userId: userId, firstName: firstName, lastName: lastName, email: email)
                         // Save/Update User in Firebase
@@ -99,7 +99,7 @@ extension LoginViewController: NavigationDelegate {
     // Login Success with Google Account
     func signWithGoogleAccount(user: UserProfile) {
         
-        let userDict : [String:Any] = ["first_name": user.firstName, "last_name": user.lastName, "email": user.email]
+        let userDict : [String:Any] = [FirebaseUser.FirstName: user.firstName, FirebaseUser.LastName: user.lastName, FirebaseUser.Email: user.email]
         
         let ref = self.rootUserReference.child(user.userId)
         ref.setValue(userDict)
