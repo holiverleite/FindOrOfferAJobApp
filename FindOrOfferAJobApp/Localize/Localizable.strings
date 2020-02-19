@@ -14,5 +14,8 @@
 "common_error_message" = "Algum erro ocorreu!";
 
 // Home
-"home_welcome_message" = "Nome: %@ \n Email: %@";
+"home_nav_bar" = "Home";
+
+// Settings
+"settings_nav_bar" = "Configurações";
 

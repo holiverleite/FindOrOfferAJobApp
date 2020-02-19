@@ -14,8 +14,8 @@ class PostLaunchScreenViewController: UIViewController {
     
     // MARK: - Routes
     enum StoryboardNavigate: String {
-        case Main
-        case Home
+        case AccessScreen
+        case MainFlow
     }
     
     override func viewDidLoad() {
@@ -33,12 +33,12 @@ class PostLaunchScreenViewController: UIViewController {
         super.viewWillAppear(animated)
         
         if Auth.auth().currentUser != nil || GIDSignIn.sharedInstance()?.currentUser != nil {
-            let homeStoryboard = UIStoryboard(name: StoryboardNavigate.Home.rawValue, bundle: nil)
+            let homeStoryboard = UIStoryboard(name: StoryboardNavigate.MainFlow.rawValue, bundle: nil)
             if let homeViewController = homeStoryboard.instantiateInitialViewController() {
                 self.navigationController?.pushViewController(homeViewController, animated: true)
             }
         } else {
-            let mainStoryboard = UIStoryboard(name: StoryboardNavigate.Main.rawValue, bundle: nil)
+            let mainStoryboard = UIStoryboard(name: StoryboardNavigate.AccessScreen.rawValue, bundle: nil)
             if let mainViewController = mainStoryboard.instantiateInitialViewController() {
                 self.navigationController?.pushViewController(mainViewController, animated: true)
             }

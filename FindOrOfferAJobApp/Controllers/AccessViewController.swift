@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  AccessViewController.swift
 //  FindOrOfferAJobApp
 //
 //  Created by Haroldo on 12/02/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class AccessViewController: UIViewController {
     
     // MARK: - Routes
     enum StoryboardNavigate: String {
