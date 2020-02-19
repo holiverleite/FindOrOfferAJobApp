@@ -96,7 +96,7 @@ class RegistrationViewController: UIViewController {
                 let alertViewController = UIAlertController(title: title, message: message, preferredStyle: .alert)
                 alertViewController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
                     if let _ = userId {
-                        self.navigationController?.dismiss(animated: true, completion: nil)
+                        self.navigationController?.popToRootViewController(animated: true)
                     }
                 }))
                 

@@ -22,6 +22,7 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.navigationItem.hidesBackButton = true
         if let userProfile = PreferencesManager.sharedInstance().retrieveUserProfile() {
             self.mainLabel.text = String(format: String.localize("home_welcome_message"), userProfile.firstName, userProfile.email)
         }
@@ -34,14 +35,14 @@ class HomeViewController: UIViewController {
             GIDSignIn.sharedInstance()?.signOut()
             
             PreferencesManager.sharedInstance().deleteUserProfile()
-            self.navigationController?.dismiss(animated: false, completion: nil)
+            self.navigationController?.popToRootViewController(animated: true)
         }
         // SignOut from User/Password Login
         else {
             FirebaseAuthManager().signOut { [weak self] (success) in
                 if success {
                     PreferencesManager.sharedInstance().deleteUserProfile()
-                    self?.navigationController?.dismiss(animated: false, completion: nil)
+                    self?.navigationController?.popToRootViewController(animated: true)
                 } else {
                     print("Error Logout")
                 }

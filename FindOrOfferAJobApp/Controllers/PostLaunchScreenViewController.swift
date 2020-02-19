@@ -35,12 +35,12 @@ class PostLaunchScreenViewController: UIViewController {
         if Auth.auth().currentUser != nil || GIDSignIn.sharedInstance()?.currentUser != nil {
             let homeStoryboard = UIStoryboard(name: StoryboardNavigate.Home.rawValue, bundle: nil)
             if let homeViewController = homeStoryboard.instantiateInitialViewController() {
-                self.present(homeViewController, animated: true, completion: nil)
+                self.navigationController?.pushViewController(homeViewController, animated: true)
             }
         } else {
             let mainStoryboard = UIStoryboard(name: StoryboardNavigate.Main.rawValue, bundle: nil)
             if let mainViewController = mainStoryboard.instantiateInitialViewController() {
-                self.present(mainViewController, animated: true, completion: nil)
+                self.navigationController?.pushViewController(mainViewController, animated: true)
             }
         }
     }
