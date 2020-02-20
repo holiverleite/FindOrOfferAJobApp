@@ -19,4 +19,10 @@
 // Profile
 "profile_nav_bar" = "Perfil";
 "settings_nav_bar" = "Configurações";
+"change_password_nav_bar" = "Alterar senha";
+
+// Settings
+"new_password_placeholder" = "Nova senha";
+"retype_new_password_placeholder" = "Repita a nova senha";
+"save_changes_button" = "Salvar alteração";
 

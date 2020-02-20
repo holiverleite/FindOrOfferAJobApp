@@ -17,6 +17,7 @@
 		945531FD23FEC70A00016D30 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 945531FC23FEC70A00016D30 /* Profile.storyboard */; };
 		945531FF23FEC9A400016D30 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 945531FE23FEC9A400016D30 /* Home.storyboard */; };
 		9455320323FEE2C700016D30 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9455320223FEE2C600016D30 /* SettingsViewController.swift */; };
+		9455320523FEF58A00016D30 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9455320423FEF58A00016D30 /* ChangePasswordViewController.swift */; };
 		945578F723F41CFA005B1B92 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 945578F623F41CFA005B1B92 /* GoogleService-Info.plist */; };
 		945578FA23F4241B005B1B92 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945578F923F4241B005B1B92 /* FirebaseAuthManager.swift */; };
 		9455790323F431EF005B1B92 /* AccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9455790223F431EF005B1B92 /* AccessViewController.swift */; };
@@ -52,6 +53,7 @@
 		945531FC23FEC70A00016D30 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		945531FE23FEC9A400016D30 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		9455320223FEE2C600016D30 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		9455320423FEF58A00016D30 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		945578F623F41CFA005B1B92 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		945578F923F4241B005B1B92 /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
 		9455790223F431EF005B1B92 /* AccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessViewController.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				9461BFE623F4711600EA2CA9 /* HomeViewController.swift */,
 				94601EF223FD7DF000FAF484 /* ProfileViewController.swift */,
 				9455320223FEE2C600016D30 /* SettingsViewController.swift */,
+				9455320423FEF58A00016D30 /* ChangePasswordViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -398,6 +401,7 @@
 				9443361A23FB072D004378BD /* Protocols.swift in Sources */,
 				9455790323F431EF005B1B92 /* AccessViewController.swift in Sources */,
 				9455791023F4634D005B1B92 /* PreferencesManager.swift in Sources */,
+				9455320523FEF58A00016D30 /* ChangePasswordViewController.swift in Sources */,
 				9455791323F467BF005B1B92 /* UserProfile.swift in Sources */,
 				94D19A2423F56E0B00A557CC /* PostLaunchScreenViewController.swift in Sources */,
 				94601EF623FD8FE800FAF484 /* ImageConstants.swift in Sources */,

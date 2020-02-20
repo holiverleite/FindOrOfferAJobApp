@@ -113,6 +113,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let settingsViewController = segue.destination as? SettingsViewController {
             settingsViewController.userProfileViewModel = self.userProfileViewModel

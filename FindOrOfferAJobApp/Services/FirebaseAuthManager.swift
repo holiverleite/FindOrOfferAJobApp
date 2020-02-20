@@ -39,4 +39,14 @@ class FirebaseAuthManager {
         }
     }
     
+    func changePassword(to newPassword: String, completion: @escaping (_ success: Bool) -> Void) {
+        Auth.auth().currentUser?.updatePassword(to: newPassword, completion: { (error) in
+            if let error = error {
+                completion(false)
+            } else {
+                completion(true)
+            }
+        })
+    }
+    
 }

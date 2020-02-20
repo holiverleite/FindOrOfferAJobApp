@@ -37,6 +37,11 @@ class SettingsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         self.navigationController?.navigationBar.topItem?.title = String.localize("settings_nav_bar")
     }
 }
@@ -82,9 +87,16 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch settingsItem {
         case .ChangePassword:
-            break
+            self.performSegue(withIdentifier: "ChangePasswordViewController", sender: nil)
         case .DeleteAccount:
             break
+        }
+    }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let changePasswordViewController = segue.destination as? ChangePasswordViewController {
+            changePasswordViewController.userProfileViewModel = self.userProfileViewModel
         }
     }
 }
