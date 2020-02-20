@@ -34,15 +34,17 @@ class SettingsViewController: UIViewController {
     var userProfileViewModel: UserProfileViewModel? = nil
 
     // MARK: - Lifecycle
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
+        // FIXME: - Create a default BarButtonItem
+        self.navigationItem.setLeftBarButton(UIBarButtonItem(image: ImageConstants.Back, landscapeImagePhone: ImageConstants.Back, style: .plain, target: self, action: #selector(didTapBackButton)), animated: true)
+        self.navigationItem.title = String.localize("settings_nav_bar")
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        self.navigationController?.navigationBar.topItem?.title = String.localize("settings_nav_bar")
+    // MARK: - Methods
+    @objc func didTapBackButton() {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 

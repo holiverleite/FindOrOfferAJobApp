@@ -22,4 +22,7 @@ struct ImageConstants {
     // Settings
     static let Lock = UIImage(named: "lock")
     static let Delete = UIImage(named: "delete")
+    
+    // Others
+    static let Back = UIImage(named: "back")
 }

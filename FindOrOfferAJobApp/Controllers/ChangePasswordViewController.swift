@@ -33,10 +33,10 @@ class ChangePasswordViewController: UIViewController {
     // MARK: - Variables
     var userProfileViewModel: UserProfileViewModel? = nil
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        self.navigationController?.navigationBar.topItem?.title = String.localize("change_password_nav_bar")
+        self.navigationItem.title = String.localize("change_password_nav_bar")
     }
     
     // MARK: - Methods
