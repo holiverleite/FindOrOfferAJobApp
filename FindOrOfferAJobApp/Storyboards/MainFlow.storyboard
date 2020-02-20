@@ -8,53 +8,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Settings View Controller-->
-        <scene sceneID="4ja-1e-YgP">
-            <objects>
-                <viewController id="U94-N5-6lO" customClass="SettingsViewController" customModule="FindOrOfferAJobApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="JL5-0v-LKq">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BHc-e4-2Gs">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="nc6-dE-3SQ" firstAttribute="bottom" secondItem="BHc-e4-2Gs" secondAttribute="bottom" id="7hf-I4-XAf"/>
-                            <constraint firstItem="BHc-e4-2Gs" firstAttribute="top" secondItem="nc6-dE-3SQ" secondAttribute="top" id="EFO-hv-Oed"/>
-                            <constraint firstItem="nc6-dE-3SQ" firstAttribute="trailing" secondItem="BHc-e4-2Gs" secondAttribute="trailing" id="LS4-Hp-vqw"/>
-                            <constraint firstItem="BHc-e4-2Gs" firstAttribute="leading" secondItem="nc6-dE-3SQ" secondAttribute="leading" id="z7e-py-tM6"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="nc6-dE-3SQ"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="" image="settings" id="GVm-JE-Lh3"/>
-                    <connections>
-                        <outlet property="tableView" destination="BHc-e4-2Gs" id="vCa-RH-XLF"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DbU-ky-Y8p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-81.159420289855078" y="401.78571428571428"/>
-        </scene>
-        <!--Home View Controller-->
-        <scene sceneID="VZm-on-cOS">
-            <objects>
-                <viewController id="VvV-oL-mXS" customClass="HomeViewController" customModule="FindOrOfferAJobApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="aDp-h4-aGY">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="1PF-pO-lrD"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="" image="home" id="ndw-t3-bgB"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Dpm-Ly-xhY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-81" y="-417"/>
-        </scene>
         <!--Main Tab Bar View Controller-->
         <scene sceneID="6tu-0W-trR">
             <objects>
@@ -66,16 +19,36 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="VvV-oL-mXS" kind="relationship" relationship="viewControllers" id="8Zx-7m-SwG"/>
+                        <segue destination="Mkb-Ph-vAU" kind="relationship" relationship="viewControllers" id="Ltt-q1-kjn"/>
                         <segue destination="e2d-gF-q4h" kind="relationship" relationship="viewControllers" id="gmo-ds-9Of"/>
-                        <segue destination="U94-N5-6lO" kind="relationship" relationship="viewControllers" id="cCN-ng-AgL"/>
+                        <segue destination="BEx-HK-lzG" kind="relationship" relationship="viewControllers" id="TIy-g9-044"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6HU-3c-ryr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-978" y="106"/>
         </scene>
-        <!--Item-->
+        <!--Home-->
+        <scene sceneID="Gk0-T6-fEI">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Home" id="Mkb-Ph-vAU" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="jgn-aP-wyP"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a0g-rE-zqz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-289" y="-143"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="yrX-vb-vzu">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" id="BEx-HK-lzG" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="5Yv-65-Tdf"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MQO-sU-Ens" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-147" y="299"/>
+        </scene>
+        <!--View Controller-->
         <scene sceneID="bLh-5z-oDw">
             <objects>
                 <viewController id="e2d-gF-q4h" sceneMemberID="viewController">
@@ -85,7 +58,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="087-Da-nzm"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="XjC-8e-2hW"/>
+                    <tabBarItem key="tabBarItem" title="" image="job" id="XjC-8e-2hW"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cpb-GX-sUa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -93,7 +66,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="home" width="24" height="24"/>
-        <image name="settings" width="24" height="24"/>
+        <image name="job" width="29" height="29"/>
     </resources>
 </document>

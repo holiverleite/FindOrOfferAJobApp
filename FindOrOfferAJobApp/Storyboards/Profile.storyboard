@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HzQ-Kb-46Y">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Profile View Controller-->
+        <scene sceneID="LZd-da-zn8">
+            <objects>
+                <viewController id="HzQ-Kb-46Y" customClass="ProfileViewController" customModule="FindOrOfferAJobApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iBT-4d-3RM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mgm-c2-pn8">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="mgm-c2-pn8" firstAttribute="top" secondItem="fFd-CX-ueQ" secondAttribute="top" id="3pL-uI-TvP"/>
+                            <constraint firstItem="fFd-CX-ueQ" firstAttribute="trailing" secondItem="mgm-c2-pn8" secondAttribute="trailing" id="oZp-Q9-tyP"/>
+                            <constraint firstItem="mgm-c2-pn8" firstAttribute="leading" secondItem="fFd-CX-ueQ" secondAttribute="leading" id="us2-ez-c1b"/>
+                            <constraint firstItem="fFd-CX-ueQ" firstAttribute="bottom" secondItem="mgm-c2-pn8" secondAttribute="bottom" id="zwb-0d-33a"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="fFd-CX-ueQ"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="profile" id="qyW-k6-7F8"/>
+                    <connections>
+                        <outlet property="tableView" destination="mgm-c2-pn8" id="Txv-QJ-dea"/>
+                        <segue destination="gW8-ic-I8Z" kind="show" identifier="SettingsViewController" id="1hO-RR-r2F"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tnl-b4-VgW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-172" y="163"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="5aB-NG-qKe">
+            <objects>
+                <viewController id="gW8-ic-I8Z" customClass="SettingsViewController" customModule="FindOrOfferAJobApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4ow-lp-4Mo">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ecV-WH-Z4f">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ecV-WH-Z4f" firstAttribute="top" secondItem="mbe-I1-tdA" secondAttribute="top" id="470-9Q-2vJ"/>
+                            <constraint firstItem="ecV-WH-Z4f" firstAttribute="leading" secondItem="mbe-I1-tdA" secondAttribute="leading" id="63r-ez-oCO"/>
+                            <constraint firstItem="mbe-I1-tdA" firstAttribute="trailing" secondItem="ecV-WH-Z4f" secondAttribute="trailing" id="MOx-LT-eag"/>
+                            <constraint firstItem="mbe-I1-tdA" firstAttribute="bottom" secondItem="ecV-WH-Z4f" secondAttribute="bottom" id="jxW-E7-nEi"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="mbe-I1-tdA"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Hmu-gl-yW9"/>
+                    <connections>
+                        <outlet property="tableView" destination="ecV-WH-Z4f" id="jjh-uc-8Jx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DI2-MU-pBM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="745" y="163"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="profile" width="24" height="24"/>
+    </resources>
+</document>

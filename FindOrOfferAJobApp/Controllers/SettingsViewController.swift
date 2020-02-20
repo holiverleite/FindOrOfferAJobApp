@@ -1,5 +1,5 @@
 //
-//  SettingsViewController.swift
+//  ProfileViewController.swift
 //  FindOrOfferAJobApp
 //
 //  Created by Haroldo on 19/02/20.
@@ -12,10 +12,11 @@ import GoogleSignIn
 class SettingsViewController: UIViewController {
     
     enum SettingItems: String, CaseIterable {
-        case Profile = "Perfil"
-        case Logout = "Sair"
+        case ChangePassword = "Alterar Senha"
+        case DeleteAccount = "Deletar Conta"
     }
-
+    
+    // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             self.tableView.delegate = self
@@ -28,78 +29,61 @@ class SettingsViewController: UIViewController {
             self.tableView.rowHeight = 50
         }
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
+    // MARK: - Variables
+    var userProfileViewModel: UserProfileViewModel? = nil
+
+    // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.navigationController?.navigationBar.topItem?.title = String.localize("settings_nav_bar")
-        
-        if let userProfile = PreferencesManager.sharedInstance().retrieveUserProfile() {
-
-        }
-    }
-    
-    func logoutUser() {
-        
-        // SignOut from Google Login
-        if GIDSignIn.sharedInstance()?.currentUser != nil {
-            GIDSignIn.sharedInstance()?.signOut()
-            
-            PreferencesManager.sharedInstance().deleteUserProfile()
-            self.navigationController?.popToRootViewController(animated: true)
-        }
-        // SignOut from User/Password Login
-        else {
-            FirebaseAuthManager().signOut { [weak self] (success) in
-                if success {
-                    PreferencesManager.sharedInstance().deleteUserProfile()
-                    self?.navigationController?.popToRootViewController(animated: true)
-                } else {
-                    print("Error Logout")
-                }
-            }
-        }
     }
 }
 
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return SettingItems.allCases.count
+        guard let userProfileViewModel = self.userProfileViewModel else {
+            return 0
+        }
+        
+        return userProfileViewModel.settingsOptions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SettingsTableViewCell.self), for: indexPath) as? SettingsTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SettingsTableViewCell.self), for: indexPath) as? SettingsTableViewCell, let userProfileViewModel = self.userProfileViewModel else {
             fatalError("SettingsTableViewCell not found!")
         }
         
-        cell.selectionStyle = .none
+        let settingsItem = userProfileViewModel.settingsOptions[indexPath.row]
         
-        switch indexPath.row {
-        case 0:
-            cell.nameLabel.text = SettingItems.Profile.rawValue
-            cell.imageView?.image = ImageConstants.Profie
-        case 1:
-            cell.nameLabel.text = SettingItems.Logout.rawValue
-            cell.imageView?.image = ImageConstants.Logout
-        default:
-            break
+        switch settingsItem {
+        case .ChangePassword:
+            cell.nameLabel.text = SettingsViewController.SettingItems.ChangePassword.rawValue
+            cell.imageView?.image = ImageConstants.Lock
+        case .DeleteAccount:
+            cell.nameLabel.text = SettingsViewController.SettingItems.DeleteAccount.rawValue
+            cell.imageView?.image = ImageConstants.Delete
         }
+        
+        cell.selectionStyle = .none
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 0:
+        
+        guard let userProfileViewModel = self.userProfileViewModel else {
+            return
+        }
+        
+        let settingsItem = userProfileViewModel.settingsOptions[indexPath.row]
+        
+        switch settingsItem {
+        case .ChangePassword:
             break
-        case 1:
-            self.logoutUser()
-        default:
+        case .DeleteAccount:
             break
         }
     }

@@ -83,7 +83,7 @@ class RegistrationViewController: UIViewController {
                     
                     // FIXME: - Implement UserProfileViewModel
                     // FIXME: - Implement To do this when receive a change in the listener
-                    let userProfile = UserProfile(userId: userId, firstName: firstName, lastName: lastName, email: email)
+                    let userProfile = UserProfile(userId: userId, firstName: firstName, lastName: lastName, email: email, accountType: .DefaultAccount)
                     PreferencesManager.sharedInstance().saveUserProfile(user: userProfile)
                     
                     title = String.localize("commom_success_title_alert")

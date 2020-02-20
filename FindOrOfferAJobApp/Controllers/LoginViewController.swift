@@ -75,10 +75,10 @@ class LoginViewController: UIViewController {
                         let lastName = value?.object(forKey: FirebaseUser.LastName) as? String,
                         let email = value?.object(forKey: FirebaseUser.Email) as? String {
                         
-                        let userProfile = UserProfile(userId: userId, firstName: firstName, lastName: lastName, email: email)
+                        let userProfile = UserProfile(userId: userId, firstName: firstName, lastName: lastName, email: email, accountType: .DefaultAccount)
                         // Save/Update User in Firebase
                         PreferencesManager.sharedInstance().saveUserProfile(user: userProfile)
-                        self.navigationController?.popToRootViewController(animated: true)
+                        self.navigationController?.popToRootViewController(animated: false)
                     }
                     
                 }
@@ -106,7 +106,7 @@ extension LoginViewController: NavigationDelegate {
         
         // Save/Update User in Firebase
         PreferencesManager.sharedInstance().saveUserProfile(user: user)
-        self.navigationController?.popToRootViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: false)
         
     }
 }

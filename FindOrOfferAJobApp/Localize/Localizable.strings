@@ -16,6 +16,7 @@
 // Home
 "home_nav_bar" = "Home";
 
-// Settings
+// Profile
+"profile_nav_bar" = "Perfil";
 "settings_nav_bar" = "Configurações";
 

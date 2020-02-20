@@ -10,8 +10,16 @@ import Foundation
 import UIKit
 
 struct ImageConstants {
+    // TabBar
     static let Home = UIImage(named: "home")
-    static let Profie = UIImage(named: "profile")
+    static let Job = UIImage(named: "job")
+    static let Profile = UIImage(named: "profile")
+    
+    // Profile
     static let Settings = UIImage(named: "settings")
     static let Logout = UIImage(named: "logout")
+    
+    // Settings
+    static let Lock = UIImage(named: "lock")
+    static let Delete = UIImage(named: "delete")
 }

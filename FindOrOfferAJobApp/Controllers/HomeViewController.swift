@@ -19,6 +19,11 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         self.navigationController?.navigationBar.topItem?.title = String.localize("home_nav_bar")
     }
 }
