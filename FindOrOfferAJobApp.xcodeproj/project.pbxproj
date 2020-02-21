@@ -11,6 +11,8 @@
 		628CB81723DCDA4500B62278 /* AccessScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 628CB81523DCDA4500B62278 /* AccessScreen.storyboard */; };
 		628CB81923DCDA4800B62278 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 628CB81823DCDA4800B62278 /* Assets.xcassets */; };
 		628CB81C23DCDA4800B62278 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 628CB81A23DCDA4800B62278 /* LaunchScreen.storyboard */; };
+		711F2B1D240018DD00B66AA5 /* UserResumeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711F2B1B240018DD00B66AA5 /* UserResumeTableViewCell.swift */; };
+		711F2B1E240018DD00B66AA5 /* UserResumeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 711F2B1C240018DD00B66AA5 /* UserResumeTableViewCell.xib */; };
 		940CDC5F23F5734100683B1A /* PostLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 940CDC5E23F5734100683B1A /* PostLaunchScreen.storyboard */; };
 		9443361A23FB072D004378BD /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9443361923FB072D004378BD /* Protocols.swift */; };
 		945531FA23FEB0B200016D30 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945531F923FEB0B200016D30 /* UserProfileViewModel.swift */; };
@@ -47,6 +49,8 @@
 		628CB81823DCDA4800B62278 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		628CB81B23DCDA4800B62278 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		628CB81D23DCDA4800B62278 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		711F2B1B240018DD00B66AA5 /* UserResumeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResumeTableViewCell.swift; sourceTree = "<group>"; };
+		711F2B1C240018DD00B66AA5 /* UserResumeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserResumeTableViewCell.xib; sourceTree = "<group>"; };
 		940CDC5E23F5734100683B1A /* PostLaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PostLaunchScreen.storyboard; sourceTree = "<group>"; };
 		9443361923FB072D004378BD /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		945531F923FEB0B200016D30 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
@@ -137,6 +141,24 @@
 			path = FindOrOfferAJobApp;
 			sourceTree = "<group>";
 		};
+		711F2B162400185600B66AA5 /* SettingsTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				94601EF823FDB20900FAF484 /* SettingsTableViewCell.swift */,
+				94601EF923FDB20900FAF484 /* SettingsTableViewCell.xib */,
+			);
+			path = SettingsTableViewCell;
+			sourceTree = "<group>";
+		};
+		711F2B172400186900B66AA5 /* UserResumeTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				711F2B1B240018DD00B66AA5 /* UserResumeTableViewCell.swift */,
+				711F2B1C240018DD00B66AA5 /* UserResumeTableViewCell.xib */,
+			);
+			path = UserResumeTableViewCell;
+			sourceTree = "<group>";
+		};
 		7E8AF0FA921AD1CEEDC8750E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,8 +187,8 @@
 		945531FB23FEC56000016D30 /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				94601EF823FDB20900FAF484 /* SettingsTableViewCell.swift */,
-				94601EF923FDB20900FAF484 /* SettingsTableViewCell.xib */,
+				711F2B172400186900B66AA5 /* UserResumeTableViewCell */,
+				711F2B162400185600B66AA5 /* SettingsTableViewCell */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -317,6 +339,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				711F2B1E240018DD00B66AA5 /* UserResumeTableViewCell.xib in Resources */,
 				628CB81C23DCDA4800B62278 /* LaunchScreen.storyboard in Resources */,
 				945531FF23FEC9A400016D30 /* Home.storyboard in Resources */,
 				940CDC5F23F5734100683B1A /* PostLaunchScreen.storyboard in Resources */,
@@ -415,6 +438,7 @@
 				945531FA23FEB0B200016D30 /* UserProfileViewModel.swift in Sources */,
 				9455790723F4356A005B1B92 /* RegistrationViewController.swift in Sources */,
 				9455320323FEE2C700016D30 /* SettingsViewController.swift in Sources */,
+				711F2B1D240018DD00B66AA5 /* UserResumeTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

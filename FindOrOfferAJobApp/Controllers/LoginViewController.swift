@@ -75,7 +75,7 @@ class LoginViewController: UIViewController {
                         let lastName = value?.object(forKey: FirebaseUser.LastName) as? String,
                         let email = value?.object(forKey: FirebaseUser.Email) as? String {
                         
-                        let userProfile = UserProfile(userId: userId, firstName: firstName, lastName: lastName, email: email, accountType: .DefaultAccount)
+                        let userProfile = UserProfile(userId: userId, firstName: firstName, lastName: lastName, email: email, accountType: .DefaultAccount, userImageURL: nil, userImageData: nil)
                         // Save/Update User in Firebase
                         PreferencesManager.sharedInstance().saveUserProfile(user: userProfile)
                         self.navigationController?.popToRootViewController(animated: false)
@@ -93,6 +93,16 @@ class LoginViewController: UIViewController {
             }
         }
     }
+    
+    private func downloadUserImageData(imageUrl: URL, completion: @escaping (_ image: Data?) -> Void) {
+        URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+            if let data = data {
+                completion(data)
+            } else {
+                completion(nil)
+            }
+        }.resume()
+    }
 }
 
 extension LoginViewController: NavigationDelegate {
@@ -100,13 +110,19 @@ extension LoginViewController: NavigationDelegate {
     func signWithGoogleAccount(user: UserProfile) {
         
         let userDict : [String:Any] = [FirebaseUser.FirstName: user.firstName, FirebaseUser.LastName: user.lastName, FirebaseUser.Email: user.email]
-        
         let ref = self.rootUserReference.child(user.userId)
-        ref.setValue(userDict)
         
-        // Save/Update User in Firebase
-        PreferencesManager.sharedInstance().saveUserProfile(user: user)
-        self.navigationController?.popToRootViewController(animated: false)
+        if let urlUserImage = user.userImageURL, let url = URL(string: urlUserImage) {
+            self.downloadUserImageData(imageUrl: url) { (data) in
+                user.userImageData = data
+                PreferencesManager.sharedInstance().saveUserProfile(user: user)
+            }
+        }
         
+        ref.setValue(userDict) { (error, _) in
+            // Save/Update User in Firebase
+            PreferencesManager.sharedInstance().saveUserProfile(user: user)
+            self.navigationController?.popToRootViewController(animated: false)
+        }
     }
 }

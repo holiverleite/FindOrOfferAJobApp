@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class UserProfile: NSObject, NSCoding {
     
@@ -21,6 +22,8 @@ class UserProfile: NSObject, NSCoding {
         case lastName
         case email
         case accountType
+        case userImageURL
+        case userImageData
     }
     
     let userId: String // Cant be changed
@@ -28,6 +31,8 @@ class UserProfile: NSObject, NSCoding {
     var lastName: String
     let email: String // Cant be changed
     var accountType: AccountType
+    var userImageURL: String?
+    var userImageData: Data?
     
     override init() {
         self.userId = ""
@@ -35,14 +40,18 @@ class UserProfile: NSObject, NSCoding {
         self.lastName = ""
         self.email = ""
         self.accountType = .DefaultAccount
+        self.userImageURL = nil
+        self.userImageData = nil
     }
     
-    init(userId: String, firstName: String, lastName: String, email: String, accountType: AccountType) {
+    init(userId: String, firstName: String, lastName: String, email: String, accountType: AccountType, userImageURL: String?, userImageData: Data?) {
         self.userId = userId
         self.firstName = firstName
         self.lastName = lastName
         self.email = email
         self.accountType = accountType
+        self.userImageURL = userImageURL
+        self.userImageData = userImageData
     }
     
     func encode(with coder: NSCoder) {
@@ -51,6 +60,8 @@ class UserProfile: NSObject, NSCoding {
         coder.encode(self.lastName, forKey: User.lastName.rawValue)
         coder.encode(self.email, forKey: User.email.rawValue)
         coder.encode(self.accountType.rawValue, forKey: User.accountType.rawValue)
+        coder.encode(self.userImageURL, forKey: User.userImageURL.rawValue)
+        coder.encode(self.userImageData, forKey: User.userImageData.rawValue)
     }
     
     required convenience init(coder aDecoder: NSCoder) {
@@ -60,9 +71,14 @@ class UserProfile: NSObject, NSCoding {
             let email = aDecoder.decodeObject(forKey: User.email.rawValue) as? String,
             let accountTypeDecoder = aDecoder.decodeObject(forKey: User.accountType.rawValue) as? String,
             let accountType: AccountType = UserProfile.AccountType(rawValue: accountTypeDecoder) {
-            self.init(userId: userId, firstName: firstName, lastName: lastName, email: email, accountType: accountType)
+            
+            if let imageURL = aDecoder.decodeObject(forKey: User.userImageURL.rawValue) as? String, let imageData = aDecoder.decodeObject(forKey: User.userImageData.rawValue) as? Data {
+                self.init(userId: userId, firstName: firstName, lastName: lastName, email: email, accountType: accountType, userImageURL: imageURL, userImageData: imageData)
+            } else {
+                self.init(userId: userId, firstName: firstName, lastName: lastName, email: email, accountType: accountType, userImageURL: nil, userImageData: nil)
+            }
         } else {
-            self.init(userId: "", firstName: "", lastName: "", email: "", accountType: .DefaultAccount)
+            self.init(userId: "", firstName: "", lastName: "", email: "", accountType: .DefaultAccount, userImageURL: nil, userImageData: nil)
         }
     }
 }

@@ -17,6 +17,7 @@ class ProfileViewController: UIViewController {
     }
     
     enum ProfileItems: String, CaseIterable {
+        case UserResumeCard
         case EditProfile = "Editar Perfil"
         case Settings = "Configurações"
         case Logout = "Sair"
@@ -28,11 +29,13 @@ class ProfileViewController: UIViewController {
             self.tableView.delegate = self
             self.tableView.dataSource = self
             
+            self.tableView.register(UserResumeTableViewCell.self, forCellReuseIdentifier: String(describing: UserResumeTableViewCell.self))
+            self.tableView.register(UINib(nibName: String(describing: UserResumeTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: UserResumeTableViewCell.self))
+            
             self.tableView.register(SettingsTableViewCell.self, forCellReuseIdentifier: String(describing: SettingsTableViewCell.self))
             self.tableView.register(UINib(nibName: String(describing: SettingsTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: SettingsTableViewCell.self))
             
             self.tableView.separatorStyle = .none
-            self.tableView.rowHeight = 50
         }
     }
     
@@ -69,33 +72,57 @@ class ProfileViewController: UIViewController {
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            return 150
+        } else {
+            return 70
+        }
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.userProfileViewModel.profileOptions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SettingsTableViewCell.self), for: indexPath) as? SettingsTableViewCell else {
-            fatalError("SettingsTableViewCell not found!")
+        
+        if indexPath.row == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UserResumeTableViewCell.self), for: indexPath) as? UserResumeTableViewCell else {
+                fatalError("UserResumeTableViewCell not found!")
+            }
+            
+            if let dataImage = self.userProfileViewModel.userImageData {
+                cell.userImageView.image = UIImage(data: dataImage)
+            }
+            
+            return cell
+            
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SettingsTableViewCell.self), for: indexPath) as? SettingsTableViewCell else {
+                fatalError("SettingsTableViewCell not found!")
+            }
+            
+            let settingsItem = self.userProfileViewModel.profileOptions[indexPath.row]
+            
+            switch settingsItem {
+            case .UserResumeCard:
+                break
+            case .EditProfile:
+                cell.nameLabel.text = ProfileViewController.ProfileItems.EditProfile.rawValue
+                cell.imageView?.image = ImageConstants.Profile
+            case .Settings:
+                cell.nameLabel.text = ProfileViewController.ProfileItems.Settings.rawValue
+                cell.imageView?.image = ImageConstants.Settings
+            case .Logout:
+                cell.nameLabel.text = ProfileViewController.ProfileItems.Logout.rawValue
+                cell.imageView?.image = ImageConstants.Logout
+            }
+            
+            cell.selectionStyle = .none
+            
+            return cell
         }
-        
-        let settingsItem = self.userProfileViewModel.profileOptions[indexPath.row]
-        
-        switch settingsItem {
-        case .EditProfile:
-            cell.nameLabel.text = ProfileViewController.ProfileItems.EditProfile.rawValue
-            cell.imageView?.image = ImageConstants.Profile
-        case .Settings:
-            cell.nameLabel.text = ProfileViewController.ProfileItems.Settings.rawValue
-            cell.imageView?.image = ImageConstants.Settings
-        case .Logout:
-            cell.nameLabel.text = ProfileViewController.ProfileItems.Logout.rawValue
-            cell.imageView?.image = ImageConstants.Logout
-        }
-        
-        cell.selectionStyle = .none
-        
-        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -103,6 +130,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         let profileItem = self.userProfileViewModel.profileOptions[indexPath.row]
         
         switch profileItem {
+        case .UserResumeCard:
+            break
         case .EditProfile:
             break
         case .Settings:

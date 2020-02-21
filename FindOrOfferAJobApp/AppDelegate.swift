@@ -45,11 +45,11 @@ extension AppDelegate: GIDSignInDelegate {
             return
         }
         
-        if let userId = user.userID, let firstName = user.profile.name, let lastName = user.profile.familyName, let email = user.profile.email {
-            let userProfile = UserProfile(userId: userId, firstName: firstName, lastName: lastName, email: email, accountType: .GoogleAccount)
+        if let userId = user.userID, let firstName = user.profile.name, let lastName = user.profile.familyName, let email = user.profile.email, let userImageURL = user.profile.imageURL(withDimension: 120) {
+            
+            let userProfile = UserProfile(userId: userId, firstName: firstName, lastName: lastName, email: email, accountType: .GoogleAccount, userImageURL: userImageURL.absoluteString, userImageData: nil)
             self.navigationDelegate?.signWithGoogleAccount(user: userProfile)
         }
-        
     }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {

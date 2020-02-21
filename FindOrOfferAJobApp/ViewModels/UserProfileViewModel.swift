@@ -40,6 +40,14 @@ struct UserProfileViewModel {
         return self.userProfile.accountType
     }
     
+    var userImageData: Data? {
+        if let imageData = self.userProfile.userImageData {
+            return imageData
+        } else {
+            return nil
+        }
+    }
+    
     var profileOptions: [ProfileViewController.ProfileItems] {
         return ProfileViewController.ProfileItems.allCases
     }
