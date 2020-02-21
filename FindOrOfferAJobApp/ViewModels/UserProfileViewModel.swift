@@ -20,6 +20,10 @@ struct UserProfileViewModel {
         }
     }
     
+    var userId: String {
+        return self.userProfile.userId
+    }
+    
     var firstName: String {
         return self.userProfile.firstName
     }

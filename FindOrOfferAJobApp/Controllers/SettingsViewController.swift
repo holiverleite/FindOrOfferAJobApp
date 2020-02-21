@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import GoogleSignIn
+
 
 class SettingsViewController: UIViewController {
     
@@ -45,6 +45,19 @@ class SettingsViewController: UIViewController {
     // MARK: - Methods
     @objc func didTapBackButton() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    private func deleteAccount() {
+        if let userViewModel = self.userProfileViewModel {
+            FirebaseAuthManager().deleteProfile(profile: userViewModel) { (success) in
+                if success {
+                    PreferencesManager.sharedInstance().deleteUserProfile()
+                    self.navigationController?.popToRootViewController(animated: true)
+                } else {
+                    print("Alert - Error")
+                }
+            }
+        }
     }
 }
 
@@ -91,7 +104,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         case .ChangePassword:
             self.performSegue(withIdentifier: "ChangePasswordViewController", sender: nil)
         case .DeleteAccount:
-            break
+            self.deleteAccount()
         }
     }
     

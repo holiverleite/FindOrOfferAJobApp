@@ -8,8 +8,12 @@
 
 import Foundation
 import FirebaseAuth
+import FirebaseDatabase
+import GoogleSignIn
 
 class FirebaseAuthManager {
+    
+    let rootUsersReference = Database.database().reference(withPath: FirebaseKnot.Users)
 
     func createUser(email: String, password: String, completion: @escaping (_ userId: String?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
@@ -41,7 +45,7 @@ class FirebaseAuthManager {
     
     func changePassword(to newPassword: String, completion: @escaping (_ success: Bool) -> Void) {
         Auth.auth().currentUser?.updatePassword(to: newPassword, completion: { (error) in
-            if let error = error {
+            if let _ = error {
                 completion(false)
             } else {
                 completion(true)
@@ -49,4 +53,30 @@ class FirebaseAuthManager {
         })
     }
     
+    func deleteProfile(profile: UserProfileViewModel, completion: @escaping (_ success: Bool) -> Void) {
+        switch profile.accountType {
+        case .DefaultAccount:
+            
+            self.rootUsersReference.child(profile.userId).removeValue(completionBlock: { (error, databaseReference) in
+                Auth.auth().currentUser?.delete(completion: { (error) in
+                    if let _ = error {
+                        completion(false)
+                    } else {
+                        completion(true)
+                    }
+                })
+            })
+            
+        case .GoogleAccount:
+            GIDSignIn.sharedInstance()?.signOut()
+            
+            self.rootUsersReference.child(profile.userId).removeValue { (error, _) in
+                if let _ = error {
+                    completion(false)
+                } else {
+                    completion(true)
+                }
+            }
+        }
+    }
 }
