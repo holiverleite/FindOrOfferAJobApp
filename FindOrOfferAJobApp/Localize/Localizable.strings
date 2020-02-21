@@ -20,6 +20,7 @@
 "profile_nav_bar" = "Perfil";
 "settings_nav_bar" = "Configurações";
 "change_password_nav_bar" = "Alterar senha";
+"edit_profile_nav_bar" = "Editar Perfil";
 
 // Settings
 "new_password_placeholder" = "Nova senha";

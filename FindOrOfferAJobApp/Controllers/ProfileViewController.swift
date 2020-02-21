@@ -11,11 +11,6 @@ import GoogleSignIn
 
 class ProfileViewController: UIViewController {
     
-    // MARK: - Routes
-    enum StoryboardNavigate: String {
-        case Profile
-    }
-    
     enum ProfileItems: String, CaseIterable {
         case UserResumeCard
         case EditProfile = "Editar Perfil"
@@ -96,6 +91,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.userImageView.image = UIImage(data: dataImage)
             }
             
+            cell.selectionStyle = .none
+            
             return cell
             
         } else {
@@ -133,7 +130,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         case .UserResumeCard:
             break
         case .EditProfile:
-            break
+            self.performSegue(withIdentifier: "EditProfileViewController", sender: nil)
         case .Settings:
             self.performSegue(withIdentifier: "SettingsViewController", sender: nil)
             //self.performSegue(withIdentifier: String(describing: SettingsViewController.self), sender: self.userProfileViewModel)
@@ -146,6 +143,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let settingsViewController = segue.destination as? SettingsViewController {
             settingsViewController.userProfileViewModel = self.userProfileViewModel
+        } else
+        
+        if let editProfileViewController = segue.destination as? EditProfileViewController {
+            editProfileViewController.userProfileViewModel = self.userProfileViewModel
         }
     }
 }

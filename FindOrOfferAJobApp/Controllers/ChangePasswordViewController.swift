@@ -2,7 +2,7 @@
 //  ChangePasswordViewController.swift
 //  FindOrOfferAJobApp
 //
-//  Created by monitora on 20/02/20.
+//  Created by Haroldo on 20/02/20.
 //  Copyright © 2020 HaroldoLeite. All rights reserved.
 //
 

@@ -34,6 +34,7 @@
                     <connections>
                         <outlet property="tableView" destination="mgm-c2-pn8" id="Txv-QJ-dea"/>
                         <segue destination="gW8-ic-I8Z" kind="show" identifier="SettingsViewController" id="1hO-RR-r2F"/>
+                        <segue destination="xmc-Ja-LHY" kind="show" identifier="EditProfileViewController" id="5Na-9P-m4Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tnl-b4-VgW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -71,6 +72,37 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DI2-MU-pBM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="745" y="163"/>
+        </scene>
+        <!--Edit Profile View Controller-->
+        <scene sceneID="y6f-Hr-9hk">
+            <objects>
+                <viewController id="xmc-Ja-LHY" customClass="EditProfileViewController" customModule="FindOrOfferAJobApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="a4K-m5-jOi">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MSo-n7-4sx">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="MSo-n7-4sx" firstAttribute="leading" secondItem="LKN-F7-xPJ" secondAttribute="leading" id="Nh5-Vu-VLm"/>
+                            <constraint firstItem="LKN-F7-xPJ" firstAttribute="bottom" secondItem="MSo-n7-4sx" secondAttribute="bottom" id="eVJ-gt-p1Y"/>
+                            <constraint firstItem="MSo-n7-4sx" firstAttribute="top" secondItem="LKN-F7-xPJ" secondAttribute="top" id="jTX-Xa-e62"/>
+                            <constraint firstItem="LKN-F7-xPJ" firstAttribute="trailing" secondItem="MSo-n7-4sx" secondAttribute="trailing" id="nwx-GX-au3"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="LKN-F7-xPJ"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="wkI-n3-jxE"/>
+                    <connections>
+                        <outlet property="tableview" destination="MSo-n7-4sx" id="EiS-R0-nGi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VIA-Uv-fmH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="745" y="892"/>
         </scene>
         <!--Change Password View Controller-->
         <scene sceneID="CSz-wb-cio">

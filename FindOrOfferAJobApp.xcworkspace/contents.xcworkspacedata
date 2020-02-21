@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/haroldo/git/FindOrOfferAJobApp/FindOrOfferAJobApp/Controllers/EditProfileViewController.swift">
+   </FileRef>
+   <FileRef
       location = "group:FindOrOfferAJobApp.xcodeproj">
    </FileRef>
    <FileRef
