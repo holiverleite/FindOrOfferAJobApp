@@ -21,6 +21,8 @@ class UserProfile: NSObject, NSCoding {
         case firstName
         case lastName
         case email
+        case cellphone
+        case phone
         case accountType
         case userImageURL
         case userImageData
@@ -30,6 +32,8 @@ class UserProfile: NSObject, NSCoding {
     var firstName: String
     var lastName: String
     let email: String // Cant be changed
+    var cellphone: String
+    var phone: String
     var accountType: AccountType
     var userImageURL: String?
     var userImageData: Data?
@@ -39,19 +43,35 @@ class UserProfile: NSObject, NSCoding {
         self.firstName = ""
         self.lastName = ""
         self.email = ""
+        self.cellphone = ""
+        self.phone = ""
         self.accountType = .DefaultAccount
         self.userImageURL = nil
         self.userImageData = nil
     }
     
-    init(userId: String, firstName: String, lastName: String, email: String, accountType: AccountType, userImageURL: String?, userImageData: Data?) {
+    init(userId: String, firstName: String, lastName: String, email: String, cellphone: String, phone: String, accountType: AccountType, userImageURL: String?, userImageData: Data?) {
         self.userId = userId
         self.firstName = firstName
         self.lastName = lastName
         self.email = email
+        self.cellphone = cellphone
+        self.phone = phone
         self.accountType = accountType
         self.userImageURL = userImageURL
         self.userImageData = userImageData
+    }
+    
+    init(userProfileViewModel: UserProfileViewModel) {
+        self.userId = userProfileViewModel.userId
+        self.firstName = userProfileViewModel.firstName
+        self.lastName = userProfileViewModel.lastName
+        self.email = userProfileViewModel.email
+        self.cellphone = userProfileViewModel.cellphone
+        self.phone = userProfileViewModel.phone
+        self.accountType = userProfileViewModel.accountType
+        self.userImageURL = userProfileViewModel.userImageURL
+        self.userImageData = userProfileViewModel.userImageData
     }
     
     func encode(with coder: NSCoder) {
@@ -59,6 +79,8 @@ class UserProfile: NSObject, NSCoding {
         coder.encode(self.firstName, forKey: User.firstName.rawValue)
         coder.encode(self.lastName, forKey: User.lastName.rawValue)
         coder.encode(self.email, forKey: User.email.rawValue)
+        coder.encode(self.cellphone, forKey: User.cellphone.rawValue)
+        coder.encode(self.phone, forKey: User.phone.rawValue)
         coder.encode(self.accountType.rawValue, forKey: User.accountType.rawValue)
         coder.encode(self.userImageURL, forKey: User.userImageURL.rawValue)
         coder.encode(self.userImageData, forKey: User.userImageData.rawValue)
@@ -69,16 +91,18 @@ class UserProfile: NSObject, NSCoding {
             let firstName = aDecoder.decodeObject(forKey: User.firstName.rawValue) as? String,
             let lastName = aDecoder.decodeObject(forKey: User.lastName.rawValue) as? String,
             let email = aDecoder.decodeObject(forKey: User.email.rawValue) as? String,
+            let cellphone = aDecoder.decodeObject(forKey: User.cellphone.rawValue) as? String,
+            let phone = aDecoder.decodeObject(forKey: User.phone.rawValue) as? String,
             let accountTypeDecoder = aDecoder.decodeObject(forKey: User.accountType.rawValue) as? String,
             let accountType: AccountType = UserProfile.AccountType(rawValue: accountTypeDecoder) {
             
             if let imageURL = aDecoder.decodeObject(forKey: User.userImageURL.rawValue) as? String, let imageData = aDecoder.decodeObject(forKey: User.userImageData.rawValue) as? Data {
-                self.init(userId: userId, firstName: firstName, lastName: lastName, email: email, accountType: accountType, userImageURL: imageURL, userImageData: imageData)
+                self.init(userId: userId, firstName: firstName, lastName: lastName, email: email, cellphone: cellphone, phone: phone, accountType: accountType, userImageURL: imageURL, userImageData: imageData)
             } else {
-                self.init(userId: userId, firstName: firstName, lastName: lastName, email: email, accountType: accountType, userImageURL: nil, userImageData: nil)
+                self.init(userId: userId, firstName: firstName, lastName: lastName, email: email, cellphone: cellphone, phone: phone, accountType: accountType, userImageURL: nil, userImageData: nil)
             }
         } else {
-            self.init(userId: "", firstName: "", lastName: "", email: "", accountType: .DefaultAccount, userImageURL: nil, userImageData: nil)
+            self.init(userId: "", firstName: "", lastName: "", email: "", cellphone: "", phone: "", accountType: .DefaultAccount, userImageURL: nil, userImageData: nil)
         }
     }
 }

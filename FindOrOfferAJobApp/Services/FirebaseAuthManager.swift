@@ -25,6 +25,26 @@ class FirebaseAuthManager {
         }
     }
     
+    func updateUser(user: UserProfile, completion: @escaping (_ success: Bool?) -> Void) {
+        let ref = self.rootUsersReference.child(user.userId)
+        let userDict: [String: Any] = [
+            FirebaseUser.FirstName: user.firstName,
+            FirebaseUser.LastName: user.lastName,
+            FirebaseUser.Email: user.email,
+            FirebaseUser.Cellphone: user.cellphone,
+            FirebaseUser.Phone: user.phone
+        ]
+        
+        ref.updateChildValues(userDict) { (error, databaseReference) in
+            if error != nil {
+                completion(false)
+            } else {
+                PreferencesManager.sharedInstance().saveUserProfile(user: user)
+                completion(true)
+            }
+        }
+    }
+    
     func signIn(email: String, password: String, completion: @escaping (_ userId: String?) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
             if let error = error, let _ = AuthErrorCode(rawValue: error._code) {

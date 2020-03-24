@@ -73,9 +73,11 @@ class LoginViewController: UIViewController {
                     let value = snapshot.value as? NSDictionary
                     if let firstName = value?.object(forKey: FirebaseUser.FirstName) as? String,
                         let lastName = value?.object(forKey: FirebaseUser.LastName) as? String,
-                        let email = value?.object(forKey: FirebaseUser.Email) as? String {
+                        let email = value?.object(forKey: FirebaseUser.Email) as? String,
+                        let cellphone = value?.object(forKey: FirebaseUser.Cellphone) as? String,
+                        let phone = value?.object(forKey: FirebaseUser.Phone) as? String {
                         
-                        let userProfile = UserProfile(userId: userId, firstName: firstName, lastName: lastName, email: email, accountType: .DefaultAccount, userImageURL: nil, userImageData: nil)
+                        let userProfile = UserProfile(userId: userId, firstName: firstName, lastName: lastName, email: email, cellphone: cellphone, phone: phone, accountType: .DefaultAccount, userImageURL: nil, userImageData: nil)
                         // Save/Update User in Firebase
                         PreferencesManager.sharedInstance().saveUserProfile(user: userProfile)
                         self.navigationController?.popToRootViewController(animated: false)

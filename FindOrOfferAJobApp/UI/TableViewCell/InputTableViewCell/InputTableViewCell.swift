@@ -8,10 +8,23 @@
 
 import UIKit
 
+protocol CustomTextFieldDelegate: class {
+    func textFieldDidChanged(_ textField: UITextField, type: ProfileOptions)
+    func textFieldDidEndEditing(_ textField: UITextField, type: ProfileOptions)
+}
+
 class InputTableViewCell: UITableViewCell {
 
     @IBOutlet weak var inputDescription: UILabel!
-    @IBOutlet weak var inputTextField: UITextField!
+    @IBOutlet weak var inputTextField: UITextField! {
+        didSet {
+            self.inputTextField.delegate = self
+            self.inputTextField.addTarget(self, action: #selector(textFieldDidChanged), for: .editingChanged)
+        }
+    }
+    
+    var type: ProfileOptions = .Nome
+    weak var delegate: CustomTextFieldDelegate? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,4 +37,13 @@ class InputTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    @objc func textFieldDidChanged() {
+        self.delegate?.textFieldDidChanged(self.inputTextField, type: self.type)
+    }
+}
+
+extension InputTableViewCell: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.delegate?.textFieldDidEndEditing(self.inputTextField, type: self.type)
+    }
 }

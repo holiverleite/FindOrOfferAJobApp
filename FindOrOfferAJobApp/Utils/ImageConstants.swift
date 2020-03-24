@@ -25,4 +25,5 @@ struct ImageConstants {
     
     // Others
     static let Back = UIImage(named: "back")
+    static let ProflePlaceHolder = UIImage(named: "profile_placeholder")
 }

@@ -36,8 +36,23 @@ struct UserProfileViewModel {
         return self.userProfile.email
     }
     
+    var cellphone: String {
+        return self.userProfile.cellphone
+    }
+    
+    var phone: String {
+        return self.userProfile.phone
+    }
+    
     var accountType: UserProfile.AccountType {
         return self.userProfile.accountType
+    }
+    
+    var userImageURL: String {
+        guard let imageURL = self.userProfile.userImageURL else {
+            return ""
+        }
+        return imageURL
     }
     
     var userImageData: Data? {

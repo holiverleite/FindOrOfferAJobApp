@@ -24,10 +24,12 @@
                         </constraints>
                     </imageView>
                 </subviews>
+                <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstItem="41F-0Q-TfK" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="AWf-wz-UIH"/>
-                    <constraint firstItem="41F-0Q-TfK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="NTJ-Yb-PSx"/>
                     <constraint firstItem="41F-0Q-TfK" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="RxN-nl-lrw"/>
+                    <constraint firstItem="41F-0Q-TfK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="ozi-TK-ZWS"/>
+                    <constraint firstAttribute="bottom" secondItem="41F-0Q-TfK" secondAttribute="bottom" constant="11" id="ycP-p6-bVz"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

@@ -12,10 +12,11 @@ class UserResumeTableViewCell: UITableViewCell {
 
     @IBOutlet weak var userImageView: UIImageView! {
         didSet {
+            self.userImageView.image = ImageConstants.ProflePlaceHolder
             self.userImageView.layer.borderWidth = 1
             self.userImageView.layer.masksToBounds = false
             self.userImageView.layer.borderColor = UIColor.clear.cgColor
-            self.userImageView.layer.cornerRadius = self.userImageView.frame.height/3
+            self.userImageView.layer.cornerRadius = self.userImageView.frame.height/3.3
             self.userImageView.clipsToBounds = true
         }
     }

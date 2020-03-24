@@ -47,7 +47,7 @@ extension AppDelegate: GIDSignInDelegate {
         
         if let userId = user.userID, let firstName = user.profile.name, let lastName = user.profile.familyName, let email = user.profile.email, let userImageURL = user.profile.imageURL(withDimension: 120) {
             
-            let userProfile = UserProfile(userId: userId, firstName: firstName, lastName: lastName, email: email, accountType: .GoogleAccount, userImageURL: userImageURL.absoluteString, userImageData: nil)
+            let userProfile = UserProfile(userId: userId, firstName: firstName, lastName: lastName, email: email, cellphone: "", phone: "", accountType: .GoogleAccount, userImageURL: userImageURL.absoluteString, userImageData: nil)
             self.navigationDelegate?.signWithGoogleAccount(user: userProfile)
         }
     }

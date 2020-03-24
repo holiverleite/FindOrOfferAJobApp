@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HzQ-Kb-46Y">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -13,17 +13,16 @@
             <objects>
                 <viewController id="HzQ-Kb-46Y" customClass="ProfileViewController" customModule="FindOrOfferAJobApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iBT-4d-3RM">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mgm-c2-pn8">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="mgm-c2-pn8" firstAttribute="top" secondItem="fFd-CX-ueQ" secondAttribute="top" id="3pL-uI-TvP"/>
+                            <constraint firstItem="mgm-c2-pn8" firstAttribute="top" secondItem="iBT-4d-3RM" secondAttribute="top" id="3pL-uI-TvP"/>
                             <constraint firstItem="fFd-CX-ueQ" firstAttribute="trailing" secondItem="mgm-c2-pn8" secondAttribute="trailing" id="oZp-Q9-tyP"/>
                             <constraint firstItem="mgm-c2-pn8" firstAttribute="leading" secondItem="fFd-CX-ueQ" secondAttribute="leading" id="us2-ez-c1b"/>
                             <constraint firstItem="fFd-CX-ueQ" firstAttribute="bottom" secondItem="mgm-c2-pn8" secondAttribute="bottom" id="zwb-0d-33a"/>
@@ -46,11 +45,11 @@
             <objects>
                 <viewController id="gW8-ic-I8Z" customClass="SettingsViewController" customModule="FindOrOfferAJobApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4ow-lp-4Mo">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ecV-WH-Z4f">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                         </subviews>
@@ -76,21 +75,20 @@
         <!--Edit Profile View Controller-->
         <scene sceneID="y6f-Hr-9hk">
             <objects>
-                <viewController id="xmc-Ja-LHY" customClass="EditProfileViewController" customModule="FindOrOfferAJobApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="xmc-Ja-LHY" customClass="EditProfileViewController" customModule="FindOrOfferAJobApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="a4K-m5-jOi">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MSo-n7-4sx">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="MSo-n7-4sx" firstAttribute="leading" secondItem="LKN-F7-xPJ" secondAttribute="leading" id="Nh5-Vu-VLm"/>
                             <constraint firstItem="LKN-F7-xPJ" firstAttribute="bottom" secondItem="MSo-n7-4sx" secondAttribute="bottom" id="eVJ-gt-p1Y"/>
-                            <constraint firstItem="MSo-n7-4sx" firstAttribute="top" secondItem="LKN-F7-xPJ" secondAttribute="top" id="jTX-Xa-e62"/>
+                            <constraint firstItem="MSo-n7-4sx" firstAttribute="top" secondItem="a4K-m5-jOi" secondAttribute="top" id="jTX-Xa-e62"/>
                             <constraint firstItem="LKN-F7-xPJ" firstAttribute="trailing" secondItem="MSo-n7-4sx" secondAttribute="trailing" id="nwx-GX-au3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LKN-F7-xPJ"/>
@@ -102,28 +100,28 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VIA-Uv-fmH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="745" y="892"/>
+            <point key="canvasLocation" x="745" y="933"/>
         </scene>
         <!--Change Password View Controller-->
         <scene sceneID="CSz-wb-cio">
             <objects>
                 <viewController id="77D-C5-cG4" customClass="ChangePasswordViewController" customModule="FindOrOfferAJobApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hkv-ep-5pN">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vHX-zM-bf8">
-                                <rect key="frame" x="50" y="179" width="314" height="34"/>
+                                <rect key="frame" x="50" y="179" width="275" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EDj-aJ-0FQ">
-                                <rect key="frame" x="50" y="233" width="314" height="34"/>
+                                <rect key="frame" x="50" y="233" width="275" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BZo-ek-Tug">
-                                <rect key="frame" x="50" y="713" width="314" height="45"/>
+                                <rect key="frame" x="50" y="552" width="275" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="IdS-ZA-6rD"/>
                                 </constraints>

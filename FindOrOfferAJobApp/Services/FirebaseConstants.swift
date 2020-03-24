@@ -16,4 +16,6 @@ struct FirebaseUser {
     static let FirstName = "firstName"
     static let LastName = "lastName"
     static let Email = "email"
+    static let Cellphone = "cellphone"
+    static let Phone = "phone"
 }
