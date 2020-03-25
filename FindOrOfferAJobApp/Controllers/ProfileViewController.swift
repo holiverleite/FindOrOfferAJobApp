@@ -35,13 +35,15 @@ class ProfileViewController: UIViewController {
     }
     
     // MARK: - Variables
-    let userProfileViewModel = UserProfileViewModel()
+    var userProfileViewModel = UserProfileViewModel()
 
     // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.navigationController?.navigationBar.topItem?.title = String.localize("profile_nav_bar")
+        
+        self.userProfileViewModel = UserProfileViewModel()
     }
     
     // MARK: - Methods

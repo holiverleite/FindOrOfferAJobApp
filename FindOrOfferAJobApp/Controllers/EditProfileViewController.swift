@@ -71,7 +71,7 @@ class EditProfileViewController: UIViewController {
     @objc func didTapSaveButton() {
         self.view.endEditing(true)
         FirebaseAuthManager().updateUser(user: self.userProfile) { (success) in
-            print("")
+            PreferencesManager.sharedInstance().saveUserProfile(user: self.userProfile)
             self.navigationController?.popViewController(animated: true)
         }
     }

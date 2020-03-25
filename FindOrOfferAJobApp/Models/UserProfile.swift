@@ -62,18 +62,6 @@ class UserProfile: NSObject, NSCoding {
         self.userImageData = userImageData
     }
     
-    init(userProfileViewModel: UserProfileViewModel) {
-        self.userId = userProfileViewModel.userId
-        self.firstName = userProfileViewModel.firstName
-        self.lastName = userProfileViewModel.lastName
-        self.email = userProfileViewModel.email
-        self.cellphone = userProfileViewModel.cellphone
-        self.phone = userProfileViewModel.phone
-        self.accountType = userProfileViewModel.accountType
-        self.userImageURL = userProfileViewModel.userImageURL
-        self.userImageData = userProfileViewModel.userImageData
-    }
-    
     func encode(with coder: NSCoder) {
         coder.encode(self.userId, forKey: User.userId.rawValue)
         coder.encode(self.firstName, forKey: User.firstName.rawValue)

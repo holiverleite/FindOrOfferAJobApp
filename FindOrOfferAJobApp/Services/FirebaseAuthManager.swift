@@ -25,12 +25,43 @@ class FirebaseAuthManager {
         }
     }
     
+    func retrieveUserFromFirebase(userId: String, completion: @escaping (_ profile: UserProfile?) -> Void) {
+        let ref = self.rootUsersReference.child(userId)
+        ref.observeSingleEvent(of: .value) { (dataSnapshot) in
+            
+            guard let data = dataSnapshot.value as? [String: String],
+                let firstName = data[FirebaseUser.FirstName],
+                let lastName = data[FirebaseUser.LastName],
+                let email = data[FirebaseUser.Email],
+                let cellPhone = data[FirebaseUser.Cellphone],
+                let phone = data[FirebaseUser.Phone],
+                let accountType = data[FirebaseUser.TypeAccount],
+                let userImageURL = data[FirebaseUser.UserImageURL] else {
+                    completion(nil)
+                    return
+            }
+            
+            let userProfile = UserProfile(userId: userId,
+                                          firstName: firstName,
+                                          lastName: lastName,
+                                          email: email,
+                                          cellphone: cellPhone,
+                                          phone: phone,
+                                          accountType: accountType == UserProfile.AccountType.DefaultAccount.rawValue ? UserProfile.AccountType.DefaultAccount : UserProfile.AccountType.DefaultAccount,
+                                          userImageURL: userImageURL, userImageData: nil)
+            
+            completion(userProfile)
+        }
+    }
+    
     func updateUser(user: UserProfile, completion: @escaping (_ success: Bool?) -> Void) {
         let ref = self.rootUsersReference.child(user.userId)
         let userDict: [String: Any] = [
             FirebaseUser.FirstName: user.firstName,
             FirebaseUser.LastName: user.lastName,
             FirebaseUser.Email: user.email,
+            FirebaseUser.TypeAccount: user.accountType.rawValue,
+            FirebaseUser.UserImageURL: user.userImageURL ?? "",
             FirebaseUser.Cellphone: user.cellphone,
             FirebaseUser.Phone: user.phone
         ]
@@ -39,7 +70,6 @@ class FirebaseAuthManager {
             if error != nil {
                 completion(false)
             } else {
-                PreferencesManager.sharedInstance().saveUserProfile(user: user)
                 completion(true)
             }
         }

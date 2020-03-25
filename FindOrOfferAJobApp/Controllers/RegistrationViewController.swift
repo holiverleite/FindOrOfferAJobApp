@@ -76,15 +76,11 @@ class RegistrationViewController: UIViewController {
                 
                 if let userId = userId {
                     
-                    let userDict : [String:Any] = [FirebaseUser.FirstName: firstName, FirebaseUser.LastName: lastName, FirebaseUser.Email: email]
-                    
-                    let ref = self.rootUsersReference.child(userId)
-                    ref.setValue(userDict)
-                    
-                    // FIXME: - Implement UserProfileViewModel
-                    // FIXME: - Implement To do this when receive a change in the listener
                     let userProfile = UserProfile(userId: userId, firstName: firstName, lastName: lastName, email: email, cellphone: "", phone: "", accountType: .DefaultAccount, userImageURL: nil, userImageData: nil)
-                    PreferencesManager.sharedInstance().saveUserProfile(user: userProfile)
+                    
+                    FirebaseAuthManager().updateUser(user: userProfile) { (success) in
+                        PreferencesManager.sharedInstance().saveUserProfile(user: userProfile)
+                    }
                     
                     title = String.localize("commom_success_title_alert")
                     message = String.localize("registration_success_account_creation")
@@ -93,6 +89,7 @@ class RegistrationViewController: UIViewController {
                     message = String.localize("common_error_message")
                 }
                 
+                // Alert
                 let alertViewController = UIAlertController(title: title, message: message, preferredStyle: .alert)
                 alertViewController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
                     if let _ = userId {

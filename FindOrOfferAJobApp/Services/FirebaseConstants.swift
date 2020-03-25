@@ -18,4 +18,6 @@ struct FirebaseUser {
     static let Email = "email"
     static let Cellphone = "cellphone"
     static let Phone = "phone"
+    static let TypeAccount = "typeAccount"
+    static let UserImageURL = "userImageURL"
 }

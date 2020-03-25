@@ -9,5 +9,5 @@
 import Foundation
 
 protocol NavigationDelegate: class {
-    func signWithGoogleAccount(user: UserProfile)
+    func signWithGoogleAccount(user: UserProfile, firstLogin: Bool)
 }

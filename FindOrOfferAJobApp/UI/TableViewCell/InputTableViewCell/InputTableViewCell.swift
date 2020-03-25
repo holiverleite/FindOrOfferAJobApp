@@ -19,6 +19,8 @@ class InputTableViewCell: UITableViewCell {
     @IBOutlet weak var inputTextField: UITextField! {
         didSet {
             self.inputTextField.delegate = self
+            self.inputTextField.borderStyle = .roundedRect
+            self.inputTextField.layer.borderColor = UIColor.lightGray.cgColor
             self.inputTextField.addTarget(self, action: #selector(textFieldDidChanged), for: .editingChanged)
         }
     }

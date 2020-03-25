@@ -69,20 +69,11 @@ class LoginViewController: UIViewController {
             // Login Success with Email and Passwd
             if let userId = userId {
                 // FIXME: REcover the user from firebase after the login
-                var _ = self.rootUserReference.child(userId).observeSingleEvent(of: .value) { (snapshot) in
-                    let value = snapshot.value as? NSDictionary
-                    if let firstName = value?.object(forKey: FirebaseUser.FirstName) as? String,
-                        let lastName = value?.object(forKey: FirebaseUser.LastName) as? String,
-                        let email = value?.object(forKey: FirebaseUser.Email) as? String,
-                        let cellphone = value?.object(forKey: FirebaseUser.Cellphone) as? String,
-                        let phone = value?.object(forKey: FirebaseUser.Phone) as? String {
-                        
-                        let userProfile = UserProfile(userId: userId, firstName: firstName, lastName: lastName, email: email, cellphone: cellphone, phone: phone, accountType: .DefaultAccount, userImageURL: nil, userImageData: nil)
-                        // Save/Update User in Firebase
+                FirebaseAuthManager().retrieveUserFromFirebase(userId: userId) { (userProfile) in
+                    if let userProfile = userProfile {
                         PreferencesManager.sharedInstance().saveUserProfile(user: userProfile)
                         self.navigationController?.popToRootViewController(animated: false)
                     }
-                    
                 }
             } else {
                 let alertViewController = UIAlertController(title: String.localize("commom_warning_title_alert"), message: String.localize("login_wrong_user_or_password"), preferredStyle: .alert)
@@ -109,22 +100,23 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: NavigationDelegate {
     // Login Success with Google Account
-    func signWithGoogleAccount(user: UserProfile) {
+    func signWithGoogleAccount(user: UserProfile, firstLogin: Bool) {
         
-        let userDict : [String:Any] = [FirebaseUser.FirstName: user.firstName, FirebaseUser.LastName: user.lastName, FirebaseUser.Email: user.email]
-        let ref = self.rootUserReference.child(user.userId)
+        if firstLogin {
+            FirebaseAuthManager().updateUser(user: user) { (success) in
+                PreferencesManager.sharedInstance().saveUserProfile(user: user)
+                self.navigationController?.popToRootViewController(animated: false)
+            }
+        } else {
+            PreferencesManager.sharedInstance().saveUserProfile(user: user)
+            self.navigationController?.popToRootViewController(animated: false)
+        }
         
-        if let urlUserImage = user.userImageURL, let url = URL(string: urlUserImage) {
+        if let userImageURL = user.userImageURL, let url = URL(string: userImageURL), user.userImageData == nil {
             self.downloadUserImageData(imageUrl: url) { (data) in
                 user.userImageData = data
                 PreferencesManager.sharedInstance().saveUserProfile(user: user)
             }
-        }
-        
-        ref.setValue(userDict) { (error, _) in
-            // Save/Update User in Firebase
-            PreferencesManager.sharedInstance().saveUserProfile(user: user)
-            self.navigationController?.popToRootViewController(animated: false)
         }
     }
 }
