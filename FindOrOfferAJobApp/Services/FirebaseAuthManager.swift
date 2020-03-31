@@ -47,7 +47,7 @@ class FirebaseAuthManager {
                                           email: email,
                                           cellphone: cellPhone,
                                           phone: phone,
-                                          accountType: accountType == UserProfile.AccountType.DefaultAccount.rawValue ? UserProfile.AccountType.DefaultAccount : UserProfile.AccountType.DefaultAccount,
+                                          accountType: accountType == UserProfile.AccountType.DefaultAccount.rawValue ? UserProfile.AccountType.DefaultAccount : UserProfile.AccountType.GoogleAccount,
                                           userImageURL: userImageURL, userImageData: nil)
             
             completion(userProfile)

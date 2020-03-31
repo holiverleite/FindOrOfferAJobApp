@@ -24,14 +24,17 @@ class PostLaunchScreenViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         
         GIDSignIn.sharedInstance()?.presentingViewController = self
+        
         GIDSignIn.sharedInstance()?.restorePreviousSignIn()
+        
     }
 
     @IBOutlet weak var activityIndicator: UIActivity!
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
+        super.viewWillAppear(animated)
+
         if Auth.auth().currentUser != nil || GIDSignIn.sharedInstance()?.currentUser != nil {
             let homeStoryboard = UIStoryboard(name: StoryboardNavigate.MainFlow.rawValue, bundle: nil)
             if let homeViewController = homeStoryboard.instantiateInitialViewController() {
