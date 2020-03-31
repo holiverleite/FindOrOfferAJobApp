@@ -44,6 +44,10 @@ struct UserProfileViewModel {
         return self.userProfile.phone
     }
     
+    var birthDate: String {
+        return self.userProfile.birthDate
+    }
+        
     var accountType: UserProfile.AccountType {
         return self.userProfile.accountType
     }

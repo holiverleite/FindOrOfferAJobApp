@@ -1,5 +1,5 @@
 //
-//  EditProfileViewController.swift
+//  EditPersonalDataViewController.swift
 //  FindOrOfferAJobApp
 //
 //  Created by Haroldo on 21/02/20.
@@ -14,9 +14,10 @@ enum ProfileOptions: String, CaseIterable {
     case Email
     case Celular
     case Telefone
+    case BirthDate
 }
 
-class EditProfileViewController: UIViewController {
+class EditPersonalDataViewController: UIViewController {
     
     @IBOutlet weak var tableview: UITableView! {
         didSet {
@@ -42,9 +43,8 @@ class EditProfileViewController: UIViewController {
         
         self.loadUserProfileValues()
 
-        self.navigationItem.title = String.localize("edit_profile_nav_bar")
+        self.navigationItem.title = String.localize("edit_personal_profile_nav_bar")
         // Do any additional setup after loading the view.
-        
         let saveButton = UIBarButtonItem(title: "Salvar", style: .plain, target: self, action: #selector(didTapSaveButton))
         self.navigationItem.rightBarButtonItem = saveButton
         self.navigationItem.rightBarButtonItem?.isEnabled = false
@@ -65,7 +65,7 @@ class EditProfileViewController: UIViewController {
             return
         }
         
-        self.userProfile = UserProfile(userId: userViewModel.userId, firstName: userViewModel.firstName, lastName: userViewModel.lastName, email: userViewModel.email, cellphone: userViewModel.cellphone, phone: userViewModel.phone, accountType: userViewModel.accountType, userImageURL: "", userImageData: userViewModel.userImageData)
+        self.userProfile = UserProfile(userId: userViewModel.userId, firstName: userViewModel.firstName, lastName: userViewModel.lastName, email: userViewModel.email, cellphone: userViewModel.cellphone, phone: userViewModel.phone, birthDate: userViewModel.birthDate, accountType: userViewModel.accountType, userImageURL: userViewModel.userImageURL, userImageData: userViewModel.userImageData)
     }
     
     @objc func didTapSaveButton() {
@@ -77,7 +77,7 @@ class EditProfileViewController: UIViewController {
     }
 }
 
-extension EditProfileViewController: UITableViewDelegate, UITableViewDataSource {
+extension EditPersonalDataViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
@@ -133,6 +133,9 @@ extension EditProfileViewController: UITableViewDelegate, UITableViewDataSource 
             case .Telefone:
                 cell.type = .Telefone
                 cell.inputTextField.text = self.userProfileViewModel?.phone
+            case .BirthDate:
+                cell.type = .BirthDate
+                cell.inputTextField.text = self.userProfileViewModel?.birthDate
             }
             
             cell.selectionStyle = .none
@@ -142,7 +145,7 @@ extension EditProfileViewController: UITableViewDelegate, UITableViewDataSource 
     }
 }
 
-extension EditProfileViewController: CustomTextFieldDelegate {
+extension EditPersonalDataViewController: CustomTextFieldDelegate {
     func textFieldDidChanged(_ textField: UITextField, type: ProfileOptions) {
         let inputText = textField.text
         switch type {
@@ -154,6 +157,8 @@ extension EditProfileViewController: CustomTextFieldDelegate {
             inputText == self.userProfileViewModel?.cellphone ? self.enableSaveButton(false) : self.enableSaveButton(true)
         case .Telefone:
             inputText == self.userProfileViewModel?.phone ? self.enableSaveButton(false) : self.enableSaveButton(true)
+        case .BirthDate:
+            inputText == self.userProfileViewModel?.birthDate ? self.enableSaveButton(false) : self.enableSaveButton(true)
         case .Email:
             break
         }
@@ -174,6 +179,8 @@ extension EditProfileViewController: CustomTextFieldDelegate {
             self.userProfile.cellphone = inputText
         case .Telefone:
             self.userProfile.phone = inputText
+        case .BirthDate:
+            self.userProfile.birthDate = inputText
         case .Email:
             break
         }

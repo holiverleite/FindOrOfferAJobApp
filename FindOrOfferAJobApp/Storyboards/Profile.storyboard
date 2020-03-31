@@ -33,12 +33,13 @@
                     <connections>
                         <outlet property="tableView" destination="mgm-c2-pn8" id="Txv-QJ-dea"/>
                         <segue destination="gW8-ic-I8Z" kind="show" identifier="SettingsViewController" id="1hO-RR-r2F"/>
-                        <segue destination="xmc-Ja-LHY" kind="show" identifier="EditProfileViewController" id="5Na-9P-m4Z"/>
+                        <segue destination="xmc-Ja-LHY" kind="show" identifier="EditPersonalDataViewController" id="5Na-9P-m4Z"/>
+                        <segue destination="B4J-d9-tVw" kind="show" identifier="EditProfessionalDataViewController" id="171-hw-lMW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tnl-b4-VgW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-172" y="163"/>
+            <point key="canvasLocation" x="-174" y="162"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="5aB-NG-qKe">
@@ -72,10 +73,10 @@
             </objects>
             <point key="canvasLocation" x="745" y="163"/>
         </scene>
-        <!--Edit Profile View Controller-->
+        <!--Edit Personal Data View Controller-->
         <scene sceneID="y6f-Hr-9hk">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="xmc-Ja-LHY" customClass="EditProfileViewController" customModule="FindOrOfferAJobApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="xmc-Ja-LHY" customClass="EditPersonalDataViewController" customModule="FindOrOfferAJobApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="a4K-m5-jOi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -152,6 +153,65 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DXW-l3-DyA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1573.913043478261" y="162.72321428571428"/>
+        </scene>
+        <!--Edit Professional Data View Controller-->
+        <scene sceneID="fjv-eM-dMz">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="B4J-d9-tVw" customClass="EditProfessionalDataViewController" customModule="FindOrOfferAJobApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Bde-Ha-2fJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n5z-ZK-1FJ">
+                                <rect key="frame" x="30" y="293" width="315" height="81.5"/>
+                                <string key="text">Você ainda não possui nenhum Cartão Profissional cadastrado. Crie seus cartões profissionais clicando em "+" na barra de navegação.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yeI-Ki-Di3">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="n5z-ZK-1FJ" firstAttribute="leading" secondItem="Bde-Ha-2fJ" secondAttribute="leading" constant="30" id="4A1-4o-qgy"/>
+                            <constraint firstAttribute="trailing" secondItem="n5z-ZK-1FJ" secondAttribute="trailing" constant="30" id="62N-YD-C4Z"/>
+                            <constraint firstItem="oHr-tB-ISi" firstAttribute="trailing" secondItem="yeI-Ki-Di3" secondAttribute="trailing" id="8ss-2f-44Y"/>
+                            <constraint firstItem="yeI-Ki-Di3" firstAttribute="leading" secondItem="oHr-tB-ISi" secondAttribute="leading" id="Dgv-ic-Uhz"/>
+                            <constraint firstItem="n5z-ZK-1FJ" firstAttribute="centerY" secondItem="Bde-Ha-2fJ" secondAttribute="centerY" id="SiB-ws-yBj"/>
+                            <constraint firstItem="n5z-ZK-1FJ" firstAttribute="centerX" secondItem="Bde-Ha-2fJ" secondAttribute="centerX" id="lzA-pf-qHA"/>
+                            <constraint firstItem="yeI-Ki-Di3" firstAttribute="top" secondItem="oHr-tB-ISi" secondAttribute="top" id="pBs-3S-xXy"/>
+                            <constraint firstItem="oHr-tB-ISi" firstAttribute="bottom" secondItem="yeI-Ki-Di3" secondAttribute="bottom" id="wUD-4U-2WS"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="oHr-tB-ISi"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="qNq-Vm-mKs"/>
+                    <connections>
+                        <outlet property="tableview" destination="yeI-Ki-Di3" id="Dak-UF-0ve"/>
+                        <segue destination="UEz-ym-K1p" kind="show" id="iZS-Iv-8F7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XeM-7R-2Hc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1573.5999999999999" y="931.48425787106453"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="C5d-oh-UHU">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="UEz-ym-K1p" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nFy-nJ-OOq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="RJr-ID-s4F"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="BBN-iC-nFZ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gvf-ma-rsS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2327" y="932"/>
         </scene>
     </scenes>
     <resources>

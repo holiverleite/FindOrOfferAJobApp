@@ -76,7 +76,7 @@ class RegistrationViewController: UIViewController {
                 
                 if let userId = userId {
                     
-                    let userProfile = UserProfile(userId: userId, firstName: firstName, lastName: lastName, email: email, cellphone: "", phone: "", accountType: .DefaultAccount, userImageURL: nil, userImageData: nil)
+                    let userProfile = UserProfile(userId: userId, firstName: firstName, lastName: lastName, email: email, cellphone: "", phone: "", birthDate: "", accountType: .DefaultAccount, userImageURL: nil, userImageData: nil)
                     
                     FirebaseAuthManager().updateUser(user: userProfile) { (success) in
                         PreferencesManager.sharedInstance().saveUserProfile(user: userProfile)

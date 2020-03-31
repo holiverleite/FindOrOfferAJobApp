@@ -19,6 +19,9 @@ struct ImageConstants {
     static let Settings = UIImage(named: "settings")
     static let Logout = UIImage(named: "logout")
     
+    // Work
+    static let Work = UIImage(named: "work")
+    
     // Settings
     static let Lock = UIImage(named: "lock")
     static let Delete = UIImage(named: "delete")

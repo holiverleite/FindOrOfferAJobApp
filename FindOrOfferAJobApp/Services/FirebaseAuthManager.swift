@@ -35,6 +35,7 @@ class FirebaseAuthManager {
                 let email = data[FirebaseUser.Email],
                 let cellPhone = data[FirebaseUser.Cellphone],
                 let phone = data[FirebaseUser.Phone],
+                let birthDate = data[FirebaseUser.BirthDate],
                 let accountType = data[FirebaseUser.TypeAccount],
                 let userImageURL = data[FirebaseUser.UserImageURL] else {
                     completion(nil)
@@ -47,6 +48,7 @@ class FirebaseAuthManager {
                                           email: email,
                                           cellphone: cellPhone,
                                           phone: phone,
+                                          birthDate: birthDate,
                                           accountType: accountType == UserProfile.AccountType.DefaultAccount.rawValue ? UserProfile.AccountType.DefaultAccount : UserProfile.AccountType.GoogleAccount,
                                           userImageURL: userImageURL, userImageData: nil)
             
@@ -63,7 +65,8 @@ class FirebaseAuthManager {
             FirebaseUser.TypeAccount: user.accountType.rawValue,
             FirebaseUser.UserImageURL: user.userImageURL ?? "",
             FirebaseUser.Cellphone: user.cellphone,
-            FirebaseUser.Phone: user.phone
+            FirebaseUser.Phone: user.phone,
+            FirebaseUser.BirthDate: user.birthDate
         ]
         
         ref.updateChildValues(userDict) { (error, databaseReference) in

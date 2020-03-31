@@ -20,7 +20,8 @@
 "profile_nav_bar" = "Perfil";
 "settings_nav_bar" = "Configurações";
 "change_password_nav_bar" = "Alterar senha";
-"edit_profile_nav_bar" = "Editar Perfil";
+"edit_personal_profile_nav_bar" = "Dados Pessoais";
+"edit_professional_profile_nav_bar" = "Dados Profissionais";
 
 // Settings
 "new_password_placeholder" = "Nova senha";

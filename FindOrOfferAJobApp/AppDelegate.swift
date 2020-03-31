@@ -62,6 +62,7 @@ extension AppDelegate: GIDSignInDelegate {
                                                   email: email,
                                                   cellphone: "",
                                                   phone: "",
+                                                  birthDate: "",
                                                   accountType: .GoogleAccount,
                                                   userImageURL: userImageURL.absoluteString,
                                                   userImageData: nil)

@@ -13,9 +13,10 @@
 		628CB81C23DCDA4800B62278 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 628CB81A23DCDA4800B62278 /* LaunchScreen.storyboard */; };
 		711F2B1D240018DD00B66AA5 /* UserResumeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711F2B1B240018DD00B66AA5 /* UserResumeTableViewCell.swift */; };
 		711F2B1E240018DD00B66AA5 /* UserResumeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 711F2B1C240018DD00B66AA5 /* UserResumeTableViewCell.xib */; };
-		711F2B212400537300B66AA5 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711F2B202400537300B66AA5 /* EditProfileViewController.swift */; };
+		711F2B212400537300B66AA5 /* EditPersonalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711F2B202400537300B66AA5 /* EditPersonalDataViewController.swift */; };
 		711F2B2A240061DC00B66AA5 /* InputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711F2B28240061DC00B66AA5 /* InputTableViewCell.swift */; };
 		711F2B2B240061DC00B66AA5 /* InputTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 711F2B29240061DC00B66AA5 /* InputTableViewCell.xib */; };
+		717BF25E2433C0E600BB21F4 /* EditProfessionalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717BF25D2433C0E600BB21F4 /* EditProfessionalDataViewController.swift */; };
 		940CDC5F23F5734100683B1A /* PostLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 940CDC5E23F5734100683B1A /* PostLaunchScreen.storyboard */; };
 		9443361A23FB072D004378BD /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9443361923FB072D004378BD /* Protocols.swift */; };
 		945531FA23FEB0B200016D30 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945531F923FEB0B200016D30 /* UserProfileViewModel.swift */; };
@@ -54,9 +55,10 @@
 		628CB81D23DCDA4800B62278 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		711F2B1B240018DD00B66AA5 /* UserResumeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResumeTableViewCell.swift; sourceTree = "<group>"; };
 		711F2B1C240018DD00B66AA5 /* UserResumeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserResumeTableViewCell.xib; sourceTree = "<group>"; };
-		711F2B202400537300B66AA5 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileViewController.swift; path = /Users/haroldo/git/FindOrOfferAJobApp/FindOrOfferAJobApp/Controllers/EditProfileViewController.swift; sourceTree = "<absolute>"; };
+		711F2B202400537300B66AA5 /* EditPersonalDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditPersonalDataViewController.swift; path = /Users/haroldo/git/FindOrOfferAJobApp/FindOrOfferAJobApp/Controllers/EditPersonalDataViewController.swift; sourceTree = "<absolute>"; };
 		711F2B28240061DC00B66AA5 /* InputTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTableViewCell.swift; sourceTree = "<group>"; };
 		711F2B29240061DC00B66AA5 /* InputTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputTableViewCell.xib; sourceTree = "<group>"; };
+		717BF25D2433C0E600BB21F4 /* EditProfessionalDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfessionalDataViewController.swift; sourceTree = "<group>"; };
 		940CDC5E23F5734100683B1A /* PostLaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PostLaunchScreen.storyboard; sourceTree = "<group>"; };
 		9443361923FB072D004378BD /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		945531F923FEB0B200016D30 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
@@ -240,7 +242,8 @@
 				94601EEE23FD7C5200FAF484 /* MainTabBarViewController.swift */,
 				9461BFE623F4711600EA2CA9 /* HomeViewController.swift */,
 				94601EF223FD7DF000FAF484 /* ProfileViewController.swift */,
-				711F2B202400537300B66AA5 /* EditProfileViewController.swift */,
+				711F2B202400537300B66AA5 /* EditPersonalDataViewController.swift */,
+				717BF25D2433C0E600BB21F4 /* EditProfessionalDataViewController.swift */,
 				9455320223FEE2C600016D30 /* SettingsViewController.swift */,
 				9455320423FEF58A00016D30 /* ChangePasswordViewController.swift */,
 			);
@@ -454,11 +457,12 @@
 				945578FA23F4241B005B1B92 /* FirebaseAuthManager.swift in Sources */,
 				94601EEF23FD7C5200FAF484 /* MainTabBarViewController.swift in Sources */,
 				628CB81023DCDA4500B62278 /* AppDelegate.swift in Sources */,
+				717BF25E2433C0E600BB21F4 /* EditProfessionalDataViewController.swift in Sources */,
 				945531FA23FEB0B200016D30 /* UserProfileViewModel.swift in Sources */,
 				9455790723F4356A005B1B92 /* RegistrationViewController.swift in Sources */,
 				9455320323FEE2C700016D30 /* SettingsViewController.swift in Sources */,
 				711F2B1D240018DD00B66AA5 /* UserResumeTableViewCell.swift in Sources */,
-				711F2B212400537300B66AA5 /* EditProfileViewController.swift in Sources */,
+				711F2B212400537300B66AA5 /* EditPersonalDataViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

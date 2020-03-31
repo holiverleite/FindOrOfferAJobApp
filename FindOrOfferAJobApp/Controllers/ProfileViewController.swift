@@ -13,7 +13,8 @@ class ProfileViewController: UIViewController {
     
     enum ProfileItems: String, CaseIterable {
         case UserResumeCard
-        case EditProfile = "Editar Perfil"
+        case EditPersonalData = "Dados Pessoais"
+        case EditProfessionalData = "Dados Profissionais"
         case Settings = "Configurações"
         case Logout = "Sair"
     }
@@ -107,9 +108,12 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             switch settingsItem {
             case .UserResumeCard:
                 break
-            case .EditProfile:
-                cell.nameLabel.text = ProfileViewController.ProfileItems.EditProfile.rawValue
+            case .EditPersonalData:
+                cell.nameLabel.text = ProfileViewController.ProfileItems.EditPersonalData.rawValue
                 cell.imageView?.image = ImageConstants.Profile
+            case .EditProfessionalData:
+                cell.nameLabel.text = ProfileViewController.ProfileItems.EditProfessionalData.rawValue
+                cell.imageView?.image = ImageConstants.Work
             case .Settings:
                 cell.nameLabel.text = ProfileViewController.ProfileItems.Settings.rawValue
                 cell.imageView?.image = ImageConstants.Settings
@@ -131,11 +135,12 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         switch profileItem {
         case .UserResumeCard:
             break
-        case .EditProfile:
-            self.performSegue(withIdentifier: "EditProfileViewController", sender: nil)
+        case .EditPersonalData:
+            self.performSegue(withIdentifier: "EditPersonalDataViewController", sender: nil)
+        case .EditProfessionalData:
+            self.performSegue(withIdentifier: "EditProfessionalDataViewController", sender: nil)
         case .Settings:
             self.performSegue(withIdentifier: "SettingsViewController", sender: nil)
-            //self.performSegue(withIdentifier: String(describing: SettingsViewController.self), sender: self.userProfileViewModel)
         case .Logout:
             self.logoutUser()
         }
@@ -147,8 +152,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             settingsViewController.userProfileViewModel = self.userProfileViewModel
         } else
         
-        if let editProfileViewController = segue.destination as? EditProfileViewController {
-            editProfileViewController.userProfileViewModel = self.userProfileViewModel
+        if let editPersonalDataViewController = segue.destination as? EditPersonalDataViewController {
+            editPersonalDataViewController.userProfileViewModel = self.userProfileViewModel
         }
     }
 }

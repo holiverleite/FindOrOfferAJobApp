@@ -20,4 +20,5 @@ struct FirebaseUser {
     static let Phone = "phone"
     static let TypeAccount = "typeAccount"
     static let UserImageURL = "userImageURL"
+    static let BirthDate = "birthDate"
 }
