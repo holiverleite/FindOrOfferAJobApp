@@ -15,40 +15,40 @@ class EditProfessionalDataViewController: UIViewController {
             self.tableview.delegate = self
             self.tableview.dataSource = self
             
-//            self.tableview.register(UserResumeTableViewCell.self, forCellReuseIdentifier: String(describing: UserResumeTableViewCell.self))
-//            self.tableview.register(UINib(nibName: String(describing: UserResumeTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: UserResumeTableViewCell.self))
-            
-            self.tableview.register(InputTableViewCell.self, forCellReuseIdentifier: String(describing: InputTableViewCell.self))
-            self.tableview.register(UINib(nibName: String(describing: InputTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: InputTableViewCell.self))
+//            self.tableview.register(InputTableViewCell.self, forCellReuseIdentifier: String(describing: InputTableViewCell.self))
+//            self.tableview.register(UINib(nibName: String(describing: InputTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: InputTableViewCell.self))
             
             self.tableview.separatorStyle = .none
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationItem.title = String.localize("edit_professional_profile_nav_bar")
+        self.navigationItem.setLeftBarButton(UIBarButtonItem(image: ImageConstants.Back, landscapeImagePhone: ImageConstants.Back, style: .plain, target: self, action: #selector(didTapBackButton)), animated: true)
         // Do any additional setup after loading the view.
-        let saveButton = UIBarButtonItem(title: "+", style: .plain, target: self, action: #selector(didTapCreateProfessionalCardButton))
-        self.navigationItem.rightBarButtonItem = saveButton
+        let createButton = UIBarButtonItem(title: "+", style: .plain, target: self, action: #selector(didTapCreateProfessionalCardButton))
+        self.navigationItem.rightBarButtonItem = createButton
         
         self.tableview.isHidden = true
     }
     
+    // MARK: - Methods
     @objc func didTapCreateProfessionalCardButton() {
         // did tap save
+        self.performSegue(withIdentifier: "CreateProfessionalCardViewController", sender: nil)
+    }
+    
+    @objc func didTapBackButton() {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
 extension EditProfessionalDataViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath.row == 0 {
-//            return 150
-//        } else {
-            return 70
-//        }
+        return 70
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -57,21 +57,7 @@ extension EditProfessionalDataViewController: UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-//        if indexPath.row == 0 {
-//            guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UserResumeTableViewCell.self), for: indexPath) as? UserResumeTableViewCell else {
-//                fatalError("UserResumeTableViewCell not found!")
-//            }
-            
-//            if let dataImage = self.userProfileViewModel?.userImageData {
-//                cell.userImageView.image = UIImage(data: dataImage)
-//            }
-            
-//            cell.selectionStyle = .none
-//            
-//            return cell
-//            
-//        } else {
-//            return UITableViewCell()
-//        }
+        
+        return UITableViewCell()
     }
 }

@@ -44,6 +44,9 @@ class EditPersonalDataViewController: UIViewController {
         self.loadUserProfileValues()
 
         self.navigationItem.title = String.localize("edit_personal_profile_nav_bar")
+        
+        self.navigationItem.setLeftBarButton(UIBarButtonItem(image: ImageConstants.Back, landscapeImagePhone: ImageConstants.Back, style: .plain, target: self, action: #selector(didTapBackButton)), animated: true)
+        
         // Do any additional setup after loading the view.
         let saveButton = UIBarButtonItem(title: "Salvar", style: .plain, target: self, action: #selector(didTapSaveButton))
         self.navigationItem.rightBarButtonItem = saveButton
@@ -68,12 +71,17 @@ class EditPersonalDataViewController: UIViewController {
         self.userProfile = UserProfile(userId: userViewModel.userId, firstName: userViewModel.firstName, lastName: userViewModel.lastName, email: userViewModel.email, cellphone: userViewModel.cellphone, phone: userViewModel.phone, birthDate: userViewModel.birthDate, accountType: userViewModel.accountType, userImageURL: userViewModel.userImageURL, userImageData: userViewModel.userImageData)
     }
     
+    // MARK: - Methods
     @objc func didTapSaveButton() {
         self.view.endEditing(true)
         FirebaseAuthManager().updateUser(user: self.userProfile) { (success) in
             PreferencesManager.sharedInstance().saveUserProfile(user: self.userProfile)
             self.navigationController?.popViewController(animated: true)
         }
+    }
+    
+    @objc func didTapBackButton() {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 

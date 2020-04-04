@@ -17,6 +17,8 @@
 		711F2B2A240061DC00B66AA5 /* InputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711F2B28240061DC00B66AA5 /* InputTableViewCell.swift */; };
 		711F2B2B240061DC00B66AA5 /* InputTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 711F2B29240061DC00B66AA5 /* InputTableViewCell.xib */; };
 		717BF25E2433C0E600BB21F4 /* EditProfessionalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717BF25D2433C0E600BB21F4 /* EditProfessionalDataViewController.swift */; };
+		71A334532438C02900FC2EA0 /* CreateProfessionalCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A334522438C02900FC2EA0 /* CreateProfessionalCardViewController.swift */; };
+		71A334552438CD8100FC2EA0 /* ProfessionOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A334542438CD8100FC2EA0 /* ProfessionOptionsViewController.swift */; };
 		940CDC5F23F5734100683B1A /* PostLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 940CDC5E23F5734100683B1A /* PostLaunchScreen.storyboard */; };
 		9443361A23FB072D004378BD /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9443361923FB072D004378BD /* Protocols.swift */; };
 		945531FA23FEB0B200016D30 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945531F923FEB0B200016D30 /* UserProfileViewModel.swift */; };
@@ -59,6 +61,8 @@
 		711F2B28240061DC00B66AA5 /* InputTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTableViewCell.swift; sourceTree = "<group>"; };
 		711F2B29240061DC00B66AA5 /* InputTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputTableViewCell.xib; sourceTree = "<group>"; };
 		717BF25D2433C0E600BB21F4 /* EditProfessionalDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfessionalDataViewController.swift; sourceTree = "<group>"; };
+		71A334522438C02900FC2EA0 /* CreateProfessionalCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfessionalCardViewController.swift; sourceTree = "<group>"; };
+		71A334542438CD8100FC2EA0 /* ProfessionOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionOptionsViewController.swift; sourceTree = "<group>"; };
 		940CDC5E23F5734100683B1A /* PostLaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PostLaunchScreen.storyboard; sourceTree = "<group>"; };
 		9443361923FB072D004378BD /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		945531F923FEB0B200016D30 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
@@ -244,8 +248,10 @@
 				94601EF223FD7DF000FAF484 /* ProfileViewController.swift */,
 				711F2B202400537300B66AA5 /* EditPersonalDataViewController.swift */,
 				717BF25D2433C0E600BB21F4 /* EditProfessionalDataViewController.swift */,
+				71A334522438C02900FC2EA0 /* CreateProfessionalCardViewController.swift */,
 				9455320223FEE2C600016D30 /* SettingsViewController.swift */,
 				9455320423FEF58A00016D30 /* ChangePasswordViewController.swift */,
+				71A334542438CD8100FC2EA0 /* ProfessionOptionsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -442,6 +448,7 @@
 			files = (
 				9455790D23F43F7A005B1B92 /* StringExtensions.swift in Sources */,
 				9455790523F43510005B1B92 /* LoginViewController.swift in Sources */,
+				71A334552438CD8100FC2EA0 /* ProfessionOptionsViewController.swift in Sources */,
 				9443361A23FB072D004378BD /* Protocols.swift in Sources */,
 				9455790323F431EF005B1B92 /* AccessViewController.swift in Sources */,
 				9455791023F4634D005B1B92 /* PreferencesManager.swift in Sources */,
@@ -455,6 +462,7 @@
 				94601EFA23FDB20900FAF484 /* SettingsTableViewCell.swift in Sources */,
 				94601EF323FD7DF000FAF484 /* ProfileViewController.swift in Sources */,
 				945578FA23F4241B005B1B92 /* FirebaseAuthManager.swift in Sources */,
+				71A334532438C02900FC2EA0 /* CreateProfessionalCardViewController.swift in Sources */,
 				94601EEF23FD7C5200FAF484 /* MainTabBarViewController.swift in Sources */,
 				628CB81023DCDA4500B62278 /* AppDelegate.swift in Sources */,
 				717BF25E2433C0E600BB21F4 /* EditProfessionalDataViewController.swift in Sources */,

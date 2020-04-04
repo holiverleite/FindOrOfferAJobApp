@@ -22,6 +22,8 @@
 "change_password_nav_bar" = "Alterar senha";
 "edit_personal_profile_nav_bar" = "Dados Pessoais";
 "edit_professional_profile_nav_bar" = "Dados Profissionais";
+"create_professional_card_nav_bar" = "Criar Cartão Profissional";
+"select_one_profession_nav_bar" = "Selecione uma Profissão";
 
 // Settings
 "new_password_placeholder" = "Nova senha";
