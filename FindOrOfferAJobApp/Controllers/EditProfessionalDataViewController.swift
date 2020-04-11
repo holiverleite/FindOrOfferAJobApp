@@ -22,6 +22,9 @@ class EditProfessionalDataViewController: UIViewController {
         }
     }
     
+    // MARK: - Variables
+    var userProfileViewModel = UserProfileViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,6 +41,12 @@ class EditProfessionalDataViewController: UIViewController {
     @objc func didTapCreateProfessionalCardButton() {
         // did tap save
         self.performSegue(withIdentifier: "CreateProfessionalCardViewController", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let createProfessionalCard = segue.destination as? CreateProfessionalCardViewController {
+            createProfessionalCard.userProfileViewModel = self.userProfileViewModel
+        }
     }
     
     @objc func didTapBackButton() {

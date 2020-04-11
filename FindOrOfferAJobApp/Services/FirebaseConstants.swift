@@ -13,6 +13,7 @@ struct FirebaseKnot {
 }
 
 struct FirebaseUser {
+    // Personal
     static let FirstName = "firstName"
     static let LastName = "lastName"
     static let Email = "email"
@@ -21,4 +22,8 @@ struct FirebaseUser {
     static let TypeAccount = "typeAccount"
     static let UserImageURL = "userImageURL"
     static let BirthDate = "birthDate"
+    // Professional
+    static let ProfessionalCards = "professionalCards"
+    static let OccupationArea = "occupationArea"
+    static let ExperienceTime = "experienceTime"
 }

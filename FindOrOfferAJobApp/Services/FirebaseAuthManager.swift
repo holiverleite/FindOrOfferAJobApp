@@ -15,6 +15,9 @@ class FirebaseAuthManager {
     
     let rootUsersReference = Database.database().reference(withPath: FirebaseKnot.Users)
 
+    //
+    // USER
+    //
     func createUser(email: String, password: String, completion: @escaping (_ userId: String?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
             if let user = authResult?.user {
@@ -132,4 +135,24 @@ class FirebaseAuthManager {
             }
         }
     }
+    
+    //
+    // PROFESSIONAL DATA
+    //
+    func addProfessionalCard(userId: String, professionalCard: ProfessionalCard, completion: @escaping (_ success: Bool?) -> Void) {
+        let ref = self.rootUsersReference.child(userId).child(FirebaseUser.ProfessionalCards).childByAutoId()
+        let professionalCardDict: [String: Any] = [
+            FirebaseUser.OccupationArea: professionalCard.occupationArea,
+            FirebaseUser.ExperienceTime: professionalCard.experienceTime
+        ]
+        
+        ref.updateChildValues(professionalCardDict) { (error, databaseReference) in
+            if error != nil {
+                completion(false)
+            } else {
+                completion(true)
+            }
+        }
+    }
+    
 }

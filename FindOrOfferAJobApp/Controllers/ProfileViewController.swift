@@ -154,6 +154,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         
         if let editPersonalDataViewController = segue.destination as? EditPersonalDataViewController {
             editPersonalDataViewController.userProfileViewModel = self.userProfileViewModel
+        } else
+        
+        if let editProfessionalDataViewController = segue.destination as? EditProfessionalDataViewController {
+            editProfessionalDataViewController.userProfileViewModel = self.userProfileViewModel
         }
     }
 }
