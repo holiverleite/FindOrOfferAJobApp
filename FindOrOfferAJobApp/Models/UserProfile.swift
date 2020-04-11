@@ -26,6 +26,7 @@ class UserProfile: NSObject, NSCoding {
         case accountType
         case userImageURL
         case userImageData
+        case professionalCards
     }
     
     let userId: String // Cant be changed
@@ -38,6 +39,7 @@ class UserProfile: NSObject, NSCoding {
     var accountType: AccountType
     var userImageURL: String?
     var userImageData: Data?
+    var professionalCards: [ProfessionalCard]
     
     override init() {
         self.userId = ""
@@ -50,6 +52,7 @@ class UserProfile: NSObject, NSCoding {
         self.accountType = .DefaultAccount
         self.userImageURL = nil
         self.userImageData = nil
+        self.professionalCards = []
     }
     
     init(userId: String,
@@ -61,7 +64,8 @@ class UserProfile: NSObject, NSCoding {
          birthDate: String,
          accountType: AccountType,
          userImageURL: String?,
-         userImageData: Data?) {
+         userImageData: Data?,
+         professionalCards: [ProfessionalCard]) {
         
         self.userId = userId
         self.firstName = firstName
@@ -73,6 +77,7 @@ class UserProfile: NSObject, NSCoding {
         self.accountType = accountType
         self.userImageURL = userImageURL
         self.userImageData = userImageData
+        self.professionalCards = professionalCards
     }
     
     func encode(with coder: NSCoder) {
@@ -86,6 +91,7 @@ class UserProfile: NSObject, NSCoding {
         coder.encode(self.accountType.rawValue, forKey: User.accountType.rawValue)
         coder.encode(self.userImageURL, forKey: User.userImageURL.rawValue)
         coder.encode(self.userImageData, forKey: User.userImageData.rawValue)
+//        coder.encode(self.professionalCards, forKey: User.professionalCards.rawValue)
     }
     
     required convenience init(coder aDecoder: NSCoder) {
@@ -97,15 +103,16 @@ class UserProfile: NSObject, NSCoding {
             let phone = aDecoder.decodeObject(forKey: User.phone.rawValue) as? String,
             let birthDate = aDecoder.decodeObject(forKey: User.birthDate.rawValue) as? String,
             let accountTypeDecoder = aDecoder.decodeObject(forKey: User.accountType.rawValue) as? String,
-            let accountType: AccountType = UserProfile.AccountType(rawValue: accountTypeDecoder) {
+            let accountType: AccountType = UserProfile.AccountType(rawValue: accountTypeDecoder)
+            /*let professionalCards: [ProfessionalCard] = aDecoder.decodeObject(forKey: User.professionalCards.rawValue) as? [ProfessionalCard]*/ {
             
             if let imageURL = aDecoder.decodeObject(forKey: User.userImageURL.rawValue) as? String, let imageData = aDecoder.decodeObject(forKey: User.userImageData.rawValue) as? Data {
-                self.init(userId: userId, firstName: firstName, lastName: lastName, email: email, cellphone: cellphone, phone: phone, birthDate: birthDate, accountType: accountType, userImageURL: imageURL, userImageData: imageData)
+                self.init(userId: userId, firstName: firstName, lastName: lastName, email: email, cellphone: cellphone, phone: phone, birthDate: birthDate, accountType: accountType, userImageURL: imageURL, userImageData: imageData, professionalCards: [])
             } else {
-                self.init(userId: userId, firstName: firstName, lastName: lastName, email: email, cellphone: cellphone, phone: phone, birthDate: birthDate, accountType: accountType, userImageURL: nil, userImageData: nil)
+                self.init(userId: userId, firstName: firstName, lastName: lastName, email: email, cellphone: cellphone, phone: phone, birthDate: birthDate, accountType: accountType, userImageURL: nil, userImageData: nil, professionalCards: [])
             }
         } else {
-            self.init(userId: "", firstName: "", lastName: "", email: "", cellphone: "", phone: "", birthDate: "", accountType: .DefaultAccount, userImageURL: nil, userImageData: nil)
+            self.init(userId: "", firstName: "", lastName: "", email: "", cellphone: "", phone: "", birthDate: "", accountType: .DefaultAccount, userImageURL: nil, userImageData: nil, professionalCards: [])
         }
     }
 }

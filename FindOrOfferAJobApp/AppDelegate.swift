@@ -65,7 +65,8 @@ extension AppDelegate: GIDSignInDelegate {
                                                   birthDate: "",
                                                   accountType: .GoogleAccount,
                                                   userImageURL: userImageURL.absoluteString,
-                                                  userImageData: nil)
+                                                  userImageData: nil,
+                                                  professionalCards: [])
                     
                     self.navigationDelegate?.signWithGoogleAccount(user: userProfile, firstLogin: true)
                 }

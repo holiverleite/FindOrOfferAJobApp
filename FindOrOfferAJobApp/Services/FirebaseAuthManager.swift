@@ -32,18 +32,33 @@ class FirebaseAuthManager {
         let ref = self.rootUsersReference.child(userId)
         ref.observeSingleEvent(of: .value) { (dataSnapshot) in
             
-            guard let data = dataSnapshot.value as? [String: String],
-                let firstName = data[FirebaseUser.FirstName],
-                let lastName = data[FirebaseUser.LastName],
-                let email = data[FirebaseUser.Email],
-                let cellPhone = data[FirebaseUser.Cellphone],
-                let phone = data[FirebaseUser.Phone],
-                let birthDate = data[FirebaseUser.BirthDate],
-                let accountType = data[FirebaseUser.TypeAccount],
-                let userImageURL = data[FirebaseUser.UserImageURL] else {
+            
+            guard let data = dataSnapshot.value as? [String: Any],
+                let firstName = data[FirebaseUser.FirstName] as? String,
+                let lastName = data[FirebaseUser.LastName] as? String,
+                let email = data[FirebaseUser.Email] as? String,
+                let cellPhone = data[FirebaseUser.Cellphone] as? String,
+                let phone = data[FirebaseUser.Phone] as? String,
+                let birthDate = data[FirebaseUser.BirthDate] as? String,
+                let accountType = data[FirebaseUser.TypeAccount] as? String,
+                let userImageURL = data[FirebaseUser.UserImageURL] as? String
+            else {
                     completion(nil)
                     return
             }
+            
+            var cards: [ProfessionalCard] = []
+            if let data = dataSnapshot.value as? [String:Any], let professionalCards = data[FirebaseUser.ProfessionalCards] as? [String:Any] {
+                for cardItem in professionalCards {
+                    if let card = cardItem.value as? [String: String], let occupationArea = card[FirebaseUser.OccupationArea], let experienceTime = card[FirebaseUser.ExperienceTime] {
+                        let professionalCard = ProfessionalCard(occupationArea: occupationArea,
+                                                                experienceTime: experienceTime)
+                        cards.append(professionalCard)
+                    }
+                    
+                }
+            }
+            
             
             let userProfile = UserProfile(userId: userId,
                                           firstName: firstName,
@@ -53,9 +68,30 @@ class FirebaseAuthManager {
                                           phone: phone,
                                           birthDate: birthDate,
                                           accountType: accountType == UserProfile.AccountType.DefaultAccount.rawValue ? UserProfile.AccountType.DefaultAccount : UserProfile.AccountType.GoogleAccount,
-                                          userImageURL: userImageURL, userImageData: nil)
+                                          userImageURL: userImageURL,
+                                          userImageData: nil,
+                                          professionalCards: cards)
             
             completion(userProfile)
+        }
+    }
+    
+    func retrieveProfessionalCards(userId: String, completion: @escaping (_ professionalCards: [ProfessionalCard]) -> Void) {
+        let ref = self.rootUsersReference.child(userId).child(FirebaseUser.ProfessionalCards)
+        ref.observeSingleEvent(of: .value) { (dataSnapshot) in
+            guard let data = dataSnapshot.value as? [String: Any] else {
+                completion([])
+                return
+            }
+            
+            var cards: [ProfessionalCard] = []
+            for card in data.values {
+                if let cardData = card as? [String:String], let occupationArea = cardData[FirebaseUser.OccupationArea], let experienceTime = cardData[FirebaseUser.ExperienceTime]{
+                    let professionalCard = ProfessionalCard(occupationArea: occupationArea, experienceTime: experienceTime)
+                    cards.append(professionalCard)
+                }
+            }
+            completion(cards)
         }
     }
     
@@ -146,7 +182,7 @@ class FirebaseAuthManager {
             FirebaseUser.ExperienceTime: professionalCard.experienceTime
         ]
         
-        ref.updateChildValues(professionalCardDict) { (error, databaseReference) in
+        ref.setValue(professionalCardDict) { (error, databaseReference) in
             if error != nil {
                 completion(false)
             } else {
@@ -154,5 +190,7 @@ class FirebaseAuthManager {
             }
         }
     }
+    
+   
     
 }

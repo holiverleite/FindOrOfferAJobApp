@@ -37,6 +37,15 @@ class EditProfessionalDataViewController: UIViewController {
         self.tableview.isHidden = true
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        FirebaseAuthManager().retrieveProfessionalCards(userId: self.userProfileViewModel.userId) { (professionalCards) in
+            print("")
+            // show cards in the screen
+        }
+    }
+    
     // MARK: - Methods
     @objc func didTapCreateProfessionalCardButton() {
         // did tap save
