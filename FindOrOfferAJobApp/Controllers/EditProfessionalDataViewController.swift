@@ -15,8 +15,8 @@ class EditProfessionalDataViewController: UIViewController {
             self.tableview.delegate = self
             self.tableview.dataSource = self
             
-//            self.tableview.register(InputTableViewCell.self, forCellReuseIdentifier: String(describing: InputTableViewCell.self))
-//            self.tableview.register(UINib(nibName: String(describing: InputTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: InputTableViewCell.self))
+            self.tableview.register(ProfessionalCardTableViewCell.self, forCellReuseIdentifier: String(describing: ProfessionalCardTableViewCell.self))
+            self.tableview.register(UINib(nibName: String(describing: ProfessionalCardTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: ProfessionalCardTableViewCell.self))
             
             self.tableview.separatorStyle = .none
         }
@@ -24,6 +24,7 @@ class EditProfessionalDataViewController: UIViewController {
     
     // MARK: - Variables
     var userProfileViewModel = UserProfileViewModel()
+    var professionalCards: [ProfessionalCard] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,8 +42,12 @@ class EditProfessionalDataViewController: UIViewController {
         super.viewWillAppear(animated)
         
         FirebaseAuthManager().retrieveProfessionalCards(userId: self.userProfileViewModel.userId) { (professionalCards) in
-            print("")
-            // show cards in the screen
+            if professionalCards.count > 0 {
+                self.professionalCards.removeAll()
+                self.professionalCards.append(contentsOf: professionalCards)
+                self.tableview.isHidden = false
+                self.tableview.reloadData()
+            }
         }
     }
     
@@ -53,7 +58,13 @@ class EditProfessionalDataViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let createProfessionalCard = segue.destination as? CreateProfessionalCardViewController {
+        if let senderIndex = sender as? IndexPath {
+            if let editProfessionalCard = segue.destination as? CreateProfessionalCardViewController {
+                editProfessionalCard.isEditingMode = true
+                editProfessionalCard.userProfileViewModel = self.userProfileViewModel
+                editProfessionalCard.professionalCardEdit = self.professionalCards[senderIndex.row]
+            }
+        } else if let createProfessionalCard = segue.destination as? CreateProfessionalCardViewController {
             createProfessionalCard.userProfileViewModel = self.userProfileViewModel
         }
     }
@@ -65,17 +76,40 @@ class EditProfessionalDataViewController: UIViewController {
 
 extension EditProfessionalDataViewController: UITableViewDataSource, UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        
+        if self.professionalCards.count == 0 {
+            self.tableview.isHidden = true
+        } else {
+            self.tableview.isHidden = false
+        }
+        
+        return self.professionalCards.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProfessionalCardTableViewCell.self), for: indexPath) as? ProfessionalCardTableViewCell else {
+            fatalError("ProfessionalCardTableViewCell not found!")
+        }
         
-        return UITableViewCell()
+        let card = self.professionalCards[indexPath.row]
+        
+        cell.setValues(professionaltitle: card.occupationArea, exp: card.experienceTime, professionDescription: card.descriptionOfProfession)
+        cell.selectionStyle = .none
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "CreateProfessionalCardViewController", sender: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            self.professionalCards.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            // DELETAR DO FIREBASE TAMBME
+        }
     }
 }

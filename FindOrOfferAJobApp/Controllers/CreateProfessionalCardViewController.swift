@@ -10,9 +10,12 @@ import UIKit
 
 class CreateProfessionalCardViewController: UIViewController {
     
+    let descriptionTextPlaceHolder = "Breve descrição da experiência"
+    
     enum ProfessionalQuestions: String, CaseIterable {
         case OcupationArea = "Area de atuação"
         case TimeExperience = "Tempo de experiência (em meses)"
+        case Description = "Descrição da experiência"
     }
 
     @IBOutlet weak var tableView: UITableView! {
@@ -25,32 +28,54 @@ class CreateProfessionalCardViewController: UIViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        self.navigationItem.title = String.localize("create_professional_card_nav_bar")
-        self.navigationItem.setLeftBarButton(UIBarButtonItem(image: ImageConstants.Back, landscapeImagePhone: ImageConstants.Back, style: .plain, target: self, action: #selector(didTapBackButton)), animated: true)
-        
-        // Do any additional setup after loading the view.
-        let saveButton = UIBarButtonItem(title: "Salvar", style: .plain, target: self, action: #selector(didTapSaveCardButton))
-        self.navigationItem.rightBarButtonItem = saveButton
-        self.navigationItem.rightBarButtonItem?.isEnabled = false
-    }
-    
     // MARK: - Variables
     var userProfileViewModel = UserProfileViewModel()
     var professionSelected: String = ""
-    var textField: UITextField = UITextField()
+    var experienceText: String = ""
+    var descriptionProfession: String = ""
+    var textFieldExperience: UITextField = UITextField()
+    var textViewDescription: UITextView = UITextView()
+    var isEditingMode: Bool = false
+    var professionalCardEdit: ProfessionalCard? = nil
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if self.isEditingMode, let card = self.professionalCardEdit {
+            self.navigationItem.title = String.localize("edit_professional_card_nav_bar")
+            let updateButton = UIBarButtonItem(title: "Atualizar", style: .plain, target: self, action: #selector(didTapUpdateCardButton))
+            
+            self.navigationItem.rightBarButtonItem = updateButton
+            self.navigationItem.rightBarButtonItem?.isEnabled = false
+            
+            self.professionSelected = card.occupationArea
+            self.experienceText = card.experienceTime
+            self.descriptionProfession = card.descriptionOfProfession
+            
+        } else {
+            self.navigationItem.title = String.localize("create_professional_card_nav_bar")
+            
+            let saveButton = UIBarButtonItem(title: "Salvar", style: .plain, target: self, action: #selector(didTapSaveCardButton))
+            self.navigationItem.rightBarButtonItem = saveButton
+            self.navigationItem.rightBarButtonItem?.isEnabled = false
+        }
+        
+        self.navigationItem.setLeftBarButton(UIBarButtonItem(image: ImageConstants.Back, landscapeImagePhone: ImageConstants.Back, style: .plain, target: self, action: #selector(didTapBackButton)), animated: true)
+    }
     
     // MARK: - Methods
     @objc func didTapBackButton() {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @objc func didTapUpdateCardButton() {
+        self.view.endEditing(true)
+    }
+    
     @objc func didTapSaveCardButton() {
         self.view.endEditing(true)
         
-        let professionalCard = ProfessionalCard(occupationArea: self.professionSelected, experienceTime: self.textField.text ?? "")
+        let professionalCard = ProfessionalCard(occupationArea: self.professionSelected, experienceTime: self.textFieldExperience.text ?? "", descriptionOfProfession: self.textViewDescription.text ?? "")
         
         FirebaseAuthManager().addProfessionalCard(userId: userProfileViewModel.userId, professionalCard: professionalCard) { (success) in
             if let success = success, success {
@@ -61,7 +86,7 @@ class CreateProfessionalCardViewController: UIViewController {
     
     // MARK: - Local Methods
     private func shouldEnableSaveButton() {
-        if let text = textField.text, !text.isEmpty && !self.professionSelected.isEmpty {
+        if let textExp = textFieldExperience.text, let textDescript = self.textViewDescription.text, !textExp.isEmpty && !self.professionSelected.isEmpty && !textDescript.isEmpty {
             self.enableSaveButton(true)
         } else {
             self.enableSaveButton(false)
@@ -89,6 +114,8 @@ extension CreateProfessionalCardViewController: UITableViewDelegate, UITableView
             return ProfessionalQuestions.OcupationArea.rawValue
         case 1:
             return ProfessionalQuestions.TimeExperience.rawValue
+        case 2:
+            return ProfessionalQuestions.Description.rawValue
         default:
             return ""
         }
@@ -113,12 +140,26 @@ extension CreateProfessionalCardViewController: UITableViewDelegate, UITableView
             
             return cell
         case 1:
-            self.textField = UITextField(frame: CGRect(x: 15, y: 10, width: cell.frame.width, height: cell.frame.height))
-            self.textField.keyboardType = .numberPad
-            self.textField.placeholder = "Ex: 12"
-            self.textField.addTarget(self, action: #selector(textFieldDidChanged), for: .editingChanged)
+            self.textFieldExperience = UITextField(frame: CGRect(x: 15, y: 0, width: cell.frame.width, height: cell.frame.height))
+            self.textFieldExperience.keyboardType = .numberPad
+            self.textFieldExperience.placeholder = "Ex: 12"
+            self.textFieldExperience.addTarget(self, action: #selector(textFieldDidChanged), for: .editingChanged)
+            self.textFieldExperience.text = self.experienceText
             
-            cell.addSubview(self.textField)
+            cell.addSubview(self.textFieldExperience)
+            
+            return cell
+        case 2:
+            self.textViewDescription = UITextView(frame: CGRect(x: 15, y: 10, width: self.view.frame.width - 25, height: 200))
+            
+            self.textViewDescription.layer.borderWidth = 0.5
+            self.textViewDescription.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
+            self.textViewDescription.layer.cornerRadius = 4.0
+            self.textViewDescription.font = UIFont.systemFont(ofSize: 14, weight: .thin)
+            self.textViewDescription.delegate = self
+            self.textViewDescription.text = self.descriptionProfession
+            
+            cell.addSubview(self.textViewDescription)
             
             return cell
         default:
@@ -144,5 +185,11 @@ extension CreateProfessionalCardViewController: ProfessionSelectedDelegate {
         
         self.professionSelected = profession
         self.tableView.reloadRows(at: [indexPath], with: .fade)
+    }
+}
+
+extension CreateProfessionalCardViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        self.shouldEnableSaveButton()
     }
 }

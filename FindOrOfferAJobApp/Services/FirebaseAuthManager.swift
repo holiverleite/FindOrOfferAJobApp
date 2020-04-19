@@ -50,9 +50,9 @@ class FirebaseAuthManager {
             var cards: [ProfessionalCard] = []
             if let data = dataSnapshot.value as? [String:Any], let professionalCards = data[FirebaseUser.ProfessionalCards] as? [String:Any] {
                 for cardItem in professionalCards {
-                    if let card = cardItem.value as? [String: String], let occupationArea = card[FirebaseUser.OccupationArea], let experienceTime = card[FirebaseUser.ExperienceTime] {
+                    if let card = cardItem.value as? [String: String], let occupationArea = card[FirebaseUser.OccupationArea], let experienceTime = card[FirebaseUser.ExperienceTime], let description = card[FirebaseUser.DescriptionOfProfession] {
                         let professionalCard = ProfessionalCard(occupationArea: occupationArea,
-                                                                experienceTime: experienceTime)
+                                                                experienceTime: experienceTime, descriptionOfProfession: description)
                         cards.append(professionalCard)
                     }
                     
@@ -86,8 +86,8 @@ class FirebaseAuthManager {
             
             var cards: [ProfessionalCard] = []
             for card in data.values {
-                if let cardData = card as? [String:String], let occupationArea = cardData[FirebaseUser.OccupationArea], let experienceTime = cardData[FirebaseUser.ExperienceTime]{
-                    let professionalCard = ProfessionalCard(occupationArea: occupationArea, experienceTime: experienceTime)
+                if let cardData = card as? [String:String], let occupationArea = cardData[FirebaseUser.OccupationArea], let experienceTime = cardData[FirebaseUser.ExperienceTime], let description = cardData[FirebaseUser.DescriptionOfProfession]{
+                    let professionalCard = ProfessionalCard(occupationArea: occupationArea, experienceTime: experienceTime, descriptionOfProfession: description)
                     cards.append(professionalCard)
                 }
             }
@@ -179,7 +179,8 @@ class FirebaseAuthManager {
         let ref = self.rootUsersReference.child(userId).child(FirebaseUser.ProfessionalCards).childByAutoId()
         let professionalCardDict: [String: Any] = [
             FirebaseUser.OccupationArea: professionalCard.occupationArea,
-            FirebaseUser.ExperienceTime: professionalCard.experienceTime
+            FirebaseUser.ExperienceTime: professionalCard.experienceTime,
+            FirebaseUser.DescriptionOfProfession: professionalCard.descriptionOfProfession
         ]
         
         ref.setValue(professionalCardDict) { (error, databaseReference) in

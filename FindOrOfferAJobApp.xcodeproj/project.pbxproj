@@ -14,6 +14,8 @@
 		628CB81923DCDA4800B62278 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 628CB81823DCDA4800B62278 /* Assets.xcassets */; };
 		628CB81C23DCDA4800B62278 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 628CB81A23DCDA4800B62278 /* LaunchScreen.storyboard */; };
 		62D7F6322441DD3E002C41DD /* EditPersonalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D7F6312441DD3E002C41DD /* EditPersonalDataViewController.swift */; };
+		62DE34E6244CA46F0036F8CB /* ProfessionalCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DE34E4244CA46F0036F8CB /* ProfessionalCardTableViewCell.swift */; };
+		62DE34E7244CA46F0036F8CB /* ProfessionalCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62DE34E5244CA46F0036F8CB /* ProfessionalCardTableViewCell.xib */; };
 		711F2B1D240018DD00B66AA5 /* UserResumeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711F2B1B240018DD00B66AA5 /* UserResumeTableViewCell.swift */; };
 		711F2B1E240018DD00B66AA5 /* UserResumeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 711F2B1C240018DD00B66AA5 /* UserResumeTableViewCell.xib */; };
 		711F2B2A240061DC00B66AA5 /* InputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711F2B28240061DC00B66AA5 /* InputTableViewCell.swift */; };
@@ -60,6 +62,8 @@
 		628CB81B23DCDA4800B62278 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		628CB81D23DCDA4800B62278 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62D7F6312441DD3E002C41DD /* EditPersonalDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditPersonalDataViewController.swift; sourceTree = "<group>"; };
+		62DE34E4244CA46F0036F8CB /* ProfessionalCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalCardTableViewCell.swift; sourceTree = "<group>"; };
+		62DE34E5244CA46F0036F8CB /* ProfessionalCardTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfessionalCardTableViewCell.xib; sourceTree = "<group>"; };
 		711F2B1B240018DD00B66AA5 /* UserResumeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResumeTableViewCell.swift; sourceTree = "<group>"; };
 		711F2B1C240018DD00B66AA5 /* UserResumeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserResumeTableViewCell.xib; sourceTree = "<group>"; };
 		711F2B28240061DC00B66AA5 /* InputTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTableViewCell.swift; sourceTree = "<group>"; };
@@ -157,6 +161,15 @@
 			path = FindOrOfferAJobApp;
 			sourceTree = "<group>";
 		};
+		62DE34E3244CA4280036F8CB /* ProfessionalCardViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				62DE34E4244CA46F0036F8CB /* ProfessionalCardTableViewCell.swift */,
+				62DE34E5244CA46F0036F8CB /* ProfessionalCardTableViewCell.xib */,
+			);
+			path = ProfessionalCardViewCell;
+			sourceTree = "<group>";
+		};
 		711F2B162400185600B66AA5 /* SettingsTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +226,7 @@
 		945531FB23FEC56000016D30 /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				62DE34E3244CA4280036F8CB /* ProfessionalCardViewCell */,
 				711F2B272400617200B66AA5 /* InputTableViewCell */,
 				711F2B172400186900B66AA5 /* UserResumeTableViewCell */,
 				711F2B162400185600B66AA5 /* SettingsTableViewCell */,
@@ -373,6 +387,7 @@
 			files = (
 				711F2B1E240018DD00B66AA5 /* UserResumeTableViewCell.xib in Resources */,
 				628CB81C23DCDA4800B62278 /* LaunchScreen.storyboard in Resources */,
+				62DE34E7244CA46F0036F8CB /* ProfessionalCardTableViewCell.xib in Resources */,
 				945531FF23FEC9A400016D30 /* Home.storyboard in Resources */,
 				940CDC5F23F5734100683B1A /* PostLaunchScreen.storyboard in Resources */,
 				945578F723F41CFA005B1B92 /* GoogleService-Info.plist in Resources */,
@@ -456,6 +471,7 @@
 				9455790D23F43F7A005B1B92 /* StringExtensions.swift in Sources */,
 				9455790523F43510005B1B92 /* LoginViewController.swift in Sources */,
 				71A334552438CD8100FC2EA0 /* ProfessionOptionsViewController.swift in Sources */,
+				62DE34E6244CA46F0036F8CB /* ProfessionalCardTableViewCell.swift in Sources */,
 				9443361A23FB072D004378BD /* Protocols.swift in Sources */,
 				9455790323F431EF005B1B92 /* AccessViewController.swift in Sources */,
 				9455791023F4634D005B1B92 /* PreferencesManager.swift in Sources */,

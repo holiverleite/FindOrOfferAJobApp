@@ -26,4 +26,5 @@ struct FirebaseUser {
     static let ProfessionalCards = "professionalCards"
     static let OccupationArea = "occupationArea"
     static let ExperienceTime = "experienceTime"
+    static let DescriptionOfProfession = "description"
 }
