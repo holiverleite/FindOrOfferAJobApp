@@ -51,11 +51,10 @@ class FirebaseAuthManager {
             if let data = dataSnapshot.value as? [String:Any], let professionalCards = data[FirebaseUser.ProfessionalCards] as? [String:Any] {
                 for cardItem in professionalCards {
                     if let card = cardItem.value as? [String: String], let occupationArea = card[FirebaseUser.OccupationArea], let experienceTime = card[FirebaseUser.ExperienceTime], let description = card[FirebaseUser.DescriptionOfProfession] {
-                        let professionalCard = ProfessionalCard(occupationArea: occupationArea,
+                        let professionalCard = ProfessionalCard(id: cardItem.key, occupationArea: occupationArea,
                                                                 experienceTime: experienceTime, descriptionOfProfession: description)
                         cards.append(professionalCard)
                     }
-                    
                 }
             }
             
@@ -85,10 +84,12 @@ class FirebaseAuthManager {
             }
             
             var cards: [ProfessionalCard] = []
-            for card in data.values {
-                if let cardData = card as? [String:String], let occupationArea = cardData[FirebaseUser.OccupationArea], let experienceTime = cardData[FirebaseUser.ExperienceTime], let description = cardData[FirebaseUser.DescriptionOfProfession]{
-                    let professionalCard = ProfessionalCard(occupationArea: occupationArea, experienceTime: experienceTime, descriptionOfProfession: description)
-                    cards.append(professionalCard)
+            for cardItem in data {
+                if let item = cardItem.value as? [String: Any] {
+                    if let occupationArea = item[FirebaseUser.OccupationArea] as? String, let experienceTime = item[FirebaseUser.ExperienceTime] as? String, let description = item[FirebaseUser.DescriptionOfProfession] as? String {
+                        let professionalCard = ProfessionalCard(id: cardItem.key, occupationArea: occupationArea, experienceTime: experienceTime, descriptionOfProfession: description)
+                        cards.append(professionalCard)
+                    }
                 }
             }
             completion(cards)
@@ -192,6 +193,30 @@ class FirebaseAuthManager {
         }
     }
     
-   
+    func deleteProfessionalCard(userId: String, cardId: String, completion: @escaping (_ success: Bool?) -> Void) {
+        let ref = self.rootUsersReference.child(userId).child(FirebaseUser.ProfessionalCards).child(cardId)
+        ref.removeValue { (error, databaseReference) in
+            if error != nil {
+                completion(false)
+            } else {
+                completion(true)
+            }
+        }
+    }
     
+    func updateProfessionalCard(userId: String, card: ProfessionalCard, completion: @escaping (_ success: Bool?) -> Void) {
+        let ref = self.rootUsersReference.child(userId).child(FirebaseUser.ProfessionalCards).child(card.id)
+        let professionalCardDict: [String: Any] = [
+            FirebaseUser.OccupationArea: card.occupationArea,
+            FirebaseUser.ExperienceTime: card.experienceTime,
+            FirebaseUser.DescriptionOfProfession: card.descriptionOfProfession
+        ]
+        ref.updateChildValues(professionalCardDict) { (error, databaseReference) in
+            if error != nil {
+                completion(false)
+            } else {
+                completion(true)
+            }
+        }
+    }
 }

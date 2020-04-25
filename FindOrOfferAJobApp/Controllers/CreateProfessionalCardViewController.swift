@@ -70,26 +70,52 @@ class CreateProfessionalCardViewController: UIViewController {
     
     @objc func didTapUpdateCardButton() {
         self.view.endEditing(true)
+        
+        if let professionalCard = self.professionalCardEdit {
+            let professionalCard = ProfessionalCard(id: professionalCard.id, occupationArea: self.professionSelected, experienceTime: self.textFieldExperience.text ?? "", descriptionOfProfession: self.textViewDescription.text ?? "")
+            
+            FirebaseAuthManager().updateProfessionalCard(userId: userProfileViewModel.userId, card: professionalCard, completion: { (success) in
+                if let success = success, success {
+                    let alert = UIAlertController(title: "Sucesso", message: "Cartão Profissional atualizado com sucesso!", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: { (_) in
+                        self.navigationController?.popViewController(animated: true)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            })
+        }
     }
     
     @objc func didTapSaveCardButton() {
         self.view.endEditing(true)
         
-        let professionalCard = ProfessionalCard(occupationArea: self.professionSelected, experienceTime: self.textFieldExperience.text ?? "", descriptionOfProfession: self.textViewDescription.text ?? "")
+        let professionalCard = ProfessionalCard(id: "", occupationArea: self.professionSelected, experienceTime: self.textFieldExperience.text ?? "", descriptionOfProfession: self.textViewDescription.text ?? "")
         
         FirebaseAuthManager().addProfessionalCard(userId: userProfileViewModel.userId, professionalCard: professionalCard) { (success) in
             if let success = success, success {
-                self.navigationController?.popViewController(animated: true)
+                let alert = UIAlertController(title: "Sucesso", message: "Cartão Profissional criado com sucesso!", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: { (_) in
+                    self.navigationController?.popViewController(animated: true)
+                }))
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
     
     // MARK: - Local Methods
     private func shouldEnableSaveButton() {
-        if let textExp = textFieldExperience.text, let textDescript = self.textViewDescription.text, !textExp.isEmpty && !self.professionSelected.isEmpty && !textDescript.isEmpty {
-            self.enableSaveButton(true)
+        if self.isEditingMode {
+            if let textExp = textFieldExperience.text, let textDescript = self.textViewDescription.text, let descriptionTextView = self.professionalCardEdit?.descriptionOfProfession, textExp != self.professionalCardEdit?.experienceTime || textDescript != descriptionTextView {
+                self.enableSaveButton(true)
+            } else {
+                self.enableSaveButton(false)
+            }
         } else {
-            self.enableSaveButton(false)
+            if let textExp = textFieldExperience.text, let textDescript = self.textViewDescription.text, !textExp.isEmpty && !self.professionSelected.isEmpty && !textDescript.isEmpty {
+                self.enableSaveButton(true)
+            } else {
+                self.enableSaveButton(false)
+            }
         }
     }
     

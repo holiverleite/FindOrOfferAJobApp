@@ -106,10 +106,23 @@ extension EditProfessionalDataViewController: UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            self.professionalCards.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            // DELETAR DO FIREBASE TAMBME
-        }
+        let alert = UIAlertController(title: "Atenção", message: "Realmente deseja deletar este item?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Sim", style: .default, handler: { (action) in
+            if editingStyle == .delete {
+                let professionalCard = self.professionalCards[indexPath.row]
+                FirebaseAuthManager().deleteProfessionalCard(userId: self.userProfileViewModel.userId, cardId: professionalCard.id) { (success) in
+                    if let success = success, success {
+                        self.professionalCards.remove(at: indexPath.row)
+                        tableView.deleteRows(at: [indexPath], with: .fade)
+                    } else {
+                        let alert = UIAlertController(title: "Atenção", message: "Não foi possível deletar este item.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Não", style: .destructive, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
