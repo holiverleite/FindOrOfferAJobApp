@@ -9,10 +9,15 @@
 /* Begin PBXBuildFile section */
 		6209AF132441F5F90070E5D1 /* ProfessionalCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6209AF122441F5F90070E5D1 /* ProfessionalCardViewModel.swift */; };
 		6209AF152441F6210070E5D1 /* ProfessionalCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6209AF142441F6210070E5D1 /* ProfessionalCard.swift */; };
+		62777E4324675DEA00FD35C2 /* Records.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62777E4224675DEA00FD35C2 /* Records.storyboard */; };
+		62777E45246767BF00FD35C2 /* RecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62777E44246767BF00FD35C2 /* RecordsViewController.swift */; };
 		628CB81023DCDA4500B62278 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628CB80F23DCDA4500B62278 /* AppDelegate.swift */; };
 		628CB81723DCDA4500B62278 /* AccessScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 628CB81523DCDA4500B62278 /* AccessScreen.storyboard */; };
 		628CB81923DCDA4800B62278 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 628CB81823DCDA4800B62278 /* Assets.xcassets */; };
 		628CB81C23DCDA4800B62278 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 628CB81A23DCDA4800B62278 /* LaunchScreen.storyboard */; };
+		62BF847524673504003AB826 /* FindJobViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BF847424673504003AB826 /* FindJobViewController.swift */; };
+		62BF847724673C49003AB826 /* AnnounceOrOfferJob.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62BF847624673C49003AB826 /* AnnounceOrOfferJob.storyboard */; };
+		62BF847924673C83003AB826 /* AnnounceOrOfferJobViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BF847824673C83003AB826 /* AnnounceOrOfferJobViewController.swift */; };
 		62D7F6322441DD3E002C41DD /* EditPersonalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D7F6312441DD3E002C41DD /* EditPersonalDataViewController.swift */; };
 		62DE34E6244CA46F0036F8CB /* ProfessionalCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DE34E4244CA46F0036F8CB /* ProfessionalCardTableViewCell.swift */; };
 		62DE34E7244CA46F0036F8CB /* ProfessionalCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62DE34E5244CA46F0036F8CB /* ProfessionalCardTableViewCell.xib */; };
@@ -55,12 +60,17 @@
 		27C0346F02195F24BC5A7402 /* Pods_FindOrOfferAJobApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FindOrOfferAJobApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6209AF122441F5F90070E5D1 /* ProfessionalCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalCardViewModel.swift; sourceTree = "<group>"; };
 		6209AF142441F6210070E5D1 /* ProfessionalCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalCard.swift; sourceTree = "<group>"; };
+		62777E4224675DEA00FD35C2 /* Records.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Records.storyboard; sourceTree = "<group>"; };
+		62777E44246767BF00FD35C2 /* RecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsViewController.swift; sourceTree = "<group>"; };
 		628CB80C23DCDA4500B62278 /* FindOrOfferAJobApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindOrOfferAJobApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		628CB80F23DCDA4500B62278 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		628CB81623DCDA4500B62278 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AccessScreen.storyboard; sourceTree = "<group>"; };
 		628CB81823DCDA4800B62278 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		628CB81B23DCDA4800B62278 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		628CB81D23DCDA4800B62278 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		62BF847424673504003AB826 /* FindJobViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindJobViewController.swift; sourceTree = "<group>"; };
+		62BF847624673C49003AB826 /* AnnounceOrOfferJob.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AnnounceOrOfferJob.storyboard; sourceTree = "<group>"; };
+		62BF847824673C83003AB826 /* AnnounceOrOfferJobViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceOrOfferJobViewController.swift; sourceTree = "<group>"; };
 		62D7F6312441DD3E002C41DD /* EditPersonalDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditPersonalDataViewController.swift; sourceTree = "<group>"; };
 		62DE34E4244CA46F0036F8CB /* ProfessionalCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalCardTableViewCell.swift; sourceTree = "<group>"; };
 		62DE34E5244CA46F0036F8CB /* ProfessionalCardTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfessionalCardTableViewCell.xib; sourceTree = "<group>"; };
@@ -251,6 +261,8 @@
 				9461BFE423F4710100EA2CA9 /* MainFlow.storyboard */,
 				945531FE23FEC9A400016D30 /* Home.storyboard */,
 				945531FC23FEC70A00016D30 /* Profile.storyboard */,
+				62BF847624673C49003AB826 /* AnnounceOrOfferJob.storyboard */,
+				62777E4224675DEA00FD35C2 /* Records.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -271,6 +283,9 @@
 				71A334522438C02900FC2EA0 /* CreateProfessionalCardViewController.swift */,
 				9455320223FEE2C600016D30 /* SettingsViewController.swift */,
 				9455320423FEF58A00016D30 /* ChangePasswordViewController.swift */,
+				62BF847424673504003AB826 /* FindJobViewController.swift */,
+				62BF847824673C83003AB826 /* AnnounceOrOfferJobViewController.swift */,
+				62777E44246767BF00FD35C2 /* RecordsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -390,10 +405,12 @@
 				62DE34E7244CA46F0036F8CB /* ProfessionalCardTableViewCell.xib in Resources */,
 				945531FF23FEC9A400016D30 /* Home.storyboard in Resources */,
 				940CDC5F23F5734100683B1A /* PostLaunchScreen.storyboard in Resources */,
+				62BF847724673C49003AB826 /* AnnounceOrOfferJob.storyboard in Resources */,
 				945578F723F41CFA005B1B92 /* GoogleService-Info.plist in Resources */,
 				628CB81923DCDA4800B62278 /* Assets.xcassets in Resources */,
 				9455790A23F43E3D005B1B92 /* Localizable.strings in Resources */,
 				628CB81723DCDA4500B62278 /* AccessScreen.storyboard in Resources */,
+				62777E4324675DEA00FD35C2 /* Records.storyboard in Resources */,
 				945531FD23FEC70A00016D30 /* Profile.storyboard in Resources */,
 				94601EFB23FDB20900FAF484 /* SettingsTableViewCell.xib in Resources */,
 				711F2B2B240061DC00B66AA5 /* InputTableViewCell.xib in Resources */,
@@ -468,6 +485,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6209AF152441F6210070E5D1 /* ProfessionalCard.swift in Sources */,
+				62777E45246767BF00FD35C2 /* RecordsViewController.swift in Sources */,
 				9455790D23F43F7A005B1B92 /* StringExtensions.swift in Sources */,
 				9455790523F43510005B1B92 /* LoginViewController.swift in Sources */,
 				71A334552438CD8100FC2EA0 /* ProfessionOptionsViewController.swift in Sources */,
@@ -485,12 +503,14 @@
 				9488CBA123FC614100D8B883 /* FirebaseConstants.swift in Sources */,
 				94601EFA23FDB20900FAF484 /* SettingsTableViewCell.swift in Sources */,
 				94601EF323FD7DF000FAF484 /* ProfileViewController.swift in Sources */,
+				62BF847524673504003AB826 /* FindJobViewController.swift in Sources */,
 				945578FA23F4241B005B1B92 /* FirebaseAuthManager.swift in Sources */,
 				71A334532438C02900FC2EA0 /* CreateProfessionalCardViewController.swift in Sources */,
 				94601EEF23FD7C5200FAF484 /* MainTabBarViewController.swift in Sources */,
 				628CB81023DCDA4500B62278 /* AppDelegate.swift in Sources */,
 				717BF25E2433C0E600BB21F4 /* EditProfessionalDataViewController.swift in Sources */,
 				945531FA23FEB0B200016D30 /* UserProfileViewModel.swift in Sources */,
+				62BF847924673C83003AB826 /* AnnounceOrOfferJobViewController.swift in Sources */,
 				9455790723F4356A005B1B92 /* RegistrationViewController.swift in Sources */,
 				9455320323FEE2C700016D30 /* SettingsViewController.swift in Sources */,
 				711F2B1D240018DD00B66AA5 /* UserResumeTableViewCell.swift in Sources */,

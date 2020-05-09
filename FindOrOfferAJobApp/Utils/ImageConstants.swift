@@ -26,6 +26,9 @@ struct ImageConstants {
     static let Lock = UIImage(named: "lock")
     static let Delete = UIImage(named: "delete")
     
+    static let Announce = UIImage(named: "announce")
+    static let Records = UIImage(named: "records")
+    
     // Others
     static let Back = UIImage(named: "back")
     static let ProflePlaceHolder = UIImage(named: "profile_placeholder")

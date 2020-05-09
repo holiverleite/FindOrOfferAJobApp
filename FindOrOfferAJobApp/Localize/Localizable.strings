@@ -26,6 +26,15 @@
 "edit_professional_card_nav_bar" = "Editar Cartão Profissional";
 "select_one_profession_nav_bar" = "Selecione uma Profissão";
 
+// FindJob
+"find_a_job_nav_bar" = "Encontre seu serviço";
+
+// AnnounceJob
+"announce_a_job_nav_bar" = "Anuncie um serviço";
+
+// Historic
+"records_nav_bar" = "Histórico";
+
 // Settings
 "new_password_placeholder" = "Nova senha";
 "retype_new_password_placeholder" = "Repita a nova senha";

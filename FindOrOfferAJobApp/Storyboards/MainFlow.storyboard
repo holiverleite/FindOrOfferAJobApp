@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="U6N-p4-daM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="U6N-p4-daM">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,7 +19,8 @@
                     </tabBar>
                     <connections>
                         <segue destination="Mkb-Ph-vAU" kind="relationship" relationship="viewControllers" id="Ltt-q1-kjn"/>
-                        <segue destination="e2d-gF-q4h" kind="relationship" relationship="viewControllers" id="gmo-ds-9Of"/>
+                        <segue destination="3p5-ry-eG3" kind="relationship" relationship="viewControllers" id="PPu-3t-bAS"/>
+                        <segue destination="eGw-Vv-JWJ" kind="relationship" relationship="viewControllers" id="a2Y-BJ-77K"/>
                         <segue destination="BEx-HK-lzG" kind="relationship" relationship="viewControllers" id="TIy-g9-044"/>
                     </connections>
                 </tabBarController>
@@ -32,40 +32,47 @@
         <scene sceneID="Gk0-T6-fEI">
             <objects>
                 <viewControllerPlaceholder storyboardName="Home" id="Mkb-Ph-vAU" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="jgn-aP-wyP"/>
+                    <tabBarItem key="tabBarItem" title="" image="home" id="jgn-aP-wyP"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a0g-rE-zqz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-289" y="-143"/>
         </scene>
+        <!--AnnounceOrOfferJob-->
+        <scene sceneID="VGi-9v-VZ7">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AnnounceOrOfferJob" id="3p5-ry-eG3" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="job" id="kOV-nU-50l"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fe7-sv-ghl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-222" y="-107"/>
+        </scene>
         <!--Profile-->
         <scene sceneID="yrX-vb-vzu">
             <objects>
                 <viewControllerPlaceholder storyboardName="Profile" id="BEx-HK-lzG" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="5Yv-65-Tdf"/>
+                    <tabBarItem key="tabBarItem" title="" image="profile" id="5Yv-65-Tdf"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MQO-sU-Ens" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-147" y="299"/>
+            <point key="canvasLocation" x="-287" y="-39"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="bLh-5z-oDw">
+        <!--Records-->
+        <scene sceneID="Tyx-rA-aSf">
             <objects>
-                <viewController id="e2d-gF-q4h" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="P9S-70-w2i">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="087-Da-nzm"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="" image="job" id="XjC-8e-2hW"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Cpb-GX-sUa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="Records" id="eGw-Vv-JWJ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="records" id="QF6-za-Hex"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e6E-cB-3HK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="742" y="-105"/>
+            <point key="canvasLocation" x="-280" y="-70"/>
         </scene>
     </scenes>
     <resources>
+        <image name="home" width="24" height="24"/>
         <image name="job" width="29" height="29"/>
+        <image name="profile" width="24" height="24"/>
+        <image name="records" width="24" height="24"/>
     </resources>
 </document>
