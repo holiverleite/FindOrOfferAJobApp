@@ -44,7 +44,7 @@ class ProfileViewController: UIViewController {
         
         self.navigationController?.navigationBar.topItem?.title = String.localize("profile_nav_bar")
         
-        self.userProfileViewModel = UserProfileViewModel()
+//        self.userProfileViewModel = UserProfileViewModel()
     }
     
     // MARK: - Methods

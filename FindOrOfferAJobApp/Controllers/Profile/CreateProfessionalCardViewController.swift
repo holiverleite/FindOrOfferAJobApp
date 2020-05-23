@@ -13,7 +13,7 @@ class CreateProfessionalCardViewController: UIViewController {
     let descriptionTextPlaceHolder = "Breve descrição da experiência"
     
     enum ProfessionalQuestions: String, CaseIterable {
-        case OcupationArea = "Area de atuação"
+        case OcupationArea = "Área de atuação"
         case TimeExperience = "Tempo de experiência (em meses)"
         case Description = "Descrição da experiência"
     }
@@ -94,7 +94,7 @@ class CreateProfessionalCardViewController: UIViewController {
         FirebaseAuthManager().addProfessionalCard(userId: userProfileViewModel.userId, professionalCard: professionalCard) { (success) in
             if let success = success, success {
                 let alert = UIAlertController(title: "Sucesso", message: "Cartão Profissional criado com sucesso!", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: { (_) in
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
                     self.navigationController?.popViewController(animated: true)
                 }))
                 self.present(alert, animated: true, completion: nil)
@@ -147,6 +147,17 @@ extension CreateProfessionalCardViewController: UITableViewDelegate, UITableView
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.section {
+        case 0, 1:
+            return 50.0
+        case 2:
+            return 220.0
+        default:
+            return 50.0
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
@@ -176,7 +187,7 @@ extension CreateProfessionalCardViewController: UITableViewDelegate, UITableView
             
             return cell
         case 2:
-            self.textViewDescription = UITextView(frame: CGRect(x: 15, y: 10, width: self.view.frame.width - 25, height: 200))
+            self.textViewDescription = UITextView(frame: CGRect(origin: CGPoint(x: 0, y: 10), size: CGSize(width: tableView.frame.width, height: 200)))
             
             self.textViewDescription.layer.borderWidth = 0.5
             self.textViewDescription.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
@@ -206,16 +217,20 @@ extension CreateProfessionalCardViewController: UITableViewDelegate, UITableView
 
 extension CreateProfessionalCardViewController: ProfessionSelectedDelegate {
     func professionSelected(profession: String) {
-        self.shouldEnableSaveButton()
         let indexPath = IndexPath(row: 0, section: 0)
         
         self.professionSelected = profession
         self.tableView.reloadRows(at: [indexPath], with: .fade)
+        self.shouldEnableSaveButton()
     }
 }
 
 extension CreateProfessionalCardViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         self.shouldEnableSaveButton()
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        descriptionProfession = textView.text
     }
 }

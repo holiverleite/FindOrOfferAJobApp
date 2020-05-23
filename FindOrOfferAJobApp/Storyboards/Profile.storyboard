@@ -206,15 +206,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="L1Y-ax-UfS">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="20" y="20" width="335" height="647"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="RJr-ID-s4F" firstAttribute="trailing" secondItem="L1Y-ax-UfS" secondAttribute="trailing" id="6he-Qi-GVC"/>
-                            <constraint firstItem="L1Y-ax-UfS" firstAttribute="top" secondItem="RJr-ID-s4F" secondAttribute="top" id="8ut-XO-Ko0"/>
-                            <constraint firstItem="L1Y-ax-UfS" firstAttribute="leading" secondItem="RJr-ID-s4F" secondAttribute="leading" id="gyF-EM-E0u"/>
+                            <constraint firstItem="RJr-ID-s4F" firstAttribute="trailing" secondItem="L1Y-ax-UfS" secondAttribute="trailing" constant="20" id="6he-Qi-GVC"/>
+                            <constraint firstItem="L1Y-ax-UfS" firstAttribute="top" secondItem="RJr-ID-s4F" secondAttribute="top" constant="20" id="8ut-XO-Ko0"/>
+                            <constraint firstItem="L1Y-ax-UfS" firstAttribute="leading" secondItem="RJr-ID-s4F" secondAttribute="leading" constant="20" id="gyF-EM-E0u"/>
                             <constraint firstItem="RJr-ID-s4F" firstAttribute="bottom" secondItem="L1Y-ax-UfS" secondAttribute="bottom" id="lx8-dR-ndO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="RJr-ID-s4F"/>
@@ -232,7 +232,7 @@
         <!--Profession Options View Controller-->
         <scene sceneID="5Gd-nP-BbB">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="z2d-ZL-Gp2" customClass="ProfessionOptionsViewController" customModule="FindOrOfferAJobApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfessionOptionsViewController" modalPresentationStyle="fullScreen" id="z2d-ZL-Gp2" customClass="ProfessionOptionsViewController" customModule="FindOrOfferAJobApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WaA-Km-V01">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

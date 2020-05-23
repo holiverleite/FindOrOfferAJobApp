@@ -23,19 +23,51 @@
                                     <segment title="Anúnciar"/>
                                 </segments>
                             </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SXT-m1-RoC">
+                                <rect key="frame" x="20" y="105" width="374" height="688"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fd5-Hr-OZA">
+                                <rect key="frame" x="20" y="105" width="374" height="688"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nenhuma vaga foi encontrada na sua região." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z4X-IZ-P54">
+                                        <rect key="frame" x="30" y="323.5" width="314" height="41"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="z4X-IZ-P54" firstAttribute="centerX" secondItem="Fd5-Hr-OZA" secondAttribute="centerX" id="Ced-mm-LHs"/>
+                                    <constraint firstItem="z4X-IZ-P54" firstAttribute="leading" secondItem="Fd5-Hr-OZA" secondAttribute="leading" constant="30" id="E3D-EC-JZQ"/>
+                                    <constraint firstItem="z4X-IZ-P54" firstAttribute="centerY" secondItem="Fd5-Hr-OZA" secondAttribute="centerY" id="S5d-1R-fZI"/>
+                                    <constraint firstAttribute="trailing" secondItem="z4X-IZ-P54" secondAttribute="trailing" constant="30" id="tRN-91-Lcc"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Npj-MZ-ZWB" firstAttribute="top" secondItem="oLz-LZ-yrR" secondAttribute="top" constant="15" id="5Kf-nZ-F45"/>
+                            <constraint firstItem="SXT-m1-RoC" firstAttribute="leading" secondItem="oLz-LZ-yrR" secondAttribute="leading" constant="20" id="5xV-Vb-tdo"/>
                             <constraint firstItem="oLz-LZ-yrR" firstAttribute="trailing" secondItem="Npj-MZ-ZWB" secondAttribute="trailing" constant="15" id="LZd-xq-oJ9"/>
+                            <constraint firstItem="Fd5-Hr-OZA" firstAttribute="leading" secondItem="SXT-m1-RoC" secondAttribute="leading" id="NCD-PS-r1E"/>
+                            <constraint firstItem="oLz-LZ-yrR" firstAttribute="bottom" secondItem="SXT-m1-RoC" secondAttribute="bottom" constant="20" id="QF1-Qa-FR0"/>
                             <constraint firstItem="Npj-MZ-ZWB" firstAttribute="leading" secondItem="oLz-LZ-yrR" secondAttribute="leading" constant="15" id="YsW-40-Uiy"/>
+                            <constraint firstItem="SXT-m1-RoC" firstAttribute="top" secondItem="Npj-MZ-ZWB" secondAttribute="bottom" constant="15" id="Z9b-M2-LOy"/>
+                            <constraint firstItem="Fd5-Hr-OZA" firstAttribute="top" secondItem="SXT-m1-RoC" secondAttribute="top" id="ZMO-Ag-9XN"/>
+                            <constraint firstItem="Fd5-Hr-OZA" firstAttribute="trailing" secondItem="SXT-m1-RoC" secondAttribute="trailing" id="fBH-Dw-HL6"/>
+                            <constraint firstItem="oLz-LZ-yrR" firstAttribute="trailing" secondItem="SXT-m1-RoC" secondAttribute="trailing" constant="20" id="vik-2m-YFu"/>
+                            <constraint firstItem="Fd5-Hr-OZA" firstAttribute="bottom" secondItem="SXT-m1-RoC" secondAttribute="bottom" id="wJ9-Nv-9n6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="oLz-LZ-yrR"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="job" id="Bkn-l4-nkv"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="emptyView" destination="Fd5-Hr-OZA" id="DSN-jl-kaw"/>
                         <outlet property="segmentedControl" destination="Npj-MZ-ZWB" id="E2Z-jm-zlD"/>
+                        <outlet property="tableView" destination="SXT-m1-RoC" id="Vo4-aG-TbW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0ji-pN-VKi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -15,7 +15,11 @@
 		628CB81723DCDA4500B62278 /* AccessScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 628CB81523DCDA4500B62278 /* AccessScreen.storyboard */; };
 		628CB81923DCDA4800B62278 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 628CB81823DCDA4800B62278 /* Assets.xcassets */; };
 		628CB81C23DCDA4800B62278 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 628CB81A23DCDA4800B62278 /* LaunchScreen.storyboard */; };
-		62BF847524673504003AB826 /* FindJobViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BF847424673504003AB826 /* FindJobViewController.swift */; };
+		62B84CB52479A7D200028801 /* FirebaseAuthManagerUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B84CB42479A7D200028801 /* FirebaseAuthManagerUser.swift */; };
+		62B84CB72479A83900028801 /* FirebaseAuthManagerProfessional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B84CB62479A83900028801 /* FirebaseAuthManagerProfessional.swift */; };
+		62B84CB92479AE9900028801 /* FirebaseAuthManagerAnnounces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B84CB82479AE9900028801 /* FirebaseAuthManagerAnnounces.swift */; };
+		62B84CBB2479B08900028801 /* AnnounceJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B84CBA2479B08900028801 /* AnnounceJob.swift */; };
+		62B84CBD2479D27500028801 /* MyAnnouncesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B84CBC2479D27500028801 /* MyAnnouncesListViewController.swift */; };
 		62BF847724673C49003AB826 /* AnnounceOrOfferJob.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62BF847624673C49003AB826 /* AnnounceOrOfferJob.storyboard */; };
 		62BF847924673C83003AB826 /* AnnounceOrOfferJobViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BF847824673C83003AB826 /* AnnounceOrOfferJobViewController.swift */; };
 		62D7F6322441DD3E002C41DD /* EditPersonalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D7F6312441DD3E002C41DD /* EditPersonalDataViewController.swift */; };
@@ -68,7 +72,11 @@
 		628CB81823DCDA4800B62278 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		628CB81B23DCDA4800B62278 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		628CB81D23DCDA4800B62278 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		62BF847424673504003AB826 /* FindJobViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindJobViewController.swift; sourceTree = "<group>"; };
+		62B84CB42479A7D200028801 /* FirebaseAuthManagerUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManagerUser.swift; sourceTree = "<group>"; };
+		62B84CB62479A83900028801 /* FirebaseAuthManagerProfessional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManagerProfessional.swift; sourceTree = "<group>"; };
+		62B84CB82479AE9900028801 /* FirebaseAuthManagerAnnounces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManagerAnnounces.swift; sourceTree = "<group>"; };
+		62B84CBA2479B08900028801 /* AnnounceJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceJob.swift; sourceTree = "<group>"; };
+		62B84CBC2479D27500028801 /* MyAnnouncesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAnnouncesListViewController.swift; sourceTree = "<group>"; };
 		62BF847624673C49003AB826 /* AnnounceOrOfferJob.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AnnounceOrOfferJob.storyboard; sourceTree = "<group>"; };
 		62BF847824673C83003AB826 /* AnnounceOrOfferJobViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceOrOfferJobViewController.swift; sourceTree = "<group>"; };
 		62D7F6312441DD3E002C41DD /* EditPersonalDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditPersonalDataViewController.swift; sourceTree = "<group>"; };
@@ -171,6 +179,41 @@
 			path = FindOrOfferAJobApp;
 			sourceTree = "<group>";
 		};
+		62B84CBE2479D2BF00028801 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				94601EF223FD7DF000FAF484 /* ProfileViewController.swift */,
+				717BF25D2433C0E600BB21F4 /* EditProfessionalDataViewController.swift */,
+				62D7F6312441DD3E002C41DD /* EditPersonalDataViewController.swift */,
+				71A334542438CD8100FC2EA0 /* ProfessionOptionsViewController.swift */,
+				71A334522438C02900FC2EA0 /* CreateProfessionalCardViewController.swift */,
+				9455320223FEE2C600016D30 /* SettingsViewController.swift */,
+				9455320423FEF58A00016D30 /* ChangePasswordViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		62B84CBF2479D37000028801 /* LoginAndRegistration */ = {
+			isa = PBXGroup;
+			children = (
+				94D19A2323F56E0B00A557CC /* PostLaunchScreenViewController.swift */,
+				9455790223F431EF005B1B92 /* AccessViewController.swift */,
+				9455790423F43510005B1B92 /* LoginViewController.swift */,
+				9455790623F4356A005B1B92 /* RegistrationViewController.swift */,
+				94601EEE23FD7C5200FAF484 /* MainTabBarViewController.swift */,
+			);
+			path = LoginAndRegistration;
+			sourceTree = "<group>";
+		};
+		62B84CC02479D39D00028801 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				9461BFE623F4711600EA2CA9 /* HomeViewController.swift */,
+				62B84CBC2479D27500028801 /* MyAnnouncesListViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		62DE34E3244CA4280036F8CB /* ProfessionalCardViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -249,6 +292,9 @@
 			children = (
 				945578F923F4241B005B1B92 /* FirebaseAuthManager.swift */,
 				9488CBA023FC614100D8B883 /* FirebaseConstants.swift */,
+				62B84CB42479A7D200028801 /* FirebaseAuthManagerUser.swift */,
+				62B84CB62479A83900028801 /* FirebaseAuthManagerProfessional.swift */,
+				62B84CB82479AE9900028801 /* FirebaseAuthManagerAnnounces.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -270,20 +316,9 @@
 		9455790023F431BF005B1B92 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				94D19A2323F56E0B00A557CC /* PostLaunchScreenViewController.swift */,
-				9455790223F431EF005B1B92 /* AccessViewController.swift */,
-				9455790423F43510005B1B92 /* LoginViewController.swift */,
-				9455790623F4356A005B1B92 /* RegistrationViewController.swift */,
-				94601EEE23FD7C5200FAF484 /* MainTabBarViewController.swift */,
-				9461BFE623F4711600EA2CA9 /* HomeViewController.swift */,
-				94601EF223FD7DF000FAF484 /* ProfileViewController.swift */,
-				717BF25D2433C0E600BB21F4 /* EditProfessionalDataViewController.swift */,
-				62D7F6312441DD3E002C41DD /* EditPersonalDataViewController.swift */,
-				71A334542438CD8100FC2EA0 /* ProfessionOptionsViewController.swift */,
-				71A334522438C02900FC2EA0 /* CreateProfessionalCardViewController.swift */,
-				9455320223FEE2C600016D30 /* SettingsViewController.swift */,
-				9455320423FEF58A00016D30 /* ChangePasswordViewController.swift */,
-				62BF847424673504003AB826 /* FindJobViewController.swift */,
+				62B84CC02479D39D00028801 /* Home */,
+				62B84CBF2479D37000028801 /* LoginAndRegistration */,
+				62B84CBE2479D2BF00028801 /* Profile */,
 				62BF847824673C83003AB826 /* AnnounceOrOfferJobViewController.swift */,
 				62777E44246767BF00FD35C2 /* RecordsViewController.swift */,
 			);
@@ -319,6 +354,7 @@
 			children = (
 				9455791223F467BF005B1B92 /* UserProfile.swift */,
 				6209AF142441F6210070E5D1 /* ProfessionalCard.swift */,
+				62B84CBA2479B08900028801 /* AnnounceJob.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -488,6 +524,8 @@
 				62777E45246767BF00FD35C2 /* RecordsViewController.swift in Sources */,
 				9455790D23F43F7A005B1B92 /* StringExtensions.swift in Sources */,
 				9455790523F43510005B1B92 /* LoginViewController.swift in Sources */,
+				62B84CB52479A7D200028801 /* FirebaseAuthManagerUser.swift in Sources */,
+				62B84CB92479AE9900028801 /* FirebaseAuthManagerAnnounces.swift in Sources */,
 				71A334552438CD8100FC2EA0 /* ProfessionOptionsViewController.swift in Sources */,
 				62DE34E6244CA46F0036F8CB /* ProfessionalCardTableViewCell.swift in Sources */,
 				9443361A23FB072D004378BD /* Protocols.swift in Sources */,
@@ -502,12 +540,14 @@
 				62D7F6322441DD3E002C41DD /* EditPersonalDataViewController.swift in Sources */,
 				9488CBA123FC614100D8B883 /* FirebaseConstants.swift in Sources */,
 				94601EFA23FDB20900FAF484 /* SettingsTableViewCell.swift in Sources */,
+				62B84CBD2479D27500028801 /* MyAnnouncesListViewController.swift in Sources */,
 				94601EF323FD7DF000FAF484 /* ProfileViewController.swift in Sources */,
-				62BF847524673504003AB826 /* FindJobViewController.swift in Sources */,
 				945578FA23F4241B005B1B92 /* FirebaseAuthManager.swift in Sources */,
 				71A334532438C02900FC2EA0 /* CreateProfessionalCardViewController.swift in Sources */,
 				94601EEF23FD7C5200FAF484 /* MainTabBarViewController.swift in Sources */,
 				628CB81023DCDA4500B62278 /* AppDelegate.swift in Sources */,
+				62B84CBB2479B08900028801 /* AnnounceJob.swift in Sources */,
+				62B84CB72479A83900028801 /* FirebaseAuthManagerProfessional.swift in Sources */,
 				717BF25E2433C0E600BB21F4 /* EditProfessionalDataViewController.swift in Sources */,
 				945531FA23FEB0B200016D30 /* UserProfileViewModel.swift in Sources */,
 				62BF847924673C83003AB826 /* AnnounceOrOfferJobViewController.swift in Sources */,

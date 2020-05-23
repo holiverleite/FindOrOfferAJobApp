@@ -19,8 +19,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wYf-1a-b3V">
                                 <rect key="frame" x="40" y="125" width="162" height="162"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1a-ta-Znw">
-                                        <rect key="frame" x="60" y="70.5" width="42" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meus processos seletivos" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1a-ta-Znw">
+                                        <rect key="frame" x="20" y="50.5" width="122" height="61"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -28,7 +28,9 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBrownColor" red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="b1a-ta-Znw" secondAttribute="trailing" constant="20" id="3Jn-28-bgN"/>
                                     <constraint firstAttribute="width" secondItem="wYf-1a-b3V" secondAttribute="height" multiplier="1:1" id="4i6-II-tQU"/>
+                                    <constraint firstItem="b1a-ta-Znw" firstAttribute="leading" secondItem="wYf-1a-b3V" secondAttribute="leading" constant="20" id="Aql-mr-hXQ"/>
                                     <constraint firstItem="b1a-ta-Znw" firstAttribute="centerY" secondItem="wYf-1a-b3V" secondAttribute="centerY" id="T9h-no-79O"/>
                                     <constraint firstItem="b1a-ta-Znw" firstAttribute="centerX" secondItem="wYf-1a-b3V" secondAttribute="centerX" id="t5Q-Mg-1Ev"/>
                                 </constraints>
@@ -36,8 +38,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z09-72-MdX">
                                 <rect key="frame" x="212" y="125" width="162" height="162"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X7G-oO-ulQ">
-                                        <rect key="frame" x="60" y="71" width="42" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meus Anúncios" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X7G-oO-ulQ">
+                                        <rect key="frame" x="22.5" y="71" width="117" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -49,14 +51,36 @@
                                     <constraint firstItem="X7G-oO-ulQ" firstAttribute="centerX" secondItem="z09-72-MdX" secondAttribute="centerX" id="ygJ-92-Vkq"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MuN-pz-CWd">
+                                <rect key="frame" x="40" y="297" width="162" height="162"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cadastrar Cartão Profissional" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Asd-ve-iW9">
+                                        <rect key="frame" x="20" y="50.5" width="122" height="61"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Asd-ve-iW9" secondAttribute="trailing" constant="20" id="Spx-O6-hls"/>
+                                    <constraint firstItem="Asd-ve-iW9" firstAttribute="centerX" secondItem="MuN-pz-CWd" secondAttribute="centerX" id="Vyo-b2-ah2"/>
+                                    <constraint firstItem="Asd-ve-iW9" firstAttribute="centerY" secondItem="MuN-pz-CWd" secondAttribute="centerY" id="rLL-JQ-eEM"/>
+                                    <constraint firstItem="Asd-ve-iW9" firstAttribute="leading" secondItem="MuN-pz-CWd" secondAttribute="leading" constant="20" id="sRg-F0-UgM"/>
+                                    <constraint firstAttribute="width" secondItem="MuN-pz-CWd" secondAttribute="height" multiplier="1:1" id="vau-w4-WVB"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="wYf-1a-b3V" firstAttribute="top" secondItem="ZPZ-YJ-Z94" secondAttribute="top" constant="81" id="1Lh-dY-igF"/>
+                            <constraint firstItem="MuN-pz-CWd" firstAttribute="leading" secondItem="wYf-1a-b3V" secondAttribute="leading" id="9lf-1G-pv6"/>
                             <constraint firstItem="ZPZ-YJ-Z94" firstAttribute="trailing" secondItem="z09-72-MdX" secondAttribute="trailing" constant="40" id="ME0-cc-LgZ"/>
                             <constraint firstItem="wYf-1a-b3V" firstAttribute="leading" secondItem="ZPZ-YJ-Z94" secondAttribute="leading" constant="40" id="PiA-tv-5bF"/>
+                            <constraint firstItem="MuN-pz-CWd" firstAttribute="top" secondItem="wYf-1a-b3V" secondAttribute="bottom" constant="10" id="Qt7-zI-CDZ"/>
                             <constraint firstItem="z09-72-MdX" firstAttribute="centerY" secondItem="wYf-1a-b3V" secondAttribute="centerY" id="S6N-hj-an3"/>
                             <constraint firstItem="wYf-1a-b3V" firstAttribute="width" secondItem="z09-72-MdX" secondAttribute="width" id="Z5l-Mm-KDu"/>
+                            <constraint firstItem="MuN-pz-CWd" firstAttribute="trailing" secondItem="wYf-1a-b3V" secondAttribute="trailing" id="ZTh-h4-NkB"/>
                             <constraint firstItem="z09-72-MdX" firstAttribute="top" secondItem="ZPZ-YJ-Z94" secondAttribute="top" constant="81" id="bgY-Yo-cyL"/>
                             <constraint firstItem="z09-72-MdX" firstAttribute="leading" secondItem="wYf-1a-b3V" secondAttribute="trailing" constant="10" id="jg2-id-bVg"/>
                             <constraint firstItem="z09-72-MdX" firstAttribute="leading" secondItem="wYf-1a-b3V" secondAttribute="trailing" constant="10" id="xC7-xg-Wmy"/>
@@ -64,10 +88,41 @@
                         <viewLayoutGuide key="safeArea" id="ZPZ-YJ-Z94"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="home" id="rS5-0i-kAb"/>
+                    <connections>
+                        <segue destination="ROW-5h-ce0" kind="show" id="0A3-eU-TN2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uLV-Ia-x6l" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-81.159420289855078" y="-417.1875"/>
+        </scene>
+        <!--My Announces List View Controller-->
+        <scene sceneID="vBs-RI-MJr">
+            <objects>
+                <viewController id="ROW-5h-ce0" customClass="MyAnnouncesListViewController" customModule="FindOrOfferAJobApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aWa-bt-uQy">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yRJ-EL-SIl">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="yRJ-EL-SIl" firstAttribute="leading" secondItem="rmz-EQ-fsF" secondAttribute="leading" id="Vbr-Th-xob"/>
+                            <constraint firstItem="rmz-EQ-fsF" firstAttribute="bottom" secondItem="yRJ-EL-SIl" secondAttribute="bottom" id="VkH-SS-DQy"/>
+                            <constraint firstItem="yRJ-EL-SIl" firstAttribute="top" secondItem="rmz-EQ-fsF" secondAttribute="top" id="rn6-Cj-eyQ"/>
+                            <constraint firstItem="rmz-EQ-fsF" firstAttribute="trailing" secondItem="yRJ-EL-SIl" secondAttribute="trailing" id="wBo-HV-o2q"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="rmz-EQ-fsF"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="tuh-Cp-nQP"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B9P-1v-2R7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="907" y="-417"/>
         </scene>
     </scenes>
     <resources>
