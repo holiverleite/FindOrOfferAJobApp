@@ -76,6 +76,7 @@
         <!--Edit Personal Data View Controller-->
         <scene sceneID="y6f-Hr-9hk">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VIA-Uv-fmH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController modalPresentationStyle="fullScreen" id="xmc-Ja-LHY" customClass="EditPersonalDataViewController" customModule="FindOrOfferAJobApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="a4K-m5-jOi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -99,7 +100,6 @@
                         <outlet property="tableview" destination="MSo-n7-4sx" id="EiS-R0-nGi"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VIA-Uv-fmH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="745" y="933"/>
         </scene>

@@ -36,10 +36,6 @@ class EditProfessionalDataViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = createButton
         
         self.tableview.isHidden = true
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
         FirebaseAuthManager().retrieveProfessionalCards(userId: self.userProfileViewModel.userId) { (professionalCards) in
             if professionalCards.count > 0 {
@@ -49,6 +45,10 @@ class EditProfessionalDataViewController: UIViewController {
                 self.tableview.reloadData()
             }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     // MARK: - Methods

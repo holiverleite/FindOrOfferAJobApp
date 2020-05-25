@@ -12,14 +12,12 @@ class ProfessionalCardTableViewCell: UITableViewCell {
 
     @IBOutlet weak var backgroundCardView: UIView! {
         didSet {
-            self.backgroundCardView.layer.cornerRadius = 8
+            self.backgroundCardView.layer.cornerRadius = 2
             self.backgroundCardView.layer.borderWidth = 0.5
-            self.backgroundCardView.backgroundColor = UIColor.blue.withAlphaComponent(0.1)
+            self.backgroundCardView.backgroundColor = UIColor.blue.withAlphaComponent(0.3)
         }
     }
     @IBOutlet weak var professionalTitleLabel: UILabel!
-    @IBOutlet weak var experienceLabel: UILabel!
-    @IBOutlet weak var professionDescriptionLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,8 +32,6 @@ class ProfessionalCardTableViewCell: UITableViewCell {
     
     func setValues(professionaltitle: String, exp: String, professionDescription: String) {
         self.professionalTitleLabel.text = professionaltitle
-        self.experienceLabel.text = exp
-        self.professionDescriptionLabel.text = professionDescription
     }
     
 }

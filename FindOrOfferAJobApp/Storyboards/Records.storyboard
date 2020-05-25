@@ -15,7 +15,33 @@
                     <view key="view" contentMode="scaleToFill" id="5UA-WG-hXE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YMJ-an-tIe">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Não existe nenhum registro de Anúncios ou Serviços prestados no seu histórico." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8IM-nF-2CH">
+                                        <rect key="frame" x="30" y="364" width="354" height="41"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="8IM-nF-2CH" firstAttribute="leading" secondItem="YMJ-an-tIe" secondAttribute="leading" constant="30" id="0w0-DH-7X9"/>
+                                    <constraint firstItem="8IM-nF-2CH" firstAttribute="centerY" secondItem="YMJ-an-tIe" secondAttribute="centerY" id="9hf-de-z19"/>
+                                    <constraint firstAttribute="trailing" secondItem="8IM-nF-2CH" secondAttribute="trailing" constant="30" id="fPw-Oc-bv3"/>
+                                    <constraint firstItem="8IM-nF-2CH" firstAttribute="centerX" secondItem="YMJ-an-tIe" secondAttribute="centerX" id="uab-V2-EZ4"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="KaT-zo-6PJ" firstAttribute="bottom" secondItem="YMJ-an-tIe" secondAttribute="bottom" id="EFO-Fm-1cR"/>
+                            <constraint firstItem="YMJ-an-tIe" firstAttribute="top" secondItem="KaT-zo-6PJ" secondAttribute="top" id="GeR-dm-zmD"/>
+                            <constraint firstItem="YMJ-an-tIe" firstAttribute="leading" secondItem="KaT-zo-6PJ" secondAttribute="leading" id="dow-xq-OXU"/>
+                            <constraint firstItem="KaT-zo-6PJ" firstAttribute="trailing" secondItem="YMJ-an-tIe" secondAttribute="trailing" id="puw-RJ-3b7"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="KaT-zo-6PJ"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="records" id="biQ-au-sFZ"/>

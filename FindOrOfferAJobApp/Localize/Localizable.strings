@@ -30,6 +30,9 @@
 "find_a_job_nav_bar" = "Encontre seu serviço";
 
 // AnnounceJob
+"my_selective_proccess_nav_bar" = "Meus Processos Seletivos";
+"my_announces_nav_bar" = "Meus Anúncios";
+"announce_detail_nav_bar" = "Detalhes do Anuncio";
 "announce_a_job_nav_bar" = "Anuncie um serviço";
 
 // Historic

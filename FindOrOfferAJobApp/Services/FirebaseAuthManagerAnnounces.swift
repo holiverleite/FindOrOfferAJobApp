@@ -17,7 +17,9 @@ extension FirebaseAuthManager {
         let ref = self.rootUsersReference.child(userId).child(FirebaseUser.AnnounceJob).childByAutoId()
         let professionalCardDict: [String: Any] = [
             FirebaseUser.OccupationArea: announceJob.occupationArea,
-            FirebaseUser.DescriptionOfProfession: announceJob.descriptionOfAnnounce
+            FirebaseUser.DescriptionOfProfession: announceJob.descriptionOfAnnounce,
+            FirebaseUser.StartDate: announceJob.startTimestamp,
+            FirebaseUser.FinishDate: announceJob.finishTimestamp
         ]
         
         ref.setValue(professionalCardDict) { (error, databaseReference) in
@@ -29,4 +31,24 @@ extension FirebaseAuthManager {
         }
     }
     
+    func retrieveAnnouncesJob(userId: String, completion: @escaping (_ professionalCards: [AnnounceJob]) -> Void) {
+        let ref = self.rootUsersReference.child(userId).child(FirebaseUser.AnnounceJob)
+        ref.observeSingleEvent(of: .value) { (dataSnapshot) in
+            guard let data = dataSnapshot.value as? [String: Any] else {
+                completion([])
+                return
+            }
+            
+            var announces: [AnnounceJob] = []
+            for announceItem in data {
+                if let item = announceItem.value as? [String: Any] {
+                    if let occupationArea = item[FirebaseUser.OccupationArea] as? String, let startDate = item[FirebaseUser.StartDate] as? Double, let finishDate = item[FirebaseUser.FinishDate] as? Double, let description = item[FirebaseUser.DescriptionOfProfession] as? String {
+                        let announce = AnnounceJob(id: announceItem.key, occupationArea: occupationArea, startTimestamp: startDate, finishTimestamp: finishDate, descriptionOfAnnounce: description)
+                        announces.append(announce)
+                    }
+                }
+            }
+            completion(announces)
+        }
+    }
 }

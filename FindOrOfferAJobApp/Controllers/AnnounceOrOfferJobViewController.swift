@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol ClearFieldsDelegate: class {
+    func clearFields()
+}
+
 class AnnounceOrOfferJobViewController: UIViewController {
     
     // MARK: - Constants
@@ -43,7 +47,7 @@ class AnnounceOrOfferJobViewController: UIViewController {
     // MARK: - Variables
     var professionSelected: String = ""
     var textViewDescription: UITextView = UITextView()
-    var saveButton: UIButton =  UIButton()
+    var nextButton: UIButton =  UIButton()
     var descriptionAnnounce: String = ""
     
     // MARK: - LifeCycle
@@ -64,8 +68,6 @@ class AnnounceOrOfferJobViewController: UIViewController {
             navigationController?.navigationBar.topItem?.title = String.localize("announce_a_job_nav_bar")
             view.bringSubviewToFront(tableView)
         }
-        
-//        tableView.reloadData()
     }
     
     // MARK: - Private Methods
@@ -80,30 +82,25 @@ class AnnounceOrOfferJobViewController: UIViewController {
     
     private func enableSaveButton(_ value: Bool) {
         if value {
-            saveButton.isEnabled = true
-            saveButton.backgroundColor = UIColor.systemBlue
+            nextButton.isEnabled = true
+            nextButton.backgroundColor = UIColor.systemBlue
         } else {
-            saveButton.isEnabled = false
-            saveButton.backgroundColor = UIColor.lightGray
+            nextButton.isEnabled = false
+            nextButton.backgroundColor = UIColor.lightGray
         }
     }
     
     @objc
-    private func saveButtonDidTap() {
+    private func nextButtonDidTap() {
+        self.textViewDescription.resignFirstResponder()
         
-        let userProfileViewModel = UserProfileViewModel()
         let announceJob = AnnounceJob(id: "", occupationArea: professionSelected, descriptionOfAnnounce: descriptionAnnounce)
-        
-        FirebaseAuthManager().addAnnounceJob(userId: userProfileViewModel.userId, announceJob: announceJob) { (success) in
-            if let success = success, success {
-                let alert = UIAlertController(title: "Sucesso", message: "Anúncio publicado com sucesso!", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
-                    self.professionSelected = ""
-                    self.descriptionAnnounce = ""
-                    self.tableView.reloadData()
-                }))
-                self.present(alert, animated: true, completion: nil)
-            }
+        let storyBoard = UIStoryboard(name: "Home", bundle: nil)
+        if let detailViewController = storyBoard.instantiateViewController(withIdentifier: "AnnounceDetailViewController") as? AnnounceDetailViewController {
+            detailViewController.announceJob = announceJob
+            detailViewController.cameFromCreateAnnounce = true
+            detailViewController.delegate = self
+            navigationController?.pushViewController(detailViewController, animated: true)
         }
     }
     
@@ -228,14 +225,14 @@ extension AnnounceOrOfferJobViewController: UITableViewDelegate, UITableViewData
                 
                 return cell
             case 2:
-                saveButton = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: 10), size: CGSize(width: tableView.frame.width, height: 50)))
+                nextButton = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: 10), size: CGSize(width: tableView.frame.width, height: 50)))
                 
                 enableSaveButton(false)
                 
-                saveButton.setTitle("Anunciar", for: .normal)
-                saveButton.addTarget(self, action: #selector(saveButtonDidTap), for: .touchUpInside)
+                nextButton.setTitle("Avançar", for: .normal)
+                nextButton.addTarget(self, action: #selector(nextButtonDidTap), for: .touchUpInside)
                 
-                cell.addSubview(saveButton)
+                cell.addSubview(nextButton)
                 
                 return cell
             default:
@@ -287,5 +284,13 @@ extension AnnounceOrOfferJobViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         descriptionAnnounce = textView.text
+    }
+}
+
+extension AnnounceOrOfferJobViewController: ClearFieldsDelegate {
+    func clearFields() {
+        self.professionSelected = ""
+        self.descriptionAnnounce = ""
+        tableView.reloadData()
     }
 }

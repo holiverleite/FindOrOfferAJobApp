@@ -22,6 +22,10 @@
 		62B84CBD2479D27500028801 /* MyAnnouncesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B84CBC2479D27500028801 /* MyAnnouncesListViewController.swift */; };
 		62BF847724673C49003AB826 /* AnnounceOrOfferJob.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62BF847624673C49003AB826 /* AnnounceOrOfferJob.storyboard */; };
 		62BF847924673C83003AB826 /* AnnounceOrOfferJobViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BF847824673C83003AB826 /* AnnounceOrOfferJobViewController.swift */; };
+		62D49047247ACBB0004A5AA8 /* AnnounceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D49046247ACBB0004A5AA8 /* AnnounceDetailViewController.swift */; };
+		62D4904B247B1783004A5AA8 /* AnnounceDetailResumeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D49049247B1783004A5AA8 /* AnnounceDetailResumeTableViewCell.swift */; };
+		62D4904C247B1783004A5AA8 /* AnnounceDetailResumeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62D4904A247B1783004A5AA8 /* AnnounceDetailResumeTableViewCell.xib */; };
+		62D4904E247C41FA004A5AA8 /* MyProccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D4904D247C41FA004A5AA8 /* MyProccessViewController.swift */; };
 		62D7F6322441DD3E002C41DD /* EditPersonalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D7F6312441DD3E002C41DD /* EditPersonalDataViewController.swift */; };
 		62DE34E6244CA46F0036F8CB /* ProfessionalCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DE34E4244CA46F0036F8CB /* ProfessionalCardTableViewCell.swift */; };
 		62DE34E7244CA46F0036F8CB /* ProfessionalCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62DE34E5244CA46F0036F8CB /* ProfessionalCardTableViewCell.xib */; };
@@ -79,6 +83,10 @@
 		62B84CBC2479D27500028801 /* MyAnnouncesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAnnouncesListViewController.swift; sourceTree = "<group>"; };
 		62BF847624673C49003AB826 /* AnnounceOrOfferJob.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AnnounceOrOfferJob.storyboard; sourceTree = "<group>"; };
 		62BF847824673C83003AB826 /* AnnounceOrOfferJobViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceOrOfferJobViewController.swift; sourceTree = "<group>"; };
+		62D49046247ACBB0004A5AA8 /* AnnounceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceDetailViewController.swift; sourceTree = "<group>"; };
+		62D49049247B1783004A5AA8 /* AnnounceDetailResumeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceDetailResumeTableViewCell.swift; sourceTree = "<group>"; };
+		62D4904A247B1783004A5AA8 /* AnnounceDetailResumeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnnounceDetailResumeTableViewCell.xib; sourceTree = "<group>"; };
+		62D4904D247C41FA004A5AA8 /* MyProccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProccessViewController.swift; sourceTree = "<group>"; };
 		62D7F6312441DD3E002C41DD /* EditPersonalDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditPersonalDataViewController.swift; sourceTree = "<group>"; };
 		62DE34E4244CA46F0036F8CB /* ProfessionalCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalCardTableViewCell.swift; sourceTree = "<group>"; };
 		62DE34E5244CA46F0036F8CB /* ProfessionalCardTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfessionalCardTableViewCell.xib; sourceTree = "<group>"; };
@@ -183,9 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				94601EF223FD7DF000FAF484 /* ProfileViewController.swift */,
-				717BF25D2433C0E600BB21F4 /* EditProfessionalDataViewController.swift */,
 				62D7F6312441DD3E002C41DD /* EditPersonalDataViewController.swift */,
-				71A334542438CD8100FC2EA0 /* ProfessionOptionsViewController.swift */,
 				71A334522438C02900FC2EA0 /* CreateProfessionalCardViewController.swift */,
 				9455320223FEE2C600016D30 /* SettingsViewController.swift */,
 				9455320423FEF58A00016D30 /* ChangePasswordViewController.swift */,
@@ -210,8 +216,21 @@
 			children = (
 				9461BFE623F4711600EA2CA9 /* HomeViewController.swift */,
 				62B84CBC2479D27500028801 /* MyAnnouncesListViewController.swift */,
+				62D49046247ACBB0004A5AA8 /* AnnounceDetailViewController.swift */,
+				717BF25D2433C0E600BB21F4 /* EditProfessionalDataViewController.swift */,
+				71A334542438CD8100FC2EA0 /* ProfessionOptionsViewController.swift */,
+				62D4904D247C41FA004A5AA8 /* MyProccessViewController.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		62D49048247B1494004A5AA8 /* AnnounceDetail */ = {
+			isa = PBXGroup;
+			children = (
+				62D49049247B1783004A5AA8 /* AnnounceDetailResumeTableViewCell.swift */,
+				62D4904A247B1783004A5AA8 /* AnnounceDetailResumeTableViewCell.xib */,
+			);
+			path = AnnounceDetail;
 			sourceTree = "<group>";
 		};
 		62DE34E3244CA4280036F8CB /* ProfessionalCardViewCell */ = {
@@ -279,6 +298,7 @@
 		945531FB23FEC56000016D30 /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				62D49048247B1494004A5AA8 /* AnnounceDetail */,
 				62DE34E3244CA4280036F8CB /* ProfessionalCardViewCell */,
 				711F2B272400617200B66AA5 /* InputTableViewCell */,
 				711F2B172400186900B66AA5 /* UserResumeTableViewCell */,
@@ -440,6 +460,7 @@
 				628CB81C23DCDA4800B62278 /* LaunchScreen.storyboard in Resources */,
 				62DE34E7244CA46F0036F8CB /* ProfessionalCardTableViewCell.xib in Resources */,
 				945531FF23FEC9A400016D30 /* Home.storyboard in Resources */,
+				62D4904C247B1783004A5AA8 /* AnnounceDetailResumeTableViewCell.xib in Resources */,
 				940CDC5F23F5734100683B1A /* PostLaunchScreen.storyboard in Resources */,
 				62BF847724673C49003AB826 /* AnnounceOrOfferJob.storyboard in Resources */,
 				945578F723F41CFA005B1B92 /* GoogleService-Info.plist in Resources */,
@@ -523,6 +544,7 @@
 				6209AF152441F6210070E5D1 /* ProfessionalCard.swift in Sources */,
 				62777E45246767BF00FD35C2 /* RecordsViewController.swift in Sources */,
 				9455790D23F43F7A005B1B92 /* StringExtensions.swift in Sources */,
+				62D4904B247B1783004A5AA8 /* AnnounceDetailResumeTableViewCell.swift in Sources */,
 				9455790523F43510005B1B92 /* LoginViewController.swift in Sources */,
 				62B84CB52479A7D200028801 /* FirebaseAuthManagerUser.swift in Sources */,
 				62B84CB92479AE9900028801 /* FirebaseAuthManagerAnnounces.swift in Sources */,
@@ -530,6 +552,7 @@
 				62DE34E6244CA46F0036F8CB /* ProfessionalCardTableViewCell.swift in Sources */,
 				9443361A23FB072D004378BD /* Protocols.swift in Sources */,
 				9455790323F431EF005B1B92 /* AccessViewController.swift in Sources */,
+				62D49047247ACBB0004A5AA8 /* AnnounceDetailViewController.swift in Sources */,
 				9455791023F4634D005B1B92 /* PreferencesManager.swift in Sources */,
 				9455320523FEF58A00016D30 /* ChangePasswordViewController.swift in Sources */,
 				9455791323F467BF005B1B92 /* UserProfile.swift in Sources */,
@@ -538,6 +561,7 @@
 				94601EF623FD8FE800FAF484 /* ImageConstants.swift in Sources */,
 				9461BFE723F4711600EA2CA9 /* HomeViewController.swift in Sources */,
 				62D7F6322441DD3E002C41DD /* EditPersonalDataViewController.swift in Sources */,
+				62D4904E247C41FA004A5AA8 /* MyProccessViewController.swift in Sources */,
 				9488CBA123FC614100D8B883 /* FirebaseConstants.swift in Sources */,
 				94601EFA23FDB20900FAF484 /* SettingsTableViewCell.swift in Sources */,
 				62B84CBD2479D27500028801 /* MyAnnouncesListViewController.swift in Sources */,
