@@ -15,12 +15,22 @@ class AnnounceJob: NSObject {
     var descriptionOfAnnounce: String = ""
     var startTimestamp: Double = 0.0
     var finishTimestamp: Double = 0.0
+    var isCanceled: Bool = false
+    var candidatesIds: [String] = []
     
-    init(id: String, occupationArea: String, startTimestamp: Double = 0.0, finishTimestamp: Double = 0.0, descriptionOfAnnounce: String) {
+    init(id: String,
+         occupationArea: String,
+         startTimestamp: Double = 0.0,
+         finishTimestamp: Double = 0.0,
+         isCanceled: Bool = false,
+         candidatesIds: [String] = [],
+         descriptionOfAnnounce: String) {
         self.id = id
         self.occupationArea = occupationArea
         self.descriptionOfAnnounce = descriptionOfAnnounce
         self.startTimestamp = startTimestamp
+        self.isCanceled = isCanceled
         self.finishTimestamp = finishTimestamp
+        self.candidatesIds = candidatesIds
     }
 }

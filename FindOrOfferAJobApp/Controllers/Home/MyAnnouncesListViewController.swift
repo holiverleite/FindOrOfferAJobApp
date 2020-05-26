@@ -10,12 +10,17 @@ import UIKit
 
 class MyAnnouncesListViewController: UIViewController {
 
+    @IBOutlet weak var emptyView: UIView!
+    
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             self.tableView.delegate = self
             self.tableView.dataSource = self
             
-            self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "simpleCell")
+            self.tableView.register(AnnouncesListCellTableViewCell.self, forCellReuseIdentifier: String(describing: AnnouncesListCellTableViewCell.self))
+            self.tableView.register(UINib(nibName: String(describing: AnnouncesListCellTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: AnnouncesListCellTableViewCell.self))
+            
+            self.tableView.separatorStyle = .none
         }
     }
     
@@ -26,16 +31,6 @@ class MyAnnouncesListViewController: UIViewController {
         super.viewDidLoad()
 
         self.navigationItem.setLeftBarButton(UIBarButtonItem(image: ImageConstants.Back, landscapeImagePhone: ImageConstants.Back, style: .plain, target: self, action: #selector(didTapBackButton)), animated: true)
-        
-        let user = UserProfileViewModel()
-        FirebaseAuthManager().retrieveAnnouncesJob(userId: user.userId) { (announcesJob) in
-            if announcesJob.count > 0 {
-                self.announces.removeAll()
-                self.announces.append(contentsOf: announcesJob)
-                self.tableView.isHidden = false
-                self.tableView.reloadData()
-            }
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -43,7 +38,18 @@ class MyAnnouncesListViewController: UIViewController {
         
         self.navigationController?.navigationBar.topItem?.title = String.localize("my_announces_nav_bar")
         
-        
+        let user = UserProfileViewModel()
+        FirebaseAuthManager().retrieveAnnouncesJob(userId: user.userId) { (announcesJob) in
+            if announcesJob.count > 0 {
+                self.announces.removeAll()
+                self.announces.append(contentsOf: announcesJob)
+                self.tableView.isHidden = false
+                self.view.bringSubviewToFront(self.tableView)
+                self.tableView.reloadData()
+            } else {
+                self.view.bringSubviewToFront(self.emptyView)
+            }
+        }
     }
     
     // MARK: - Private
@@ -59,11 +65,23 @@ extension MyAnnouncesListViewController: UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "simpleCell") else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: AnnouncesListCellTableViewCell.self), for: indexPath) as? AnnouncesListCellTableViewCell else {
             return UITableViewCell()
         }
         
-        cell.textLabel?.text = announces[indexPath.row].occupationArea
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.locale = NSLocale.current
+        dateFormatter.dateFormat = "dd/MM/yyy 'às' HH:mm"
+        
+        let announce = announces[indexPath.row]
+        let startDate = Date(timeIntervalSince1970: announce.startTimestamp)
+        let formatterdDate = dateFormatter.string(from: startDate)
+
+        cell.announceArea.text = announce.occupationArea
+        cell.startDate.text = formatterdDate
+        cell.totalOfCandidates.text = "\(announce.candidatesIds.count) candidatos"
+        cell.selectionStyle = .none
         
         return cell
     }

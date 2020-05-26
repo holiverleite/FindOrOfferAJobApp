@@ -26,9 +26,7 @@ class AnnounceDetailViewController: UIViewController {
     
     @IBOutlet weak var buttonSaveAnnounce: UIButton! {
         didSet {
-            self.buttonSaveAnnounce.setTitle("Anunciar", for: .normal)
             self.buttonSaveAnnounce.backgroundColor = UIColor.systemBlue
-            self.buttonSaveAnnounce.addTarget(self, action: #selector(didTapSaveButton), for: .touchUpInside)
         }
     }
     
@@ -37,7 +35,7 @@ class AnnounceDetailViewController: UIViewController {
             if cameFromCreateAnnounce {
                 self.buttonHeightConstraint.constant = 55
             } else {
-                self.buttonHeightConstraint.constant = 0
+                self.buttonHeightConstraint.constant = 55
             }
         }
     }
@@ -60,9 +58,11 @@ class AnnounceDetailViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             
-            self.buttonSaveAnnounce.isHidden = false
+            self.buttonSaveAnnounce.setTitle("Anunciar", for: .normal)
+            self.buttonSaveAnnounce.addTarget(self, action: #selector(didTapSaveButton), for: .touchUpInside)
         } else {
-            self.buttonSaveAnnounce.isHidden = true
+            self.buttonSaveAnnounce.setTitle("Cancelar Anúncio", for: .normal)
+            self.buttonSaveAnnounce.addTarget(self, action: #selector(didTapCancelButton), for: .touchUpInside)
         }
     }
     
@@ -88,6 +88,35 @@ class AnnounceDetailViewController: UIViewController {
             }
         }
     }
+    
+    @objc
+    private func didTapCancelButton() {
+        let alert = UIAlertController(title: "Atenção", message: "Você tem certeza de que deseja cancelar este anúncio? Essa operação não poderá ser desfeita e você perderá o contatos dos candidatos.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancelar Anúncio", style: .destructive) { (action) in
+            self.cancelAnnounce()
+        })
+        alert.addAction(UIAlertAction(title: "Manter Anúncio", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func cancelAnnounce() {
+        let userProfileViewModel = UserProfileViewModel()
+        
+        if let announceJob = self.announceJob {
+            let finishedTimestamp = Date().timeIntervalSince1970
+            announceJob.finishTimestamp = finishedTimestamp
+            FirebaseAuthManager().cancelAnnounceJob(userId: userProfileViewModel.userId, announceJob: announceJob) { (success) in
+                if let success = success, success {
+                    let alert = UIAlertController(title: "Sucesso", message: "Anúncio cancelado com sucesso!", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
+                        self.navigationController?.popViewController(animated: true)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+        }
+    }
+    
 }
 
 extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSource {

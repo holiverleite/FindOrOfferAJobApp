@@ -11,6 +11,8 @@
 		6209AF152441F6210070E5D1 /* ProfessionalCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6209AF142441F6210070E5D1 /* ProfessionalCard.swift */; };
 		62777E4324675DEA00FD35C2 /* Records.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62777E4224675DEA00FD35C2 /* Records.storyboard */; };
 		62777E45246767BF00FD35C2 /* RecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62777E44246767BF00FD35C2 /* RecordsViewController.swift */; };
+		627A96E4247D4FB1005EB273 /* AnnouncesListCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627A96E2247D4FB1005EB273 /* AnnouncesListCellTableViewCell.swift */; };
+		627A96E5247D4FB1005EB273 /* AnnouncesListCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 627A96E3247D4FB1005EB273 /* AnnouncesListCellTableViewCell.xib */; };
 		628CB81023DCDA4500B62278 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628CB80F23DCDA4500B62278 /* AppDelegate.swift */; };
 		628CB81723DCDA4500B62278 /* AccessScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 628CB81523DCDA4500B62278 /* AccessScreen.storyboard */; };
 		628CB81923DCDA4800B62278 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 628CB81823DCDA4800B62278 /* Assets.xcassets */; };
@@ -70,6 +72,8 @@
 		6209AF142441F6210070E5D1 /* ProfessionalCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalCard.swift; sourceTree = "<group>"; };
 		62777E4224675DEA00FD35C2 /* Records.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Records.storyboard; sourceTree = "<group>"; };
 		62777E44246767BF00FD35C2 /* RecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsViewController.swift; sourceTree = "<group>"; };
+		627A96E2247D4FB1005EB273 /* AnnouncesListCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncesListCellTableViewCell.swift; sourceTree = "<group>"; };
+		627A96E3247D4FB1005EB273 /* AnnouncesListCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnnouncesListCellTableViewCell.xib; sourceTree = "<group>"; };
 		628CB80C23DCDA4500B62278 /* FindOrOfferAJobApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindOrOfferAJobApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		628CB80F23DCDA4500B62278 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		628CB81623DCDA4500B62278 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AccessScreen.storyboard; sourceTree = "<group>"; };
@@ -144,6 +148,15 @@
 				27C0346F02195F24BC5A7402 /* Pods_FindOrOfferAJobApp.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		627A96E1247D4F55005EB273 /* AnnouncesListCell */ = {
+			isa = PBXGroup;
+			children = (
+				627A96E2247D4FB1005EB273 /* AnnouncesListCellTableViewCell.swift */,
+				627A96E3247D4FB1005EB273 /* AnnouncesListCellTableViewCell.xib */,
+			);
+			path = AnnouncesListCell;
 			sourceTree = "<group>";
 		};
 		628CB80323DCDA4500B62278 = {
@@ -298,6 +311,7 @@
 		945531FB23FEC56000016D30 /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				627A96E1247D4F55005EB273 /* AnnouncesListCell */,
 				62D49048247B1494004A5AA8 /* AnnounceDetail */,
 				62DE34E3244CA4280036F8CB /* ProfessionalCardViewCell */,
 				711F2B272400617200B66AA5 /* InputTableViewCell */,
@@ -471,6 +485,7 @@
 				945531FD23FEC70A00016D30 /* Profile.storyboard in Resources */,
 				94601EFB23FDB20900FAF484 /* SettingsTableViewCell.xib in Resources */,
 				711F2B2B240061DC00B66AA5 /* InputTableViewCell.xib in Resources */,
+				627A96E5247D4FB1005EB273 /* AnnouncesListCellTableViewCell.xib in Resources */,
 				9461BFE523F4710100EA2CA9 /* MainFlow.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -572,6 +587,7 @@
 				628CB81023DCDA4500B62278 /* AppDelegate.swift in Sources */,
 				62B84CBB2479B08900028801 /* AnnounceJob.swift in Sources */,
 				62B84CB72479A83900028801 /* FirebaseAuthManagerProfessional.swift in Sources */,
+				627A96E4247D4FB1005EB273 /* AnnouncesListCellTableViewCell.swift in Sources */,
 				717BF25E2433C0E600BB21F4 /* EditProfessionalDataViewController.swift in Sources */,
 				945531FA23FEB0B200016D30 /* UserProfileViewModel.swift in Sources */,
 				62BF847924673C83003AB826 /* AnnounceOrOfferJobViewController.swift in Sources */,
@@ -724,14 +740,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2G29PVWCKX;
+				DEVELOPMENT_TEAM = 8F4T8TWV96;
 				INFOPLIST_FILE = FindOrOfferAJobApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = haroldoleite.FindOrOfferAJobApp;
+				PRODUCT_BUNDLE_IDENTIFIER = haroldoleite.FindOrOfferAJob;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -744,14 +760,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2G29PVWCKX;
+				DEVELOPMENT_TEAM = 8F4T8TWV96;
 				INFOPLIST_FILE = FindOrOfferAJobApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = haroldoleite.FindOrOfferAJobApp;
+				PRODUCT_BUNDLE_IDENTIFIER = haroldoleite.FindOrOfferAJob;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

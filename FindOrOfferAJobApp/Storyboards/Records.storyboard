@@ -16,6 +16,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="n4v-KP-gWJ">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YMJ-an-tIe">
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <subviews>
@@ -37,8 +41,12 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="n4v-KP-gWJ" firstAttribute="top" secondItem="KaT-zo-6PJ" secondAttribute="top" id="2vc-Xm-ZH4"/>
                             <constraint firstItem="KaT-zo-6PJ" firstAttribute="bottom" secondItem="YMJ-an-tIe" secondAttribute="bottom" id="EFO-Fm-1cR"/>
                             <constraint firstItem="YMJ-an-tIe" firstAttribute="top" secondItem="KaT-zo-6PJ" secondAttribute="top" id="GeR-dm-zmD"/>
+                            <constraint firstItem="n4v-KP-gWJ" firstAttribute="leading" secondItem="KaT-zo-6PJ" secondAttribute="leading" id="Jyx-si-s6M"/>
+                            <constraint firstItem="KaT-zo-6PJ" firstAttribute="trailing" secondItem="n4v-KP-gWJ" secondAttribute="trailing" id="Pxo-zd-M6M"/>
+                            <constraint firstItem="KaT-zo-6PJ" firstAttribute="bottom" secondItem="n4v-KP-gWJ" secondAttribute="bottom" id="Xic-kA-7J3"/>
                             <constraint firstItem="YMJ-an-tIe" firstAttribute="leading" secondItem="KaT-zo-6PJ" secondAttribute="leading" id="dow-xq-OXU"/>
                             <constraint firstItem="KaT-zo-6PJ" firstAttribute="trailing" secondItem="YMJ-an-tIe" secondAttribute="trailing" id="puw-RJ-3b7"/>
                         </constraints>
@@ -46,6 +54,10 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="records" id="biQ-au-sFZ"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="emptyView" destination="YMJ-an-tIe" id="iC2-EB-45v"/>
+                        <outlet property="tableView" destination="n4v-KP-gWJ" id="Tlh-12-XYh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OsC-ja-pMJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

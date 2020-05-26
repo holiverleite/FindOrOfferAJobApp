@@ -33,5 +33,4 @@ class ProfessionalCardTableViewCell: UITableViewCell {
     func setValues(professionaltitle: String, exp: String, professionDescription: String) {
         self.professionalTitleLabel.text = professionaltitle
     }
-    
 }

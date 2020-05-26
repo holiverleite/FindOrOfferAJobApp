@@ -10,6 +10,7 @@ import UIKit
 
 class EditProfessionalDataViewController: UIViewController {
     
+    @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var tableview: UITableView! {
         didSet {
             self.tableview.delegate = self
@@ -37,18 +38,24 @@ class EditProfessionalDataViewController: UIViewController {
         
         self.tableview.isHidden = true
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         FirebaseAuthManager().retrieveProfessionalCards(userId: self.userProfileViewModel.userId) { (professionalCards) in
             if professionalCards.count > 0 {
                 self.professionalCards.removeAll()
                 self.professionalCards.append(contentsOf: professionalCards)
                 self.tableview.isHidden = false
+                self.view.bringSubviewToFront(self.tableview)
                 self.tableview.reloadData()
+            } else {
+                self.view.bringSubviewToFront(self.emptyView)
             }
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        
+        self.tableview.reloadData()
     }
     
     // MARK: - Methods
