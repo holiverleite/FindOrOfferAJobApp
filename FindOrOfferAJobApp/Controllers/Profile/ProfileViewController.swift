@@ -37,12 +37,21 @@ class ProfileViewController: UIViewController {
     
     // MARK: - Variables
     var userProfileViewModel = UserProfileViewModel()
+    var userProfile: UserProfile = UserProfile()
 
     // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.navigationController?.navigationBar.topItem?.title = String.localize("profile_nav_bar")
+        
+        self.userProfileViewModel = UserProfileViewModel()
+    }
+    
+    private func loadUserProfileValues() {
+        let userViewModel = self.userProfileViewModel
+        
+        self.userProfile = UserProfile(userId: userViewModel.userId, firstName: userViewModel.firstName, lastName: userViewModel.lastName, email: userViewModel.email, cellphone: userViewModel.cellphone, phone: userViewModel.phone, birthDate: userViewModel.birthDate, accountType: userViewModel.accountType, userImageURL: userViewModel.userImageURL, userImageData: userViewModel.userImageData, professionalCards: [])
     }
     
     // MARK: - Methods

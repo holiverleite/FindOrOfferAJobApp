@@ -44,6 +44,7 @@ class AnnounceDetailViewController: UIViewController {
     
     var announceJob: AnnounceJob?
     var cameFromCreateAnnounce: Bool = false
+    var cameFromRecordsAnnounce: Bool = false
     var delegate: ClearFieldsDelegate?
     
     override func viewDidLoad() {
@@ -60,6 +61,9 @@ class AnnounceDetailViewController: UIViewController {
             
             self.buttonSaveAnnounce.setTitle("Anunciar", for: .normal)
             self.buttonSaveAnnounce.addTarget(self, action: #selector(didTapSaveButton), for: .touchUpInside)
+        } else if cameFromRecordsAnnounce {
+            self.buttonSaveAnnounce.setTitle("Reativar Anúncio", for: .normal)
+            self.buttonSaveAnnounce.addTarget(self, action: #selector(didTapReactivateButton), for: .touchUpInside)
         } else {
             self.buttonSaveAnnounce.setTitle("Cancelar Anúncio", for: .normal)
             self.buttonSaveAnnounce.addTarget(self, action: #selector(didTapCancelButton), for: .touchUpInside)
@@ -99,6 +103,37 @@ class AnnounceDetailViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    @objc
+    private func didTapReactivateButton() {
+        let alert = UIAlertController(title: "Atenção", message: "Você realmente deseja reativar este anúncio?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Reativar Anúncio", style: .default) { (action) in
+            self.reactivateAnnounce()
+        })
+        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func reactivateAnnounce() {
+        let userProfileViewModel = UserProfileViewModel()
+        if let announceJob = self.announceJob {
+            
+            let startDate = Date()
+            let finishDate = Calendar.current.date(byAdding: .day, value: 3, to: startDate)!
+            announceJob.startTimestamp = startDate.timeIntervalSince1970
+            announceJob.finishTimestamp = finishDate.timeIntervalSince1970
+        
+            FirebaseAuthManager().reactivateAnnounceJob(userId: userProfileViewModel.userId, announceJob: announceJob) { (success) in
+                if let success = success, success {
+                    let alert = UIAlertController(title: "Sucesso", message: "Anúncio reativado com sucesso!", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
+                        self.navigationController?.popViewController(animated: true)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+        }
+    }
+    
     private func cancelAnnounce() {
         let userProfileViewModel = UserProfileViewModel()
         
@@ -133,7 +168,10 @@ extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSour
         case 0:
             return "Resumo do anúncio"
         case 1:
-            return "Candidatos à vaga"
+            if !cameFromRecordsAnnounce {
+                return "Candidatos à vaga"
+            }
+            return ""
         default:
             return ""
         }
@@ -144,7 +182,10 @@ extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSour
         case 0:
             return 1
         case 1:
-            return 1
+            if !cameFromRecordsAnnounce {
+                return 1
+            }
+            return 0
         default:
             return 0
         }
@@ -159,11 +200,28 @@ extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSour
             
             cell.selectionStyle = .none
             
-            let startDate = Date()
-            let finishDate = Calendar.current.date(byAdding: .day, value: 3, to: startDate)!
-            
-            announceJob?.startTimestamp = startDate.timeIntervalSince1970
-            announceJob?.finishTimestamp = finishDate.timeIntervalSince1970
+            var startDate: Date = Date()
+            var finishDate: Date = Date()
+            if !cameFromCreateAnnounce {
+                if let announceJob = announceJob {
+                    startDate = Date(timeIntervalSince1970: announceJob.startTimestamp)
+                    finishDate = Date(timeIntervalSince1970: announceJob.finishTimestamp)
+                    
+                    if announceJob.isCanceled {
+                        cell.finalizeOrCanceledLabel.text = "Data do cancelamento:"
+                        cell.finalizeOrCanceledLabel.textColor = .red
+                        cell.finalAnnounceDate.textColor = .red
+                    } else {
+                        cell.finalAnnounceDate.text = "Finaliza em:"
+                    }
+                }
+            } else {
+                startDate = Date()
+                finishDate = Calendar.current.date(byAdding: .day, value: 3, to: startDate)!
+                
+                announceJob?.startTimestamp = startDate.timeIntervalSince1970
+                announceJob?.finishTimestamp = finishDate.timeIntervalSince1970
+            }
             
             let dateFormatter = DateFormatter()
             dateFormatter.timeZone = TimeZone.current

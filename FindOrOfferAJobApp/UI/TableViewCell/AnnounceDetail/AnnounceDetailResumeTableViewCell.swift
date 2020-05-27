@@ -14,6 +14,7 @@ class AnnounceDetailResumeTableViewCell: UITableViewCell {
     @IBOutlet weak var startAnnounceDate: UILabel!
     @IBOutlet weak var finalAnnounceDate: UILabel!
     @IBOutlet weak var announceDescription: UILabel!
+    @IBOutlet weak var finalizeOrCanceledLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

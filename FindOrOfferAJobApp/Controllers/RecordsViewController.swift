@@ -87,4 +87,15 @@ extension RecordsViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let announceJob = self.canceledAnnounces[indexPath.row]
+        
+        let storyBoard = UIStoryboard(name: "Home", bundle: nil)
+        if let detailViewController = storyBoard.instantiateViewController(withIdentifier: "AnnounceDetailViewController") as? AnnounceDetailViewController {
+            detailViewController.announceJob = announceJob
+            detailViewController.cameFromRecordsAnnounce = true
+            navigationController?.pushViewController(detailViewController, animated: true)
+        }
+    }
 }

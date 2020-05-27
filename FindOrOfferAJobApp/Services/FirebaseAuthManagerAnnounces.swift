@@ -53,6 +53,27 @@ extension FirebaseAuthManager {
         }
     }
     
+    
+    func reactivateAnnounceJob(userId: String, announceJob: AnnounceJob, completion: @escaping (_ success: Bool?) -> Void) {
+        let ref = self.rootUsersReference.child(userId).child(FirebaseUser.AnnounceJob).child(announceJob.id)
+        let announceDict: [String: Any] = [
+            FirebaseUser.OccupationArea: announceJob.occupationArea,
+            FirebaseUser.DescriptionOfProfession: announceJob.descriptionOfAnnounce,
+            FirebaseUser.StartDate: announceJob.startTimestamp,
+            FirebaseUser.FinishDate: announceJob.finishTimestamp,
+            FirebaseUser.IsCanceledAnnounce: false,
+            FirebaseUser.Candidates: [:]
+        ]
+        
+        ref.updateChildValues(announceDict) { (error, databaseReference) in
+            if error != nil {
+                completion(false)
+            } else {
+                completion(true)
+            }
+        }
+    }
+    
     func retrieveAnnouncesJob(userId: String, onlyCancelledsAndFinisheds: Bool = false, completion: @escaping (_ professionalCards: [AnnounceJob]) -> Void) {
         let ref = self.rootUsersReference.child(userId).child(FirebaseUser.AnnounceJob)
         ref.observeSingleEvent(of: .value) { (dataSnapshot) in

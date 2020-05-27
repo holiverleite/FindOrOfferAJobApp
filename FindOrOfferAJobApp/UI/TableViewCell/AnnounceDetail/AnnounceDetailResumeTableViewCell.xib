@@ -41,7 +41,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00/00/0000 - hh:mm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="enR-69-qkB" userLabel="finishDate">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00/00/0000 - hh:mm" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="enR-69-qkB" userLabel="finishDate">
                         <rect key="frame" x="318.5" y="98.5" width="150.5" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="16"/>
                         <nil key="textColor"/>
@@ -95,6 +95,7 @@
             <connections>
                 <outlet property="announceDescription" destination="5m6-9i-nr8" id="w5s-Ii-V0s"/>
                 <outlet property="finalAnnounceDate" destination="enR-69-qkB" id="TsQ-kG-np9"/>
+                <outlet property="finalizeOrCanceledLabel" destination="BkN-kF-i2w" id="0jc-ta-Tfh"/>
                 <outlet property="professionalArea" destination="KXJ-7c-JLZ" id="v9n-1K-y4A"/>
                 <outlet property="startAnnounceDate" destination="Ofh-2w-qTQ" id="RIf-ba-FOe"/>
             </connections>
