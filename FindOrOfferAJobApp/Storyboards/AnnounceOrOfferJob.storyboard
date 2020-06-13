@@ -8,30 +8,23 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Announce Or Offer Job View Controller-->
+        <!--Announce Of Job View Controller-->
         <scene sceneID="Vse-FT-8V2">
             <objects>
-                <viewController id="YOi-K9-JOc" customClass="AnnounceOrOfferJobViewController" customModule="FindOrOfferAJobApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="YOi-K9-JOc" customClass="AnnounceOfJobViewController" customModule="FindOrOfferAJobApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jCu-pj-4x5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Npj-MZ-ZWB">
-                                <rect key="frame" x="15" y="59" width="384" height="32"/>
-                                <segments>
-                                    <segment title="Serviços"/>
-                                    <segment title="Anúnciar"/>
-                                </segments>
-                            </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SXT-m1-RoC">
-                                <rect key="frame" x="20" y="105" width="374" height="688"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fd5-Hr-OZA">
-                                <rect key="frame" x="20" y="105" width="374" height="688"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nenhuma vaga foi encontrada na sua região." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z4X-IZ-P54">
-                                        <rect key="frame" x="30" y="323.5" width="314" height="41"/>
+                                        <rect key="frame" x="30" y="374.5" width="354" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                         <nil key="highlightedColor"/>
@@ -48,16 +41,13 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Npj-MZ-ZWB" firstAttribute="top" secondItem="oLz-LZ-yrR" secondAttribute="top" constant="15" id="5Kf-nZ-F45"/>
-                            <constraint firstItem="SXT-m1-RoC" firstAttribute="leading" secondItem="oLz-LZ-yrR" secondAttribute="leading" constant="20" id="5xV-Vb-tdo"/>
-                            <constraint firstItem="oLz-LZ-yrR" firstAttribute="trailing" secondItem="Npj-MZ-ZWB" secondAttribute="trailing" constant="15" id="LZd-xq-oJ9"/>
+                            <constraint firstItem="SXT-m1-RoC" firstAttribute="leading" secondItem="oLz-LZ-yrR" secondAttribute="leading" id="5xV-Vb-tdo"/>
                             <constraint firstItem="Fd5-Hr-OZA" firstAttribute="leading" secondItem="SXT-m1-RoC" secondAttribute="leading" id="NCD-PS-r1E"/>
-                            <constraint firstItem="oLz-LZ-yrR" firstAttribute="bottom" secondItem="SXT-m1-RoC" secondAttribute="bottom" constant="20" id="QF1-Qa-FR0"/>
-                            <constraint firstItem="Npj-MZ-ZWB" firstAttribute="leading" secondItem="oLz-LZ-yrR" secondAttribute="leading" constant="15" id="YsW-40-Uiy"/>
-                            <constraint firstItem="SXT-m1-RoC" firstAttribute="top" secondItem="Npj-MZ-ZWB" secondAttribute="bottom" constant="15" id="Z9b-M2-LOy"/>
+                            <constraint firstItem="oLz-LZ-yrR" firstAttribute="bottom" secondItem="SXT-m1-RoC" secondAttribute="bottom" id="QF1-Qa-FR0"/>
                             <constraint firstItem="Fd5-Hr-OZA" firstAttribute="top" secondItem="SXT-m1-RoC" secondAttribute="top" id="ZMO-Ag-9XN"/>
                             <constraint firstItem="Fd5-Hr-OZA" firstAttribute="trailing" secondItem="SXT-m1-RoC" secondAttribute="trailing" id="fBH-Dw-HL6"/>
-                            <constraint firstItem="oLz-LZ-yrR" firstAttribute="trailing" secondItem="SXT-m1-RoC" secondAttribute="trailing" constant="20" id="vik-2m-YFu"/>
+                            <constraint firstItem="SXT-m1-RoC" firstAttribute="top" secondItem="oLz-LZ-yrR" secondAttribute="top" id="lL6-d4-uEN"/>
+                            <constraint firstItem="oLz-LZ-yrR" firstAttribute="trailing" secondItem="SXT-m1-RoC" secondAttribute="trailing" id="vik-2m-YFu"/>
                             <constraint firstItem="Fd5-Hr-OZA" firstAttribute="bottom" secondItem="SXT-m1-RoC" secondAttribute="bottom" id="wJ9-Nv-9n6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="oLz-LZ-yrR"/>
@@ -66,7 +56,6 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="emptyView" destination="Fd5-Hr-OZA" id="DSN-jl-kaw"/>
-                        <outlet property="segmentedControl" destination="Npj-MZ-ZWB" id="E2Z-jm-zlD"/>
                         <outlet property="tableView" destination="SXT-m1-RoC" id="Vo4-aG-TbW"/>
                     </connections>
                 </viewController>

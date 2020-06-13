@@ -13,6 +13,8 @@
 		62777E45246767BF00FD35C2 /* RecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62777E44246767BF00FD35C2 /* RecordsViewController.swift */; };
 		627A96E4247D4FB1005EB273 /* AnnouncesListCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627A96E2247D4FB1005EB273 /* AnnouncesListCellTableViewCell.swift */; };
 		627A96E5247D4FB1005EB273 /* AnnouncesListCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 627A96E3247D4FB1005EB273 /* AnnouncesListCellTableViewCell.xib */; };
+		628527CE2482A9C20017A2B0 /* CreateAnnounceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628527CD2482A9C20017A2B0 /* CreateAnnounceViewController.swift */; };
+		628527D02482B86A0017A2B0 /* RecommendedJobsForYouViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628527CF2482B86A0017A2B0 /* RecommendedJobsForYouViewController.swift */; };
 		628CB81023DCDA4500B62278 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628CB80F23DCDA4500B62278 /* AppDelegate.swift */; };
 		628CB81723DCDA4500B62278 /* AccessScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 628CB81523DCDA4500B62278 /* AccessScreen.storyboard */; };
 		628CB81923DCDA4800B62278 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 628CB81823DCDA4800B62278 /* Assets.xcassets */; };
@@ -23,7 +25,7 @@
 		62B84CBB2479B08900028801 /* AnnounceJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B84CBA2479B08900028801 /* AnnounceJob.swift */; };
 		62B84CBD2479D27500028801 /* MyAnnouncesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B84CBC2479D27500028801 /* MyAnnouncesListViewController.swift */; };
 		62BF847724673C49003AB826 /* AnnounceOrOfferJob.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62BF847624673C49003AB826 /* AnnounceOrOfferJob.storyboard */; };
-		62BF847924673C83003AB826 /* AnnounceOrOfferJobViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BF847824673C83003AB826 /* AnnounceOrOfferJobViewController.swift */; };
+		62BF847924673C83003AB826 /* AnnounceOfJobViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BF847824673C83003AB826 /* AnnounceOfJobViewController.swift */; };
 		62D49047247ACBB0004A5AA8 /* AnnounceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D49046247ACBB0004A5AA8 /* AnnounceDetailViewController.swift */; };
 		62D4904B247B1783004A5AA8 /* AnnounceDetailResumeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D49049247B1783004A5AA8 /* AnnounceDetailResumeTableViewCell.swift */; };
 		62D4904C247B1783004A5AA8 /* AnnounceDetailResumeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62D4904A247B1783004A5AA8 /* AnnounceDetailResumeTableViewCell.xib */; };
@@ -74,6 +76,8 @@
 		62777E44246767BF00FD35C2 /* RecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsViewController.swift; sourceTree = "<group>"; };
 		627A96E2247D4FB1005EB273 /* AnnouncesListCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncesListCellTableViewCell.swift; sourceTree = "<group>"; };
 		627A96E3247D4FB1005EB273 /* AnnouncesListCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnnouncesListCellTableViewCell.xib; sourceTree = "<group>"; };
+		628527CD2482A9C20017A2B0 /* CreateAnnounceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAnnounceViewController.swift; sourceTree = "<group>"; };
+		628527CF2482B86A0017A2B0 /* RecommendedJobsForYouViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedJobsForYouViewController.swift; sourceTree = "<group>"; };
 		628CB80C23DCDA4500B62278 /* FindOrOfferAJobApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindOrOfferAJobApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		628CB80F23DCDA4500B62278 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		628CB81623DCDA4500B62278 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AccessScreen.storyboard; sourceTree = "<group>"; };
@@ -86,7 +90,7 @@
 		62B84CBA2479B08900028801 /* AnnounceJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceJob.swift; sourceTree = "<group>"; };
 		62B84CBC2479D27500028801 /* MyAnnouncesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAnnouncesListViewController.swift; sourceTree = "<group>"; };
 		62BF847624673C49003AB826 /* AnnounceOrOfferJob.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AnnounceOrOfferJob.storyboard; sourceTree = "<group>"; };
-		62BF847824673C83003AB826 /* AnnounceOrOfferJobViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceOrOfferJobViewController.swift; sourceTree = "<group>"; };
+		62BF847824673C83003AB826 /* AnnounceOfJobViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceOfJobViewController.swift; sourceTree = "<group>"; };
 		62D49046247ACBB0004A5AA8 /* AnnounceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceDetailViewController.swift; sourceTree = "<group>"; };
 		62D49049247B1783004A5AA8 /* AnnounceDetailResumeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceDetailResumeTableViewCell.swift; sourceTree = "<group>"; };
 		62D4904A247B1783004A5AA8 /* AnnounceDetailResumeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnnounceDetailResumeTableViewCell.xib; sourceTree = "<group>"; };
@@ -233,6 +237,8 @@
 				717BF25D2433C0E600BB21F4 /* EditProfessionalDataViewController.swift */,
 				71A334542438CD8100FC2EA0 /* ProfessionOptionsViewController.swift */,
 				62D4904D247C41FA004A5AA8 /* MyProccessViewController.swift */,
+				628527CD2482A9C20017A2B0 /* CreateAnnounceViewController.swift */,
+				628527CF2482B86A0017A2B0 /* RecommendedJobsForYouViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -353,7 +359,7 @@
 				62B84CC02479D39D00028801 /* Home */,
 				62B84CBF2479D37000028801 /* LoginAndRegistration */,
 				62B84CBE2479D2BF00028801 /* Profile */,
-				62BF847824673C83003AB826 /* AnnounceOrOfferJobViewController.swift */,
+				62BF847824673C83003AB826 /* AnnounceOfJobViewController.swift */,
 				62777E44246767BF00FD35C2 /* RecordsViewController.swift */,
 			);
 			path = Controllers;
@@ -567,6 +573,7 @@
 				62DE34E6244CA46F0036F8CB /* ProfessionalCardTableViewCell.swift in Sources */,
 				9443361A23FB072D004378BD /* Protocols.swift in Sources */,
 				9455790323F431EF005B1B92 /* AccessViewController.swift in Sources */,
+				628527CE2482A9C20017A2B0 /* CreateAnnounceViewController.swift in Sources */,
 				62D49047247ACBB0004A5AA8 /* AnnounceDetailViewController.swift in Sources */,
 				9455791023F4634D005B1B92 /* PreferencesManager.swift in Sources */,
 				9455320523FEF58A00016D30 /* ChangePasswordViewController.swift in Sources */,
@@ -577,6 +584,7 @@
 				9461BFE723F4711600EA2CA9 /* HomeViewController.swift in Sources */,
 				62D7F6322441DD3E002C41DD /* EditPersonalDataViewController.swift in Sources */,
 				62D4904E247C41FA004A5AA8 /* MyProccessViewController.swift in Sources */,
+				628527D02482B86A0017A2B0 /* RecommendedJobsForYouViewController.swift in Sources */,
 				9488CBA123FC614100D8B883 /* FirebaseConstants.swift in Sources */,
 				94601EFA23FDB20900FAF484 /* SettingsTableViewCell.swift in Sources */,
 				62B84CBD2479D27500028801 /* MyAnnouncesListViewController.swift in Sources */,
@@ -590,7 +598,7 @@
 				627A96E4247D4FB1005EB273 /* AnnouncesListCellTableViewCell.swift in Sources */,
 				717BF25E2433C0E600BB21F4 /* EditProfessionalDataViewController.swift in Sources */,
 				945531FA23FEB0B200016D30 /* UserProfileViewModel.swift in Sources */,
-				62BF847924673C83003AB826 /* AnnounceOrOfferJobViewController.swift in Sources */,
+				62BF847924673C83003AB826 /* AnnounceOfJobViewController.swift in Sources */,
 				9455790723F4356A005B1B92 /* RegistrationViewController.swift in Sources */,
 				9455320323FEE2C700016D30 /* SettingsViewController.swift in Sources */,
 				711F2B1D240018DD00B66AA5 /* UserResumeTableViewCell.swift in Sources */,

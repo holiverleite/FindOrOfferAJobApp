@@ -118,9 +118,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             case .EditPersonalData:
                 cell.nameLabel.text = ProfileViewController.ProfileItems.EditPersonalData.rawValue
                 cell.imageView?.image = ImageConstants.Profile
-//            case .EditProfessionalData:
-//                cell.nameLabel.text = ProfileViewController.ProfileItems.EditProfessionalData.rawValue
-//                cell.imageView?.image = ImageConstants.Work
             case .Settings:
                 cell.nameLabel.text = ProfileViewController.ProfileItems.Settings.rawValue
                 cell.imageView?.image = ImageConstants.Settings
@@ -144,8 +141,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             break
         case .EditPersonalData:
             self.performSegue(withIdentifier: "EditPersonalDataViewController", sender: nil)
-//        case .EditProfessionalData:
-//            self.performSegue(withIdentifier: "EditProfessionalDataViewController", sender: nil)
         case .Settings:
             self.performSegue(withIdentifier: "SettingsViewController", sender: nil)
         case .Logout:
@@ -157,14 +152,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let settingsViewController = segue.destination as? SettingsViewController {
             settingsViewController.userProfileViewModel = self.userProfileViewModel
-        } else
+        }
         
-//        if let editPersonalDataViewController = segue.destination as? EditPersonalDataViewController {
-//            editPersonalDataViewController.userProfileViewModel = self.userProfileViewModel
-//        } else
-        
-        if let editProfessionalDataViewController = segue.destination as? EditProfessionalDataViewController {
-            editProfessionalDataViewController.userProfileViewModel = self.userProfileViewModel
+        if let editPersonalDataViewController = segue.destination as? EditPersonalDataViewController {
+            editPersonalDataViewController.userProfileViewModel = self.userProfileViewModel
         }
     }
 }

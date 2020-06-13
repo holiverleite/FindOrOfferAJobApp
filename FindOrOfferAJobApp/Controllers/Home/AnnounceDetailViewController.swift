@@ -30,16 +30,6 @@ class AnnounceDetailViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var buttonHeightConstraint: NSLayoutConstraint! {
-        didSet {
-            if cameFromCreateAnnounce {
-                self.buttonHeightConstraint.constant = 55
-            } else {
-                self.buttonHeightConstraint.constant = 55
-            }
-        }
-    }
-    
     // MARK: - Variables
     
     var announceJob: AnnounceJob?

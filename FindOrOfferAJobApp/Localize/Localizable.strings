@@ -34,6 +34,7 @@
 "my_announces_nav_bar" = "Meus Anúncios";
 "announce_detail_nav_bar" = "Detalhes do Anuncio";
 "announce_a_job_nav_bar" = "Anuncie um serviço";
+"job_for_you_nav_bar" = "Vagas para você";
 
 // Historic
 "records_nav_bar" = "Histórico";

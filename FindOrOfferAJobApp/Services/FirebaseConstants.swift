@@ -33,4 +33,5 @@ struct FirebaseUser {
     static let AnnounceJob = "announceJob"
     static let Candidates = "candidates"
     static let IsCanceledAnnounce = "isCanceled"
+    static let GlobalAnnounces = "globalAnnounces"
 }

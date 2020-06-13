@@ -31,6 +31,9 @@ class MyAnnouncesListViewController: UIViewController {
         super.viewDidLoad()
 
         self.navigationItem.setLeftBarButton(UIBarButtonItem(image: ImageConstants.Back, landscapeImagePhone: ImageConstants.Back, style: .plain, target: self, action: #selector(didTapBackButton)), animated: true)
+        
+        let createButton = UIBarButtonItem(title: "+", style: .plain, target: self, action: #selector(didTapCreateAnnounceButton))
+        self.navigationItem.rightBarButtonItem = createButton
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -53,6 +56,10 @@ class MyAnnouncesListViewController: UIViewController {
     }
     
     // MARK: - Private
+    
+    @objc private func didTapCreateAnnounceButton() {
+        performSegue(withIdentifier: "CreateAnnounceViewController", sender: nil)
+    }
     
     @objc private func didTapBackButton() {
         self.navigationController?.popViewController(animated: true)
@@ -93,6 +100,10 @@ extension MyAnnouncesListViewController: UITableViewDataSource, UITableViewDeleg
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let announceViewController = segue.destination as? AnnounceDetailViewController, let announce = sender as? AnnounceJob {
             announceViewController.announceJob = announce
+        }
+        
+        if let createAnnounceViewController = segue.destination as? CreateAnnounceViewController {
+            // nothing here yet
         }
     }
 }

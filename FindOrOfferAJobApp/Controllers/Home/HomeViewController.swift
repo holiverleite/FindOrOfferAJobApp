@@ -31,6 +31,12 @@ class HomeViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var recommendedJobsForYou: UIView! {
+        didSet {
+            self.recommendedJobsForYou.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(recommendedJobsForYouDidTap)))
+        }
+    }
+    
     // MARK: - Lifecycle
     
     override func viewDidAppear(_ animated: Bool) {
@@ -54,5 +60,10 @@ class HomeViewController: UIViewController {
     @objc
     private func myProfessionalCardsDidTap() {
         self.performSegue(withIdentifier: "EditProfessionalDataViewController", sender: nil)
+    }
+    
+    @objc
+    private func recommendedJobsForYouDidTap() {
+        self.performSegue(withIdentifier: "RecommendedJobsForYouViewController", sender: nil)
     }
 }
