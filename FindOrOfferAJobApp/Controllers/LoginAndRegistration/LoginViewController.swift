@@ -16,18 +16,23 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var userLoginTextField: UITextField! {
         didSet {
             self.userLoginTextField.placeholder = String.localize("registration_email")
+            self.userLoginTextField.layer.borderWidth = 1.0
+            self.userLoginTextField.layer.borderColor = UIColor.lightGray.cgColor
         }
     }
     
     @IBOutlet weak var passwordTextField: UITextField! {
         didSet {
             self.passwordTextField.placeholder = String.localize("registration_password")
+            self.passwordTextField.layer.borderWidth = 1.0
+            self.passwordTextField.layer.borderColor = UIColor.lightGray.cgColor
         }
     }
     
     @IBOutlet weak var loginButton: UIButton! {
         didSet {
             self.loginButton.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
+            loginButton?.layer.cornerRadius = 4.0
         }
     }
     
@@ -43,6 +48,8 @@ class LoginViewController: UIViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.setLeftBarButton(UIBarButtonItem(image: ImageConstants.Back, landscapeImagePhone: ImageConstants.Back, style: .plain, target: self, action: #selector(didTapBackButton)), animated: true)
         
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.navigationDelegate = self
@@ -95,6 +102,10 @@ class LoginViewController: UIViewController {
                 completion(nil)
             }
         }.resume()
+    }
+    
+    @objc private func didTapBackButton() {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 

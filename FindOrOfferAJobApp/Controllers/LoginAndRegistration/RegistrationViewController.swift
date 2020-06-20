@@ -14,30 +14,40 @@ class RegistrationViewController: UIViewController {
     @IBOutlet weak var firstNameTextField: UITextField! {
         didSet {
             self.firstNameTextField.placeholder = String.localize("registration_first_name")
+            self.firstNameTextField.layer.borderWidth = 1.0
+            self.firstNameTextField.layer.borderColor = UIColor.lightGray.cgColor
         }
     }
 
     @IBOutlet weak var lastNameTextField: UITextField! {
         didSet {
             self.lastNameTextField.placeholder = String.localize("registration_last_name")
+            self.lastNameTextField.layer.borderWidth = 1.0
+            self.lastNameTextField.layer.borderColor = UIColor.lightGray.cgColor
         }
     }
     
     @IBOutlet weak var emailTextField: UITextField! {
         didSet {
             self.emailTextField.placeholder = String.localize("registration_email")
+            self.emailTextField.layer.borderWidth = 1.0
+            self.emailTextField.layer.borderColor = UIColor.lightGray.cgColor
         }
     }
     
     @IBOutlet weak var passwordTextField: UITextField! {
         didSet {
             self.passwordTextField.placeholder = String.localize("registration_password")
+            self.passwordTextField.layer.borderWidth = 1.0
+            self.passwordTextField.layer.borderColor = UIColor.lightGray.cgColor
         }
     }
     
     @IBOutlet weak var passwordRetypeTextField: UITextField! {
         didSet {
             self.passwordRetypeTextField.placeholder = String.localize("registration_retype_password")
+            self.passwordRetypeTextField.layer.borderWidth = 1.0
+            self.passwordRetypeTextField.layer.borderColor = UIColor.lightGray.cgColor
         }
     }
     
@@ -45,6 +55,7 @@ class RegistrationViewController: UIViewController {
         didSet {
             self.createAccountButton.setTitle(String.localize("registration_create_account"), for: .normal)
             self.createAccountButton.addTarget(self, action: #selector(didTapCreateAccountButon), for: .touchUpInside)
+            createAccountButton?.layer.cornerRadius = 4.0
         }
     }
     
@@ -54,6 +65,8 @@ class RegistrationViewController: UIViewController {
     // MARK: - LifeCycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.navigationItem.setLeftBarButton(UIBarButtonItem(image: ImageConstants.Back, landscapeImagePhone: ImageConstants.Back, style: .plain, target: self, action: #selector(didTapBackButton)), animated: true)
         
         self.navigationController?.navigationBar.isHidden = false
     }
@@ -100,5 +113,9 @@ class RegistrationViewController: UIViewController {
                 self.navigationController?.present(alertViewController, animated: true, completion: nil)
             }
         }
+    }
+    
+    @objc private func didTapBackButton() {
+        self.navigationController?.popViewController(animated: true)
     }
 }

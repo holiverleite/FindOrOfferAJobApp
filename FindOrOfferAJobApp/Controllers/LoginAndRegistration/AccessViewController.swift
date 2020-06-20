@@ -23,6 +23,17 @@ class AccessViewController: UIViewController {
     }
     
     // MARK: - IBOutlets
-    @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var signupButton: UIButton!
+    @IBOutlet weak var loginButton: UIButton! {
+        didSet {
+            loginButton?.layer.borderWidth = 1.0
+            loginButton?.layer.borderColor = UIColor.systemBlue.cgColor
+            loginButton?.layer.cornerRadius = 4.0
+        }
+    }
+    
+    @IBOutlet weak var signupButton: UIButton! {
+        didSet {
+            signupButton?.layer.cornerRadius = 4.0
+        }
+    }
 }
