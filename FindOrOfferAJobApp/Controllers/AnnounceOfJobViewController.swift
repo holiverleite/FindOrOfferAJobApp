@@ -72,10 +72,6 @@ extension AnnounceOfJobViewController: UITableViewDelegate, UITableViewDataSourc
         return ""
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 0
-//    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.announces.count
     }
@@ -92,17 +88,28 @@ extension AnnounceOfJobViewController: UITableViewDelegate, UITableViewDataSourc
         
         let announce = announces[indexPath.row]
         let startDate = Date(timeIntervalSince1970: announce.startTimestamp)
-        let formatterdDate = dateFormatter.string(from: startDate)
+        let formatterdStartDate = dateFormatter.string(from: startDate)
+        
+        let finalizeDate = Date(timeIntervalSince1970: announce.finishTimestamp)
+        let formatterdFinalDate = dateFormatter.string(from: finalizeDate)
 
         cell.announceArea.text = announce.occupationArea
-        cell.startDate.text = formatterdDate
-        cell.totalOfCandidates.text = "\(announce.candidatesIds.count) candidatos"
+        cell.startDate.text = formatterdStartDate
+        cell.totalCandidatesOrCancelledDateLabel.text = "Data de finalização:"
+        cell.totalOfCandidates.text = formatterdFinalDate
         cell.selectionStyle = .none
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let announceJob = announces[indexPath.row]
+        let storyBoard = UIStoryboard(name: "Home", bundle: nil)
+        if let detailViewController = storyBoard.instantiateViewController(withIdentifier: "AnnounceDetailViewController") as? AnnounceDetailViewController {
+            detailViewController.announceJob = announceJob
+            detailViewController.cameFromApplyTheJobAnnounce = true
+            navigationController?.pushViewController(detailViewController, animated: true)
+        }
         closeKeyboard()
     }
     

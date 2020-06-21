@@ -35,7 +35,9 @@ class AnnounceDetailViewController: UIViewController {
     var announceJob: AnnounceJob?
     var cameFromCreateAnnounce: Bool = false
     var cameFromRecordsAnnounce: Bool = false
+    var cameFromApplyTheJobAnnounce: Bool = false
     var delegate: ClearFieldsDelegate?
+    let userProfileViewModel = UserProfileViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +56,9 @@ class AnnounceDetailViewController: UIViewController {
         } else if cameFromRecordsAnnounce {
             self.buttonSaveAnnounce.setTitle("Reativar Anúncio", for: .normal)
             self.buttonSaveAnnounce.addTarget(self, action: #selector(didTapReactivateButton), for: .touchUpInside)
+        } else if cameFromApplyTheJobAnnounce {
+            self.buttonSaveAnnounce.setTitle("Candidatar-se", for: .normal)
+            self.buttonSaveAnnounce.addTarget(self, action: #selector(didTapApplyToJobButton), for: .touchUpInside)
         } else {
             self.buttonSaveAnnounce.setTitle("Cancelar Anúncio", for: .normal)
             self.buttonSaveAnnounce.addTarget(self, action: #selector(didTapCancelButton), for: .touchUpInside)
@@ -67,8 +72,6 @@ class AnnounceDetailViewController: UIViewController {
     
     @objc
     private func didTapSaveButton() {
-        let userProfileViewModel = UserProfileViewModel()
-        
         if let announceJob = self.announceJob {
             FirebaseAuthManager().addAnnounceJob(userId: userProfileViewModel.userId, announceJob: announceJob) { (success) in
                 if let success = success, success {
@@ -103,10 +106,32 @@ class AnnounceDetailViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    private func reactivateAnnounce() {
-        let userProfileViewModel = UserProfileViewModel()
+    @objc
+    private func didTapApplyToJobButton() {
+        let alert = UIAlertController(title: "Atenção", message: "Você realmente deseja candidatar-se a este anúncio?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Candidatar-se", style: .default) { (action) in
+            self.applyToJob()
+        })
+        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func applyToJob() {
         if let announceJob = self.announceJob {
-            
+            FirebaseAuthManager().applyToJob(userId: userProfileViewModel.userId, announceJob: announceJob) { (success) in
+                if let success = success, success {
+                    let alert = UIAlertController(title: "Sucesso", message: "Candidatura realizada com sucesso!", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
+                        self.navigationController?.popViewController(animated: true)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+        }
+    }
+    
+    private func reactivateAnnounce() {
+        if let announceJob = self.announceJob {
             let startDate = Date()
             let finishDate = Calendar.current.date(byAdding: .day, value: 3, to: startDate)!
             announceJob.startTimestamp = startDate.timeIntervalSince1970
@@ -125,8 +150,6 @@ class AnnounceDetailViewController: UIViewController {
     }
     
     private func cancelAnnounce() {
-        let userProfileViewModel = UserProfileViewModel()
-        
         if let announceJob = self.announceJob {
             let finishedTimestamp = Date().timeIntervalSince1970
             announceJob.finishTimestamp = finishedTimestamp
@@ -158,7 +181,7 @@ extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSour
         case 0:
             return "Resumo do anúncio"
         case 1:
-            if !cameFromRecordsAnnounce {
+            if !cameFromRecordsAnnounce && !cameFromApplyTheJobAnnounce {
                 return "Candidatos à vaga"
             }
             return ""
@@ -172,7 +195,7 @@ extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSour
         case 0:
             return 1
         case 1:
-            if !cameFromRecordsAnnounce {
+            if !cameFromRecordsAnnounce && !cameFromApplyTheJobAnnounce {
                 return 1
             }
             return 0
@@ -239,9 +262,23 @@ extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSour
             }
             
             cell.textLabel?.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
-            cell.textLabel?.textAlignment = .center
-            cell.textLabel?.numberOfLines = 0
-            cell.textLabel?.text = "Ainda não surgiram candidatos para esta vaga."
+            let candidates = announceJob?.candidatesIds
+            if let totalCandidates = candidates?.count, totalCandidates > 0 {
+                // ADICIONAR DADOS DO USUARIO
+                // AO CLICAR NELE, IR PARA O PERFIL DO TRABALHADOR
+                // PERFIL DO TRABALHADOR
+                // PERFIL DO TRABALHADOR
+                // PERFIL DO TRABALHADOR
+                // PERFIL DO TRABALHADOR
+                // PERFIL DO TRABALHADOR
+                // PERFIL DO TRABALHADOR
+                cell.textLabel?.textAlignment = .left
+                cell.textLabel?.text = candidates?[indexPath.row]
+            } else {
+                cell.textLabel?.textAlignment = .center
+                cell.textLabel?.numberOfLines = 0
+                cell.textLabel?.text = "Ainda não surgiram candidatos para esta vaga."
+            }
             
             return cell
         default:
