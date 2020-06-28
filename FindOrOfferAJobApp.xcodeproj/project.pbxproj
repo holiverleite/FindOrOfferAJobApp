@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		6209AF132441F5F90070E5D1 /* ProfessionalCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6209AF122441F5F90070E5D1 /* ProfessionalCardViewModel.swift */; };
 		6209AF152441F6210070E5D1 /* ProfessionalCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6209AF142441F6210070E5D1 /* ProfessionalCard.swift */; };
+		620F88C624A7D8B900E4D55D /* CandidateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620F88C424A7D8B900E4D55D /* CandidateTableViewCell.swift */; };
+		620F88C724A7D8B900E4D55D /* CandidateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 620F88C524A7D8B900E4D55D /* CandidateTableViewCell.xib */; };
+		620F88C924A7EACD00E4D55D /* CandidateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620F88C824A7EACD00E4D55D /* CandidateProfileViewController.swift */; };
 		62777E4324675DEA00FD35C2 /* Records.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62777E4224675DEA00FD35C2 /* Records.storyboard */; };
 		62777E45246767BF00FD35C2 /* RecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62777E44246767BF00FD35C2 /* RecordsViewController.swift */; };
 		627A96E4247D4FB1005EB273 /* AnnouncesListCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627A96E2247D4FB1005EB273 /* AnnouncesListCellTableViewCell.swift */; };
@@ -72,6 +75,9 @@
 		27C0346F02195F24BC5A7402 /* Pods_FindOrOfferAJobApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FindOrOfferAJobApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6209AF122441F5F90070E5D1 /* ProfessionalCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalCardViewModel.swift; sourceTree = "<group>"; };
 		6209AF142441F6210070E5D1 /* ProfessionalCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalCard.swift; sourceTree = "<group>"; };
+		620F88C424A7D8B900E4D55D /* CandidateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateTableViewCell.swift; sourceTree = "<group>"; };
+		620F88C524A7D8B900E4D55D /* CandidateTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CandidateTableViewCell.xib; sourceTree = "<group>"; };
+		620F88C824A7EACD00E4D55D /* CandidateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateProfileViewController.swift; sourceTree = "<group>"; };
 		62777E4224675DEA00FD35C2 /* Records.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Records.storyboard; sourceTree = "<group>"; };
 		62777E44246767BF00FD35C2 /* RecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsViewController.swift; sourceTree = "<group>"; };
 		627A96E2247D4FB1005EB273 /* AnnouncesListCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncesListCellTableViewCell.swift; sourceTree = "<group>"; };
@@ -152,6 +158,15 @@
 				27C0346F02195F24BC5A7402 /* Pods_FindOrOfferAJobApp.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		620F88C324A7D88B00E4D55D /* CandidateTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				620F88C424A7D8B900E4D55D /* CandidateTableViewCell.swift */,
+				620F88C524A7D8B900E4D55D /* CandidateTableViewCell.xib */,
+			);
+			path = CandidateTableViewCell;
 			sourceTree = "<group>";
 		};
 		627A96E1247D4F55005EB273 /* AnnouncesListCell */ = {
@@ -239,6 +254,7 @@
 				62D4904D247C41FA004A5AA8 /* MyProccessViewController.swift */,
 				628527CD2482A9C20017A2B0 /* CreateAnnounceViewController.swift */,
 				628527CF2482B86A0017A2B0 /* RecommendedJobsForYouViewController.swift */,
+				620F88C824A7EACD00E4D55D /* CandidateProfileViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -317,6 +333,7 @@
 		945531FB23FEC56000016D30 /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				620F88C324A7D88B00E4D55D /* CandidateTableViewCell */,
 				627A96E1247D4F55005EB273 /* AnnouncesListCell */,
 				62D49048247B1494004A5AA8 /* AnnounceDetail */,
 				62DE34E3244CA4280036F8CB /* ProfessionalCardViewCell */,
@@ -481,6 +498,7 @@
 				62DE34E7244CA46F0036F8CB /* ProfessionalCardTableViewCell.xib in Resources */,
 				945531FF23FEC9A400016D30 /* Home.storyboard in Resources */,
 				62D4904C247B1783004A5AA8 /* AnnounceDetailResumeTableViewCell.xib in Resources */,
+				620F88C724A7D8B900E4D55D /* CandidateTableViewCell.xib in Resources */,
 				940CDC5F23F5734100683B1A /* PostLaunchScreen.storyboard in Resources */,
 				62BF847724673C49003AB826 /* AnnounceOrOfferJob.storyboard in Resources */,
 				945578F723F41CFA005B1B92 /* GoogleService-Info.plist in Resources */,
@@ -575,6 +593,7 @@
 				9455790323F431EF005B1B92 /* AccessViewController.swift in Sources */,
 				628527CE2482A9C20017A2B0 /* CreateAnnounceViewController.swift in Sources */,
 				62D49047247ACBB0004A5AA8 /* AnnounceDetailViewController.swift in Sources */,
+				620F88C624A7D8B900E4D55D /* CandidateTableViewCell.swift in Sources */,
 				9455791023F4634D005B1B92 /* PreferencesManager.swift in Sources */,
 				9455320523FEF58A00016D30 /* ChangePasswordViewController.swift in Sources */,
 				9455791323F467BF005B1B92 /* UserProfile.swift in Sources */,
@@ -587,6 +606,7 @@
 				628527D02482B86A0017A2B0 /* RecommendedJobsForYouViewController.swift in Sources */,
 				9488CBA123FC614100D8B883 /* FirebaseConstants.swift in Sources */,
 				94601EFA23FDB20900FAF484 /* SettingsTableViewCell.swift in Sources */,
+				620F88C924A7EACD00E4D55D /* CandidateProfileViewController.swift in Sources */,
 				62B84CBD2479D27500028801 /* MyAnnouncesListViewController.swift in Sources */,
 				94601EF323FD7DF000FAF484 /* ProfileViewController.swift in Sources */,
 				945578FA23F4241B005B1B92 /* FirebaseAuthManager.swift in Sources */,

@@ -18,6 +18,9 @@ class AnnounceDetailViewController: UIViewController {
             self.tableView.register(AnnounceDetailResumeTableViewCell.self, forCellReuseIdentifier: String(describing: AnnounceDetailResumeTableViewCell.self))
             self.tableView.register(UINib(nibName: String(describing: AnnounceDetailResumeTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: AnnounceDetailResumeTableViewCell.self))
             
+            self.tableView.register(CandidateTableViewCell.self, forCellReuseIdentifier: String(describing: CandidateTableViewCell.self))
+            self.tableView.register(UINib(nibName: String(describing: CandidateTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: CandidateTableViewCell.self))
+            
             self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "simpleCell")
             
             self.tableView.separatorStyle = .none
@@ -33,6 +36,7 @@ class AnnounceDetailViewController: UIViewController {
     // MARK: - Variables
     
     var announceJob: AnnounceJob?
+    var profileCandidates: [UserProfile] = []
     var cameFromCreateAnnounce: Bool = false
     var cameFromRecordsAnnounce: Bool = false
     var cameFromApplyTheJobAnnounce: Bool = false
@@ -60,8 +64,20 @@ class AnnounceDetailViewController: UIViewController {
             self.buttonSaveAnnounce.setTitle("Candidatar-se", for: .normal)
             self.buttonSaveAnnounce.addTarget(self, action: #selector(didTapApplyToJobButton), for: .touchUpInside)
         } else {
+            loadCandidates()
             self.buttonSaveAnnounce.setTitle("Cancelar Anúncio", for: .normal)
             self.buttonSaveAnnounce.addTarget(self, action: #selector(didTapCancelButton), for: .touchUpInside)
+        }
+    }
+    
+    private func loadCandidates() {
+        if let candidatesIds = announceJob?.candidatesIds, let ocupationArea = announceJob?.occupationArea {
+            FirebaseAuthManager().retrieveCandidatesFromFirebase(userIds: candidatesIds, occupationAreaAnnounce: ocupationArea) { (profileUsers) in
+                if let profileUsers = profileUsers {
+                    self.profileCandidates.append(contentsOf: profileUsers)
+                    self.tableView.reloadData()
+                }
+            }
         }
     }
     
@@ -164,7 +180,6 @@ class AnnounceDetailViewController: UIViewController {
             }
         }
     }
-    
 }
 
 extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSource {
@@ -257,32 +272,51 @@ extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSour
             
             return cell
         case 1:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "simpleCell") else {
-                return UITableViewCell()
-            }
-            
-            cell.textLabel?.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
-            let candidates = announceJob?.candidatesIds
-            if let totalCandidates = candidates?.count, totalCandidates > 0 {
-                // ADICIONAR DADOS DO USUARIO
-                // AO CLICAR NELE, IR PARA O PERFIL DO TRABALHADOR
-                // PERFIL DO TRABALHADOR
-                // PERFIL DO TRABALHADOR
-                // PERFIL DO TRABALHADOR
-                // PERFIL DO TRABALHADOR
-                // PERFIL DO TRABALHADOR
-                // PERFIL DO TRABALHADOR
+            if profileCandidates.count > 0 {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CandidateTableViewCell.self), for: indexPath) as? CandidateTableViewCell else {
+                    fatalError("CandidateTableViewCell not found!")
+                }
+                
+                cell.selectionStyle = .none
+                
+                let candidate = profileCandidates[indexPath.row]
                 cell.textLabel?.textAlignment = .left
-                cell.textLabel?.text = candidates?[indexPath.row]
+                cell.userName.text = candidate.firstName
+                if let imageData = candidate.userImageData {
+                    cell.userPhoto.image = UIImage(data: imageData)
+                }
+
+                return cell
             } else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "simpleCell") else {
+                    return UITableViewCell()
+                }
+                
+                cell.selectionStyle = .none
+                
+                cell.textLabel?.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
                 cell.textLabel?.textAlignment = .center
                 cell.textLabel?.numberOfLines = 0
                 cell.textLabel?.text = "Ainda não surgiram candidatos para esta vaga."
+                
+                return cell
             }
-            
-            return cell
         default:
             return UITableViewCell()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "CandidateProfileViewController", sender: indexPath)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let senderIndex = sender as? IndexPath {
+            if let candidateProfile = segue.destination as? CandidateProfileViewController {
+                let candiadate = profileCandidates[senderIndex.row]
+                candidateProfile.candidateProfile = candiadate
+                candidateProfile.announce = announceJob
+            }
         }
     }
 }

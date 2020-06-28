@@ -14,5 +14,14 @@ import GoogleSignIn
 class FirebaseAuthManager {
     
     let rootUsersReference = Database.database().reference(withPath: FirebaseKnot.Users)
-  
+    
+    func downloadUserImageData(imageUrl: URL, completion: @escaping (_ image: Data?) -> Void) {
+        URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+            if let data = data {
+                completion(data)
+            } else {
+                completion(nil)
+            }
+        }.resume()
+    } 
 }
