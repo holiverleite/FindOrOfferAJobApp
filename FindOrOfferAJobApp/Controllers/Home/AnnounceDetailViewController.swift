@@ -21,6 +21,9 @@ class AnnounceDetailViewController: UIViewController {
             self.tableView.register(CandidateTableViewCell.self, forCellReuseIdentifier: String(describing: CandidateTableViewCell.self))
             self.tableView.register(UINib(nibName: String(describing: CandidateTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: CandidateTableViewCell.self))
             
+            self.tableView.register(CandidateSelectedTableViewCell.self, forCellReuseIdentifier: String(describing: CandidateSelectedTableViewCell.self))
+            self.tableView.register(UINib(nibName: String(describing: CandidateSelectedTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: CandidateSelectedTableViewCell.self))
+            
             self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "simpleCell")
             
             self.tableView.separatorStyle = .none
@@ -50,7 +53,7 @@ class AnnounceDetailViewController: UIViewController {
         
         self.navigationItem.setLeftBarButton(UIBarButtonItem(image: ImageConstants.Back, landscapeImagePhone: ImageConstants.Back, style: .plain, target: self, action: #selector(didTapBackButton)), animated: true)
         
-        if cameFromCreateAnnounce {
+         if cameFromCreateAnnounce {
             let alert = UIAlertController(title: "Atenção", message: "Confira os dados do anúncio com atenção antes de finalizar. Eles não poderão ser alterados posteriormente.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -65,8 +68,15 @@ class AnnounceDetailViewController: UIViewController {
             self.buttonSaveAnnounce.addTarget(self, action: #selector(didTapApplyToJobButton), for: .touchUpInside)
         } else {
             loadCandidates()
-            self.buttonSaveAnnounce.setTitle("Cancelar Anúncio", for: .normal)
-            self.buttonSaveAnnounce.addTarget(self, action: #selector(didTapCancelButton), for: .touchUpInside)
+            
+            if let announceIsFinished = announceJob?.isFinished, announceIsFinished {
+                self.buttonSaveAnnounce.backgroundColor = .gray
+                self.buttonSaveAnnounce.setTitle("Anúncio Finalizado", for: .normal)
+                self.buttonSaveAnnounce.isEnabled = false
+            } else {
+                self.buttonSaveAnnounce.setTitle("Cancelar Anúncio", for: .normal)
+                self.buttonSaveAnnounce.addTarget(self, action: #selector(didTapCancelButton), for: .touchUpInside)
+            }
         }
     }
     
@@ -197,6 +207,10 @@ extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSour
             return "Resumo do anúncio"
         case 1:
             if !cameFromRecordsAnnounce && !cameFromApplyTheJobAnnounce {
+                if let announceJob = announceJob, announceJob.isFinished {
+                    return "Candidato selecionado"
+                }
+                
                 return "Candidatos à vaga"
             }
             return ""
@@ -239,8 +253,13 @@ extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSour
                         cell.finalizeOrCanceledLabel.text = "Data do cancelamento:"
                         cell.finalizeOrCanceledLabel.textColor = .red
                         cell.finalAnnounceDate.textColor = .red
+                    } else
+                    if announceJob.isFinished {
+                        cell.finalizeOrCanceledLabel.text = "Finalizado em:"
+                        cell.finalizeOrCanceledLabel.textColor = .blue
+                        cell.finalAnnounceDate.textColor = .blue
                     } else {
-                        cell.finalAnnounceDate.text = "Finaliza em:"
+//                        cell.finalAnnounceDate.text = "Finaliza em:"
                     }
                 }
             } else {
@@ -272,21 +291,40 @@ extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSour
             
             return cell
         case 1:
-            if profileCandidates.count > 0 {
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CandidateTableViewCell.self), for: indexPath) as? CandidateTableViewCell else {
-                    fatalError("CandidateTableViewCell not found!")
-                }
-                
-                cell.selectionStyle = .none
-                
-                let candidate = profileCandidates[indexPath.row]
-                cell.textLabel?.textAlignment = .left
-                cell.userName.text = candidate.firstName
-                if let imageData = candidate.userImageData {
-                    cell.userPhoto.image = UIImage(data: imageData)
-                }
+             if profileCandidates.count > 0 {
+                if let announceIsFinished = announceJob?.isFinished, announceIsFinished {
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CandidateSelectedTableViewCell.self), for: indexPath) as? CandidateSelectedTableViewCell else {
+                        fatalError("CandidateSelectedTableViewCell not found!")
+                    }
+                    
+                    cell.selectionStyle = .none
+                    
+                    let candidate = profileCandidates[indexPath.row]
+                    cell.textLabel?.textAlignment = .left
+                    cell.userName.text = candidate.firstName
+                    cell.celPhone.text = candidate.cellphone
+                    
+                    if let imageData = candidate.userImageData {
+                        cell.userPhoto.image = UIImage(data: imageData)
+                    }
 
-                return cell
+                    return cell
+                } else {
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CandidateTableViewCell.self), for: indexPath) as? CandidateTableViewCell else {
+                        fatalError("CandidateTableViewCell not found!")
+                    }
+                    
+                    cell.selectionStyle = .none
+                    
+                    let candidate = profileCandidates[indexPath.row]
+                    cell.textLabel?.textAlignment = .left
+                    cell.userName.text = candidate.firstName
+                    if let imageData = candidate.userImageData {
+                        cell.userPhoto.image = UIImage(data: imageData)
+                    }
+
+                    return cell
+                }
             } else {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: "simpleCell") else {
                     return UITableViewCell()
@@ -316,6 +354,20 @@ extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSour
                 let candiadate = profileCandidates[senderIndex.row]
                 candidateProfile.candidateProfile = candiadate
                 candidateProfile.announce = announceJob
+                candidateProfile.delegate = self
+            }
+        }
+    }
+}
+
+extension AnnounceDetailViewController: SelectCondaidateDelegate {
+    func candidateSelected(announceJobId: String) {
+        FirebaseAuthManager().retrieveAnnouncesJob(announceId: announceJobId) { (announce) in
+            if let announce = announce {
+                self.announceJob = announce
+                self.tableView.reloadData()
+            } else {
+                self.navigationController?.popViewController(animated: true)
             }
         }
     }

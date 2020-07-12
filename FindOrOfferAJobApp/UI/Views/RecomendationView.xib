@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RecomendationView" customModule="FindOrOfferAJobApp" customModuleProvider="target">
+            <connections>
+                <outlet property="recomendationDescription" destination="uhJ-S4-WOA" id="0Fu-aG-jZ8"/>
+                <outlet property="recomendationTitle" destination="tnZ-xI-KpS" id="g7Q-12-55K"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="364" height="72"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tnZ-xI-KpS">
+                    <rect key="frame" x="24" y="10" width="316" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhJ-S4-WOA">
+                    <rect key="frame" x="24" y="39" width="316" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="uhJ-S4-WOA" secondAttribute="bottom" constant="12" id="A0M-te-uwa"/>
+                <constraint firstAttribute="trailing" secondItem="tnZ-xI-KpS" secondAttribute="trailing" constant="24" id="Dm6-dZ-c0r"/>
+                <constraint firstItem="uhJ-S4-WOA" firstAttribute="leading" secondItem="tnZ-xI-KpS" secondAttribute="leading" id="IEq-Xr-I57"/>
+                <constraint firstItem="tnZ-xI-KpS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="Lq7-v5-Wsm"/>
+                <constraint firstItem="uhJ-S4-WOA" firstAttribute="top" secondItem="tnZ-xI-KpS" secondAttribute="bottom" constant="8" id="S3T-6w-gfi"/>
+                <constraint firstItem="uhJ-S4-WOA" firstAttribute="trailing" secondItem="tnZ-xI-KpS" secondAttribute="trailing" id="j0H-4E-Cui"/>
+                <constraint firstItem="tnZ-xI-KpS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="24" id="mak-Sm-rQi"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="95.652173913043484" y="387.72321428571428"/>
+        </view>
+    </objects>
+</document>

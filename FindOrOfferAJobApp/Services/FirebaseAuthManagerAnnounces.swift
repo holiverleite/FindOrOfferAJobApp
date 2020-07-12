@@ -22,6 +22,7 @@ extension FirebaseAuthManager {
             FirebaseUser.StartDate: announceJob.startTimestamp,
             FirebaseUser.FinishDate: announceJob.finishTimestamp,
             FirebaseUser.IsCanceledAnnounce: announceJob.isCanceled,
+            FirebaseUser.IsFinalizedAnnounce: false,
             FirebaseUser.Candidates: [:]
         ]
         
@@ -43,6 +44,28 @@ extension FirebaseAuthManager {
                         }
                     }
                 }
+            }
+        }
+    }
+    
+    func approveCandidateOfAnnounce(candidateId: String, announceJob: AnnounceJob, completion: @escaping (_ success: Bool?) -> Void) {
+        let ref = rootUsersReference.child(FirebaseUser.GlobalAnnounces).child(announceJob.id)
+        let announceDict: [String: Any] = [
+            FirebaseUser.OccupationArea: announceJob.occupationArea,
+            FirebaseUser.DescriptionOfProfession: announceJob.descriptionOfAnnounce,
+            FirebaseUser.StartDate: announceJob.startTimestamp,
+            FirebaseUser.FinishDate: Date().timeIntervalSince1970,
+            FirebaseUser.IsCanceledAnnounce: false,
+            FirebaseUser.IsFinalizedAnnounce: true,
+            FirebaseUser.SelectedCandidate: candidateId,
+            FirebaseUser.Candidates: [candidateId:candidateId]
+        ]
+        
+        ref.setValue(announceDict) { (error, databaseReference) in
+            if error != nil {
+                completion(false)
+            } else {
+                completion(true)
             }
         }
     }
@@ -136,17 +159,24 @@ extension FirebaseAuthManager {
             for announceItem in data {
                 if let item = announceItem.value as? [String: Any] {
                     
-                    if let occupationArea = item[FirebaseUser.OccupationArea] as? String, let startDate = item[FirebaseUser.StartDate] as? Double, let finishDate = item[FirebaseUser.FinishDate] as? Double, let description = item[FirebaseUser.DescriptionOfProfession] as? String, let isCancelledAnnounce = item[FirebaseUser.IsCanceledAnnounce] as? Bool {
+                    if let occupationArea = item[FirebaseUser.OccupationArea] as? String,
+                        let startDate = item[FirebaseUser.StartDate] as? Double,
+                        let finishDate = item[FirebaseUser.FinishDate] as? Double,
+                        let description = item[FirebaseUser.DescriptionOfProfession] as? String,
+                        let isCancelledAnnounce = item[FirebaseUser.IsCanceledAnnounce] as? Bool,
+                        let isFinalizedAnnounce = item[FirebaseUser.IsFinalizedAnnounce] as? Bool {
                         
-                        let announce = AnnounceJob(id: announceItem.key,
-                                                   occupationArea: occupationArea,
-                                                   startTimestamp: startDate,
-                                                   finishTimestamp: finishDate,
-                                                   isCanceled: isCancelledAnnounce,
-                                                   candidatesIds: [],
-                                                   descriptionOfAnnounce: description)
-                        
-                        announces.append(announce)
+                        if !isFinalizedAnnounce {
+                            let announce = AnnounceJob(id: announceItem.key,
+                                                       occupationArea: occupationArea,
+                                                       startTimestamp: startDate,
+                                                       finishTimestamp: finishDate,
+                                                       isCanceled: isCancelledAnnounce,
+                                                       candidatesIds: [],
+                                                       descriptionOfAnnounce: description)
+                            
+                            announces.append(announce)
+                        }
                     }
                 }
             }
@@ -181,7 +211,8 @@ extension FirebaseAuthManager {
                             let startDate = adDetail[FirebaseUser.StartDate] as? Double,
                             let finishDate = adDetail[FirebaseUser.FinishDate] as? Double,
                             let description = adDetail[FirebaseUser.DescriptionOfProfession] as? String,
-                            let isCancelledAnnounce = adDetail[FirebaseUser.IsCanceledAnnounce] as? Bool {
+                            let isCancelledAnnounce = adDetail[FirebaseUser.IsCanceledAnnounce] as? Bool,
+                            let isFinalizedAnnounce = adDetail[FirebaseUser.IsFinalizedAnnounce] as? Bool {
                             
                             var candidateIds: [String] = []
                             if let candidates = adDetail[FirebaseUser.Candidates] as? [String: String] {
@@ -196,7 +227,8 @@ extension FirebaseAuthManager {
                                                        finishTimestamp: finishDate,
                                                        isCanceled: isCancelledAnnounce,
                                                        candidatesIds: candidateIds,
-                                                       descriptionOfAnnounce: description)
+                                                       descriptionOfAnnounce: description,
+                                                       isFinished:  isFinalizedAnnounce)
                             
                             if onlyCancelledsAndFinisheds {
                                 if announce.isCanceled /* e only finalizado */ {
@@ -211,6 +243,40 @@ extension FirebaseAuthManager {
                         completion(announces)
                     }
                 }
+            }
+        }
+    }
+    
+    func retrieveAnnouncesJob(announceId: String, completion: @escaping (_ announce: AnnounceJob?) -> Void) {
+        let ref = self.rootUsersReference.child(FirebaseUser.GlobalAnnounces).child(announceId)
+        ref.observeSingleEvent(of: .value) { (dataSnapshot) in
+            guard let data = dataSnapshot.value as? [String: Any] else {
+                completion(nil)
+                return
+            }
+            
+            var announce: AnnounceJob?
+            if let adDetail = data as? [String: Any] {
+                if let occupationArea = adDetail[FirebaseUser.OccupationArea] as? String,
+                    let selectedCandidate = adDetail[FirebaseUser.SelectedCandidate] as? String,
+                    let startDate = adDetail[FirebaseUser.StartDate] as? Double,
+                    let finishDate = adDetail[FirebaseUser.FinishDate] as? Double,
+                    let description = adDetail[FirebaseUser.DescriptionOfProfession] as? String,
+                    let isCancelledAnnounce = adDetail[FirebaseUser.IsCanceledAnnounce] as? Bool,
+                    let isFinalizedAnnounce = adDetail[FirebaseUser.IsFinalizedAnnounce] as? Bool {
+
+                    announce = AnnounceJob(id: announceId,
+                                               occupationArea: occupationArea,
+                                               startTimestamp: startDate,
+                                               finishTimestamp: finishDate,
+                                               isCanceled: isCancelledAnnounce,
+                                               candidatesIds: [],
+                                               descriptionOfAnnounce: description,
+                                               selectedCandidateId: selectedCandidate,
+                                               isFinished:  isFinalizedAnnounce)
+                    
+                }
+                completion(announce)
             }
         }
     }
