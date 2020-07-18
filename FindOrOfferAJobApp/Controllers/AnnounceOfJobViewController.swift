@@ -17,6 +17,7 @@ class AnnounceOfJobViewController: UIViewController {
     // MARK: - Outlets
     
     @IBOutlet weak var emptyView: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.delegate = self
@@ -30,7 +31,9 @@ class AnnounceOfJobViewController: UIViewController {
     }
     
     // MARK: - Variables
+    
     var announces: [AnnounceJob] = []
+    var occupationArea: [String] = []
     
     // MARK: - LifeCycle
     
@@ -42,16 +45,35 @@ class AnnounceOfJobViewController: UIViewController {
         super.viewWillAppear(animated)
         
         navigationController?.navigationBar.topItem?.title = String.localize("find_a_job_nav_bar")
-        view.bringSubviewToFront(emptyView)
         
-        FirebaseAuthManager().retrieveGlobalAnnouncesJob { (announces) in
-            if announces.count > 0 {
-                self.view.bringSubviewToFront(self.tableView)
-                self.announces.removeAll()
-                self.announces.append(contentsOf: announces)
-                self.tableView.reloadData()
-            } else {
-                self.view.bringSubviewToFront(self.emptyView)
+        let dispatchGroup = DispatchGroup()
+        let user = UserProfileViewModel()
+        
+        shouldShowActivity(true)
+        dispatchGroup.enter()
+        FirebaseAuthManager().retrieveProfessionalCards(userId: user.userId) { cards in
+            if cards.count > 0 {
+                for card in cards {
+                    let occupationArea = card.occupationArea
+                    self.occupationArea.append(occupationArea)
+                }
+            }
+            dispatchGroup.leave()
+        }
+        
+        shouldShowActivity(true)
+        dispatchGroup.notify(queue: .main) {
+            FirebaseAuthManager().retrieveGlobalAnnouncesJob { (announces) in
+                self.shouldShowActivity(false)
+                if announces.count > 0 {
+                    self.emptyView.isHidden = true
+                    self.view.bringSubviewToFront(self.tableView)
+                    self.announces.removeAll()
+                    self.announces.append(contentsOf: announces)
+                    self.tableView.reloadData()
+                } else {
+                    self.view.bringSubviewToFront(self.emptyView)
+                }
             }
         }
     }
@@ -59,6 +81,18 @@ class AnnounceOfJobViewController: UIViewController {
     @objc
     private func closeKeyboard() {
         view.endEditing(true)
+    }
+    
+    private func shouldShowActivity(_ status: Bool) {
+        if status {
+            emptyView.isHidden = true
+            activityIndicator.isHidden = false
+            activityIndicator.startAnimating()
+        } else {
+            emptyView.isHidden = false
+            activityIndicator.isHidden = true
+            activityIndicator.stopAnimating()
+        }
     }
 }
 
@@ -92,10 +126,19 @@ extension AnnounceOfJobViewController: UITableViewDelegate, UITableViewDataSourc
         
         let finalizeDate = Date(timeIntervalSince1970: announce.finishTimestamp)
         let formatterdFinalDate = dateFormatter.string(from: finalizeDate)
-
+        
+        if announce.isCanceled {
+            cell.totalCandidatesOrCancelledDateLabel.text = "Data do cancelamento:"
+            cell.totalCandidatesOrCancelledDateLabel.textColor = .red
+            cell.totalOfCandidates.textColor = .red
+        } else {
+            cell.totalCandidatesOrCancelledDateLabel.text = "Data de finalização:"
+            cell.totalCandidatesOrCancelledDateLabel.textColor = .black
+            cell.totalOfCandidates.textColor = .black
+        }
+        
         cell.announceArea.text = announce.occupationArea
         cell.startDate.text = formatterdStartDate
-        cell.totalCandidatesOrCancelledDateLabel.text = "Data de finalização:"
         cell.totalOfCandidates.text = formatterdFinalDate
         cell.selectionStyle = .none
         
@@ -104,12 +147,20 @@ extension AnnounceOfJobViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let announceJob = announces[indexPath.row]
-        let storyBoard = UIStoryboard(name: "Home", bundle: nil)
-        if let detailViewController = storyBoard.instantiateViewController(withIdentifier: "AnnounceDetailViewController") as? AnnounceDetailViewController {
-            detailViewController.announceJob = announceJob
-            detailViewController.cameFromApplyTheJobAnnounce = true
-            navigationController?.pushViewController(detailViewController, animated: true)
+        
+        if occupationArea.contains(announceJob.occupationArea) {
+            let storyBoard = UIStoryboard(name: "Home", bundle: nil)
+            if let detailViewController = storyBoard.instantiateViewController(withIdentifier: "AnnounceDetailViewController") as? AnnounceDetailViewController {
+                detailViewController.announceJob = announceJob
+                detailViewController.cameFromApplyTheJobAnnounce = true
+                navigationController?.pushViewController(detailViewController, animated: true)
+            }
+        } else {
+            let alert = UIAlertController(title: "Atenção", message: String(format: "Você não possui nenhum Cartão Profissional para esta vaga em específico. Crie um Cartão Profissiona para area de '%@' e tente novamente.", announceJob.occupationArea), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
+        
         closeKeyboard()
     }
     

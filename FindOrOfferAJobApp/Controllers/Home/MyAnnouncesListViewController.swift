@@ -10,8 +10,6 @@ import UIKit
 
 class MyAnnouncesListViewController: UIViewController {
 
-    @IBOutlet weak var emptyView: UIView!
-    
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             self.tableView.delegate = self
@@ -23,6 +21,9 @@ class MyAnnouncesListViewController: UIViewController {
             self.tableView.separatorStyle = .none
         }
     }
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var emptyView: UIView!
     
     // MARK: - Variables
     var announces: [AnnounceJob] = []
@@ -36,14 +37,23 @@ class MyAnnouncesListViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = createButton
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        shouldShowActivity(true)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         self.navigationController?.navigationBar.topItem?.title = String.localize("my_announces_nav_bar")
         
         let user = UserProfileViewModel()
+        
         FirebaseAuthManager().retrieveAnnouncesJob(userId: user.userId) { (announcesJob) in
+            self.shouldShowActivity(false)
             if announcesJob.count > 0 {
+                self.emptyView.isHidden = true
                 self.announces.removeAll()
                 self.announces.append(contentsOf: announcesJob)
                 self.tableView.isHidden = false
@@ -63,6 +73,18 @@ class MyAnnouncesListViewController: UIViewController {
     
     @objc private func didTapBackButton() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    private func shouldShowActivity(_ status: Bool) {
+        if status {
+            emptyView.isHidden = true
+            activityIndicator.isHidden = false
+            activityIndicator.startAnimating()
+        } else {
+            emptyView.isHidden = false
+            activityIndicator.isHidden = true
+            activityIndicator.stopAnimating()
+        }
     }
 }
 
@@ -87,8 +109,21 @@ extension MyAnnouncesListViewController: UITableViewDataSource, UITableViewDeleg
 
         cell.announceArea.text = announce.occupationArea
         cell.startDate.text = formatterdDate
-        cell.totalOfCandidates.text = "\(announce.candidatesIds.count) candidatos"
         cell.selectionStyle = .none
+        
+        if announce.isFinished {
+            let finishedDate = Date(timeIntervalSince1970: announce.finishTimestamp)
+            let formatterFinishedDate = dateFormatter.string(from: finishedDate)
+            cell.totalCandidatesOrCancelledDateLabel.text = "Anúncio Finalizado"
+            cell.totalCandidatesOrCancelledDateLabel.textColor = .systemBlue
+            cell.totalOfCandidates.textColor = .systemBlue
+            cell.totalOfCandidates.text = formatterFinishedDate
+        } else {
+            cell.totalCandidatesOrCancelledDateLabel.text = "Número de candidatos"
+            cell.totalCandidatesOrCancelledDateLabel.textColor = .black
+            cell.totalOfCandidates.textColor = .black
+            cell.totalOfCandidates.text = "\(announce.candidatesIds.count) candidatos"
+        }
         
         return cell
     }

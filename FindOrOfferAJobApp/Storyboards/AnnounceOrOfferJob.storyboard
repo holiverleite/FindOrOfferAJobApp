@@ -38,6 +38,9 @@
                                     <constraint firstAttribute="trailing" secondItem="z4X-IZ-P54" secondAttribute="trailing" constant="30" id="tRN-91-Lcc"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="hl2-LB-luk">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -45,6 +48,8 @@
                             <constraint firstItem="Fd5-Hr-OZA" firstAttribute="leading" secondItem="SXT-m1-RoC" secondAttribute="leading" id="NCD-PS-r1E"/>
                             <constraint firstItem="oLz-LZ-yrR" firstAttribute="bottom" secondItem="SXT-m1-RoC" secondAttribute="bottom" id="QF1-Qa-FR0"/>
                             <constraint firstItem="Fd5-Hr-OZA" firstAttribute="top" secondItem="SXT-m1-RoC" secondAttribute="top" id="ZMO-Ag-9XN"/>
+                            <constraint firstItem="hl2-LB-luk" firstAttribute="centerX" secondItem="jCu-pj-4x5" secondAttribute="centerX" id="b3S-Rd-odt"/>
+                            <constraint firstItem="hl2-LB-luk" firstAttribute="centerY" secondItem="jCu-pj-4x5" secondAttribute="centerY" id="ezW-jF-lgw"/>
                             <constraint firstItem="Fd5-Hr-OZA" firstAttribute="trailing" secondItem="SXT-m1-RoC" secondAttribute="trailing" id="fBH-Dw-HL6"/>
                             <constraint firstItem="SXT-m1-RoC" firstAttribute="top" secondItem="oLz-LZ-yrR" secondAttribute="top" id="lL6-d4-uEN"/>
                             <constraint firstItem="oLz-LZ-yrR" firstAttribute="trailing" secondItem="SXT-m1-RoC" secondAttribute="trailing" id="vik-2m-YFu"/>
@@ -55,6 +60,7 @@
                     <tabBarItem key="tabBarItem" title="" image="job" id="Bkn-l4-nkv"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="hl2-LB-luk" id="uSm-Wp-ZCj"/>
                         <outlet property="emptyView" destination="Fd5-Hr-OZA" id="DSN-jl-kaw"/>
                         <outlet property="tableView" destination="SXT-m1-RoC" id="Vo4-aG-TbW"/>
                     </connections>

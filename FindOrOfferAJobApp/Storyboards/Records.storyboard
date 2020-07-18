@@ -38,14 +38,19 @@
                                     <constraint firstItem="8IM-nF-2CH" firstAttribute="centerX" secondItem="YMJ-an-tIe" secondAttribute="centerX" id="uab-V2-EZ4"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="vgl-lq-gVd">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="n4v-KP-gWJ" firstAttribute="top" secondItem="KaT-zo-6PJ" secondAttribute="top" id="2vc-Xm-ZH4"/>
                             <constraint firstItem="KaT-zo-6PJ" firstAttribute="bottom" secondItem="YMJ-an-tIe" secondAttribute="bottom" id="EFO-Fm-1cR"/>
                             <constraint firstItem="YMJ-an-tIe" firstAttribute="top" secondItem="KaT-zo-6PJ" secondAttribute="top" id="GeR-dm-zmD"/>
+                            <constraint firstItem="vgl-lq-gVd" firstAttribute="centerY" secondItem="5UA-WG-hXE" secondAttribute="centerY" id="HsQ-YF-aD2"/>
                             <constraint firstItem="n4v-KP-gWJ" firstAttribute="leading" secondItem="KaT-zo-6PJ" secondAttribute="leading" id="Jyx-si-s6M"/>
                             <constraint firstItem="KaT-zo-6PJ" firstAttribute="trailing" secondItem="n4v-KP-gWJ" secondAttribute="trailing" id="Pxo-zd-M6M"/>
+                            <constraint firstItem="vgl-lq-gVd" firstAttribute="centerX" secondItem="5UA-WG-hXE" secondAttribute="centerX" id="VUh-fb-1MH"/>
                             <constraint firstItem="KaT-zo-6PJ" firstAttribute="bottom" secondItem="n4v-KP-gWJ" secondAttribute="bottom" id="Xic-kA-7J3"/>
                             <constraint firstItem="YMJ-an-tIe" firstAttribute="leading" secondItem="KaT-zo-6PJ" secondAttribute="leading" id="dow-xq-OXU"/>
                             <constraint firstItem="KaT-zo-6PJ" firstAttribute="trailing" secondItem="YMJ-an-tIe" secondAttribute="trailing" id="puw-RJ-3b7"/>
@@ -55,6 +60,7 @@
                     <tabBarItem key="tabBarItem" title="" image="records" id="biQ-au-sFZ"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="vgl-lq-gVd" id="uDk-Mc-2km"/>
                         <outlet property="emptyView" destination="YMJ-an-tIe" id="iC2-EB-45v"/>
                         <outlet property="tableView" destination="n4v-KP-gWJ" id="Tlh-12-XYh"/>
                     </connections>

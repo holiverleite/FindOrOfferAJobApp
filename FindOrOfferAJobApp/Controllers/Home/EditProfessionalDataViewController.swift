@@ -11,6 +11,7 @@ import UIKit
 class EditProfessionalDataViewController: UIViewController {
     
     @IBOutlet weak var emptyView: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableview: UITableView! {
         didSet {
             self.tableview.delegate = self
@@ -35,16 +36,16 @@ class EditProfessionalDataViewController: UIViewController {
         // Do any additional setup after loading the view.
         let createButton = UIBarButtonItem(title: "+", style: .plain, target: self, action: #selector(didTapCreateProfessionalCardButton))
         self.navigationItem.rightBarButtonItem = createButton
-        
-        self.tableview.isHidden = true
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        shouldShowActivity(true)
         FirebaseAuthManager().retrieveProfessionalCards(userId: self.userProfileViewModel.userId) { (professionalCards) in
+            self.shouldShowActivity(false)
             if professionalCards.count > 0 {
+                self.emptyView.isHidden = true
                 self.professionalCards.removeAll()
                 self.professionalCards.append(contentsOf: professionalCards)
                 self.tableview.isHidden = false
@@ -78,6 +79,18 @@ class EditProfessionalDataViewController: UIViewController {
     
     @objc func didTapBackButton() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    private func shouldShowActivity(_ status: Bool) {
+        if status {
+            emptyView.isHidden = true
+            activityIndicator.isHidden = false
+            activityIndicator.startAnimating()
+        } else {
+            emptyView.isHidden = false
+            activityIndicator.isHidden = true
+            activityIndicator.stopAnimating()
+        }
     }
 }
 

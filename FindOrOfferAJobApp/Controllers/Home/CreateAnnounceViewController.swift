@@ -214,5 +214,6 @@ extension CreateAnnounceViewController: ClearFieldsDelegate {
         self.descriptionAnnounce = ""
         self.enableSaveButton(false)
         tableView.reloadData()
+        self.navigationController?.popViewController(animated: true)
     }
 }

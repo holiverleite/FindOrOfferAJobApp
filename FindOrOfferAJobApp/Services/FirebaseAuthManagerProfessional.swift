@@ -14,7 +14,7 @@ import GoogleSignIn
 extension FirebaseAuthManager {
 
     func addProfessionalCard(userId: String, professionalCard: ProfessionalCard, completion: @escaping (_ success: Bool?) -> Void) {
-        let ref = self.rootUsersReference.child(userId).child(FirebaseUser.ProfessionalCards).childByAutoId()
+        let ref = self.usersReference.child(userId).child(FirebaseUser.ProfessionalCards).childByAutoId()
         let professionalCardDict: [String: Any] = [
             FirebaseUser.OccupationArea: professionalCard.occupationArea,
             FirebaseUser.ExperienceTime: professionalCard.experienceTime,
@@ -31,7 +31,7 @@ extension FirebaseAuthManager {
     }
     
     func deleteProfessionalCard(userId: String, cardId: String, completion: @escaping (_ success: Bool?) -> Void) {
-        let ref = self.rootUsersReference.child(userId).child(FirebaseUser.ProfessionalCards).child(cardId)
+        let ref = self.usersReference.child(userId).child(FirebaseUser.ProfessionalCards).child(cardId)
         ref.removeValue { (error, databaseReference) in
             if error != nil {
                 completion(false)
@@ -42,7 +42,7 @@ extension FirebaseAuthManager {
     }
     
     func updateProfessionalCard(userId: String, card: ProfessionalCard, completion: @escaping (_ success: Bool?) -> Void) {
-        let ref = self.rootUsersReference.child(userId).child(FirebaseUser.ProfessionalCards).child(card.id)
+        let ref = self.usersReference.child(userId).child(FirebaseUser.ProfessionalCards).child(card.id)
         let professionalCardDict: [String: Any] = [
             FirebaseUser.OccupationArea: card.occupationArea,
             FirebaseUser.ExperienceTime: card.experienceTime,
@@ -63,7 +63,7 @@ extension FirebaseAuthManager {
         var candidates: [UserProfile] = []
         for id in userIds {
             dispatchGroup.enter()
-            let ref = self.rootUsersReference.child(id)
+            let ref = self.usersReference.child(id)
             ref.observeSingleEvent(of: .value) { (dataSnapshot) in
                 guard let data = dataSnapshot.value as? [String: Any],
                     let firstName = data[FirebaseUser.FirstName] as? String,

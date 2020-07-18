@@ -24,7 +24,7 @@ extension FirebaseAuthManager {
     }
     
     func retrieveUserFromFirebase(userId: String, completion: @escaping (_ profile: UserProfile?) -> Void) {
-        let ref = self.rootUsersReference.child(userId)
+        let ref = self.usersReference.child(userId)
         ref.observeSingleEvent(of: .value) { (dataSnapshot) in
             
             
@@ -71,7 +71,7 @@ extension FirebaseAuthManager {
     }
     
     func retrieveProfessionalCards(userId: String, completion: @escaping (_ professionalCards: [ProfessionalCard]) -> Void) {
-        let ref = self.rootUsersReference.child(userId).child(FirebaseUser.ProfessionalCards)
+        let ref = self.usersReference.child(userId).child(FirebaseUser.ProfessionalCards)
         ref.observeSingleEvent(of: .value) { (dataSnapshot) in
             guard let data = dataSnapshot.value as? [String: Any] else {
                 completion([])
@@ -92,7 +92,7 @@ extension FirebaseAuthManager {
     }
     
     func updateUser(user: UserProfile, completion: @escaping (_ success: Bool?) -> Void) {
-        let ref = self.rootUsersReference.child(user.userId)
+        let ref = self.usersReference.child(user.userId)
         let userDict: [String: Any] = [
             FirebaseUser.FirstName: user.firstName,
             FirebaseUser.LastName: user.lastName,
@@ -145,7 +145,7 @@ extension FirebaseAuthManager {
         switch profile.accountType {
         case .DefaultAccount:
             
-            self.rootUsersReference.child(profile.userId).removeValue(completionBlock: { (error, databaseReference) in
+            self.usersReference.child(profile.userId).removeValue(completionBlock: { (error, databaseReference) in
                 Auth.auth().currentUser?.delete(completion: { (error) in
                     if let _ = error {
                         completion(false)
@@ -158,7 +158,7 @@ extension FirebaseAuthManager {
         case .GoogleAccount:
             GIDSignIn.sharedInstance()?.signOut()
             
-            self.rootUsersReference.child(profile.userId).removeValue { (error, _) in
+            self.usersReference.child(profile.userId).removeValue { (error, _) in
                 if let _ = error {
                     completion(false)
                 } else {

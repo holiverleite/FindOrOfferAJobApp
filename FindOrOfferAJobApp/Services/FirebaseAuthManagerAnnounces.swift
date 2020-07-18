@@ -14,7 +14,7 @@ import GoogleSignIn
 extension FirebaseAuthManager {
 
     func addAnnounceJob(userId: String, announceJob: AnnounceJob, completion: @escaping (_ success: Bool?) -> Void) {
-        let ref = rootUsersReference.child(FirebaseUser.GlobalAnnounces).childByAutoId()
+        let ref = globalAnnounceReference.childByAutoId()
         let announceDict: [String: Any] = [
             FirebaseUser.AdOwner: userId,
             FirebaseUser.OccupationArea: announceJob.occupationArea,
@@ -31,7 +31,7 @@ extension FirebaseAuthManager {
                 completion(false)
             } else {
                 if let announceKey = databaseReference.key {
-                    let ref = self.rootUsersReference.child(userId).child(FirebaseUser.AnnounceJob)
+                    let ref = self.usersReference.child(userId).child(FirebaseUser.AnnounceJob)
                     let announceDict: [String: Any] = [
                         announceKey: announceKey
                     ]
@@ -49,7 +49,7 @@ extension FirebaseAuthManager {
     }
     
     func approveCandidateOfAnnounce(candidateId: String, announceJob: AnnounceJob, completion: @escaping (_ success: Bool?) -> Void) {
-        let ref = rootUsersReference.child(FirebaseUser.GlobalAnnounces).child(announceJob.id)
+        let ref = globalAnnounceReference.child(announceJob.id)
         let announceDict: [String: Any] = [
             FirebaseUser.OccupationArea: announceJob.occupationArea,
             FirebaseUser.DescriptionOfProfession: announceJob.descriptionOfAnnounce,
@@ -71,7 +71,7 @@ extension FirebaseAuthManager {
     }
     
     func cancelAnnounceJob(userId: String, announceJob: AnnounceJob, completion: @escaping (_ success: Bool?) -> Void) {
-        let ref = rootUsersReference.child(FirebaseUser.GlobalAnnounces).child(announceJob.id)
+        let ref = globalAnnounceReference.child(announceJob.id)
         let announceDict: [String: Any] = [
             FirebaseUser.OccupationArea: announceJob.occupationArea,
             FirebaseUser.DescriptionOfProfession: announceJob.descriptionOfAnnounce,
@@ -91,7 +91,7 @@ extension FirebaseAuthManager {
     }
     
     func applyToJob(userId: String, announceJob: AnnounceJob, completion: @escaping (_ success: Bool?) -> Void) {
-        let ref = self.rootUsersReference.child(userId).child(FirebaseUser.MyJobApplications)
+        let ref = self.usersReference.child(userId).child(FirebaseUser.MyJobApplications)
         let announceDict: [String: Any] = [
             announceJob.id: announceJob.id
         ]
@@ -112,7 +112,7 @@ extension FirebaseAuthManager {
     }
     
     func updateGlobalJobs(userId: String, announceJob: AnnounceJob, completion: @escaping (_ success: Bool) -> Void) {
-        let ref = self.rootUsersReference.child(FirebaseUser.GlobalAnnounces).child(announceJob.id).child(FirebaseUser.Candidates)
+        let ref = self.globalAnnounceReference.child(announceJob.id).child(FirebaseUser.Candidates)
         let announceDict: [String: Any] = [
             userId: userId
         ]
@@ -127,7 +127,7 @@ extension FirebaseAuthManager {
     }
     
     func reactivateAnnounceJob(userId: String, announceJob: AnnounceJob, completion: @escaping (_ success: Bool?) -> Void) {
-        let ref = self.rootUsersReference.child(userId).child(FirebaseUser.AnnounceJob).child(announceJob.id)
+        let ref = self.usersReference.child(userId).child(FirebaseUser.AnnounceJob).child(announceJob.id)
         let announceDict: [String: Any] = [
             FirebaseUser.OccupationArea: announceJob.occupationArea,
             FirebaseUser.DescriptionOfProfession: announceJob.descriptionOfAnnounce,
@@ -147,7 +147,7 @@ extension FirebaseAuthManager {
     }
     
     func retrieveGlobalAnnouncesJob(completion: @escaping (_ announces: [AnnounceJob]) -> Void) {
-        let ref = self.rootUsersReference.child(FirebaseUser.GlobalAnnounces)
+        let ref = self.globalAnnounceReference
         ref.observe(.value) { (dataSnapshot) in
             guard let data = dataSnapshot.value as? [String: Any] else {
                 completion([])
@@ -160,13 +160,15 @@ extension FirebaseAuthManager {
                 if let item = announceItem.value as? [String: Any] {
                     
                     if let occupationArea = item[FirebaseUser.OccupationArea] as? String,
+                        let ownerAnnounce = item[FirebaseUser.AdOwner] as? String,
                         let startDate = item[FirebaseUser.StartDate] as? Double,
                         let finishDate = item[FirebaseUser.FinishDate] as? Double,
                         let description = item[FirebaseUser.DescriptionOfProfession] as? String,
                         let isCancelledAnnounce = item[FirebaseUser.IsCanceledAnnounce] as? Bool,
                         let isFinalizedAnnounce = item[FirebaseUser.IsFinalizedAnnounce] as? Bool {
                         
-                        if !isFinalizedAnnounce {
+                        let currentUser = UserProfileViewModel()
+                        if !isFinalizedAnnounce && !isCancelledAnnounce &&  currentUser.userId != ownerAnnounce {
                             let announce = AnnounceJob(id: announceItem.key,
                                                        occupationArea: occupationArea,
                                                        startTimestamp: startDate,
@@ -184,8 +186,54 @@ extension FirebaseAuthManager {
         }
     }
     
+    func retrieveAnnouncesForMe(professionalCards: [ProfessionalCard], completion: @escaping (_ announces: [AnnounceJob]) -> Void) {
+        let ref = self.globalAnnounceReference
+        ref.observe(.value) { (dataSnapshot) in
+            guard let data = dataSnapshot.value as? [String: Any] else {
+                completion([])
+                return
+            }
+            
+            var occupations: [String] = []
+            for card in professionalCards {
+                let occupationArea = card.occupationArea
+                occupations.append(occupationArea)
+            }
+            
+            var announces: [AnnounceJob] = []
+            
+            for announceItem in data {
+                if let item = announceItem.value as? [String: Any] {
+                    
+                    if let occupationArea = item[FirebaseUser.OccupationArea] as? String,
+                        let startDate = item[FirebaseUser.StartDate] as? Double,
+                        let finishDate = item[FirebaseUser.FinishDate] as? Double,
+                        let description = item[FirebaseUser.DescriptionOfProfession] as? String,
+                        let isCancelledAnnounce = item[FirebaseUser.IsCanceledAnnounce] as? Bool,
+                        let isFinalizedAnnounce = item[FirebaseUser.IsFinalizedAnnounce] as? Bool {
+                        
+                        if occupations.contains(occupationArea) {
+                            if !isFinalizedAnnounce && !isCancelledAnnounce {
+                                let announce = AnnounceJob(id: announceItem.key,
+                                                           occupationArea: occupationArea,
+                                                           startTimestamp: startDate,
+                                                           finishTimestamp: finishDate,
+                                                           isCanceled: isCancelledAnnounce,
+                                                           candidatesIds: [],
+                                                           descriptionOfAnnounce: description)
+                                
+                                announces.append(announce)
+                            }
+                        }
+                    }
+                }
+            }
+            completion(announces)
+        }
+    }
+    
     func retrieveAnnouncesJob(userId: String, onlyCancelledsAndFinisheds: Bool = false, completion: @escaping (_ professionalCards: [AnnounceJob]) -> Void) {
-        let ref = self.rootUsersReference.child(userId).child(FirebaseUser.AnnounceJob)
+        let ref = self.usersReference.child(userId).child(FirebaseUser.AnnounceJob)
         ref.observeSingleEvent(of: .value) { (dataSnapshot) in
             guard let data = dataSnapshot.value as? [String: Any] else {
                 completion([])
@@ -199,7 +247,7 @@ extension FirebaseAuthManager {
             }
             
             for item in myAnnouncesIds {
-                let ref = self.rootUsersReference.child(FirebaseUser.GlobalAnnounces).child(item)
+                let ref = self.globalAnnounceReference.child(item)
                 ref.observeSingleEvent(of: .value) { (dataSnapshot) in
                     guard let data = dataSnapshot.value as? [String: Any] else {
                         completion([])
@@ -248,7 +296,7 @@ extension FirebaseAuthManager {
     }
     
     func retrieveAnnouncesJob(announceId: String, completion: @escaping (_ announce: AnnounceJob?) -> Void) {
-        let ref = self.rootUsersReference.child(FirebaseUser.GlobalAnnounces).child(announceId)
+        let ref = self.globalAnnounceReference.child(announceId)
         ref.observeSingleEvent(of: .value) { (dataSnapshot) in
             guard let data = dataSnapshot.value as? [String: Any] else {
                 completion(nil)

@@ -10,6 +10,7 @@ import Foundation
 
 struct FirebaseKnot {
     static let Users = "users"
+    static let GlobalAnnounces = "global_announces"
 }
 
 struct FirebaseUser {

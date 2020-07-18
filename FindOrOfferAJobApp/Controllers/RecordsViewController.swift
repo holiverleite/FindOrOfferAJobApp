@@ -22,6 +22,7 @@ class RecordsViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var emptyView: UIView!
     
     var canceledAnnounces: [AnnounceJob] = []
@@ -30,14 +31,17 @@ class RecordsViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         self.navigationController?.navigationBar.topItem?.title = String.localize("records_nav_bar")
         
         let user = UserProfileViewModel()
+        shouldShowActivity(true)
         FirebaseAuthManager().retrieveAnnouncesJob(userId: user.userId, onlyCancelledsAndFinisheds: true) { (canceledAndFinishedAnnounces) in
+            self.shouldShowActivity(false)
             if canceledAndFinishedAnnounces.count > 0 {
+                self.emptyView.isHidden = true
                 self.canceledAnnounces.removeAll()
                 self.canceledAnnounces.append(contentsOf: canceledAndFinishedAnnounces)
                 self.view.bringSubviewToFront(self.tableView)
@@ -45,6 +49,18 @@ class RecordsViewController: UIViewController {
             } else {
                 self.view.bringSubviewToFront(self.emptyView)
             }
+        }
+    }
+    
+    private func shouldShowActivity(_ status: Bool) {
+        if status {
+            emptyView.isHidden = true
+            activityIndicator.isHidden = false
+            activityIndicator.startAnimating()
+        } else {
+            emptyView.isHidden = false
+            activityIndicator.isHidden = true
+            activityIndicator.stopAnimating()
         }
     }
 }
@@ -75,6 +91,8 @@ extension RecordsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.totalOfCandidates.textColor = .red
         } else {
             cell.totalCandidatesOrCancelledDateLabel.text = "Data de finalização:"
+            cell.totalCandidatesOrCancelledDateLabel.textColor = .black
+            cell.totalOfCandidates.textColor = .black
         }
         
         let formatterdStartedDate = dateFormatter.string(from: startDate)

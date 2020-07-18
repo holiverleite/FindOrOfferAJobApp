@@ -64,8 +64,20 @@ class AnnounceDetailViewController: UIViewController {
             self.buttonSaveAnnounce.setTitle("Reativar Anúncio", for: .normal)
             self.buttonSaveAnnounce.addTarget(self, action: #selector(didTapReactivateButton), for: .touchUpInside)
         } else if cameFromApplyTheJobAnnounce {
-            self.buttonSaveAnnounce.setTitle("Candidatar-se", for: .normal)
-            self.buttonSaveAnnounce.addTarget(self, action: #selector(didTapApplyToJobButton), for: .touchUpInside)
+            if let isCAnceled = announceJob?.isCanceled, let isFinished = announceJob?.isFinished, isCAnceled || isFinished {
+                self.buttonSaveAnnounce.setTitle("Candidatar-se", for: .normal)
+                self.buttonSaveAnnounce.backgroundColor = .gray
+                self.buttonSaveAnnounce.isEnabled = false
+                if isCAnceled {
+                    self.buttonSaveAnnounce.setTitle("Anúncio Cancelado", for: .normal)
+                }
+                if isFinished {
+                    self.buttonSaveAnnounce.setTitle("Anúncio Finalizado", for: .normal)
+                }
+            } else {
+                self.buttonSaveAnnounce.setTitle("Candidatar-se", for: .normal)
+                self.buttonSaveAnnounce.addTarget(self, action: #selector(didTapApplyToJobButton), for: .touchUpInside)
+            }
         } else {
             loadCandidates()
             
