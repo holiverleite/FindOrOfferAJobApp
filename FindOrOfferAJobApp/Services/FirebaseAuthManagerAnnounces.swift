@@ -209,11 +209,13 @@ extension FirebaseAuthManager {
                         let startDate = item[FirebaseUser.StartDate] as? Double,
                         let finishDate = item[FirebaseUser.FinishDate] as? Double,
                         let description = item[FirebaseUser.DescriptionOfProfession] as? String,
+                        let ownerAnnounce = item[FirebaseUser.AdOwner] as? String,
                         let isCancelledAnnounce = item[FirebaseUser.IsCanceledAnnounce] as? Bool,
                         let isFinalizedAnnounce = item[FirebaseUser.IsFinalizedAnnounce] as? Bool {
                         
                         if occupations.contains(occupationArea) {
-                            if !isFinalizedAnnounce && !isCancelledAnnounce {
+                            let currentUser = UserProfileViewModel()
+                            if !isFinalizedAnnounce && !isCancelledAnnounce && currentUser.userId != ownerAnnounce {
                                 let announce = AnnounceJob(id: announceItem.key,
                                                            occupationArea: occupationArea,
                                                            startTimestamp: startDate,
@@ -262,6 +264,8 @@ extension FirebaseAuthManager {
                             let isCancelledAnnounce = adDetail[FirebaseUser.IsCanceledAnnounce] as? Bool,
                             let isFinalizedAnnounce = adDetail[FirebaseUser.IsFinalizedAnnounce] as? Bool {
                             
+                            let selectedCandidate = adDetail[FirebaseUser.SelectedCandidate] as? String
+                            
                             var candidateIds: [String] = []
                             if let candidates = adDetail[FirebaseUser.Candidates] as? [String: String] {
                                 for candidateId in candidates.values {
@@ -276,6 +280,7 @@ extension FirebaseAuthManager {
                                                        isCanceled: isCancelledAnnounce,
                                                        candidatesIds: candidateIds,
                                                        descriptionOfAnnounce: description,
+                                                       selectedCandidateId: selectedCandidate,
                                                        isFinished:  isFinalizedAnnounce)
                             
                             if onlyCancelledsAndFinisheds {
@@ -295,6 +300,8 @@ extension FirebaseAuthManager {
         }
     }
     
+    
+    // retrieve candiadte selected
     func retrieveAnnouncesJob(announceId: String, completion: @escaping (_ announce: AnnounceJob?) -> Void) {
         let ref = self.globalAnnounceReference.child(announceId)
         ref.observeSingleEvent(of: .value) { (dataSnapshot) in
@@ -325,6 +332,70 @@ extension FirebaseAuthManager {
                     
                 }
                 completion(announce)
+            }
+        }
+    }
+    
+    func retrieveMyJobApplications(userId: String, completion: @escaping (_ professionalCards: [AnnounceJob]) -> Void) {
+        let dispatchGroup = DispatchGroup()
+        var appliedAnnouncesIds: [String] = []
+        var myApplications: [AnnounceJob] = []
+        
+        let ref = self.usersReference.child(userId).child(FirebaseUser.MyJobApplications)
+        dispatchGroup.enter()
+        ref.observeSingleEvent(of: .value) { (dataSnapshot) in
+            guard let data = dataSnapshot.value as? [String: Any] else {
+                completion([])
+                return
+            }
+            
+            
+            for item in data {
+                let announceId = item.key
+                appliedAnnouncesIds.append(announceId)
+            }
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            let dispatchGroupIntern = DispatchGroup()
+            
+            for announceId in appliedAnnouncesIds {
+                dispatchGroupIntern.enter()
+                let ref = self.globalAnnounceReference.child(announceId)
+                ref.observeSingleEvent(of: .value) { (dataSnapshot) in
+                    guard let data = dataSnapshot.value as? [String: Any] else {
+                        completion([])
+                        return
+                    }
+                    
+                    if let occupationArea = data[FirebaseUser.OccupationArea] as? String,
+                        let startDate = data[FirebaseUser.StartDate] as? Double,
+                        let finishDate = data[FirebaseUser.FinishDate] as? Double,
+                        let description = data[FirebaseUser.DescriptionOfProfession] as? String,
+                        let isCancelledAnnounce = data[FirebaseUser.IsCanceledAnnounce] as? Bool,
+                        let isFinalizedAnnounce = data[FirebaseUser.IsFinalizedAnnounce] as? Bool {
+                        
+                        let selectedCandidate = data[FirebaseUser.SelectedCandidate] as? String
+                        
+                        let announce = AnnounceJob(id: announceId,
+                                                   occupationArea: occupationArea,
+                                                   startTimestamp: startDate,
+                                                   finishTimestamp: finishDate,
+                                                   isCanceled: isCancelledAnnounce,
+                                                   candidatesIds: [],
+                                                   descriptionOfAnnounce: description,
+                                                   selectedCandidateId: selectedCandidate,
+                                                   isFinished:  isFinalizedAnnounce)
+                        
+                        myApplications.append(announce)
+                    }
+                    dispatchGroupIntern.leave()
+                }
+            }
+            
+            dispatchGroupIntern.notify(queue: .main) {
+                completion(myApplications)
             }
         }
     }

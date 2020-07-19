@@ -65,10 +65,10 @@ class AnnounceOfJobViewController: UIViewController {
         dispatchGroup.notify(queue: .main) {
             FirebaseAuthManager().retrieveGlobalAnnouncesJob { (announces) in
                 self.shouldShowActivity(false)
+                self.announces.removeAll()
                 if announces.count > 0 {
                     self.emptyView.isHidden = true
                     self.view.bringSubviewToFront(self.tableView)
-                    self.announces.removeAll()
                     self.announces.append(contentsOf: announces)
                     self.tableView.reloadData()
                 } else {
@@ -147,8 +147,9 @@ extension AnnounceOfJobViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let announceJob = announces[indexPath.row]
-        
+        self.shouldShowActivity(true)
         if occupationArea.contains(announceJob.occupationArea) {
+            self.shouldShowActivity(false)
             let storyBoard = UIStoryboard(name: "Home", bundle: nil)
             if let detailViewController = storyBoard.instantiateViewController(withIdentifier: "AnnounceDetailViewController") as? AnnounceDetailViewController {
                 detailViewController.announceJob = announceJob
@@ -156,6 +157,7 @@ extension AnnounceOfJobViewController: UITableViewDelegate, UITableViewDataSourc
                 navigationController?.pushViewController(detailViewController, animated: true)
             }
         } else {
+            self.shouldShowActivity(false)
             let alert = UIAlertController(title: "Atenção", message: String(format: "Você não possui nenhum Cartão Profissional para esta vaga em específico. Crie um Cartão Profissiona para area de '%@' e tente novamente.", announceJob.occupationArea), preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)

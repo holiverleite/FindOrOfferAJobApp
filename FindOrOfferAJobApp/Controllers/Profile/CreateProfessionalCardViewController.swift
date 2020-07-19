@@ -24,7 +24,11 @@ class CreateProfessionalCardViewController: UIViewController {
             self.tableView.dataSource = self
             
             self.tableView.separatorStyle = .none
+            tableView.backgroundColor = .clear
             self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "simpleCell")
+            
+            self.tableView.register(TextViewTableViewCell.self, forCellReuseIdentifier: String(describing: TextViewTableViewCell.self))
+            self.tableView.register(UINib(nibName: String(describing: TextViewTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: TextViewTableViewCell.self))
         }
     }
     
@@ -36,6 +40,7 @@ class CreateProfessionalCardViewController: UIViewController {
     var textFieldExperience: UITextField = UITextField()
     var textViewDescription: UITextView = UITextView()
     var isEditingMode: Bool = false
+    var occupationAreaAlreadyCreated: [String] = []
     var professionalCardEdit: ProfessionalCard? = nil
     
     override func viewDidLoad() {
@@ -154,7 +159,7 @@ extension CreateProfessionalCardViewController: UITableViewDelegate, UITableView
         case 2:
             return 220.0
         default:
-            return 50.0
+            return 0.0
         }
     }
     
@@ -187,18 +192,19 @@ extension CreateProfessionalCardViewController: UITableViewDelegate, UITableView
             
             return cell
         case 2:
-            self.textViewDescription = UITextView(frame: CGRect(origin: CGPoint(x: 0, y: 10), size: CGSize(width: tableView.frame.width, height: 200)))
             
-            self.textViewDescription.layer.borderWidth = 0.5
-            self.textViewDescription.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
-            self.textViewDescription.layer.cornerRadius = 4.0
-            self.textViewDescription.font = UIFont.systemFont(ofSize: 14, weight: .thin)
-            self.textViewDescription.delegate = self
-            self.textViewDescription.text = self.descriptionProfession
-            
-            cell.addSubview(self.textViewDescription)
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TextViewTableViewCell.self), for: indexPath) as? TextViewTableViewCell else {
+                return UITableViewCell()
+            }
+
+            self.textViewDescription = cell.descriptionTextView
+            cell.descriptionTextView.delegate = self
+            cell.descriptionTextView.text = self.descriptionProfession
             
             return cell
+            
+            
+            
         default:
             return UITableViewCell()
         }
@@ -211,6 +217,7 @@ extension CreateProfessionalCardViewController: UITableViewDelegate, UITableView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let professionOptionsViewController = segue.destination as? ProfessionOptionsViewController {
             professionOptionsViewController.delegate = self
+            professionOptionsViewController.occupationAreaAlreadyCreated = occupationAreaAlreadyCreated
         }
     }
 }

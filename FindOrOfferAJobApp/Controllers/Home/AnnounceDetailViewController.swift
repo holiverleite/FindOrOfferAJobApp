@@ -43,17 +43,18 @@ class AnnounceDetailViewController: UIViewController {
     var cameFromCreateAnnounce: Bool = false
     var cameFromRecordsAnnounce: Bool = false
     var cameFromApplyTheJobAnnounce: Bool = false
+    var cameFromMyApplications: Bool = false
     var delegate: ClearFieldsDelegate?
     let userProfileViewModel = UserProfileViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.navigationItem.title = String.localize("announce_detail_nav_bar")
         
         self.navigationItem.setLeftBarButton(UIBarButtonItem(image: ImageConstants.Back, landscapeImagePhone: ImageConstants.Back, style: .plain, target: self, action: #selector(didTapBackButton)), animated: true)
         
-         if cameFromCreateAnnounce {
+        if cameFromCreateAnnounce {
             let alert = UIAlertController(title: "Atenção", message: "Confira os dados do anúncio com atenção antes de finalizar. Eles não poderão ser alterados posteriormente.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -78,6 +79,9 @@ class AnnounceDetailViewController: UIViewController {
                 self.buttonSaveAnnounce.setTitle("Candidatar-se", for: .normal)
                 self.buttonSaveAnnounce.addTarget(self, action: #selector(didTapApplyToJobButton), for: .touchUpInside)
             }
+        } else if cameFromMyApplications {
+            self.buttonSaveAnnounce.setTitle("Desistir do processo", for: .normal)
+            self.buttonSaveAnnounce.addTarget(self, action: #selector(didTapGiveUpButton), for: .touchUpInside)
         } else {
             loadCandidates()
             
@@ -106,6 +110,25 @@ class AnnounceDetailViewController: UIViewController {
     // MARK: - Methods
     @objc func didTapBackButton() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc
+    private func didTapGiveUpButton() {
+        let alert = UIAlertController(title: "Atenção", message: "Realmente deseja desistir desse porcesso seletivo?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Sim", style: .destructive, handler: { (_) in
+//            FirebaseAuthManager().addAnnounceJob(userId: userProfileViewModel.userId, announceJob: announceJob) { (success) in
+//                if let success = success, success {
+//                    let alert = UIAlertController(title: "Sucesso", message: "Anúncio publicado com sucesso!", preferredStyle: .alert)
+//                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
+//                        self.delegate?.clearFields()
+//                        self.navigationController?.popViewController(animated: true)
+//                    }))
+//                    self.present(alert, animated: true, completion: nil)
+//                }
+//            }
+            self.navigationController?.popViewController(animated: true)
+        }))
+        alert.addAction(UIAlertAction(title: "Não", style: .default, handler: nil))
     }
     
     @objc
@@ -219,6 +242,9 @@ extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSour
             return "Resumo do anúncio"
         case 1:
             if !cameFromRecordsAnnounce && !cameFromApplyTheJobAnnounce {
+                if cameFromMyApplications {
+                    return "Status da vaga"
+                }
                 if let announceJob = announceJob, announceJob.isFinished {
                     return "Candidato selecionado"
                 }
@@ -237,7 +263,10 @@ extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSour
             return 1
         case 1:
             if !cameFromRecordsAnnounce && !cameFromApplyTheJobAnnounce {
-                return 1
+                if (announceJob?.selectedCandidateId != nil) || cameFromMyApplications {
+                    return 1
+                }
+                return profileCandidates.count
             }
             return 0
         default:
@@ -268,8 +297,8 @@ extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSour
                     } else
                     if announceJob.isFinished {
                         cell.finalizeOrCanceledLabel.text = "Finalizado em:"
-                        cell.finalizeOrCanceledLabel.textColor = .blue
-                        cell.finalAnnounceDate.textColor = .blue
+                        cell.finalizeOrCanceledLabel.textColor = .systemBlue
+                        cell.finalAnnounceDate.textColor = .systemBlue
                     } else {
 //                        cell.finalAnnounceDate.text = "Finaliza em:"
                     }
@@ -303,7 +332,7 @@ extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSour
             
             return cell
         case 1:
-             if profileCandidates.count > 0 {
+             if profileCandidates.count > 0, !cameFromMyApplications {
                 if let announceIsFinished = announceJob?.isFinished, announceIsFinished {
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CandidateSelectedTableViewCell.self), for: indexPath) as? CandidateSelectedTableViewCell else {
                         fatalError("CandidateSelectedTableViewCell not found!")
@@ -311,16 +340,25 @@ extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSour
                     
                     cell.selectionStyle = .none
                     
+                    let candidateSelectedId = announceJob?.selectedCandidateId
                     let candidate = profileCandidates[indexPath.row]
-                    cell.textLabel?.textAlignment = .left
-                    cell.userName.text = candidate.firstName
-                    cell.celPhone.text = candidate.cellphone
                     
-                    if let imageData = candidate.userImageData {
-                        cell.userPhoto.image = UIImage(data: imageData)
+                    if candidateSelectedId == candidate.userId {
+                        cell.textLabel?.textAlignment = .left
+                        cell.userName.text = candidate.firstName
+                        cell.celPhone.text = candidate.cellphone
+                        
+                        if let imageData = candidate.userImageData {
+                            cell.userPhoto.image = UIImage(data: imageData)
+                        } else {
+                            cell.userPhoto.image = ImageConstants.ProflePlaceHolder
+                        }
+                        
+                        return cell
                     }
+                    
+                    return UITableViewCell()
 
-                    return cell
                 } else {
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CandidateTableViewCell.self), for: indexPath) as? CandidateTableViewCell else {
                         fatalError("CandidateTableViewCell not found!")
@@ -333,6 +371,8 @@ extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSour
                     cell.userName.text = candidate.firstName
                     if let imageData = candidate.userImageData {
                         cell.userPhoto.image = UIImage(data: imageData)
+                    } else {
+                        cell.userPhoto.image = ImageConstants.ProflePlaceHolder
                     }
 
                     return cell
@@ -347,7 +387,28 @@ extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSour
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
                 cell.textLabel?.textAlignment = .center
                 cell.textLabel?.numberOfLines = 0
-                cell.textLabel?.text = "Ainda não surgiram candidatos para esta vaga."
+                if cameFromMyApplications {
+                    if let isFinished = announceJob?.isFinished, isFinished {
+                        self.buttonSaveAnnounce.backgroundColor = .gray
+                        self.buttonSaveAnnounce.isEnabled = false
+                        if announceJob?.selectedCandidateId == userProfileViewModel.userId {
+                            cell.textLabel?.text = "Parabéns, você foi selecionado para esta vaga. Aguarde o contato do anunciante."
+                            cell.textLabel?.textColor = .systemBlue
+                        } else {
+                            cell.textLabel?.text = "Infelizmente você não foi selecionado neste processo seletivo."
+                            cell.textLabel?.textColor = .red
+                        }
+                    } else if let isCanceled = announceJob?.isCanceled, isCanceled {
+                        self.buttonSaveAnnounce.backgroundColor = .gray
+                        self.buttonSaveAnnounce.isEnabled = false
+                        cell.textLabel?.text = "Infelizmente este processo seletivo foi cancelado pelo anunciante."
+                        cell.textLabel?.textColor = .red
+                    } else {
+                        cell.textLabel?.text = "Fique atento! Caso você seja selecionado, o anunciante da vaga entrará em contato com você."
+                    }
+                } else {
+                    cell.textLabel?.text = "Ainda não surgiram candidatos para esta vaga."
+                }
                 
                 return cell
             }
@@ -357,7 +418,9 @@ extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "CandidateProfileViewController", sender: indexPath)
+        if !profileCandidates.isEmpty {
+            self.performSegue(withIdentifier: "CandidateProfileViewController", sender: indexPath)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

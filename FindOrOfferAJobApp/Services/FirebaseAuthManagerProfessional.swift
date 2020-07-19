@@ -101,18 +101,24 @@ extension FirebaseAuthManager {
                                               userImageData: nil,
                                               professionalCards: cards)
                 
-                dispatchGroup.enter()
-                if let url = URL(string: userImageURL) {
-                    self.downloadUserImageData(imageUrl: url) { (data) in
-                        if let data = data {
-                            userProfile.userImageData = data
-                        }
-                        dispatchGroup.leave()
-                    }
-                }
                 
-                candidates.append(userProfile)
-                dispatchGroup.leave()
+                if userImageURL.isEmpty {
+                    candidates.append(userProfile)
+                    dispatchGroup.leave()
+                } else {
+                    dispatchGroup.enter()
+                    if let url = URL(string: userImageURL) {
+                        self.downloadUserImageData(imageUrl: url) { (data) in
+                            if let data = data {
+                                userProfile.userImageData = data
+                            }
+                            dispatchGroup.leave()
+                        }
+                    }
+                    
+                    candidates.append(userProfile)
+                    dispatchGroup.leave()
+                }
             }
         }
         

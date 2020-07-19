@@ -25,6 +25,7 @@ class ProfessionOptionsViewController: UIViewController {
     
     //MARK: - Variables
     weak var delegate: ProfessionSelectedDelegate?
+    var occupationAreaAlreadyCreated: [String] = []
     var categoriesArray: [String] = [
         "ABATEDOR(A) DE AVES",
         "ABATEDOR(A) DE AVES COM COMERCIALIZAÇÃO DO PRODUTO",
@@ -540,8 +541,18 @@ extension ProfessionOptionsViewController: UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        self.delegate?.professionSelected(profession: self.categoriesArray[indexPath.row])
-        self.navigationController?.popViewController(animated: true)
+        
+        let professionSelected = self.categoriesArray[indexPath.row]
+        if occupationAreaAlreadyCreated.contains(professionSelected) {
+            let alert = UIAlertController(title: "Atenção", message: String(format: "Você já possui um Cartão Profissional para a profissão de '%@'. Edite o cartão já existente.", professionSelected), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
+                tableView.cellForRow(at: indexPath)?.accessoryType = .none
+            }))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            self.delegate?.professionSelected(profession: self.categoriesArray[indexPath.row])
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {

@@ -12,6 +12,8 @@
 		620F88C624A7D8B900E4D55D /* CandidateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620F88C424A7D8B900E4D55D /* CandidateTableViewCell.swift */; };
 		620F88C724A7D8B900E4D55D /* CandidateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 620F88C524A7D8B900E4D55D /* CandidateTableViewCell.xib */; };
 		620F88C924A7EACD00E4D55D /* CandidateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620F88C824A7EACD00E4D55D /* CandidateProfileViewController.swift */; };
+		62682D4E24C47211003F4AB0 /* TextViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62682D4C24C47211003F4AB0 /* TextViewTableViewCell.swift */; };
+		62682D4F24C47211003F4AB0 /* TextViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62682D4D24C47211003F4AB0 /* TextViewTableViewCell.xib */; };
 		62777E4324675DEA00FD35C2 /* Records.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62777E4224675DEA00FD35C2 /* Records.storyboard */; };
 		62777E45246767BF00FD35C2 /* RecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62777E44246767BF00FD35C2 /* RecordsViewController.swift */; };
 		627A96E4247D4FB1005EB273 /* AnnouncesListCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627A96E2247D4FB1005EB273 /* AnnouncesListCellTableViewCell.swift */; };
@@ -83,6 +85,8 @@
 		620F88C424A7D8B900E4D55D /* CandidateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateTableViewCell.swift; sourceTree = "<group>"; };
 		620F88C524A7D8B900E4D55D /* CandidateTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CandidateTableViewCell.xib; sourceTree = "<group>"; };
 		620F88C824A7EACD00E4D55D /* CandidateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateProfileViewController.swift; sourceTree = "<group>"; };
+		62682D4C24C47211003F4AB0 /* TextViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewTableViewCell.swift; sourceTree = "<group>"; };
+		62682D4D24C47211003F4AB0 /* TextViewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextViewTableViewCell.xib; sourceTree = "<group>"; };
 		62777E4224675DEA00FD35C2 /* Records.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Records.storyboard; sourceTree = "<group>"; };
 		62777E44246767BF00FD35C2 /* RecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsViewController.swift; sourceTree = "<group>"; };
 		627A96E2247D4FB1005EB273 /* AnnouncesListCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncesListCellTableViewCell.swift; sourceTree = "<group>"; };
@@ -177,6 +181,15 @@
 				620F88C524A7D8B900E4D55D /* CandidateTableViewCell.xib */,
 			);
 			path = CandidateTableViewCell;
+			sourceTree = "<group>";
+		};
+		62682D4B24C4714E003F4AB0 /* TextViewTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				62682D4C24C47211003F4AB0 /* TextViewTableViewCell.swift */,
+				62682D4D24C47211003F4AB0 /* TextViewTableViewCell.xib */,
+			);
+			path = TextViewTableViewCell;
 			sourceTree = "<group>";
 		};
 		627A96E1247D4F55005EB273 /* AnnouncesListCell */ = {
@@ -361,6 +374,7 @@
 		945531FB23FEC56000016D30 /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				62682D4B24C4714E003F4AB0 /* TextViewTableViewCell */,
 				627CE22124BB93AF00E5C0BC /* CandidateSelectedTableViewCell */,
 				620F88C324A7D88B00E4D55D /* CandidateTableViewCell */,
 				627A96E1247D4F55005EB273 /* AnnouncesListCell */,
@@ -537,6 +551,7 @@
 				628CB81923DCDA4800B62278 /* Assets.xcassets in Resources */,
 				9455790A23F43E3D005B1B92 /* Localizable.strings in Resources */,
 				628CB81723DCDA4500B62278 /* AccessScreen.storyboard in Resources */,
+				62682D4F24C47211003F4AB0 /* TextViewTableViewCell.xib in Resources */,
 				62777E4324675DEA00FD35C2 /* Records.storyboard in Resources */,
 				627CE21E24BA4F5700E5C0BC /* RecomendationView.xib in Resources */,
 				945531FD23FEC70A00016D30 /* Profile.storyboard in Resources */,
@@ -654,6 +669,7 @@
 				717BF25E2433C0E600BB21F4 /* EditProfessionalDataViewController.swift in Sources */,
 				945531FA23FEB0B200016D30 /* UserProfileViewModel.swift in Sources */,
 				62BF847924673C83003AB826 /* AnnounceOfJobViewController.swift in Sources */,
+				62682D4E24C47211003F4AB0 /* TextViewTableViewCell.swift in Sources */,
 				9455790723F4356A005B1B92 /* RegistrationViewController.swift in Sources */,
 				9455320323FEE2C700016D30 /* SettingsViewController.swift in Sources */,
 				627CE22024BB15FE00E5C0BC /* BaseView.swift in Sources */,

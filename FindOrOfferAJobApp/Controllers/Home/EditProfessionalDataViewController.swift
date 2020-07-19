@@ -27,6 +27,7 @@ class EditProfessionalDataViewController: UIViewController {
     // MARK: - Variables
     var userProfileViewModel = UserProfileViewModel()
     var professionalCards: [ProfessionalCard] = []
+    var occupationAreaCArds: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +46,11 @@ class EditProfessionalDataViewController: UIViewController {
         FirebaseAuthManager().retrieveProfessionalCards(userId: self.userProfileViewModel.userId) { (professionalCards) in
             self.shouldShowActivity(false)
             if professionalCards.count > 0 {
+                
+                professionalCards.forEach { (card) in
+                    self.occupationAreaCArds.append(card.occupationArea)
+                }
+                
                 self.emptyView.isHidden = true
                 self.professionalCards.removeAll()
                 self.professionalCards.append(contentsOf: professionalCards)
@@ -71,9 +77,13 @@ class EditProfessionalDataViewController: UIViewController {
                 editProfessionalCard.isEditingMode = true
                 editProfessionalCard.userProfileViewModel = self.userProfileViewModel
                 editProfessionalCard.professionalCardEdit = self.professionalCards[senderIndex.row]
+                editProfessionalCard.occupationAreaAlreadyCreated = occupationAreaCArds.filter() {
+                    $0 != self.professionalCards[senderIndex.row].occupationArea
+                }
             }
         } else if let createProfessionalCard = segue.destination as? CreateProfessionalCardViewController {
             createProfessionalCard.userProfileViewModel = self.userProfileViewModel
+            createProfessionalCard.occupationAreaAlreadyCreated = occupationAreaCArds
         }
     }
     

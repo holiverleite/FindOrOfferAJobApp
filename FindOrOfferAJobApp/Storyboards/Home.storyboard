@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wYf-1a-b3V">
-                                <rect key="frame" x="40" y="81" width="142.5" height="142.5"/>
+                                <rect key="frame" x="40" y="45" width="142.5" height="142.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meus processos seletivos" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1a-ta-Znw">
                                         <rect key="frame" x="20" y="41" width="102.5" height="61"/>
@@ -36,7 +36,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z09-72-MdX">
-                                <rect key="frame" x="192.5" y="81" width="142.5" height="142.5"/>
+                                <rect key="frame" x="192.5" y="45" width="142.5" height="142.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meus Anúncios" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X7G-oO-ulQ">
                                         <rect key="frame" x="20" y="51" width="102.5" height="41"/>
@@ -54,7 +54,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MuN-pz-CWd">
-                                <rect key="frame" x="40" y="233.5" width="142.5" height="142.5"/>
+                                <rect key="frame" x="40" y="197.5" width="142.5" height="142.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meus Cartões Profissionais" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Asd-ve-iW9">
                                         <rect key="frame" x="20" y="41" width="102.5" height="61"/>
@@ -73,7 +73,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="toy-Sl-0NL">
-                                <rect key="frame" x="192.5" y="233.5" width="142.5" height="142.5"/>
+                                <rect key="frame" x="192.5" y="197.5" width="142.5" height="142.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vagas Recomendadas para você" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tfg-rw-gvX">
                                         <rect key="frame" x="10" y="41" width="122.5" height="61"/>
@@ -90,7 +90,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pf9-qf-DIr">
-                                <rect key="frame" x="116.5" y="386" width="142.5" height="142.5"/>
+                                <rect key="frame" x="116.5" y="350" width="142.5" height="142.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minhas Avaliações" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cC1-Bn-fay">
                                         <rect key="frame" x="10" y="51" width="122.5" height="41"/>
@@ -110,7 +110,7 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="wYf-1a-b3V" firstAttribute="top" secondItem="ZPZ-YJ-Z94" secondAttribute="top" constant="81" id="1Lh-dY-igF"/>
+                            <constraint firstItem="wYf-1a-b3V" firstAttribute="top" secondItem="ZPZ-YJ-Z94" secondAttribute="top" constant="45" id="1Lh-dY-igF"/>
                             <constraint firstItem="pf9-qf-DIr" firstAttribute="centerX" secondItem="ZPZ-YJ-Z94" secondAttribute="centerX" id="8aa-PS-jgV"/>
                             <constraint firstItem="MuN-pz-CWd" firstAttribute="leading" secondItem="wYf-1a-b3V" secondAttribute="leading" id="9lf-1G-pv6"/>
                             <constraint firstItem="toy-Sl-0NL" firstAttribute="leading" secondItem="z09-72-MdX" secondAttribute="leading" id="ALN-Jg-134"/>
@@ -124,7 +124,7 @@
                             <constraint firstItem="toy-Sl-0NL" firstAttribute="top" secondItem="MuN-pz-CWd" secondAttribute="top" id="W1p-lq-nHI"/>
                             <constraint firstItem="wYf-1a-b3V" firstAttribute="width" secondItem="z09-72-MdX" secondAttribute="width" id="Z5l-Mm-KDu"/>
                             <constraint firstItem="MuN-pz-CWd" firstAttribute="trailing" secondItem="wYf-1a-b3V" secondAttribute="trailing" id="ZTh-h4-NkB"/>
-                            <constraint firstItem="z09-72-MdX" firstAttribute="top" secondItem="ZPZ-YJ-Z94" secondAttribute="top" constant="81" id="bgY-Yo-cyL"/>
+                            <constraint firstItem="z09-72-MdX" firstAttribute="top" secondItem="ZPZ-YJ-Z94" secondAttribute="top" constant="45" id="bgY-Yo-cyL"/>
                             <constraint firstItem="z09-72-MdX" firstAttribute="leading" secondItem="wYf-1a-b3V" secondAttribute="trailing" constant="10" id="jg2-id-bVg"/>
                             <constraint firstItem="toy-Sl-0NL" firstAttribute="trailing" secondItem="z09-72-MdX" secondAttribute="trailing" id="mfP-ft-20L"/>
                             <constraint firstItem="toy-Sl-0NL" firstAttribute="bottom" secondItem="MuN-pz-CWd" secondAttribute="bottom" id="wIn-0s-snt"/>
@@ -179,6 +179,9 @@
                                     <constraint firstItem="C6X-PU-dZa" firstAttribute="centerX" secondItem="MKG-d5-adf" secondAttribute="centerX" id="hTD-hF-Fhu"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="7bY-AP-1Ok">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -187,6 +190,8 @@
                             <constraint firstItem="MKG-d5-adf" firstAttribute="leading" secondItem="PSP-VK-wgz" secondAttribute="leading" id="Uva-Pp-Ek8"/>
                             <constraint firstItem="ePy-Ea-bNN" firstAttribute="top" secondItem="PSP-VK-wgz" secondAttribute="top" id="fQa-CI-354"/>
                             <constraint firstItem="MKG-d5-adf" firstAttribute="top" secondItem="PSP-VK-wgz" secondAttribute="top" id="k5c-BP-gTO"/>
+                            <constraint firstItem="7bY-AP-1Ok" firstAttribute="centerY" secondItem="qhn-hK-FsY" secondAttribute="centerY" id="kNA-iN-lgb"/>
+                            <constraint firstItem="7bY-AP-1Ok" firstAttribute="centerX" secondItem="qhn-hK-FsY" secondAttribute="centerX" id="nyP-Y1-uSp"/>
                             <constraint firstAttribute="trailing" secondItem="MKG-d5-adf" secondAttribute="trailing" id="tAU-bx-A1C"/>
                             <constraint firstAttribute="bottom" secondItem="MKG-d5-adf" secondAttribute="bottom" id="uE1-Iw-hRG"/>
                             <constraint firstItem="PSP-VK-wgz" firstAttribute="trailing" secondItem="ePy-Ea-bNN" secondAttribute="trailing" id="z1n-g3-ghN"/>
@@ -195,6 +200,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="fwA-T8-xlr"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="7bY-AP-1Ok" id="gSD-0L-oEd"/>
                         <outlet property="emptyView" destination="MKG-d5-adf" id="5ao-ml-UrE"/>
                         <outlet property="tableView" destination="ePy-Ea-bNN" id="JuP-DV-iuy"/>
                     </connections>
@@ -274,15 +280,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Puu-0h-q0J">
-                                <rect key="frame" x="20" y="20" width="335" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Puu-0h-q0J" firstAttribute="leading" secondItem="7Mx-ac-5eP" secondAttribute="leading" constant="20" id="93s-1g-P9O"/>
-                            <constraint firstItem="Puu-0h-q0J" firstAttribute="top" secondItem="7Mx-ac-5eP" secondAttribute="top" constant="20" id="J2M-IM-PqG"/>
-                            <constraint firstItem="7Mx-ac-5eP" firstAttribute="trailing" secondItem="Puu-0h-q0J" secondAttribute="trailing" constant="20" id="emn-uu-ngq"/>
+                            <constraint firstItem="Puu-0h-q0J" firstAttribute="leading" secondItem="7Mx-ac-5eP" secondAttribute="leading" id="93s-1g-P9O"/>
+                            <constraint firstItem="Puu-0h-q0J" firstAttribute="top" secondItem="7Mx-ac-5eP" secondAttribute="top" id="J2M-IM-PqG"/>
+                            <constraint firstItem="7Mx-ac-5eP" firstAttribute="trailing" secondItem="Puu-0h-q0J" secondAttribute="trailing" id="emn-uu-ngq"/>
                             <constraint firstItem="7Mx-ac-5eP" firstAttribute="bottom" secondItem="Puu-0h-q0J" secondAttribute="bottom" id="lH2-Zy-EfL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7Mx-ac-5eP"/>

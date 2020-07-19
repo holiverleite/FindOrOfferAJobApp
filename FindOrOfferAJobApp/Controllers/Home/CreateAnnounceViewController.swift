@@ -26,7 +26,12 @@ class CreateAnnounceViewController: UIViewController {
             tableView.dataSource = self
             
             tableView.separatorStyle = .none
+            tableView.backgroundColor = .clear
             tableView.register(UITableViewCell.self, forCellReuseIdentifier: "simpleCell")
+            
+            self.tableView.register(TextViewTableViewCell.self, forCellReuseIdentifier: String(describing: TextViewTableViewCell.self))
+            self.tableView.register(UINib(nibName: String(describing: TextViewTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: TextViewTableViewCell.self))
+
         }
     }
     
@@ -129,7 +134,7 @@ extension CreateAnnounceViewController: UITableViewDelegate, UITableViewDataSour
         case 1:
             return 220.0
         default:
-            return 50.0
+            return 0
         }
     }
     
@@ -138,32 +143,31 @@ extension CreateAnnounceViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "simpleCell") else {
-            return UITableViewCell()
-        }
-        
-        cell.selectionStyle = .none
         
         switch indexPath.section {
         case 0:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "simpleCell") else {
+                return UITableViewCell()
+            }
+
             if professionSelected.isEmpty {
                 cell.textLabel?.text = "Selecione a área de atuação..."
             } else {
                 cell.textLabel?.text = professionSelected
             }
+            cell.selectionStyle = .none
             
             return cell
         case 1:
-            textViewDescription = UITextView(frame: CGRect(origin: CGPoint(x: 0, y: 10), size: CGSize(width: tableView.frame.width, height: 200)))
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TextViewTableViewCell.self), for: indexPath) as? TextViewTableViewCell else {
+                return UITableViewCell()
+            }
             
-            textViewDescription.layer.borderWidth = 0.5
-            textViewDescription.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
-            textViewDescription.layer.cornerRadius = 4.0
-            textViewDescription.font = UIFont.systemFont(ofSize: 14, weight: .thin)
-            textViewDescription.delegate = self
-            textViewDescription.text = descriptionAnnounce
-            
-            cell.addSubview(textViewDescription)
+            self.textViewDescription = cell.descriptionTextView
+            cell.selectionStyle = .none
+            cell.descriptionTextView.delegate = self
+            cell.descriptionTextView.text = descriptionAnnounce
+            cell.selectionStyle = .none
             
             return cell
         default:
@@ -184,7 +188,7 @@ extension CreateAnnounceViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        closeKeyboard()
+//        closeKeyboard()
     }
 }
 

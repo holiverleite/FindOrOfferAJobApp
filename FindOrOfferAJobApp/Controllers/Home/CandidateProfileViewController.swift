@@ -45,8 +45,12 @@ class CandidateProfileViewController: UIViewController {
         
         self.navigationItem.setLeftBarButton(UIBarButtonItem(image: ImageConstants.Back, landscapeImagePhone: ImageConstants.Back, style: .plain, target: self, action: #selector(didTapBackButton)), animated: true)
 
-        if let candidate = candidateProfile, let announce = announce, let candidateImageData = candidate.userImageData {
-            candidateImage.image = UIImage(data: candidateImageData)
+        if let candidate = candidateProfile, let announce = announce {
+            if let candidateImageData = candidate.userImageData  {
+                candidateImage.image = UIImage(data: candidateImageData)
+            } else {
+                candidateImage.image = ImageConstants.ProflePlaceHolder
+            }
             name.text = "\(candidate.firstName)\(candidate.lastName)"
             age.text = candidate.birthDate
             
