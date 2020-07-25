@@ -34,6 +34,7 @@ class RecommendedJobsForYouViewController: UIViewController {
     // MARK: - Variables
     
     var announces: [AnnounceJob] = []
+    var myApplicationsIds: [String] = []
     
     // MARK: - LifeCycle
     
@@ -62,6 +63,12 @@ class RecommendedJobsForYouViewController: UIViewController {
                 self.view.bringSubviewToFront(self.emptyView)
                 self.messageEmptyStateLabel.text = "Você nao possui cartões profissionais para as vagas existentes. Cadastre seus cartões profissionais e tente novamente."
             }
+        }
+        
+        dispatchGroup.enter()
+        FirebaseAuthManager().retrieveJobApplicationsIds(userId: user.userId) { myApplicationsIds in
+            dispatchGroup.leave()
+            self.myApplicationsIds = myApplicationsIds
         }
         
         dispatchGroup.notify(queue: .main) {
@@ -155,7 +162,9 @@ extension RecommendedJobsForYouViewController: UITableViewDelegate, UITableViewD
         let storyBoard = UIStoryboard(name: "Home", bundle: nil)
         if let detailViewController = storyBoard.instantiateViewController(withIdentifier: "AnnounceDetailViewController") as? AnnounceDetailViewController {
             detailViewController.announceJob = announceJob
-            detailViewController.cameFromApplyTheJobAnnounce = true
+            detailViewController.cameFromJobToMe = true
+//            detailViewController.cameFromApplyTheJobAnnounce = true
+            detailViewController.myApplicationsIds = self.myApplicationsIds
             navigationController?.pushViewController(detailViewController, animated: true)
         }
         closeKeyboard()

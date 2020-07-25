@@ -31,7 +31,8 @@
 
 // AnnounceJob
 "my_selective_proccess_nav_bar" = "Meus Processos Seletivos";
-"my_announces_nav_bar" = "Meus Anúncios";
+"my_announces_nav_bar" = "Meus Anúncios Atívos
+";
 "announce_detail_nav_bar" = "Detalhes do Anúncio";
 "announce_a_job_nav_bar" = "Anuncie um serviço";
 "job_for_you_nav_bar" = "Vagas para você";

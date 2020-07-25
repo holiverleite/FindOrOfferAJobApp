@@ -35,6 +35,7 @@ struct FirebaseUser {
     static let Candidates = "candidates"
     static let IsCanceledAnnounce = "isCanceled"
     static let IsFinalizedAnnounce = "isFinalized"
+    static let IsProcessFinalizedAnnounce = "isProcessFinalized"
     static let GlobalAnnounces = "globalAnnounces"
     static let MyJobApplications = "myJobApplications"
     static let AdOwner = "adOwner"

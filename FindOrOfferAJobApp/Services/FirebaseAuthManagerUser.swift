@@ -91,6 +91,24 @@ extension FirebaseAuthManager {
         }
     }
     
+    func retrieveJobApplicationsIds(userId: String, completion: @escaping (_ professionalCards: [String]) -> Void) {
+        let ref = self.usersReference.child(userId).child(FirebaseUser.MyJobApplications)
+        ref.observeSingleEvent(of: .value) { (dataSnapshot) in
+            guard let data = dataSnapshot.value as? [String: Any] else {
+                completion([])
+                return
+            }
+            
+            var myJobApplications: [String] = []
+            for jobApplications in data {
+                if let jobApplicationId = jobApplications.key as? String {
+                    myJobApplications.append(jobApplicationId)
+                }
+            }
+            completion(myJobApplications)
+        }
+    }
+    
     func updateUser(user: UserProfile, completion: @escaping (_ success: Bool?) -> Void) {
         let ref = self.usersReference.child(user.userId)
         let userDict: [String: Any] = [

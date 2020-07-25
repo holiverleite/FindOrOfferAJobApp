@@ -13,6 +13,7 @@ import GoogleSignIn
 
 extension FirebaseAuthManager {
 
+    // Announce Creation
     func addAnnounceJob(userId: String, announceJob: AnnounceJob, completion: @escaping (_ success: Bool?) -> Void) {
         let ref = globalAnnounceReference.childByAutoId()
         let announceDict: [String: Any] = [
@@ -21,8 +22,9 @@ extension FirebaseAuthManager {
             FirebaseUser.DescriptionOfProfession: announceJob.descriptionOfAnnounce,
             FirebaseUser.StartDate: announceJob.startTimestamp,
             FirebaseUser.FinishDate: announceJob.finishTimestamp,
-            FirebaseUser.IsCanceledAnnounce: announceJob.isCanceled,
+            FirebaseUser.IsCanceledAnnounce: false,
             FirebaseUser.IsFinalizedAnnounce: false,
+            FirebaseUser.IsProcessFinalizedAnnounce: false,
             FirebaseUser.Candidates: [:]
         ]
         
@@ -48,6 +50,7 @@ extension FirebaseAuthManager {
         }
     }
     
+    // When candidate is approved
     func approveCandidateOfAnnounce(candidateId: String, announceJob: AnnounceJob, completion: @escaping (_ success: Bool?) -> Void) {
         let ref = globalAnnounceReference.child(announceJob.id)
         let announceDict: [String: Any] = [
@@ -56,7 +59,8 @@ extension FirebaseAuthManager {
             FirebaseUser.StartDate: announceJob.startTimestamp,
             FirebaseUser.FinishDate: Date().timeIntervalSince1970,
             FirebaseUser.IsCanceledAnnounce: false,
-            FirebaseUser.IsFinalizedAnnounce: true,
+            FirebaseUser.IsFinalizedAnnounce: false,
+            FirebaseUser.IsProcessFinalizedAnnounce: true,
             FirebaseUser.SelectedCandidate: candidateId,
             FirebaseUser.Candidates: [candidateId:candidateId]
         ]
@@ -86,6 +90,51 @@ extension FirebaseAuthManager {
                 completion(false)
             } else {
                 completion(true)
+            }
+        }
+    }
+    
+    func cancelJobApplication(userId: String, announceJob: AnnounceJob, completion: @escaping (_ success: Bool?) -> Void) {
+        let ref = globalAnnounceReference.child(announceJob.id).child(FirebaseUser.Candidates)
+        ref.observeSingleEvent(of: .value) { (dataSnapshot) in
+            guard let data = dataSnapshot.value as? [String: Any] else {
+                return
+            }
+            
+            var dictCandidates: [String:Any] = [:]
+            for item in data {
+                if item.key != userId {
+                    dictCandidates[item.key] = item.key
+                }
+            }
+            
+            ref.setValue(dictCandidates) { (error, databaseReference) in
+                if error != nil {
+                    completion(false)
+                } else {
+                    let userRef = self.usersReference.child(userId).child(FirebaseUser.MyJobApplications)
+                    userRef.observeSingleEvent(of: .value) { (dataSnapshot) in
+                        guard let data = dataSnapshot.value as? [String: Any] else {
+                            completion(false)
+                            return
+                        }
+                        
+                        var myJobApplications: [String:Any] = [:]
+                        for item in data {
+                            if item.key != announceJob.id {
+                                myJobApplications[item.key] = item.key
+                            }
+                        }
+                        
+                        userRef.setValue(myJobApplications) { (error, databaseReference) in
+                            if error != nil {
+                                completion(false)
+                            } else {
+                                completion(true)
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -127,12 +176,14 @@ extension FirebaseAuthManager {
     }
     
     func reactivateAnnounceJob(userId: String, announceJob: AnnounceJob, completion: @escaping (_ success: Bool?) -> Void) {
-        let ref = self.usersReference.child(userId).child(FirebaseUser.AnnounceJob).child(announceJob.id)
+        let ref = self.globalAnnounceReference.child(announceJob.id)
         let announceDict: [String: Any] = [
             FirebaseUser.OccupationArea: announceJob.occupationArea,
             FirebaseUser.DescriptionOfProfession: announceJob.descriptionOfAnnounce,
             FirebaseUser.StartDate: announceJob.startTimestamp,
             FirebaseUser.FinishDate: announceJob.finishTimestamp,
+            FirebaseUser.IsFinalizedAnnounce: false,
+            FirebaseUser.IsProcessFinalizedAnnounce: false,
             FirebaseUser.IsCanceledAnnounce: false,
             FirebaseUser.Candidates: [:]
         ]
@@ -155,20 +206,19 @@ extension FirebaseAuthManager {
             }
             
             var announces: [AnnounceJob] = []
-            
             for announceItem in data {
                 if let item = announceItem.value as? [String: Any] {
-                    
                     if let occupationArea = item[FirebaseUser.OccupationArea] as? String,
                         let ownerAnnounce = item[FirebaseUser.AdOwner] as? String,
                         let startDate = item[FirebaseUser.StartDate] as? Double,
                         let finishDate = item[FirebaseUser.FinishDate] as? Double,
                         let description = item[FirebaseUser.DescriptionOfProfession] as? String,
                         let isCancelledAnnounce = item[FirebaseUser.IsCanceledAnnounce] as? Bool,
-                        let isFinalizedAnnounce = item[FirebaseUser.IsFinalizedAnnounce] as? Bool {
+                        let isFinalizedAnnounce = item[FirebaseUser.IsFinalizedAnnounce] as? Bool,
+                        let isProccessFinalizedAnnounce = item[FirebaseUser.IsProcessFinalizedAnnounce] as? Bool {
                         
                         let currentUser = UserProfileViewModel()
-                        if !isFinalizedAnnounce && !isCancelledAnnounce &&  currentUser.userId != ownerAnnounce {
+                        if !isFinalizedAnnounce && !isCancelledAnnounce && !isProccessFinalizedAnnounce && currentUser.userId != ownerAnnounce {
                             let announce = AnnounceJob(id: announceItem.key,
                                                        occupationArea: occupationArea,
                                                        startTimestamp: startDate,
@@ -211,11 +261,12 @@ extension FirebaseAuthManager {
                         let description = item[FirebaseUser.DescriptionOfProfession] as? String,
                         let ownerAnnounce = item[FirebaseUser.AdOwner] as? String,
                         let isCancelledAnnounce = item[FirebaseUser.IsCanceledAnnounce] as? Bool,
-                        let isFinalizedAnnounce = item[FirebaseUser.IsFinalizedAnnounce] as? Bool {
+                        let isFinalizedAnnounce = item[FirebaseUser.IsFinalizedAnnounce] as? Bool,
+                        let isProccessFinalizedAnnounce = item[FirebaseUser.IsProcessFinalizedAnnounce] as? Bool {
                         
                         if occupations.contains(occupationArea) {
                             let currentUser = UserProfileViewModel()
-                            if !isFinalizedAnnounce && !isCancelledAnnounce && currentUser.userId != ownerAnnounce {
+                            if !isFinalizedAnnounce && !isCancelledAnnounce && !isProccessFinalizedAnnounce && currentUser.userId != ownerAnnounce {
                                 let announce = AnnounceJob(id: announceItem.key,
                                                            occupationArea: occupationArea,
                                                            startTimestamp: startDate,
@@ -262,7 +313,8 @@ extension FirebaseAuthManager {
                             let finishDate = adDetail[FirebaseUser.FinishDate] as? Double,
                             let description = adDetail[FirebaseUser.DescriptionOfProfession] as? String,
                             let isCancelledAnnounce = adDetail[FirebaseUser.IsCanceledAnnounce] as? Bool,
-                            let isFinalizedAnnounce = adDetail[FirebaseUser.IsFinalizedAnnounce] as? Bool {
+                            let isFinalizedAnnounce = adDetail[FirebaseUser.IsFinalizedAnnounce] as? Bool,
+                            let isProcessFinalizedAnnounce = adDetail[FirebaseUser.IsProcessFinalizedAnnounce] as? Bool {
                             
                             let selectedCandidate = adDetail[FirebaseUser.SelectedCandidate] as? String
                             
@@ -281,14 +333,15 @@ extension FirebaseAuthManager {
                                                        candidatesIds: candidateIds,
                                                        descriptionOfAnnounce: description,
                                                        selectedCandidateId: selectedCandidate,
-                                                       isFinished:  isFinalizedAnnounce)
+                                                       isFinished:  isFinalizedAnnounce,
+                                                       isProcessFinished: isProcessFinalizedAnnounce)
                             
                             if onlyCancelledsAndFinisheds {
-                                if announce.isCanceled /* e only finalizado */ {
+                                if announce.isCanceled || announce.isFinished /* e only finalizado */ {
                                     announces.append(announce)
                                 }
                             } else {
-                                if !announce.isCanceled /* e only finalizado */ {
+                                if !announce.isCanceled && !announce.isFinished /* e only finalizado */ {
                                     announces.append(announce)
                                 }
                             }
@@ -318,7 +371,8 @@ extension FirebaseAuthManager {
                     let finishDate = adDetail[FirebaseUser.FinishDate] as? Double,
                     let description = adDetail[FirebaseUser.DescriptionOfProfession] as? String,
                     let isCancelledAnnounce = adDetail[FirebaseUser.IsCanceledAnnounce] as? Bool,
-                    let isFinalizedAnnounce = adDetail[FirebaseUser.IsFinalizedAnnounce] as? Bool {
+                    let isFinalizedAnnounce = adDetail[FirebaseUser.IsFinalizedAnnounce] as? Bool,
+                    let isProccessFinalizedAnnounce = adDetail[FirebaseUser.IsProcessFinalizedAnnounce] as? Bool {
 
                     announce = AnnounceJob(id: announceId,
                                                occupationArea: occupationArea,
@@ -328,7 +382,8 @@ extension FirebaseAuthManager {
                                                candidatesIds: [],
                                                descriptionOfAnnounce: description,
                                                selectedCandidateId: selectedCandidate,
-                                               isFinished:  isFinalizedAnnounce)
+                                               isFinished: isFinalizedAnnounce,
+                                               isProcessFinished: isProccessFinalizedAnnounce)
                     
                 }
                 completion(announce)
@@ -374,7 +429,8 @@ extension FirebaseAuthManager {
                         let finishDate = data[FirebaseUser.FinishDate] as? Double,
                         let description = data[FirebaseUser.DescriptionOfProfession] as? String,
                         let isCancelledAnnounce = data[FirebaseUser.IsCanceledAnnounce] as? Bool,
-                        let isFinalizedAnnounce = data[FirebaseUser.IsFinalizedAnnounce] as? Bool {
+                        let isFinalizedAnnounce = data[FirebaseUser.IsFinalizedAnnounce] as? Bool,
+                        let isProccessFinalizedAnnounce = data[FirebaseUser.IsProcessFinalizedAnnounce] as? Bool {
                         
                         let selectedCandidate = data[FirebaseUser.SelectedCandidate] as? String
                         
@@ -386,7 +442,8 @@ extension FirebaseAuthManager {
                                                    candidatesIds: [],
                                                    descriptionOfAnnounce: description,
                                                    selectedCandidateId: selectedCandidate,
-                                                   isFinished:  isFinalizedAnnounce)
+                                                   isFinished:  isFinalizedAnnounce,
+                                                   isProcessFinished: isProccessFinalizedAnnounce)
                         
                         myApplications.append(announce)
                     }

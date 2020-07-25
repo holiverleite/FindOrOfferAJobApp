@@ -111,7 +111,7 @@ extension MyAnnouncesListViewController: UITableViewDataSource, UITableViewDeleg
         cell.startDate.text = formatterdDate
         cell.selectionStyle = .none
         
-        if announce.isFinished {
+        if announce.isProcessFinished {
             let finishedDate = Date(timeIntervalSince1970: announce.finishTimestamp)
             let formatterFinishedDate = dateFormatter.string(from: finishedDate)
             cell.totalCandidatesOrCancelledDateLabel.text = "Anúncio Finalizado"

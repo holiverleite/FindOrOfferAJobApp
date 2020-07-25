@@ -62,7 +62,7 @@ class CandidateProfileViewController: UIViewController {
             }
         }
         
-        if let announceIsFinished = announce?.isFinished, announceIsFinished {
+        if let processIsFinished = announce?.isProcessFinished, processIsFinished {
             selectCandidate.removeTarget(self, action: #selector(selectCandidateDidTape), for: .touchUpInside)
             selectCandidate.setTitle("Chamar no Whatsapp", for: .normal)
             selectCandidate.backgroundColor = UIColor.green.withAlphaComponent(0.8)

@@ -40,9 +40,11 @@ class AnnounceDetailViewController: UIViewController {
     
     var announceJob: AnnounceJob?
     var profileCandidates: [UserProfile] = []
+    var myApplicationsIds: [String] = []
     var cameFromCreateAnnounce: Bool = false
     var cameFromRecordsAnnounce: Bool = false
     var cameFromApplyTheJobAnnounce: Bool = false
+    var cameFromJobToMe: Bool = false
     var cameFromMyApplications: Bool = false
     var delegate: ClearFieldsDelegate?
     let userProfileViewModel = UserProfileViewModel()
@@ -64,20 +66,25 @@ class AnnounceDetailViewController: UIViewController {
         } else if cameFromRecordsAnnounce {
             self.buttonSaveAnnounce.setTitle("Reativar Anúncio", for: .normal)
             self.buttonSaveAnnounce.addTarget(self, action: #selector(didTapReactivateButton), for: .touchUpInside)
-        } else if cameFromApplyTheJobAnnounce {
-            if let isCAnceled = announceJob?.isCanceled, let isFinished = announceJob?.isFinished, isCAnceled || isFinished {
+        } else if cameFromApplyTheJobAnnounce || cameFromJobToMe {
+            if let isCanceled = announceJob?.isCanceled, let isProccessFinished = announceJob?.isProcessFinished, isCanceled || isProccessFinished {
                 self.buttonSaveAnnounce.setTitle("Candidatar-se", for: .normal)
                 self.buttonSaveAnnounce.backgroundColor = .gray
                 self.buttonSaveAnnounce.isEnabled = false
-                if isCAnceled {
+                if isCanceled {
                     self.buttonSaveAnnounce.setTitle("Anúncio Cancelado", for: .normal)
                 }
-                if isFinished {
+                if isProccessFinished {
                     self.buttonSaveAnnounce.setTitle("Anúncio Finalizado", for: .normal)
                 }
             } else {
-                self.buttonSaveAnnounce.setTitle("Candidatar-se", for: .normal)
-                self.buttonSaveAnnounce.addTarget(self, action: #selector(didTapApplyToJobButton), for: .touchUpInside)
+                if let announceJobId = self.announceJob?.id, myApplicationsIds.contains(announceJobId) {
+                    self.buttonSaveAnnounce.setTitle("Desistir do processo", for: .normal)
+                    self.buttonSaveAnnounce.addTarget(self, action: #selector(didTapGiveUpButton), for: .touchUpInside)
+                } else {
+                    self.buttonSaveAnnounce.setTitle("Candidatar-se", for: .normal)
+                    self.buttonSaveAnnounce.addTarget(self, action: #selector(didTapApplyToJobButton), for: .touchUpInside)
+                }
             }
         } else if cameFromMyApplications {
             self.buttonSaveAnnounce.setTitle("Desistir do processo", for: .normal)
@@ -85,7 +92,7 @@ class AnnounceDetailViewController: UIViewController {
         } else {
             loadCandidates()
             
-            if let announceIsFinished = announceJob?.isFinished, announceIsFinished {
+            if let processIsFinished = announceJob?.isProcessFinished, processIsFinished {
                 self.buttonSaveAnnounce.backgroundColor = .gray
                 self.buttonSaveAnnounce.setTitle("Anúncio Finalizado", for: .normal)
                 self.buttonSaveAnnounce.isEnabled = false
@@ -116,19 +123,23 @@ class AnnounceDetailViewController: UIViewController {
     private func didTapGiveUpButton() {
         let alert = UIAlertController(title: "Atenção", message: "Realmente deseja desistir desse porcesso seletivo?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Sim", style: .destructive, handler: { (_) in
-//            FirebaseAuthManager().addAnnounceJob(userId: userProfileViewModel.userId, announceJob: announceJob) { (success) in
-//                if let success = success, success {
-//                    let alert = UIAlertController(title: "Sucesso", message: "Anúncio publicado com sucesso!", preferredStyle: .alert)
-//                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
-//                        self.delegate?.clearFields()
-//                        self.navigationController?.popViewController(animated: true)
-//                    }))
-//                    self.present(alert, animated: true, completion: nil)
-//                }
-//            }
-            self.navigationController?.popViewController(animated: true)
+            if let announceJob = self.announceJob {
+                FirebaseAuthManager().cancelJobApplication(userId: self.userProfileViewModel.userId, announceJob: announceJob) { (success) in
+                    if let success = success, success {
+                        self.navigationController?.popViewController(animated: true)
+                    } else {
+                        let alert = UIAlertController(title: "Atenção", message: "Algum erro ocorreu. Tente novamente mais tarde!", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
+                            self.delegate?.clearFields()
+                            self.navigationController?.popViewController(animated: true)
+                        }))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
         }))
         alert.addAction(UIAlertAction(title: "Não", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     @objc
@@ -241,11 +252,19 @@ extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSour
         case 0:
             return "Resumo do anúncio"
         case 1:
+            if cameFromJobToMe {
+                return "Status da vaga"
+            }
+            
+            if cameFromRecordsAnnounce {
+                return "Status da vaga"
+            }
+            
             if !cameFromRecordsAnnounce && !cameFromApplyTheJobAnnounce {
                 if cameFromMyApplications {
                     return "Status da vaga"
                 }
-                if let announceJob = announceJob, announceJob.isFinished {
+                if let announceJob = announceJob, announceJob.isProcessFinished {
                     return "Candidato selecionado"
                 }
                 
@@ -266,9 +285,14 @@ extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSour
                 if (announceJob?.selectedCandidateId != nil) || cameFromMyApplications {
                     return 1
                 }
-                return profileCandidates.count
+                
+                if profileCandidates.count > 0 {
+                    return profileCandidates.count
+                } else {
+                    return 1 // pra mostrar linha de info
+                }
             }
-            return 0
+            return 1
         default:
             return 0
         }
@@ -295,7 +319,7 @@ extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSour
                         cell.finalizeOrCanceledLabel.textColor = .red
                         cell.finalAnnounceDate.textColor = .red
                     } else
-                    if announceJob.isFinished {
+                    if announceJob.isProcessFinished {
                         cell.finalizeOrCanceledLabel.text = "Finalizado em:"
                         cell.finalizeOrCanceledLabel.textColor = .systemBlue
                         cell.finalAnnounceDate.textColor = .systemBlue
@@ -333,7 +357,7 @@ extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSour
             return cell
         case 1:
              if profileCandidates.count > 0, !cameFromMyApplications {
-                if let announceIsFinished = announceJob?.isFinished, announceIsFinished {
+                if let processIsFinished = announceJob?.isProcessFinished, processIsFinished {
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CandidateSelectedTableViewCell.self), for: indexPath) as? CandidateSelectedTableViewCell else {
                         fatalError("CandidateSelectedTableViewCell not found!")
                     }
@@ -383,12 +407,17 @@ extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSour
                 }
                 
                 cell.selectionStyle = .none
-                
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
                 cell.textLabel?.textAlignment = .center
                 cell.textLabel?.numberOfLines = 0
-                if cameFromMyApplications {
-                    if let isFinished = announceJob?.isFinished, isFinished {
+                
+                if cameFromRecordsAnnounce {
+                    if let isCanceled = announceJob?.isCanceled, isCanceled {
+                        cell.textLabel?.text = "Anúncio cancelado."
+                    }
+                } else
+                if cameFromMyApplications || cameFromJobToMe {
+                    if let isProcessFinished = announceJob?.isProcessFinished, isProcessFinished {
                         self.buttonSaveAnnounce.backgroundColor = .gray
                         self.buttonSaveAnnounce.isEnabled = false
                         if announceJob?.selectedCandidateId == userProfileViewModel.userId {
@@ -404,7 +433,11 @@ extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSour
                         cell.textLabel?.text = "Infelizmente este processo seletivo foi cancelado pelo anunciante."
                         cell.textLabel?.textColor = .red
                     } else {
-                        cell.textLabel?.text = "Fique atento! Caso você seja selecionado, o anunciante da vaga entrará em contato com você."
+                        if let announceJobId = self.announceJob?.id, myApplicationsIds.contains(announceJobId) || cameFromMyApplications {
+                            cell.textLabel?.text = "Fique atento! Caso você seja selecionado, o anunciante da vaga entrará em contato com você."
+                        } else {
+                            cell.textLabel?.text = "O processo seletivo para está vaga já está acontecendo."
+                        }
                     }
                 } else {
                     cell.textLabel?.text = "Ainda não surgiram candidatos para esta vaga."
