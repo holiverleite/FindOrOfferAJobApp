@@ -15,6 +15,11 @@ protocol CustomTextFieldDelegate: class {
 
 class InputTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var backgroundCellView: UIView! {
+        didSet {
+            backgroundCellView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTouchBackground)))
+        }
+    }
     @IBOutlet weak var inputDescription: UILabel!
     @IBOutlet weak var inputTextField: UITextField! {
         didSet {
@@ -41,6 +46,10 @@ class InputTableViewCell: UITableViewCell {
     
     @objc func textFieldDidChanged() {
         self.delegate?.textFieldDidChanged(self.inputTextField, type: self.type)
+    }
+    
+    @objc func didTouchBackground() {
+        self.endEditing(true)
     }
 }
 

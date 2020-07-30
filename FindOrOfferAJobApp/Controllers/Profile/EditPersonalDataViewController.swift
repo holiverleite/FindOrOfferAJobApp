@@ -122,7 +122,7 @@ extension EditPersonalDataViewController: UITableViewDelegate, UITableViewDataSo
             let profileItem = ProfileOptions.allCases[indexPath.row - 1]
             
             cell.inputDescription.text = profileItem.rawValue
-            cell.delegate = self
+            cell.inputTextField.delegate = self
             
             switch profileItem {
             case .Nome:
@@ -153,7 +153,7 @@ extension EditPersonalDataViewController: UITableViewDelegate, UITableViewDataSo
     }
 }
 
-extension EditPersonalDataViewController: CustomTextFieldDelegate {
+extension EditPersonalDataViewController: CustomTextFieldDelegate, UITextFieldDelegate {
     func textFieldDidChanged(_ textField: UITextField, type: ProfileOptions) {
         let inputText = textField.text
         switch type {
@@ -192,5 +192,16 @@ extension EditPersonalDataViewController: CustomTextFieldDelegate {
         case .Email:
             break
         }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        var point = textField.frame.origin
+        point.y = point.y + 130
+        tableview.setContentOffset(point, animated: true)
+        textField.becomeFirstResponder()
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.view.endEditing(true)
     }
 }

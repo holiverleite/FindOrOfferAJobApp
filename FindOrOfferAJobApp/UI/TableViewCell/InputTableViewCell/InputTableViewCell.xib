@@ -42,6 +42,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="backgroundCellView" destination="H2p-sc-9uM" id="5gF-Mt-2Nw"/>
                 <outlet property="inputDescription" destination="jq7-Gb-eGD" id="sKV-Lp-Sel"/>
                 <outlet property="inputTextField" destination="tKM-K9-I06" id="j1a-Qy-Mwn"/>
             </connections>
