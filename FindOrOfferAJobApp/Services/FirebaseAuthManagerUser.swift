@@ -45,9 +45,8 @@ extension FirebaseAuthManager {
             var cards: [ProfessionalCard] = []
             if let data = dataSnapshot.value as? [String:Any], let professionalCards = data[FirebaseUser.ProfessionalCards] as? [String:Any] {
                 for cardItem in professionalCards {
-                    if let card = cardItem.value as? [String: String], let occupationArea = card[FirebaseUser.OccupationArea], let experienceTime = card[FirebaseUser.ExperienceTime], let description = card[FirebaseUser.DescriptionOfProfession] {
-                        let professionalCard = ProfessionalCard(id: cardItem.key, occupationArea: occupationArea,
-                                                                experienceTime: experienceTime, descriptionOfProfession: description)
+                    if let card = cardItem.value as? [String: String], let occupationArea = card[FirebaseUser.OccupationArea], let description = card[FirebaseUser.DescriptionOfProfession] {
+                        let professionalCard = ProfessionalCard(id: cardItem.key, occupationArea: occupationArea, descriptionOfProfession: description)
                         cards.append(professionalCard)
                     }
                 }
@@ -81,8 +80,8 @@ extension FirebaseAuthManager {
             var cards: [ProfessionalCard] = []
             for cardItem in data {
                 if let item = cardItem.value as? [String: Any] {
-                    if let occupationArea = item[FirebaseUser.OccupationArea] as? String, let experienceTime = item[FirebaseUser.ExperienceTime] as? String, let description = item[FirebaseUser.DescriptionOfProfession] as? String {
-                        let professionalCard = ProfessionalCard(id: cardItem.key, occupationArea: occupationArea, experienceTime: experienceTime, descriptionOfProfession: description)
+                    if let occupationArea = item[FirebaseUser.OccupationArea] as? String, let description = item[FirebaseUser.DescriptionOfProfession] as? String {
+                        let professionalCard = ProfessionalCard(id: cardItem.key, occupationArea: occupationArea, descriptionOfProfession: description)
                         cards.append(professionalCard)
                     }
                 }

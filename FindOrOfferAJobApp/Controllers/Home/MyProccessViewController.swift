@@ -118,12 +118,12 @@ extension MyProccessViewController: UITableViewDelegate, UITableViewDataSource {
         if announce.isProcessFinished {
             let finishedDate = Date(timeIntervalSince1970: announce.finishTimestamp)
             let formatterFinishedDate = dateFormatter.string(from: finishedDate)
-            cell.totalCandidatesOrCancelledDateLabel.text = "Anúncio Finalizado"
+            cell.totalCandidatesOrCancelledDateLabel.text = "Processo finalizado"
             cell.totalCandidatesOrCancelledDateLabel.textColor = .systemBlue
             cell.totalOfCandidates.textColor = .systemBlue
             cell.totalOfCandidates.text = formatterFinishedDate
         } else {
-            cell.totalCandidatesOrCancelledDateLabel.text = "Data de finalização:"
+            cell.totalCandidatesOrCancelledDateLabel.text = "Data de finalização"
             cell.totalOfCandidates.text = formatterdFinalDate
             cell.totalCandidatesOrCancelledDateLabel.textColor = .black
             cell.totalOfCandidates.textColor = .black

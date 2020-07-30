@@ -12,20 +12,17 @@ class ProfessionalCard: NSObject {
     
     var id: String = ""
     var occupationArea: String = ""
-    var experienceTime: String = ""
     var descriptionOfProfession: String = ""
     
     override init() {
         self.id = ""
         self.occupationArea = ""
-        self.experienceTime = ""
         self.descriptionOfProfession = ""
     }
     
-    init(id: String, occupationArea: String, experienceTime: String, descriptionOfProfession: String) {
+    init(id: String, occupationArea: String, descriptionOfProfession: String) {
         self.id = id
         self.occupationArea = occupationArea
-        self.experienceTime = experienceTime
         self.descriptionOfProfession = descriptionOfProfession
     }
 }

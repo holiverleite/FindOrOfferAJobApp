@@ -34,6 +34,7 @@ class AnnounceOfJobViewController: UIViewController {
     
     var announces: [AnnounceJob] = []
     var occupationArea: [String] = []
+    var myApplicationsIds: [String] = []
     
     // MARK: - LifeCycle
     
@@ -59,6 +60,12 @@ class AnnounceOfJobViewController: UIViewController {
                 }
             }
             dispatchGroup.leave()
+        }
+        
+        dispatchGroup.enter()
+        FirebaseAuthManager().retrieveJobApplicationsIds(userId: user.userId) { myApplicationsIds in
+            dispatchGroup.leave()
+            self.myApplicationsIds = myApplicationsIds
         }
         
         shouldShowActivity(true)
@@ -128,11 +135,11 @@ extension AnnounceOfJobViewController: UITableViewDelegate, UITableViewDataSourc
         let formatterdFinalDate = dateFormatter.string(from: finalizeDate)
         
         if announce.isCanceled {
-            cell.totalCandidatesOrCancelledDateLabel.text = "Data do cancelamento:"
+            cell.totalCandidatesOrCancelledDateLabel.text = "Data do cancelamento"
             cell.totalCandidatesOrCancelledDateLabel.textColor = .red
             cell.totalOfCandidates.textColor = .red
         } else {
-            cell.totalCandidatesOrCancelledDateLabel.text = "Data de finalização:"
+            cell.totalCandidatesOrCancelledDateLabel.text = "Data de finalização"
             cell.totalCandidatesOrCancelledDateLabel.textColor = .black
             cell.totalOfCandidates.textColor = .black
         }
@@ -146,6 +153,8 @@ extension AnnounceOfJobViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard !announces.isEmpty else { return }
+        
         let announceJob = announces[indexPath.row]
         self.shouldShowActivity(true)
         if occupationArea.contains(announceJob.occupationArea) {
@@ -154,11 +163,12 @@ extension AnnounceOfJobViewController: UITableViewDelegate, UITableViewDataSourc
             if let detailViewController = storyBoard.instantiateViewController(withIdentifier: "AnnounceDetailViewController") as? AnnounceDetailViewController {
                 detailViewController.announceJob = announceJob
                 detailViewController.cameFromApplyTheJobAnnounce = true
+                detailViewController.myApplicationsIds = self.myApplicationsIds
                 navigationController?.pushViewController(detailViewController, animated: true)
             }
         } else {
             self.shouldShowActivity(false)
-            let alert = UIAlertController(title: "Atenção", message: String(format: "Você não possui nenhum Cartão Profissional para esta vaga em específico. Crie um Cartão Profissiona para area de '%@' e tente novamente.", announceJob.occupationArea), preferredStyle: .alert)
+            let alert = UIAlertController(title: "Atenção", message: String(format: "Você não possui nenhum Cartão Profissional para esta vaga em específico. Crie um Cartão Profissional para area de '%@' e tente novamente.", announceJob.occupationArea), preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }

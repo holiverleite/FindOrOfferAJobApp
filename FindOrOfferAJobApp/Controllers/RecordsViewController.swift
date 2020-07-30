@@ -86,11 +86,11 @@ extension RecordsViewController: UITableViewDelegate, UITableViewDataSource {
         let canceledOrFinishedDate = Date(timeIntervalSince1970: announce.finishTimestamp)
         
         if announce.isCanceled {
-            cell.totalCandidatesOrCancelledDateLabel.text = "Data do cancelamento:"
+            cell.totalCandidatesOrCancelledDateLabel.text = "Data do cancelamento"
             cell.totalCandidatesOrCancelledDateLabel.textColor = .red
             cell.totalOfCandidates.textColor = .red
         } else {
-            cell.totalCandidatesOrCancelledDateLabel.text = "Data de finalização:"
+            cell.totalCandidatesOrCancelledDateLabel.text = "Data de finalização"
             cell.totalCandidatesOrCancelledDateLabel.textColor = .black
             cell.totalOfCandidates.textColor = .black
         }

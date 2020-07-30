@@ -287,7 +287,7 @@ extension FirebaseAuthManager {
     
     func retrieveAnnouncesJob(userId: String, onlyCancelledsAndFinisheds: Bool = false, completion: @escaping (_ professionalCards: [AnnounceJob]) -> Void) {
         let ref = self.usersReference.child(userId).child(FirebaseUser.AnnounceJob)
-        ref.observeSingleEvent(of: .value) { (dataSnapshot) in
+        ref.observe(.value) { (dataSnapshot) in
             guard let data = dataSnapshot.value as? [String: Any] else {
                 completion([])
                 return
@@ -301,7 +301,7 @@ extension FirebaseAuthManager {
             
             for item in myAnnouncesIds {
                 let ref = self.globalAnnounceReference.child(item)
-                ref.observeSingleEvent(of: .value) { (dataSnapshot) in
+                ref.observe(.value) { (dataSnapshot) in
                     guard let data = dataSnapshot.value as? [String: Any] else {
                         completion([])
                         return
@@ -335,6 +335,8 @@ extension FirebaseAuthManager {
                                                        selectedCandidateId: selectedCandidate,
                                                        isFinished:  isFinalizedAnnounce,
                                                        isProcessFinished: isProcessFinalizedAnnounce)
+                            // Remove old references when a announceis updated
+                            announces.removeAll(where: {$0.id == announce.id})
                             
                             if onlyCancelledsAndFinisheds {
                                 if announce.isCanceled || announce.isFinished /* e only finalizado */ {
@@ -413,12 +415,9 @@ extension FirebaseAuthManager {
         }
         
         dispatchGroup.notify(queue: .main) {
-            let dispatchGroupIntern = DispatchGroup()
-            
             for announceId in appliedAnnouncesIds {
-                dispatchGroupIntern.enter()
                 let ref = self.globalAnnounceReference.child(announceId)
-                ref.observeSingleEvent(of: .value) { (dataSnapshot) in
+                ref.observe(.value) { (dataSnapshot) in
                     guard let data = dataSnapshot.value as? [String: Any] else {
                         completion([])
                         return
@@ -445,14 +444,13 @@ extension FirebaseAuthManager {
                                                    isFinished:  isFinalizedAnnounce,
                                                    isProcessFinished: isProccessFinalizedAnnounce)
                         
+                        // Remove old references when a announceis updated
+                        myApplications.removeAll(where: {$0.id == announce.id})
+                        
                         myApplications.append(announce)
                     }
-                    dispatchGroupIntern.leave()
+                    completion(myApplications)
                 }
-            }
-            
-            dispatchGroupIntern.notify(queue: .main) {
-                completion(myApplications)
             }
         }
     }

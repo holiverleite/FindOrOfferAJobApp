@@ -18,8 +18,4 @@ struct ProfessionalCardViewModel {
     var occupationArea: String {
         return self.professionalCard.occupationArea
     }
-    
-    var experienceTime: String {
-        return self.professionalCard.experienceTime
-    }
 }

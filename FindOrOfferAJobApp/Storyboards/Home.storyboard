@@ -623,26 +623,26 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="R1h-JP-iKp">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <view key="tableFooterView" contentMode="scaleToFill" id="hDS-M8-ZoB">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No momento ainda não surgiram vagas para o seu perfil. Fique atento!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GOv-PW-DlN">
-                                            <rect key="frame" x="30" y="313" width="315" height="41"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                    <constraints>
-                                        <constraint firstItem="GOv-PW-DlN" firstAttribute="centerX" secondItem="hDS-M8-ZoB" secondAttribute="centerX" id="1cJ-3m-9aG"/>
-                                        <constraint firstItem="GOv-PW-DlN" firstAttribute="leading" secondItem="hDS-M8-ZoB" secondAttribute="leading" constant="30" id="Xeq-Fa-KOo"/>
-                                        <constraint firstItem="GOv-PW-DlN" firstAttribute="centerY" secondItem="hDS-M8-ZoB" secondAttribute="centerY" id="q52-VJ-YEy"/>
-                                        <constraint firstAttribute="trailing" secondItem="GOv-PW-DlN" secondAttribute="trailing" constant="30" id="sMZ-HO-v42"/>
-                                    </constraints>
-                                </view>
                             </tableView>
+                            <view contentMode="scaleToFill" id="hDS-M8-ZoB">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No momento ainda não surgiram vagas para o seu perfil. Fique atento!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GOv-PW-DlN">
+                                        <rect key="frame" x="30" y="313" width="315" height="41"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="GOv-PW-DlN" firstAttribute="centerX" secondItem="hDS-M8-ZoB" secondAttribute="centerX" id="1cJ-3m-9aG"/>
+                                    <constraint firstItem="GOv-PW-DlN" firstAttribute="leading" secondItem="hDS-M8-ZoB" secondAttribute="leading" constant="30" id="Xeq-Fa-KOo"/>
+                                    <constraint firstItem="GOv-PW-DlN" firstAttribute="centerY" secondItem="hDS-M8-ZoB" secondAttribute="centerY" id="q52-VJ-YEy"/>
+                                    <constraint firstAttribute="trailing" secondItem="GOv-PW-DlN" secondAttribute="trailing" constant="30" id="sMZ-HO-v42"/>
+                                </constraints>
+                            </view>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="2sv-JS-OkQ">
                                 <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
                             </activityIndicatorView>

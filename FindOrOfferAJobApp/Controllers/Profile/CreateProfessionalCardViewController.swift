@@ -14,7 +14,6 @@ class CreateProfessionalCardViewController: UIViewController {
     
     enum ProfessionalQuestions: String, CaseIterable {
         case OcupationArea = "Área de atuação"
-        case TimeExperience = "Tempo de experiência (em meses)"
         case Description = "Descrição da experiência"
     }
 
@@ -37,7 +36,7 @@ class CreateProfessionalCardViewController: UIViewController {
     var professionSelected: String = ""
     var experienceText: String = ""
     var descriptionProfession: String = ""
-    var textFieldExperience: UITextField = UITextField()
+//    var textFieldExperience: UITextField = UITextField()
     var textViewDescription: UITextView = UITextView()
     var isEditingMode: Bool = false
     var occupationAreaAlreadyCreated: [String] = []
@@ -54,7 +53,6 @@ class CreateProfessionalCardViewController: UIViewController {
             self.navigationItem.rightBarButtonItem?.isEnabled = false
             
             self.professionSelected = card.occupationArea
-            self.experienceText = card.experienceTime
             self.descriptionProfession = card.descriptionOfProfession
             
         } else {
@@ -77,7 +75,7 @@ class CreateProfessionalCardViewController: UIViewController {
         self.view.endEditing(true)
         
         if let professionalCard = self.professionalCardEdit {
-            let professionalCard = ProfessionalCard(id: professionalCard.id, occupationArea: self.professionSelected, experienceTime: self.textFieldExperience.text ?? "", descriptionOfProfession: self.textViewDescription.text ?? "")
+            let professionalCard = ProfessionalCard(id: professionalCard.id, occupationArea: self.professionSelected, descriptionOfProfession: self.textViewDescription.text ?? "")
             
             FirebaseAuthManager().updateProfessionalCard(userId: userProfileViewModel.userId, card: professionalCard, completion: { (success) in
                 if let success = success, success {
@@ -94,7 +92,7 @@ class CreateProfessionalCardViewController: UIViewController {
     @objc func didTapSaveCardButton() {
         self.view.endEditing(true)
         
-        let professionalCard = ProfessionalCard(id: "", occupationArea: self.professionSelected, experienceTime: self.textFieldExperience.text ?? "", descriptionOfProfession: self.textViewDescription.text ?? "")
+        let professionalCard = ProfessionalCard(id: "", occupationArea: self.professionSelected, descriptionOfProfession: self.textViewDescription.text ?? "")
         
         FirebaseAuthManager().addProfessionalCard(userId: userProfileViewModel.userId, professionalCard: professionalCard) { (success) in
             if let success = success, success {
@@ -110,13 +108,13 @@ class CreateProfessionalCardViewController: UIViewController {
     // MARK: - Local Methods
     private func shouldEnableSaveButton() {
         if self.isEditingMode {
-            if let textExp = textFieldExperience.text, let textDescript = self.textViewDescription.text, let descriptionTextView = self.professionalCardEdit?.descriptionOfProfession, textExp != self.professionalCardEdit?.experienceTime || textDescript != descriptionTextView {
+            if let textDescript = self.textViewDescription.text, let descriptionTextView = self.professionalCardEdit?.descriptionOfProfession, textDescript != descriptionTextView {
                 self.enableSaveButton(true)
             } else {
                 self.enableSaveButton(false)
             }
         } else {
-            if let textExp = textFieldExperience.text, let textDescript = self.textViewDescription.text, !textExp.isEmpty && !self.professionSelected.isEmpty && !textDescript.isEmpty {
+            if let textDescript = self.textViewDescription.text, !self.professionSelected.isEmpty && !textDescript.isEmpty {
                 self.enableSaveButton(true)
             } else {
                 self.enableSaveButton(false)
@@ -144,8 +142,6 @@ extension CreateProfessionalCardViewController: UITableViewDelegate, UITableView
         case 0:
             return ProfessionalQuestions.OcupationArea.rawValue
         case 1:
-            return ProfessionalQuestions.TimeExperience.rawValue
-        case 2:
             return ProfessionalQuestions.Description.rawValue
         default:
             return ""
@@ -154,9 +150,9 @@ extension CreateProfessionalCardViewController: UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
-        case 0, 1:
+        case 0:
             return 50.0
-        case 2:
+        case 1:
             return 220.0
         default:
             return 0.0
@@ -174,24 +170,15 @@ extension CreateProfessionalCardViewController: UITableViewDelegate, UITableView
         
         switch indexPath.section {
         case 0:
+            cell.selectionStyle = .none
             if self.professionSelected.isEmpty {
-                cell.textLabel?.text = "Selecione uma profissão..."
+                cell.textLabel?.text = "Selecione uma tecnologia..."
             } else {
                 cell.textLabel?.text = self.professionSelected
             }
             
             return cell
         case 1:
-            self.textFieldExperience = UITextField(frame: CGRect(x: 15, y: 0, width: cell.frame.width, height: cell.frame.height))
-            self.textFieldExperience.keyboardType = .numberPad
-            self.textFieldExperience.placeholder = "Ex: 12"
-            self.textFieldExperience.addTarget(self, action: #selector(textFieldDidChanged), for: .editingChanged)
-            self.textFieldExperience.text = self.experienceText
-            
-            cell.addSubview(self.textFieldExperience)
-            
-            return cell
-        case 2:
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TextViewTableViewCell.self), for: indexPath) as? TextViewTableViewCell else {
                 return UITableViewCell()
@@ -203,8 +190,15 @@ extension CreateProfessionalCardViewController: UITableViewDelegate, UITableView
             
             return cell
             
+//            self.textFieldExperience = UITextField(frame: CGRect(x: 15, y: 0, width: cell.frame.width, height: cell.frame.height))
+//            self.textFieldExperience.keyboardType = .numberPad
+//            self.textFieldExperience.placeholder = "Ex: 12"
+//            self.textFieldExperience.addTarget(self, action: #selector(textFieldDidChanged), for: .editingChanged)
+//            self.textFieldExperience.text = self.experienceText
+//
+//            cell.addSubview(self.textFieldExperience)
             
-            
+            return cell
         default:
             return UITableViewCell()
         }

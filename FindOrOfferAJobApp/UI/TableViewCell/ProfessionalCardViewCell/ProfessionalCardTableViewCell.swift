@@ -30,7 +30,7 @@ class ProfessionalCardTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setValues(professionaltitle: String, exp: String, professionDescription: String) {
+    func setValues(professionaltitle: String, professionDescription: String) {
         self.professionalTitleLabel.text = professionaltitle
     }
 }

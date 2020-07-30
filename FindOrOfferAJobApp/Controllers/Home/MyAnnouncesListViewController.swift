@@ -114,7 +114,7 @@ extension MyAnnouncesListViewController: UITableViewDataSource, UITableViewDeleg
         if announce.isProcessFinished {
             let finishedDate = Date(timeIntervalSince1970: announce.finishTimestamp)
             let formatterFinishedDate = dateFormatter.string(from: finishedDate)
-            cell.totalCandidatesOrCancelledDateLabel.text = "Anúncio Finalizado"
+            cell.totalCandidatesOrCancelledDateLabel.text = "Processo finalizado"
             cell.totalCandidatesOrCancelledDateLabel.textColor = .systemBlue
             cell.totalOfCandidates.textColor = .systemBlue
             cell.totalOfCandidates.text = formatterFinishedDate
@@ -135,6 +135,7 @@ extension MyAnnouncesListViewController: UITableViewDataSource, UITableViewDeleg
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let announceViewController = segue.destination as? AnnounceDetailViewController, let announce = sender as? AnnounceJob {
             announceViewController.announceJob = announce
+            announceViewController.cameFromMyAnnounces = true
         }
         
         if let createAnnounceViewController = segue.destination as? CreateAnnounceViewController {

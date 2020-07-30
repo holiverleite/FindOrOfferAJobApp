@@ -28,7 +28,6 @@ struct FirebaseUser {
     static let OccupationArea = "occupationArea"
     static let StartDate = "startDate"
     static let FinishDate = "finishDate"
-    static let ExperienceTime = "experienceTime"
     static let DescriptionOfProfession = "description"
     // Announce
     static let AnnounceJob = "announceJob"

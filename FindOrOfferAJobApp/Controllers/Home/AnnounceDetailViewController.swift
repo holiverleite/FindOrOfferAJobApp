@@ -41,16 +41,19 @@ class AnnounceDetailViewController: UIViewController {
     var announceJob: AnnounceJob?
     var profileCandidates: [UserProfile] = []
     var myApplicationsIds: [String] = []
+    
     var cameFromCreateAnnounce: Bool = false
     var cameFromRecordsAnnounce: Bool = false
     var cameFromApplyTheJobAnnounce: Bool = false
     var cameFromJobToMe: Bool = false
     var cameFromMyApplications: Bool = false
+    var cameFromMyAnnounces: Bool = false
+    
     var delegate: ClearFieldsDelegate?
     let userProfileViewModel = UserProfileViewModel()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         self.navigationItem.title = String.localize("announce_detail_nav_bar")
         
@@ -75,7 +78,7 @@ class AnnounceDetailViewController: UIViewController {
                     self.buttonSaveAnnounce.setTitle("Anúncio Cancelado", for: .normal)
                 }
                 if isProccessFinished {
-                    self.buttonSaveAnnounce.setTitle("Anúncio Finalizado", for: .normal)
+                    self.buttonSaveAnnounce.setTitle("Processo finalizado", for: .normal)
                 }
             } else {
                 if let announceJobId = self.announceJob?.id, myApplicationsIds.contains(announceJobId) {
@@ -89,12 +92,12 @@ class AnnounceDetailViewController: UIViewController {
         } else if cameFromMyApplications {
             self.buttonSaveAnnounce.setTitle("Desistir do processo", for: .normal)
             self.buttonSaveAnnounce.addTarget(self, action: #selector(didTapGiveUpButton), for: .touchUpInside)
-        } else {
+        } else if cameFromMyAnnounces {
             loadCandidates()
             
             if let processIsFinished = announceJob?.isProcessFinished, processIsFinished {
                 self.buttonSaveAnnounce.backgroundColor = .gray
-                self.buttonSaveAnnounce.setTitle("Anúncio Finalizado", for: .normal)
+                self.buttonSaveAnnounce.setTitle("Processo finalizado", for: .normal)
                 self.buttonSaveAnnounce.isEnabled = false
             } else {
                 self.buttonSaveAnnounce.setTitle("Cancelar Anúncio", for: .normal)
@@ -252,24 +255,22 @@ extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSour
         case 0:
             return "Resumo do anúncio"
         case 1:
-            if cameFromJobToMe {
+            if cameFromJobToMe || cameFromRecordsAnnounce || cameFromApplyTheJobAnnounce || cameFromMyApplications {
                 return "Status da vaga"
             }
             
-            if cameFromRecordsAnnounce {
-                return "Status da vaga"
-            }
-            
-            if !cameFromRecordsAnnounce && !cameFromApplyTheJobAnnounce {
-                if cameFromMyApplications {
-                    return "Status da vaga"
-                }
+            if cameFromMyAnnounces {
                 if let announceJob = announceJob, announceJob.isProcessFinished {
                     return "Candidato selecionado"
                 }
                 
-                return "Candidatos à vaga"
+                if !profileCandidates.isEmpty {
+                    return "Candidatos à vaga"
+                } else {
+                    return "Status da vaga"
+                }
             }
+
             return ""
         default:
             return ""
@@ -315,12 +316,12 @@ extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSour
                     finishDate = Date(timeIntervalSince1970: announceJob.finishTimestamp)
                     
                     if announceJob.isCanceled {
-                        cell.finalizeOrCanceledLabel.text = "Data do cancelamento:"
+                        cell.finalizeOrCanceledLabel.text = "Data do cancelamento"
                         cell.finalizeOrCanceledLabel.textColor = .red
                         cell.finalAnnounceDate.textColor = .red
                     } else
                     if announceJob.isProcessFinished {
-                        cell.finalizeOrCanceledLabel.text = "Finalizado em:"
+                        cell.finalizeOrCanceledLabel.text = "Processo finalizado em"
                         cell.finalizeOrCanceledLabel.textColor = .systemBlue
                         cell.finalAnnounceDate.textColor = .systemBlue
                     } else {
@@ -416,7 +417,7 @@ extension AnnounceDetailViewController: UITableViewDelegate, UITableViewDataSour
                         cell.textLabel?.text = "Anúncio cancelado."
                     }
                 } else
-                if cameFromMyApplications || cameFromJobToMe {
+                if cameFromMyApplications || cameFromJobToMe || cameFromApplyTheJobAnnounce {
                     if let isProcessFinished = announceJob?.isProcessFinished, isProcessFinished {
                         self.buttonSaveAnnounce.backgroundColor = .gray
                         self.buttonSaveAnnounce.isEnabled = false
@@ -474,6 +475,10 @@ extension AnnounceDetailViewController: SelectCondaidateDelegate {
             if let announce = announce {
                 self.announceJob = announce
                 self.tableView.reloadData()
+                
+                self.buttonSaveAnnounce.backgroundColor = .gray
+                self.buttonSaveAnnounce.setTitle("Processo finalizado", for: .normal)
+                self.buttonSaveAnnounce.isEnabled = false
             } else {
                 self.navigationController?.popViewController(animated: true)
             }

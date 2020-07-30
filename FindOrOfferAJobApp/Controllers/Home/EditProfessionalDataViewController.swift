@@ -125,7 +125,7 @@ extension EditProfessionalDataViewController: UITableViewDataSource, UITableView
         
         let card = self.professionalCards[indexPath.row]
         
-        cell.setValues(professionaltitle: card.occupationArea, exp: card.experienceTime, professionDescription: card.descriptionOfProfession)
+        cell.setValues(professionaltitle: card.occupationArea, professionDescription: card.descriptionOfProfession)
         cell.selectionStyle = .none
         
         return cell

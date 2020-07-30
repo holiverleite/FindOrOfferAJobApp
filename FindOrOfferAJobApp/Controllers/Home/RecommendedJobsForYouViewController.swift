@@ -150,7 +150,7 @@ extension RecommendedJobsForYouViewController: UITableViewDelegate, UITableViewD
 
         cell.announceArea.text = announce.occupationArea
         cell.startDate.text = formatterdStartDate
-        cell.totalCandidatesOrCancelledDateLabel.text = "Data de finalização:"
+        cell.totalCandidatesOrCancelledDateLabel.text = "Data de finalização"
         cell.totalOfCandidates.text = formatterdFinalDate
         cell.selectionStyle = .none
         
@@ -163,7 +163,6 @@ extension RecommendedJobsForYouViewController: UITableViewDelegate, UITableViewD
         if let detailViewController = storyBoard.instantiateViewController(withIdentifier: "AnnounceDetailViewController") as? AnnounceDetailViewController {
             detailViewController.announceJob = announceJob
             detailViewController.cameFromJobToMe = true
-//            detailViewController.cameFromApplyTheJobAnnounce = true
             detailViewController.myApplicationsIds = self.myApplicationsIds
             navigationController?.pushViewController(detailViewController, animated: true)
         }

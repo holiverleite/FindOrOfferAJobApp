@@ -17,7 +17,6 @@ extension FirebaseAuthManager {
         let ref = self.usersReference.child(userId).child(FirebaseUser.ProfessionalCards).childByAutoId()
         let professionalCardDict: [String: Any] = [
             FirebaseUser.OccupationArea: professionalCard.occupationArea,
-            FirebaseUser.ExperienceTime: professionalCard.experienceTime,
             FirebaseUser.DescriptionOfProfession: professionalCard.descriptionOfProfession
         ]
         
@@ -45,7 +44,6 @@ extension FirebaseAuthManager {
         let ref = self.usersReference.child(userId).child(FirebaseUser.ProfessionalCards).child(card.id)
         let professionalCardDict: [String: Any] = [
             FirebaseUser.OccupationArea: card.occupationArea,
-            FirebaseUser.ExperienceTime: card.experienceTime,
             FirebaseUser.DescriptionOfProfession: card.descriptionOfProfession
         ]
         ref.updateChildValues(professionalCardDict) { (error, databaseReference) in
@@ -78,11 +76,10 @@ extension FirebaseAuthManager {
                 var cards: [ProfessionalCard] = []
                 if let data = dataSnapshot.value as? [String:Any], let professionalCards = data[FirebaseUser.ProfessionalCards] as? [String:Any] {
                     for cardItem in professionalCards {
-                        if let card = cardItem.value as? [String: String], let occupationArea = card[FirebaseUser.OccupationArea], let experienceTime = card[FirebaseUser.ExperienceTime], let description = card[FirebaseUser.DescriptionOfProfession] {
+                        if let card = cardItem.value as? [String: String], let occupationArea = card[FirebaseUser.OccupationArea], let description = card[FirebaseUser.DescriptionOfProfession] {
                             
                             if occupationArea == occupationAreaAnnounce {
-                                let professionalCard = ProfessionalCard(id: cardItem.key, occupationArea: occupationArea,
-                                                                        experienceTime: experienceTime, descriptionOfProfession: description)
+                                let professionalCard = ProfessionalCard(id: cardItem.key, occupationArea: occupationArea, descriptionOfProfession: description)
                                 cards.append(professionalCard)
                             }
                         }

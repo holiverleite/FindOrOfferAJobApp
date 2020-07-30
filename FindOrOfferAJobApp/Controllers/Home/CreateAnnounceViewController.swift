@@ -15,9 +15,8 @@ class CreateAnnounceViewController: UIViewController {
     let descriptionTextPlaceHolder = "Breve descrição da experiência"
     
     enum AnnounceQuestions: String, CaseIterable {
-        case OcupationArea = "Área de atuação do trabalhador"
+        case OcupationArea = "Linguagem/Tecnologia de atuação"
         case Description = "Descrição da atividade"
-        case TimeExperience = "Tempo de experiência (em meses)"
     }
 
     @IBOutlet weak var tableView: UITableView! {
@@ -151,7 +150,7 @@ extension CreateAnnounceViewController: UITableViewDelegate, UITableViewDataSour
             }
 
             if professionSelected.isEmpty {
-                cell.textLabel?.text = "Selecione a área de atuação..."
+                cell.textLabel?.text = "Selecione a técnologia de atuação..."
             } else {
                 cell.textLabel?.text = professionSelected
             }
