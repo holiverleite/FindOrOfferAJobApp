@@ -67,7 +67,7 @@ class RegistrationViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.navigationItem.setLeftBarButton(UIBarButtonItem(image: ImageConstants.Back, landscapeImagePhone: ImageConstants.Back, style: .plain, target: self, action: #selector(didTapBackButton)), animated: true)
-        title = "Cadastro6"
+        title = "Cadastro"
         self.navigationController?.navigationBar.isHidden = false
     }
     
