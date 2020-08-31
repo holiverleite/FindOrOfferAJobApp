@@ -48,6 +48,7 @@
 		711F2B2A240061DC00B66AA5 /* InputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711F2B28240061DC00B66AA5 /* InputTableViewCell.swift */; };
 		711F2B2B240061DC00B66AA5 /* InputTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 711F2B29240061DC00B66AA5 /* InputTableViewCell.xib */; };
 		717BF25E2433C0E600BB21F4 /* EditProfessionalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717BF25D2433C0E600BB21F4 /* EditProfessionalDataViewController.swift */; };
+		718A1BE424DEEB0500C3DAB5 /* PhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718A1BE324DEEB0500C3DAB5 /* PhoneNumberViewController.swift */; };
 		71A334532438C02900FC2EA0 /* CreateProfessionalCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A334522438C02900FC2EA0 /* CreateProfessionalCardViewController.swift */; };
 		71A334552438CD8100FC2EA0 /* ProfessionOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A334542438CD8100FC2EA0 /* ProfessionOptionsViewController.swift */; };
 		940CDC5F23F5734100683B1A /* PostLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 940CDC5E23F5734100683B1A /* PostLaunchScreen.storyboard */; };
@@ -123,6 +124,7 @@
 		711F2B28240061DC00B66AA5 /* InputTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTableViewCell.swift; sourceTree = "<group>"; };
 		711F2B29240061DC00B66AA5 /* InputTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputTableViewCell.xib; sourceTree = "<group>"; };
 		717BF25D2433C0E600BB21F4 /* EditProfessionalDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfessionalDataViewController.swift; sourceTree = "<group>"; };
+		718A1BE324DEEB0500C3DAB5 /* PhoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberViewController.swift; sourceTree = "<group>"; };
 		71A334522438C02900FC2EA0 /* CreateProfessionalCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfessionalCardViewController.swift; sourceTree = "<group>"; };
 		71A334542438CD8100FC2EA0 /* ProfessionOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionOptionsViewController.swift; sourceTree = "<group>"; };
 		940CDC5E23F5734100683B1A /* PostLaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PostLaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 				9455790423F43510005B1B92 /* LoginViewController.swift */,
 				9455790623F4356A005B1B92 /* RegistrationViewController.swift */,
 				94601EEE23FD7C5200FAF484 /* MainTabBarViewController.swift */,
+				718A1BE324DEEB0500C3DAB5 /* PhoneNumberViewController.swift */,
 			);
 			path = LoginAndRegistration;
 			sourceTree = "<group>";
@@ -672,6 +675,7 @@
 				62682D4E24C47211003F4AB0 /* TextViewTableViewCell.swift in Sources */,
 				9455790723F4356A005B1B92 /* RegistrationViewController.swift in Sources */,
 				9455320323FEE2C700016D30 /* SettingsViewController.swift in Sources */,
+				718A1BE424DEEB0500C3DAB5 /* PhoneNumberViewController.swift in Sources */,
 				627CE22024BB15FE00E5C0BC /* BaseView.swift in Sources */,
 				711F2B1D240018DD00B66AA5 /* UserResumeTableViewCell.swift in Sources */,
 				6209AF132441F5F90070E5D1 /* ProfessionalCardViewModel.swift in Sources */,

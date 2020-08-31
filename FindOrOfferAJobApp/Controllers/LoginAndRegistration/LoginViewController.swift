@@ -85,7 +85,7 @@ class LoginViewController: UIViewController {
             } else {
                 let alertViewController = UIAlertController(title: String.localize("commom_warning_title_alert"), message: String.localize("login_wrong_user_or_password"), preferredStyle: .alert)
                 
-                alertViewController.addAction(UIAlertAction(title: String.localize("login_ok_title"), style: .cancel, handler: { (_) in
+                alertViewController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
                     self.passwordTextField.text = ""
                 }))
                 

@@ -30,6 +30,7 @@ class InputTableViewCell: UITableViewCell {
         }
     }
     
+    var positionY: CGRect = .zero
     var type: ProfileOptions = .Nome
     weak var delegate: CustomTextFieldDelegate? = nil
     

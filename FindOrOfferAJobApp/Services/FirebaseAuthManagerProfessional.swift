@@ -67,6 +67,8 @@ extension FirebaseAuthManager {
                     let firstName = data[FirebaseUser.FirstName] as? String,
                     let lastName = data[FirebaseUser.LastName] as? String,
                     let birthDate = data[FirebaseUser.BirthDate] as? String,
+                    let email = data[FirebaseUser.Email] as? String,
+                    let cellPhone = data[FirebaseUser.Cellphone] as? String,
                     let userImageURL = data[FirebaseUser.UserImageURL] as? String
                     else {
                         completion(nil)
@@ -89,8 +91,8 @@ extension FirebaseAuthManager {
                 let userProfile = UserProfile(userId: id,
                                               firstName: firstName,
                                               lastName: lastName,
-                                              email: "******@gmail.com",
-                                              cellphone: "(**)*****-****",
+                                              email: email,
+                                              cellphone: cellPhone,
                                               phone: "(**)*****-****",
                                               birthDate: birthDate,
                                               accountType: .GoogleAccount,

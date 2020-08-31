@@ -13,8 +13,8 @@ enum ProfileOptions: String, CaseIterable {
     case Sobrenome
     case Email
     case Celular
-    case Telefone
-    case BirthDate
+//    case Telefone
+//    case BirthDate
 }
 
 class EditPersonalDataViewController: UIViewController {
@@ -40,7 +40,7 @@ class EditPersonalDataViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapBackground)))
         self.loadUserProfileValues()
 
         self.navigationItem.title = String.localize("edit_personal_profile_nav_bar")
@@ -51,6 +51,11 @@ class EditPersonalDataViewController: UIViewController {
         let saveButton = UIBarButtonItem(title: "Salvar", style: .plain, target: self, action: #selector(didTapSaveButton))
         self.navigationItem.rightBarButtonItem = saveButton
         self.navigationItem.rightBarButtonItem?.isEnabled = false
+    }
+    
+    @objc
+    func didTapBackground() {
+        self.view.endEditing(true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -122,28 +127,37 @@ extension EditPersonalDataViewController: UITableViewDelegate, UITableViewDataSo
             let profileItem = ProfileOptions.allCases[indexPath.row - 1]
             
             cell.inputDescription.text = profileItem.rawValue
-            cell.inputTextField.delegate = self
             
             switch profileItem {
             case .Nome:
                 cell.type = .Nome
                 cell.inputTextField.text = self.userProfileViewModel?.firstName
+                cell.inputTextField.tag = 1
+                cell.delegate = self
             case .Sobrenome:
                 cell.type = .Sobrenome
                 cell.inputTextField.text = self.userProfileViewModel?.lastName
+                cell.inputTextField.tag = 2
+                cell.delegate = self
             case .Email:
                 cell.type = .Email
                 cell.inputTextField.text = self.userProfileViewModel?.email
                 cell.inputTextField.isEnabled = false
+                cell.inputTextField.tag = 3
             case .Celular:
                 cell.type = .Celular
                 cell.inputTextField.text = self.userProfileViewModel?.cellphone
-            case .Telefone:
-                cell.type = .Telefone
-                cell.inputTextField.text = self.userProfileViewModel?.phone
-            case .BirthDate:
-                cell.type = .BirthDate
-                cell.inputTextField.text = self.userProfileViewModel?.birthDate
+                cell.inputTextField.tag = 4
+                cell.inputTextField.keyboardType = .numberPad
+                cell.inputTextField.delegate = self
+//            case .Telefone:
+//                cell.type = .Telefone
+//                cell.inputTextField.text = self.userProfileViewModel?.phone
+//                cell.inputTextField.tag = 5
+//            case .BirthDate:
+//                cell.type = .BirthDate
+//                cell.inputTextField.text = self.userProfileViewModel?.birthDate
+//                cell.inputTextField.tag = 6
             }
             
             cell.selectionStyle = .none
@@ -162,11 +176,15 @@ extension EditPersonalDataViewController: CustomTextFieldDelegate, UITextFieldDe
         case .Sobrenome:
             inputText == self.userProfileViewModel?.lastName ? self.enableSaveButton(false) : self.enableSaveButton(true)
         case .Celular:
-            inputText == self.userProfileViewModel?.cellphone ? self.enableSaveButton(false) : self.enableSaveButton(true)
-        case .Telefone:
-            inputText == self.userProfileViewModel?.phone ? self.enableSaveButton(false) : self.enableSaveButton(true)
-        case .BirthDate:
-            inputText == self.userProfileViewModel?.birthDate ? self.enableSaveButton(false) : self.enableSaveButton(true)
+            if inputText?.count == 12 {
+                inputText == self.userProfileViewModel?.cellphone ? self.enableSaveButton(false) : self.enableSaveButton(true)
+            } else {
+                self.enableSaveButton(false)
+            }
+//        case .Telefone:
+//            inputText == self.userProfileViewModel?.phone ? self.enableSaveButton(false) : self.enableSaveButton(true)
+//        case .BirthDate:
+//            inputText == self.userProfileViewModel?.birthDate ? self.enableSaveButton(false) : self.enableSaveButton(true)
         case .Email:
             break
         }
@@ -185,10 +203,10 @@ extension EditPersonalDataViewController: CustomTextFieldDelegate, UITextFieldDe
             self.userProfile.lastName = inputText
         case .Celular:
             self.userProfile.cellphone = inputText
-        case .Telefone:
-            self.userProfile.phone = inputText
-        case .BirthDate:
-            self.userProfile.birthDate = inputText
+//        case .Telefone:
+//            self.userProfile.phone = inputText
+//        case .BirthDate:
+//            self.userProfile.birthDate = inputText
         case .Email:
             break
         }
@@ -196,12 +214,79 @@ extension EditPersonalDataViewController: CustomTextFieldDelegate, UITextFieldDe
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         var point = textField.frame.origin
-        point.y = point.y + 130
+        point.x = 10
+        
+        switch textField.tag {
+        case 4:   
+            point.y = (point.y - 5) * CGFloat(textField.tag)
+        case 5:
+            point.y = (point.y - 5) * CGFloat(textField.tag)
+        case 6:
+            point.y = (point.y + 5) * CGFloat(textField.tag)
+        default:
+            return
+        }
+        
         tableview.setContentOffset(point, animated: true)
         textField.becomeFirstResponder()
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        tableview.setContentOffset(.zero, animated: true)
         self.view.endEditing(true)
+        
+        self.textFieldDidEndEditing(textField, type: .Celular)
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        //New String and components
+        if textField.tag == 4 {
+            self.textFieldDidChanged(textField, type: .Celular)
+            let newStr = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+            let components = (newStr as NSString).components(separatedBy: NSCharacterSet.decimalDigits.inverted)
+
+            //Decimal string, length and leading
+            let decimalString = components.joined(separator: "") as NSString
+            let length = decimalString.length
+            let hasLeadingOne = length > 0 && decimalString.character(at: 0) == (1 as unichar)
+            
+            //Checking the length
+            if length == 0 || (length > 11 && !hasLeadingOne) || length > 13 {
+                let newLength = (textField.text! as NSString).length + (string as NSString).length - range.length as Int
+
+                return (newLength > 11) ? false : true
+            }
+
+            //Index and formatted string
+            var index = 0 as Int
+            let formattedString = NSMutableString()
+
+            //Check if it has leading
+            if hasLeadingOne {
+                formattedString.append("1 ")
+                index += 1
+            }
+
+            //Area Code
+            if (length - index) > 2 {
+                let areaCode = decimalString.substring(with: NSMakeRange(index, 2))
+                formattedString.appendFormat("%@ ", areaCode)
+                index += 2
+            }
+
+            if length - index > 5 {
+                let prefix = decimalString.substring(with: NSMakeRange(index, 5))
+                formattedString.appendFormat("%@-", prefix)
+                index += 5
+            }
+
+            let remainder = decimalString.substring(from: index)
+            formattedString.append(remainder)
+            textField.text = formattedString as String
+            
+            return false
+        }
+        
+        return true
     }
 }

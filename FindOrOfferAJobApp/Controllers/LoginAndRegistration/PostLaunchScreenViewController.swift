@@ -18,6 +18,8 @@ class PostLaunchScreenViewController: UIViewController {
         case MainFlow
     }
     
+    var user: UserProfile?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,9 +38,31 @@ class PostLaunchScreenViewController: UIViewController {
         super.viewWillAppear(animated)
 
         if Auth.auth().currentUser != nil || GIDSignIn.sharedInstance()?.currentUser != nil {
-            let homeStoryboard = UIStoryboard(name: StoryboardNavigate.MainFlow.rawValue, bundle: nil)
-            if let homeViewController = homeStoryboard.instantiateInitialViewController() {
-                self.navigationController?.pushViewController(homeViewController, animated: true)
+            var userId = String()
+            if let user = Auth.auth().currentUser {
+                userId = user.uid
+            }
+            
+            if let user = GIDSignIn.sharedInstance()?.currentUser {
+                userId = user.userID
+            }
+            
+            FirebaseAuthManager().retrieveUserFromFirebase(userId: userId) { (userProfile) in
+                if let userProfile = userProfile {
+                    self.user = userProfile
+                    if userProfile.cellphone.isEmpty {
+                        let storyBoard = UIStoryboard(name: "AccessScreen", bundle: nil)
+                        if let phoneNumberViewController = storyBoard.instantiateViewController(withIdentifier: "PhoneNumberViewController") as? PhoneNumberViewController {
+                            phoneNumberViewController.user = self.user
+                            self.navigationController?.pushViewController(phoneNumberViewController, animated: true)
+                        }
+                    } else {
+                        let homeStoryboard = UIStoryboard(name: StoryboardNavigate.MainFlow.rawValue, bundle: nil)
+                        if let homeViewController = homeStoryboard.instantiateInitialViewController() {
+                            self.navigationController?.pushViewController(homeViewController, animated: true)
+                        }
+                    }
+                }
             }
         } else {
             let mainStoryboard = UIStoryboard(name: StoryboardNavigate.AccessScreen.rawValue, bundle: nil)

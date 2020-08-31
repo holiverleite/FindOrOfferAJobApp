@@ -27,7 +27,6 @@ extension FirebaseAuthManager {
         let ref = self.usersReference.child(userId)
         ref.observeSingleEvent(of: .value) { (dataSnapshot) in
             
-            
             guard let data = dataSnapshot.value as? [String: Any],
                 let firstName = data[FirebaseUser.FirstName] as? String,
                 let lastName = data[FirebaseUser.LastName] as? String,

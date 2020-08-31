@@ -30,6 +30,7 @@ class AnnounceDetailViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var messageToEvaluateCandidateLabel: UILabel!
     @IBOutlet weak var buttonSaveAnnounce: UIButton! {
         didSet {
             self.buttonSaveAnnounce.backgroundColor = UIColor.systemBlue
@@ -96,6 +97,9 @@ class AnnounceDetailViewController: UIViewController {
             loadCandidates()
             
             if let processIsFinished = announceJob?.isProcessFinished, processIsFinished {
+                
+                messageToEvaluateCandidateLabel.text = "Assim que possível, não se esqueça de classificar como o serviço foi prestado. Seu comentário será vinculado ao perfil do usuário. Você pode classificar o candidato entrando no perfil dele acima."
+                messageToEvaluateCandidateLabel.isHidden = true // To be implemented in another oportunity
                 self.buttonSaveAnnounce.backgroundColor = .gray
                 self.buttonSaveAnnounce.setTitle("Processo finalizado", for: .normal)
                 self.buttonSaveAnnounce.isEnabled = false
@@ -110,6 +114,7 @@ class AnnounceDetailViewController: UIViewController {
         if let candidatesIds = announceJob?.candidatesIds, let ocupationArea = announceJob?.occupationArea {
             FirebaseAuthManager().retrieveCandidatesFromFirebase(userIds: candidatesIds, occupationAreaAnnounce: ocupationArea) { (profileUsers) in
                 if let profileUsers = profileUsers {
+                    self.profileCandidates.removeAll()
                     self.profileCandidates.append(contentsOf: profileUsers)
                     self.tableView.reloadData()
                 }

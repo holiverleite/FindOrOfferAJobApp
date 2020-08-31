@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -31,17 +31,25 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tl0-As-nLg">
-                        <rect key="frame" x="90" y="37" width="36" height="17"/>
+                        <rect key="frame" x="90" y="48.5" width="36" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Celular/Whatsapp:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Itg-m7-R9m">
+                        <rect key="frame" x="90" y="32.5" width="111.5" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="Itg-m7-R9m" firstAttribute="leading" secondItem="CZq-7C-568" secondAttribute="leading" id="4lS-zz-jAs"/>
                     <constraint firstItem="srg-qZ-S3R" firstAttribute="top" secondItem="b4o-jx-VBO" secondAttribute="top" constant="15.5" id="DQa-7r-DZd"/>
+                    <constraint firstItem="Itg-m7-R9m" firstAttribute="centerY" secondItem="srg-qZ-S3R" secondAttribute="centerY" id="GFk-eX-DJH"/>
                     <constraint firstItem="srg-qZ-S3R" firstAttribute="centerY" secondItem="b4o-jx-VBO" secondAttribute="centerY" id="Kon-1x-jdB"/>
                     <constraint firstItem="srg-qZ-S3R" firstAttribute="leading" secondItem="b4o-jx-VBO" secondAttribute="leading" constant="20" id="ZNQ-SE-7ww"/>
-                    <constraint firstItem="Tl0-As-nLg" firstAttribute="top" secondItem="CZq-7C-568" secondAttribute="bottom" constant="2" id="hbt-aE-y61"/>
+                    <constraint firstItem="Tl0-As-nLg" firstAttribute="bottom" secondItem="srg-qZ-S3R" secondAttribute="bottom" id="c0n-Xw-uj5"/>
                     <constraint firstAttribute="bottom" secondItem="srg-qZ-S3R" secondAttribute="bottom" constant="15.5" id="n7N-0p-imz"/>
                     <constraint firstItem="Tl0-As-nLg" firstAttribute="leading" secondItem="CZq-7C-568" secondAttribute="leading" id="p3s-K8-tYQ"/>
                     <constraint firstItem="CZq-7C-568" firstAttribute="top" secondItem="srg-qZ-S3R" secondAttribute="top" id="ry3-NZ-vSS"/>

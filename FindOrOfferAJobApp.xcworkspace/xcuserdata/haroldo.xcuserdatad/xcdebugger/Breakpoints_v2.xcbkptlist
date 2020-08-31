@@ -254,42 +254,10 @@
             filePath = "FindOrOfferAJobApp/Controllers/Home/AnnounceDetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "474"
-            endingLineNumber = "474"
-            landmarkName = "candidateSelected(announceJobId:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "6DBE2801-8AA4-49C9-AE64-C58674E9E7B3 - 72218700f1aef1a2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "FindOrOfferAJobApp.AnnounceDetailViewController.candidateSelected(announceJobId: Swift.String) -&gt; ()"
-                  moduleName = "FindOrOfferAJobApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/haroldo/Documents/Haroldo/FindOrOfferAJobApp/FindOrOfferAJobApp/Controllers/Home/AnnounceDetailViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "474"
-                  endingLineNumber = "474"
-                  offsetFromSymbolStart = "45">
-               </Location>
-               <Location
-                  uuid = "6DBE2801-8AA4-49C9-AE64-C58674E9E7B3 - 850d3e202e148351"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;FindOrOfferAJobApp.AnnounceJob&gt;) -&gt; () in FindOrOfferAJobApp.AnnounceDetailViewController.candidateSelected(announceJobId: Swift.String) -&gt; ()"
-                  moduleName = "FindOrOfferAJobApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/haroldo/Documents/Haroldo/FindOrOfferAJobApp/FindOrOfferAJobApp/Controllers/Home/AnnounceDetailViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "475"
-                  endingLineNumber = "475"
-                  offsetFromSymbolStart = "106">
-               </Location>
-            </Locations>
+            startingLineNumber = "475"
+            endingLineNumber = "475"
+            landmarkName = "AnnounceDetailViewController"
+            landmarkType = "21">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -302,10 +270,10 @@
             filePath = "FindOrOfferAJobApp/Controllers/Home/AnnounceDetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "475"
-            endingLineNumber = "475"
-            landmarkName = "candidateSelected(announceJobId:)"
-            landmarkType = "7">
+            startingLineNumber = "476"
+            endingLineNumber = "476"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -334,42 +302,10 @@
             filePath = "FindOrOfferAJobApp/Controllers/Home/AnnounceDetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
+            startingLineNumber = "216"
+            endingLineNumber = "216"
             landmarkName = "reactivateAnnounce()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "ED00D85A-9021-4117-94EC-F25A1DC5C3CA - 27890e5576584245"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "FindOrOfferAJobApp.AnnounceDetailViewController.(reactivateAnnounce in _10F1FFE7BAC42284D974CA653212D75F)() -&gt; ()"
-                  moduleName = "FindOrOfferAJobApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/haroldo/Documents/Haroldo/FindOrOfferAJobApp/FindOrOfferAJobApp/Controllers/Home/AnnounceDetailViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "215"
-                  endingLineNumber = "215"
-                  offsetFromSymbolStart = "1044">
-               </Location>
-               <Location
-                  uuid = "ED00D85A-9021-4117-94EC-F25A1DC5C3CA - c61951b58c1e8544"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Bool&gt;) -&gt; () in FindOrOfferAJobApp.AnnounceDetailViewController.(reactivateAnnounce in _10F1FFE7BAC42284D974CA653212D75F)() -&gt; ()"
-                  moduleName = "FindOrOfferAJobApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/haroldo/Documents/Haroldo/FindOrOfferAJobApp/FindOrOfferAJobApp/Controllers/Home/AnnounceDetailViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "216"
-                  endingLineNumber = "216"
-                  offsetFromSymbolStart = "110">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -382,8 +318,8 @@
             filePath = "FindOrOfferAJobApp/Controllers/Home/AnnounceDetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "216"
-            endingLineNumber = "216"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
             landmarkName = "reactivateAnnounce()"
             landmarkType = "7">
          </BreakpointContent>
@@ -542,8 +478,8 @@
             filePath = "FindOrOfferAJobApp/Controllers/Home/AnnounceDetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "viewWillAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -552,6 +488,22 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "58C89148-F568-4AAA-AC5E-D9D08ECAB7F0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FindOrOfferAJobApp/Controllers/Home/AnnounceDetailViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "373"
+            endingLineNumber = "373"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CC51868E-4A39-4241-8D11-D60F4E517427"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -567,80 +519,80 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "CC51868E-4A39-4241-8D11-D60F4E517427"
+            uuid = "D197BE62-9635-452D-A24B-A6DAB33395D8"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FindOrOfferAJobApp/Controllers/Home/AnnounceDetailViewController.swift"
+            filePath = "FindOrOfferAJobApp/Controllers/LoginAndRegistration/PhoneNumberViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "371"
-            endingLineNumber = "371"
-            landmarkName = "tableView(_:cellForRowAt:)"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "textField(_:shouldChangeCharactersIn:replacementString:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "4EC892D2-6C36-43FB-B77D-1938F140A792"
+            uuid = "2D77E7A8-BA0C-44EA-9F84-7C93FD4FD34F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FindOrOfferAJobApp/Controllers/Profile/EditPersonalDataViewController.swift"
+            filePath = "FindOrOfferAJobApp/Controllers/LoginAndRegistration/PhoneNumberViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
-            landmarkName = "textFieldDidBeginEditing(_:)"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "textField(_:shouldChangeCharactersIn:replacementString:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D2C9507E-3DA2-4B5C-876A-5B37D4A2B4BF"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FindOrOfferAJobApp/Controllers/Profile/EditPersonalDataViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
-            landmarkName = "textFieldDidEndEditing(_:type:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "444C2A2F-E6B7-4E11-93B8-007FD2BECD39"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FindOrOfferAJobApp/Controllers/Profile/EditPersonalDataViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
-            landmarkName = "textFieldDidEndEditing(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "8C312BB7-E203-4E1C-8DAC-3DB8D0F75633"
+            uuid = "CDF40271-2A30-4587-A211-914B53D1B5BD"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FindOrOfferAJobApp/UI/TableViewCell/InputTableViewCell/InputTableViewCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "textFieldDidEndEditing(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D3E1D3CB-D3DB-40E9-9DD2-517C38C9ECCE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FindOrOfferAJobApp/Controllers/Profile/EditPersonalDataViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
+            landmarkName = "textFieldDidChanged(_:type:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "323DE042-BCBD-4B12-88AC-69D231871210"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FindOrOfferAJobApp/Controllers/Profile/EditPersonalDataViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
+            landmarkName = "textFieldDidChanged(_:type:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
